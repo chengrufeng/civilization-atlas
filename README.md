@@ -29,7 +29,7 @@ Every figure who ever lived, every event that ever shaped the world, has a place
 
 | Era | Status | Figures | Events |
 |-----|--------|---------|--------|
-| Three Kingdoms (184–280 CE) | Active | 150+ | 80+ |
+| Three Kingdoms (184–280 CE) | Active | 40+ | 40+ |
 | Pre-Qin (—221 BCE) | Planned | — | — |
 | Qin–Han (221 BCE – 220 CE) | Planned | — | — |
 | Tang–Song (618–1279) | Planned | — | — |
@@ -47,10 +47,12 @@ Every figure who ever lived, every event that ever shaped the world, has a place
 ```bash
 git clone git@github.com:chengrufeng/civilization-atlas.git
 cd civilization-atlas
-open index.html
+# Uses ES Modules — serve over HTTP (opening index.html directly will hit CORS)
+npx serve .          # or: python3 -m http.server 8080
+# Then open http://localhost:8080 in your browser
 ```
 
-No dependencies to install. No build step. Just open the file and explore.
+No build step, but a local HTTP server is required (ES Modules don't work over `file://`).
 
 ## Contributing
 
@@ -65,8 +67,8 @@ History is vast, and no single person knows it all. If you have expertise in a p
 - [x] Three Kingdoms interactive map with timeline
 - [x] Figure relationship visualization
 - [x] Event trajectory tracking
-- [ ] Expand to Qin–Han dynasty
 - [ ] Expand to pre-Qin (Spring & Autumn, Warring States)
+- [ ] Expand to Qin–Han dynasty
 - [ ] Add world history layers
 - [ ] Cross-era figure connections (lineage, influence)
 - [ ] Multi-language support (Chinese / English)
