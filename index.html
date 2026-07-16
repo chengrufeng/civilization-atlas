@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>华夏人物图鉴 · 三国人物志</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%23b23a2e'/><text x='50' y='78' font-size='70' text-anchor='middle' fill='white' font-family='serif'>鉴</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Leaflet 地图库 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- ====== 顶部栏 ====== -->
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-seal">鉴</span>
+      <div class="brand-text">
+        <h1>华夏人物图鉴</h1>
+        <p class="brand-sub">三国人物志 · 184–280</p>
+      </div>
+    </div>
+    <div class="top-controls">
+      <input class="search-box" id="search" placeholder="搜索人物…" />
+      <button class="icon-btn" id="btn-left-panel" title="筛选面板">筛选</button>
+      <button class="icon-btn active" id="btn-events" title="事件一览表">大事记</button>
+      <button class="icon-btn active" id="btn-timeline" title="时间轴">时间轴</button>
+      <button class="icon-btn" id="btn-list" title="人物名册">名册</button>
+      <button class="icon-btn" id="btn-fullscreen" title="全屏切换">⤢</button>
+    </div>
+  </header>
+
+  <!-- ====== 全屏地图（Leaflet） ====== -->
+  <div id="map-chart" class="map-container"></div>
+
+  <!-- ====== 左侧浮层面板 ====== -->
+  <aside class="left-panel hidden" id="left-panel">
+    <div class="panel-section">
+      <h4 class="panel-title">势力</h4>
+      <div class="faction-filters" id="faction-filters">
+        <button class="chip active" data-faction="all">全部</button>
+        <button class="chip shu" data-faction="shu">蜀汉</button>
+        <button class="chip wei" data-faction="wei">曹魏</button>
+        <button class="chip wu" data-faction="wu">东吴</button>
+        <button class="chip other" data-faction="other">群雄</button>
+      </div>
+    </div>
+    <div class="panel-section">
+      <h4 class="panel-title">图层</h4>
+      <div class="layer-toggles" id="layer-toggles">
+        <label class="toggle"><input type="checkbox" data-layer="persons" checked /> <span>● 人物</span></label>
+        <label class="toggle"><input type="checkbox" data-layer="events" checked /> <span>◆ 事件</span></label>
+        <label class="toggle"><input type="checkbox" data-layer="capitals" checked /> <span>📍 都城</span></label>
+      </div>
+      <div class="layer-hint">选中人物后显示 ──关系 ┄┄敌对 ━▶轨迹</div>
+    </div>
+    <div class="panel-section">
+      <h4 class="panel-title">事件领域</h4>
+      <div class="domain-filters" id="domain-filters">
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="军事" checked /> <span class="domain-tag" style="--dc:#b23a2e">军事</span></label>
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="政治" checked /> <span class="domain-tag" style="--dc:#2f5d8a">政治</span></label>
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="文学" checked /> <span class="domain-tag" style="--dc:#7b4b94">文学</span></label>
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="科技" checked /> <span class="domain-tag" style="--dc:#2d8a6e">科技</span></label>
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="外交" checked /> <span class="domain-tag" style="--dc:#b8893a">外交</span></label>
+        <label class="toggle domain-toggle"><input type="checkbox" data-domain="文化" checked /> <span class="domain-tag" style="--dc:#8a6d3b">文化</span></label>
+      </div>
+    </div>
+    <div class="panel-section">
+      <h4 class="panel-title">统计</h4>
+      <div class="stat-line"><span>人物</span><b id="stat-persons">0</b></div>
+      <div class="stat-line"><span>关系</span><b id="stat-relations">0</b></div>
+      <div class="stat-line"><span>事件</span><b id="stat-events">0</b></div>
+    </div>
+  </aside>
+
+  <!-- ====== 底部时间轴 ====== -->
+  <div class="timeline-bar" id="timeline-bar">
+    <button class="play-btn" id="play-btn" title="播放/暂停">▶</button>
+    <div class="timeline-info">
+      <span class="year-display" id="year-display">全部年份</span>
+    </div>
+    <div class="timeline-slider-wrap">
+      <div class="event-track" id="event-track"></div>
+      <input type="range" id="year-slider" min="184" max="280" value="184" step="1" />
+      <div class="timeline-ticks" id="timeline-ticks"></div>
+    </div>
+    <button class="track-btn active" id="track-btn" title="自动追踪事件位置">追踪</button>
+    <button class="reset-btn" id="reset-btn" title="重置时间">全部</button>
+  </div>
+
+  <!-- ====== 右侧事件一览表（常驻） ====== -->
+  <aside class="event-list-panel" id="event-list-panel">
+    <div class="event-list-header">
+      <h4>大事记</h4>
+      <span class="event-list-count" id="event-list-count"></span>
+    </div>
+    <div class="event-list-body" id="event-list-body"></div>
+  </aside>
+
+  <!-- ====== 右侧人物详情面板 ====== -->
+  <aside class="detail-panel" id="detail-panel" aria-hidden="true">
+    <button class="detail-close" id="detail-close" aria-label="关闭">×</button>
+    <div class="detail-content" id="detail-content"></div>
+  </aside>
+  <div class="detail-mask" id="detail-mask"></div>
+
+  <!-- ====== 人物名册浮层 ====== -->
+  <div class="list-overlay" id="list-overlay" aria-hidden="true">
+    <div class="list-overlay-header">
+      <h3>人物名册</h3>
+      <button class="list-close" id="list-close">×</button>
+    </div>
+    <div class="list-overlay-body" id="list-overlay-body"></div>
+  </div>
+
+  <!-- ====== 事件通知 toast ====== -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ====== 线条说明浮层（有连线时显示） ====== -->
+  <div class="line-legend" id="line-legend">
+    <div class="ll-item"><span class="ll-line ll-relation"></span>关系</div>
+    <div class="ll-item"><span class="ll-line ll-hostile"></span>敌对</div>
+    <div class="ll-item"><span class="ll-line ll-trajectory"></span>活动轨迹</div>
+    <div class="ll-item"><span class="ll-line ll-event"></span>事件参与</div>
+  </div>
+
+  <!-- ====== 加载提示 ====== -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+    <p>地图加载中…</p>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
