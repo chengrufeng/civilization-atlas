@@ -220,7 +220,7 @@ export function setLang(newLang) {
   if (!STRINGS[newLang]) return false;
   if (lang === newLang) return true;
   lang = newLang;
-  applyToDOM();
+  if (typeof document !== 'undefined') applyToDOM();
   listeners.forEach(fn => fn(lang));
   return true;
 }

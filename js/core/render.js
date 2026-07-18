@@ -10,7 +10,7 @@
  *   6. 都城 + 一般城市标记
  * ========================================================================= */
 
-import { state, DOMAIN_COLOR, LABEL_OFFSET, ll, formatYear, relationStyle } from './state.js';
+import { state, DOMAIN_COLOR, LABEL_OFFSET, ll, formatYear, relationStyle, relationLabel } from './state.js';
 import {
   current, FACTION_COLOR, ERA_START, ERA_END,
   getPerson, getEventCoord, getPersonImage, getPersonPositionAtYear,
@@ -427,7 +427,7 @@ function buildPersonRelationLines(personId) {
         weight: 2,
         opacity: 0.65,
         dashed: style.dashed,
-        tooltip: `${person.name} ↔ ${other.name}：${r.type}（${r.label}）`,
+        tooltip: `${person.name} ↔ ${other.name}：${relationLabel(r.type)}（${r.label}）`,
       };
     })
     .filter(Boolean);

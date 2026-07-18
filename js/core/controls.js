@@ -18,6 +18,16 @@ import { openDetail, closeDetail } from './detail.js';
 import { flyToDefault } from './map.js';
 import { t, localized } from './i18n.js';
 
+/* 搜索关键字高亮：对 kw 出现的位置包 <mark>，kw 为空时返回原文 */
+function highlight(text, kw) {
+  if (!text || !kw) return text || '';
+  const idx = text.indexOf(kw);
+  if (idx < 0) return text;
+  return text.slice(0, idx)
+    + '<mark>' + text.slice(idx, idx + kw.length) + '</mark>'
+    + text.slice(idx + kw.length);
+}
+
 /* ---------- 通用面板切换 ---------- */
 function togglePanel(panelId, btnId) {
   const panel = document.getElementById(panelId);
@@ -240,15 +250,24 @@ function bindSearch() {
       // 全局模式：跨数据集检索
       if (globalReady) {
         const idx = await getGlobalPersonIndex();
-        const matches = idx.filter(p =>
-          p.name.includes(kw) ||
-          p.courtesy.includes(kw) ||
-          p.alias.some(a => a.includes(kw))
-        ).slice(0, 20);
+        // 评分：完全匹配 0 > 名字命中 1 > 字号 2 > 别名 3
+        const scored = [];
+        for (const p of idx) {
+          let score = -1;
+          if (p.name === kw) score = 0;
+          else if (p.name.includes(kw)) score = 1;
+          else if (p.courtesy && p.courtesy.includes(kw)) score = 2;
+          else if (p.alias.some(a => a === kw)) score = 2;
+          else if (p.alias.some(a => a.includes(kw))) score = 3;
+          if (score >= 0) scored.push({ p, score });
+        }
+        scored.sort((a, b) => a.score - b.score);
+        const matches = scored.slice(0, 20).map(x => x.p);
+
         if (matches.length === 0) {
           suggestBox.innerHTML = `<div class="ss-empty">${t('toast.not_found')}</div>`;
         } else {
-          // 按 atlasId 分组
+          // 按 atlasId 分组（保持相关度排序）
           const groups = [];
           for (const m of matches) {
             let g = groups.find(x => x.atlasId === m.atlasId);
@@ -258,10 +277,14 @@ function bindSearch() {
           suggestBox.innerHTML = groups.map(g => `
             <div class="ss-group">
               <div class="ss-group-title">${localized({ name: g.atlasName, nameEn: g.atlasNameEn }, 'name')}</div>
-              ${g.items.map(p => `
+              ${g.items.map(p => {
+                const nameHl = highlight(p.name, kw);
+                const cyHl = p.courtesy ? highlight(p.courtesy, kw) : '';
+                return `
                 <div class="ss-item" data-atlas="${p.atlasId}" data-id="${p.personId}">
-                  <b>${p.name}</b><span class="ss-sub">${p.courtesy ? t('detail.courtesy_label') + ' ' + p.courtesy + ' · ' : ''}${p.factionName}</span>
-                </div>`).join('')}
+                  <b>${nameHl}</b><span class="ss-sub">${cyHl ? t('detail.courtesy_label') + ' ' + cyHl + ' · ' : ''}${p.factionName}</span>
+                </div>`;
+              }).join('')}
             </div>`).join('');
           suggestBox.querySelectorAll('.ss-item').forEach(el => {
             el.addEventListener('click', () => selectPerson(el.dataset.atlas, el.dataset.id));
@@ -324,6 +347,27 @@ function bindSlider() {
     toastDebounce = setTimeout(() => showYearToasts(year), 250);
     syncUrlState({ atlas: current().id, year, person: state.selectedPerson });
   });
+
+  // F4 hover 预览：鼠标在 slider 上滑动时，显示对应年份的小气泡
+  const hint = document.createElement('div');
+  hint.className = 'slider-hover-hint';
+  hint.style.display = 'none';
+  document.body.appendChild(hint);
+  const min = () => parseInt(slider.min) || 0;
+  const max = () => parseInt(slider.max) || 1;
+  const eventsCountAt = (y) => (current().events || []).filter(e => e.year === y).length;
+  slider.addEventListener('mousemove', (ev) => {
+    const rect = slider.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+    const year = Math.round(min() + ratio * (max() - min()));
+    const n = eventsCountAt(year);
+    const evLabel = n > 0 ? ` · ${n} ${t('event_list.count_suffix').trim() || '件'}` : '';
+    hint.textContent = `${formatYear(year)}${evLabel}`;
+    hint.style.display = 'block';
+    hint.style.left = `${ev.clientX - hint.offsetWidth / 2}px`;
+    hint.style.top = `${rect.top - hint.offsetHeight - 6}px`;
+  });
+  slider.addEventListener('mouseleave', () => { hint.style.display = 'none'; });
 }
 
 /* ---------- 键盘快捷键 ---------- */

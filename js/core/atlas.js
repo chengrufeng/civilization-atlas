@@ -82,6 +82,29 @@ async function loadAtlas(meta) {
   return atlas;
 }
 
+/* F2 预加载：浏览器空闲时预先拉取其他数据集，切换时秒开。
+ * - 首次切换到该 atlas 时走动态 import()；
+ * - 我们用 requestIdleCallback 串行预拉所有 atlas，失败静默（首屏未触发的失败留给真实切换时报）。
+ * - 已缓存的会被跳过，重复调用安全。 */
+let preloadStarted = false;
+export function preloadAllAtlases() {
+  if (preloadStarted) return;
+  preloadStarted = true;
+  const queue = [...ATLAS_MANIFEST];
+  const schedule = () => {
+    const rc = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+    rc(async () => {
+      while (queue.length) {
+        const meta = queue.shift();
+        if (!atlasCache.has(meta.id)) {
+          try { await loadAtlas(meta); } catch { /* 静默；真正切换时再暴露错误 */ }
+        }
+      }
+    });
+  };
+  schedule();
+}
+
 /** 首屏初始化：加载指定 id（缺省清单第一个）的数据集 */
 export async function initAtlas(preferredId) {
   const meta = ATLAS_MANIFEST.find(a => a.id === preferredId) || ATLAS_MANIFEST[0];

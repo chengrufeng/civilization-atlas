@@ -35,6 +35,118 @@ export const CROSS_LINKS = [
       { atlas: 'qing', id: 'huangtaiji' },
     ],
   },
+  {
+    kind: 'same-person',
+    label: '秦始皇：战国末秦王 → 大一统首位皇帝',
+    persons: [
+      { atlas: 'chunqiu', id: 'qin_shi_huang' },
+      { atlas: 'qinhan', id: 'qin_shi_huang' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '文天祥：南宋丞相，宋亡后殉国',
+    persons: [
+      { atlas: 'tangsong', id: 'wenzhanxiang' },
+      { atlas: 'yuan', id: 'wen_tian_xiang' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '黄道婆：宋末元初棉纺织革新者',
+    persons: [
+      { atlas: 'tangsong', id: 'huo_xiaobo' },
+      { atlas: 'yuan', id: 'huang_dao_po' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '林则徐：清臣 → 近代开眼第一人',
+    persons: [
+      { atlas: 'qing', id: 'linzexu' },
+      { atlas: 'jinxiandai', id: 'lin_ze_xu' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '曾国藩：晚清重臣 → 近代洋务领袖',
+    persons: [
+      { atlas: 'qing', id: 'zengguofan' },
+      { atlas: 'jinxiandai', id: 'zeng_guo_fan' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '李鸿章：淮军 → 北洋 → 近代外交',
+    persons: [
+      { atlas: 'qing', id: 'lihongzhang' },
+      { atlas: 'jinxiandai', id: 'li_hong_zhang' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '左宗棠：收复新疆的晚清名臣',
+    persons: [
+      { atlas: 'qing', id: 'zuozongtang' },
+      { atlas: 'jinxiandai', id: 'zuo_zong_tang' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '慈禧太后：晚清实际统治者',
+    persons: [
+      { atlas: 'qing', id: 'cixi' },
+      { atlas: 'jinxiandai', id: 'ci_xi' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '康有为：维新领袖 → 民国遗老',
+    persons: [
+      { atlas: 'qing', id: 'kangyouwei' },
+      { atlas: 'jinxiandai', id: 'kang_you_wei' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '梁启超：维新 → 民国思想界',
+    persons: [
+      { atlas: 'qing', id: 'liangqichao' },
+      { atlas: 'jinxiandai', id: 'liang_qi_chao' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '光绪帝：戊戌变法支持者',
+    persons: [
+      { atlas: 'qing', id: 'guangxu' },
+      { atlas: 'jinxiandai', id: 'guang_xu' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '孙中山：晚清流亡革命家 → 民国临时大总统',
+    persons: [
+      { atlas: 'qing', id: 'sunyatsen' },
+      { atlas: 'jinxiandai', id: 'sun_zhong_shan' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '袁世凯：晚清北洋 → 民国大总统',
+    persons: [
+      { atlas: 'qing', id: 'yuanshikai' },
+      { atlas: 'jinxiandai', id: 'yuan_shi_kai' },
+    ],
+  },
+  {
+    kind: 'same-person',
+    label: '洪秀全：晚清拜上帝会 → 太平天国天王',
+    persons: [
+      { atlas: 'qing', id: 'hongxiuquan' },
+      { atlas: 'jinxiandai', id: 'hong_xiu_quan' },
+    ],
+  },
 
   /* ----- 跨文明互动 ----- */
   {

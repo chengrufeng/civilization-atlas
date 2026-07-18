@@ -2,7 +2,7 @@
  * 华夏人物图鉴 · 人物详情面板 + 事件信息
  * ========================================================================= */
 
-import { state, ll, formatYear, formatYearShort, relationStyle } from './state.js';
+import { state, ll, formatYear, formatYearShort, relationStyle, relationLabel } from './state.js';
 import {
   current, FACTION_NAME,
   getPerson, getFaction, getRelationsOf, getPersonImage,
@@ -71,7 +71,7 @@ function renderDetailContent(person) {
     if (!other) return '';
     const dir = r.source === person.id ? '→' : '←';
     const style = relationStyle(r.type);
-    return `<span class="relation-chip" data-person="${other.id}" style="--rc:${style.color}">${dir} ${other.name}<span class="rel-type">${r.type}</span></span>`;
+    return `<span class="relation-chip" data-person="${other.id}" style="--rc:${style.color}">${dir} ${other.name}<span class="rel-type">${relationLabel(r.type)}</span></span>`;
   }).join('');
 
   const eventsHtml = events.map(e => `

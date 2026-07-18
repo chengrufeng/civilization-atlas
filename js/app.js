@@ -12,6 +12,7 @@
 import { state } from './core/state.js';
 import {
   current, currentMeta, manifest, switchAtlas, onSwitch, initAtlas,
+  preloadAllAtlases,
   ERA_START, ERA_END,
 } from './core/atlas.js';
 import { initMap, clearAllLayers, flyToDefault, updateLabelVisibility } from './core/map.js';
@@ -53,6 +54,9 @@ async function init() {
   applyToDOM();  // 应用 i18n 到 DOM（首次渲染）
 
   document.getElementById('loading-overlay').classList.add('hide');
+
+  // F2 浏览器空闲时预加载其他数据集，切换时秒开
+  preloadAllAtlases();
 
   // 应用 URL 中的年份和人物（若有）
   if (urlState.year !== null) {
@@ -299,6 +303,8 @@ async function boot() {
       if (sc) sc.remove();
       const sm = document.getElementById('shortcuts-mask');
       if (sm) sm.remove();
+      // 关系线 tooltip 走 relationLabel，需要重绘地图
+      render();
       // 若详情面板打开，重新渲染当前人物（不改变地图状态）
       if (state.selectedPerson) {
         const p = getPerson(state.selectedPerson);

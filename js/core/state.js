@@ -4,6 +4,8 @@
  * 整个应用唯一的可变状态对象，所有模块通过 import { state } 读写。
  * ========================================================================= */
 
+import { currentLang } from './i18n.js';
+
 /* ---------- 事件领域（可被数据集覆盖） ----------
  * 每个数据集可通过 atlas.domains 提供自己的领域列表：
  *   domains: [{ name: '宗教', color: '#8a6d3b' }, ...]
@@ -41,13 +43,13 @@ export function formatYear(y) {
  * 这里把常见变体归一化到 7 个规范类型，并给出颜色/线型。
  * 视图层统一通过 relationStyle(type) 取色，不再硬编码"敌对"判断。 */
 export const RELATION_TYPES = {
-  '亲属':   { color: '#b8893a', dashed: false, label: '亲属' },
-  '君臣':   { color: '#2f5d8a', dashed: false, label: '君臣' },
-  '师承':   { color: '#2d8a6e', dashed: false, label: '师承' },
-  '敌对':   { color: '#b23a2e', dashed: true,  label: '敌对' },
-  '结义':   { color: '#7b4b94', dashed: false, label: '结义' },
-  '同时代': { color: '#8a8a8a', dashed: true,  label: '同时代' },
-  '其他':   { color: '#8a8a8a', dashed: true,  label: '其他' },
+  '亲属':   { color: '#b8893a', dashed: false, label: '亲属',   labelEn: 'Kin' },
+  '君臣':   { color: '#2f5d8a', dashed: false, label: '君臣',   labelEn: 'Liege' },
+  '师承':   { color: '#2d8a6e', dashed: false, label: '师承',   labelEn: 'Mentor' },
+  '敌对':   { color: '#b23a2e', dashed: true,  label: '敌对',   labelEn: 'Rival' },
+  '结义':   { color: '#7b4b94', dashed: false, label: '结义',   labelEn: 'Sworn' },
+  '同时代': { color: '#8a8a8a', dashed: true,  label: '同时代', labelEn: 'Peer' },
+  '其他':   { color: '#8a8a8a', dashed: true,  label: '其他',   labelEn: 'Other' },
 };
 
 const RELATION_ALIASES = {
@@ -66,6 +68,17 @@ export function normalizeRelationType(type) {
 
 export function relationStyle(type) {
   return RELATION_TYPES[normalizeRelationType(type)] || RELATION_TYPES['其他'];
+}
+
+/** 当前语言下的关系类型 label */
+export function relationLabel(type) {
+  const s = relationStyle(type);
+  return currentLang() === 'en' ? s.labelEn : s.label;
+}
+
+/** 关系原始 type 字符串本地化（别名也归一） */
+export function relationTypeLocalized(type) {
+  return relationLabel(type);
 }
 
 /* 标签朝向 → tooltip 像素偏移 */

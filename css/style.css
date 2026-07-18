@@ -635,6 +635,19 @@ body.no-timeline .leaflet-bottom.leaflet-left { bottom: 16px; }
   background: var(--seal); border: 3px solid #fff;
   cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35);
 }
+.slider-hover-hint {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  background: var(--ink, #2a2a2a);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+}
 .timeline-ticks {
   position: absolute; left: 0; right: 0; bottom: 0;
   height: 16px;
@@ -1064,6 +1077,13 @@ body.no-timeline .line-legend { bottom: 16px; }
 .ss-item:hover { background: rgba(178,58,46,.08); }
 .ss-item b { font-size: 14px; }
 .ss-sub { font-size: 11px; color: var(--ink-light); }
+.ss-item mark, .ss-sub mark {
+  background: rgba(255, 217, 79, .55);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 600;
+}
 .ss-empty {
   padding: 10px 14px; font-size: 12px; color: var(--ink-light);
 }

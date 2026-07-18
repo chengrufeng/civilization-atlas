@@ -7,9 +7,10 @@ import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
 import {
   formatYear, formatYearShort,
-  RELATION_TYPES, normalizeRelationType, relationStyle,
+  RELATION_TYPES, normalizeRelationType, relationStyle, relationLabel,
   setDomains, DOMAINS, DOMAIN_COLOR,
 } from '../js/core/state.js';
+import { setLang, currentLang } from '../js/core/i18n.js';
 
 /* ---------- 年份格式化 ---------- */
 
@@ -61,6 +62,20 @@ test('relationStyle: 返回颜色与线型', () => {
   const kinship = relationStyle('父子'); // 别名→亲属
   assert.equal(kinship.color, '#b8893a');
   assert.equal(kinship.dashed, false);
+});
+
+test('relationLabel: 中英双语', () => {
+  const before = currentLang();
+  setLang('zh');
+  assert.equal(relationLabel('敌对'), '敌对');
+  assert.equal(relationLabel('父子'), '亲属');   // 别名归一
+  setLang('en');
+  assert.equal(relationLabel('敌对'), 'Rival');
+  assert.equal(relationLabel('父子'), 'Kin');
+  setLang('zh');
+  assert.equal(relationLabel('师承'), '师承');
+  // 恢复初始
+  if (before && before !== 'zh') setLang(before);
 });
 
 /* ---------- 领域数据化（setDomains） ---------- */
