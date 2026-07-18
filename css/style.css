@@ -866,6 +866,33 @@ body.no-timeline .line-legend { bottom: 16px; }
 .lj-toast.show {
   opacity: 1; transform: translateX(-50%) translateY(0);
 }
+
+/* Life Journey 当前 step 的专用 toast：仅显示这一站的事件 */
+.lj-step-toast {
+  position: fixed; bottom: 110px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--paper, #f5f0e6);
+  color: var(--ink, #2a2a2a);
+  border-left: 3px solid var(--seal, #8a2222);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  max-width: min(420px, 90vw);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 1190;
+  box-shadow: 0 6px 16px rgba(0,0,0,.22);
+}
+.lj-step-toast.show {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+.lj-step-year {
+  font-size: 12px; font-weight: 700; color: var(--seal, #8a2222);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+.lj-step-place { font-size: 12px; color: var(--ink-soft); margin-bottom: 4px; }
+.lj-step-desc { font-size: 13px; line-height: 1.5; }
 @media (max-width: 480px) {
   .lj-bar { min-width: auto; width: calc(100vw - 24px); }
 }

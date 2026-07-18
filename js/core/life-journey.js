@@ -18,7 +18,7 @@ import { state, ll, formatYear } from './state.js';
 import { current, getPerson, manifest } from './atlas.js';
 import { switchAtlas } from './atlas.js';
 import { render } from './render.js';
-import { stopPlay, showYearToasts } from './timeline.js';
+import { stopPlay } from './timeline.js';
 import { buildEventList } from './event-list.js';
 import { updateStats } from './render.js';
 import { syncUrlState } from './url-state.js';
@@ -123,6 +123,9 @@ function ensureBar(crossAtlases = []) {
 function removeBar() {
   const bar = document.getElementById('lj-bar');
   if (bar) bar.remove();
+  // 同时清掉当前 step 的 toast（避免停止后还停留）
+  const stepToast = document.getElementById('lj-step-toast');
+  if (stepToast) stepToast.classList.remove('show');
 }
 
 /** 构建当前数据集内人物的生平事件步骤（按年份排序，过滤无坐标的） */
@@ -215,9 +218,9 @@ async function advance() {
     }
   }
 
-  // 3. 镜头 flyTo + toast
+  // 3. 镜头 flyTo + 当前 step 的专用 toast（只显示这一个事件，不再调用 showYearToasts 把同年的其他事件都弹出来）
   state.map.flyTo(ll(step.coord), Math.max(state.map.getZoom(), 6), { duration: FLY_DURATION });
-  showYearToasts(step.year, true);
+  showJourneyStepToast(step);
 
   // 4. 同步 slider / year-display / URL / 事件列表
   const slider = document.getElementById('year-slider');
@@ -316,16 +319,44 @@ export function isLifeJourneyActive() {
 }
 
 /* ---------- toast 兜底 ---------- */
+
+/** Life Journey 当前 step 的专用 toast：只显示这一站，绝不显示同年其他事件 */
+function showJourneyStepToast(step) {
+  ensureToastHost();
+  const host = document.getElementById('lj-step-toast');
+  if (!host) return;
+  host.innerHTML = `
+    <div class="lj-step-year">${formatYear(step.year)}</div>
+    <div class="lj-step-place">📍 ${step.place}</div>
+    <div class="lj-step-desc">${step.desc || ''}</div>
+  `;
+  host.classList.add('show');
+  clearTimeout(host._t);
+}
+
+/** 通用文字 toast（切换数据集 / 结束提示等） */
 function showJourneyToast(text, duration = 2000) {
-  let host = document.getElementById('lj-toast');
-  if (!host) {
-    host = document.createElement('div');
-    host.id = 'lj-toast';
-    host.className = 'lj-toast';
-    document.body.appendChild(host);
-  }
+  ensureToastHost();
+  const host = document.getElementById('lj-toast');
+  if (!host) return;
   host.textContent = text;
   host.classList.add('show');
   clearTimeout(host._t);
   host._t = setTimeout(() => host.classList.remove('show'), duration);
+}
+
+/** 一次性创建两个 toast 宿主 */
+function ensureToastHost() {
+  if (!document.getElementById('lj-step-toast')) {
+    const step = document.createElement('div');
+    step.id = 'lj-step-toast';
+    step.className = 'lj-step-toast';
+    document.body.appendChild(step);
+  }
+  if (!document.getElementById('lj-toast')) {
+    const text = document.createElement('div');
+    text.id = 'lj-toast';
+    text.className = 'lj-toast';
+    document.body.appendChild(text);
+  }
 }
