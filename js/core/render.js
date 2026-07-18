@@ -207,6 +207,12 @@ function renderPersonMarkers() {
  * ========================================================================= */
 
 function getPersonOpacity(personId) {
+  // 解说播放聚焦模式：无关人物几乎不可见
+  if (document.body.classList.contains('narration-focus')) {
+    if (state.selectedPerson === personId) return 1.0;
+    if (state.highlightedPersons.has(personId)) return 0.9;
+    return 0.05;
+  }
   if (state.selectedPerson) {
     if (state.selectedPerson === personId) return 1.0;
     if (state.highlightedPersons.has(personId)) return 0.85;

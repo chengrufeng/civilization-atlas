@@ -217,20 +217,45 @@ function clearMapArtifacts() {
 /* ---------- 音频事件 ---------- */
 
 let lastSegIdx = -1;
+let rafId = null;
 
-function onTimeUpdate() {
-  if (!session) return;
+/** rAF 高频（60Hz）轮询 currentTime，立即触发段切换。
+ *  浏览器原生 timeupdate 仅约 4Hz（250ms），字幕与地图会出现明显延迟。 */
+function tick() {
+  if (!session || session.audio.paused) {
+    rafId = null;
+    return;
+  }
   const seg = currentSegment();
-  if (!seg) return;
-  updateBar();
-  if (seg._idx !== lastSegIdx) {
+  if (seg && seg._idx !== lastSegIdx) {
     lastSegIdx = seg._idx;
     applySegment(seg);
   }
+  updateBar();
+  rafId = requestAnimationFrame(tick);
 }
 
-function onEnded() {
-  stopNarration();
+function startTick() {
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(tick);
+}
+
+function stopTick() {
+  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+}
+
+function onPlay() { startTick(); updateBar(); }
+function onPause() { stopTick(); updateBar(); }
+function onEnded() { stopNarration(); }
+// 兜底：暂停 / seek 等场景
+function onTimeUpdate() {
+  if (session && !session.audio.paused) return; // rAF 已接管
+  const seg = currentSegment();
+  if (seg && seg._idx !== lastSegIdx) {
+    lastSegIdx = seg._idx;
+    applySegment(seg);
+  }
+  updateBar();
 }
 
 /* ---------- 公共 API ---------- */
@@ -278,9 +303,13 @@ export async function startNarration(personId, opts = {}) {
   ensureBar();
   ensureCaption();
   audio.addEventListener('timeupdate', onTimeUpdate);
+  audio.addEventListener('play', onPlay);
+  audio.addEventListener('pause', onPause);
   audio.addEventListener('ended', onEnded);
-  audio.addEventListener('play', updateBar);
-  audio.addEventListener('pause', updateBar);
+  audio.addEventListener('seeked', onTimeUpdate);
+
+  // 聚焦模式：弱化其他 UI
+  document.body.classList.add('narration-focus');
 
   try {
     await audio.play();
@@ -291,18 +320,27 @@ export async function startNarration(personId, opts = {}) {
   // 立即应用第一段（hook）
   applySegment(script.segments[0]);
   lastSegIdx = 0;
+  updateBar();
 }
 
 export function stopNarration() {
   if (!session) return;
+  stopTick();
   session.audio.pause();
   session.audio.removeEventListener('timeupdate', onTimeUpdate);
+  session.audio.removeEventListener('play', onPlay);
+  session.audio.removeEventListener('pause', onPause);
   session.audio.removeEventListener('ended', onEnded);
+  session.audio.removeEventListener('seeked', onTimeUpdate);
   clearMapArtifacts();
+  document.body.classList.remove('narration-focus');
   session = null;
   state.lifeJourney = null;
+  state.highlightedPersons.clear();
   lastSegIdx = -1;
   removeUI();
+  // 触发一次 render 让图层恢复正常显示
+  render();
 }
 
 export function togglePause() {

@@ -1,28 +1,42 @@
 #!/usr/bin/env node
 /* =========================================================================
- * 解说脚本 → 音频生成工具（macOS say + afconvert，零外部依赖）
+ * 解说脚本 → 音频生成工具
+ *
+ * 支持 backend：
+ *   --backend edge   默认。微软 Edge TTS（神经网络音色，免费无需 key，中文极自然）
+ *   --backend say    macOS 系统自带（婷婷/Tingting，零依赖但机械感重）
  *
  * 用法：
  *   node tools/build-narration.mjs data/narrations/liubei.json
+ *   node tools/build-narration.mjs data/narrations/liubei.json --backend say
+ *   node tools/build-narration.mjs data/narrations/liubei.json --voice zh-CN-YunxiNeural
  *
  * 流程：
  *   1. 读取脚本 JSON
- *   2. 为每个 segment 生成临时 aiff（say -v Tingting -r 180）
- *   3. 用 afinfo 测量每段实际时长
+ *   2. 每段生成临时音频（mp3 / aiff）
+ *   3. afinfo 测量每段实际时长（精确到 0.001s）
  *   4. 累加 → 校准 segment.t（覆盖原时间戳）
- *   5. 合并为单一 m4a 文件（afconvert）
+ *   5. 合并为单一 m4a 文件（afconvert，零外部依赖）
  *   6. 写回脚本 JSON（含 totalDurationSec 与 audio 路径）
- *
- * 输出：audio/narrations/<id>.m4a
  * ========================================================================= */
 
 import { spawnSync } from 'node:child_process';
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import os from 'node:os';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+
+// ---------- CLI ----------
+const args = process.argv.slice(2);
+const scriptPathArg = args.find(a => !a.startsWith('--'));
+const getOpt = (name, def) => {
+  const i = args.indexOf(`--${name}`);
+  return i >= 0 && args[i + 1] ? args[i + 1] : def;
+};
+const BACKEND = getOpt('backend', 'edge');
+const VOICE = getOpt('voice', BACKEND === 'edge' ? 'zh-CN-XiaoxiaoNeural' : 'Tingting');
+const RATE = getOpt('rate', BACKEND === 'edge' ? '+15%' : '180');
 
 function sh(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { encoding: 'utf8', ...opts });
@@ -30,29 +44,52 @@ function sh(cmd, args, opts = {}) {
   return r;
 }
 
-/** 用 say 生成单段 aiff */
+function shQuiet(cmd, args) {
+  return spawnSync(cmd, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+}
+
+/** which 命令检查可执行文件存在 */
+function hasBin(bin) {
+  const r = shQuiet('which', [bin]);
+  return r.status === 0;
+}
+
+// ---------- TTS backends ----------
+
+/** 用 macOS say 生成单段 aiff */
 function saySegment(text, voice, rate, outPath) {
   sh('say', ['-v', voice, '-r', String(rate), '-o', outPath, text]);
 }
 
-/** 用 afinfo 解析 aiff 时长（秒） */
-function aiffDuration(path) {
+/** 用 edge-tts 生成单段 mp3 */
+function edgeSegment(text, voice, rate, outPath) {
+  const bin = hasBin('edge-tts') ? 'edge-tts' : '/Users/chengrufeng/.local/bin/edge-tts';
+  const r = sh(bin, ['--voice', voice, '--rate', String(rate), '--text', text, '--write-media', outPath]);
+  if (r.status !== 0) throw new Error(`edge-tts 失败: ${r.stderr || r.stdout}`);
+}
+
+function genSegment(text, outPath) {
+  if (BACKEND === 'edge') edgeSegment(text, VOICE, RATE, outPath);
+  else saySegment(text, VOICE, RATE, outPath);
+}
+
+/** afinfo 解析音频时长（支持 aiff/mp3/m4a） */
+function mediaDuration(path) {
   const r = sh('afinfo', [path]);
   const m = r.stdout.match(/estimated duration:\s*([\d.]+)\s*s/i);
   if (!m) throw new Error(`无法解析 ${path} 时长：${r.stdout}`);
   return parseFloat(m[1]);
 }
 
-/** 合并多个 aiff 为单一 m4a（用 afconvert 把 aiff 转 m4a，
- *  多 aiff 拼接用 say 的字串拼合策略：直接把所有文本一次性 say，
- *  这里我们改走"用 cat 拼接再转码"的简化路线——aiff 是 RIFF/wave 容器，
- *  cat 拼接需要重新写 header。改用临时 wav 拼接 + Python wave 模块。 */
-function concatAiffToM4a(aiffPaths, outPath) {
-  // 使用 Python 的 wave 模块拼接 aiff → wav（wave 不直接支持 aiff，
-  // 所以先用 afconvert 把每个 aiff 转 wav，再用 wave 拼接，最后 afconvert 转 m4a）
-  const tmpWavs = aiffPaths.map((p, i) => `/tmp/narr_${i}.wav`);
-  aiffPaths.forEach((p, i) => {
-    sh('afconvert', ['-f', 'WAVE', '-d', 'LEI16@22050', p, tmpWavs[i]]);
+/** 合并多段音频为单一 m4a
+ *  - 各段先统一转 22050Hz 16bit mono wav（afconvert 兼容性好）
+ *  - Python wave 拼接
+ *  - afconvert 输出 m4a (AAC)
+ */
+function concatToM4a(paths, outPath) {
+  const tmpWavs = paths.map((_, i) => `/tmp/narr_${i}.wav`);
+  paths.forEach((p, i) => {
+    sh('afconvert', ['-f', 'WAVE', '-d', 'LEI16@22050', '-c', '1', p, tmpWavs[i]]);
   });
   const pyScript = `
 import wave
@@ -73,33 +110,46 @@ out.close()
   try { rmSync('/tmp/narr_merged.wav'); } catch {}
 }
 
+// ---------- 主流程 ----------
+
 async function main() {
-  const scriptPath = resolve(ROOT, process.argv[2] || 'data/narrations/liubei.json');
+  if (!scriptPathArg) {
+    console.error('用法：node tools/build-narration.mjs <脚本路径> [--backend edge|say] [--voice ...] [--rate ...]');
+    process.exit(2);
+  }
+  const scriptPath = resolve(ROOT, scriptPathArg);
   const script = JSON.parse(readFileSync(scriptPath, 'utf8'));
-  const { segments, voice = 'Tingting', rate = 180, audio: audioRel } = script;
+  const { segments, audio: audioRel } = script;
   if (!segments?.length) throw new Error('segments 为空');
 
-  console.log(`▶ ${script.personId} · ${segments.length} 段 · voice=${voice} rate=${rate}`);
+  // backend 可用性检查
+  let backend = BACKEND;
+  if (backend === 'edge' && !hasBin('edge-tts') && !hasBin('/Users/chengrufeng/.local/bin/edge-tts')) {
+    console.warn('⚠ edge-tts 未安装，回退到 say（机械音）。安装：pip3 install --user edge-tts');
+    backend = 'say';
+  }
 
-  // 临时 aiff 目录
+  console.log(`▶ ${script.personId} · ${segments.length} 段 · backend=${backend} voice=${backend === 'edge' ? VOICE : VOICE} rate=${RATE}`);
+
+  const ext = backend === 'edge' ? 'mp3' : 'aiff';
   const tmpDir = `/tmp/narr_${script.personId}_${Date.now()}`;
   mkdirSync(tmpDir, { recursive: true });
 
-  const aiffPaths = [];
+  const paths = [];
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i];
-    const aiff = `${tmpDir}/seg_${String(i).padStart(3, '0')}.aiff`;
-    saySegment(seg.caption, voice, rate, aiff);
-    aiffPaths.push(aiff);
-    const dur = aiffDuration(aiff);
-    console.log(`  [${i}] ${dur.toFixed(2)}s  ${seg.caption.slice(0, 40)}${seg.caption.length > 40 ? '…' : ''}`);
+    const out = `${tmpDir}/seg_${String(i).padStart(3, '0')}.${ext}`;
+    genSegment(seg.caption, out);
+    paths.push(out);
+    const dur = mediaDuration(out);
+    console.log(`  [${i}] ${dur.toFixed(2)}s  ${seg.caption.slice(0, 42)}${seg.caption.length > 42 ? '…' : ''}`);
   }
 
-  // 按实际测量时长重算时间戳（保留 0.3s 间隔，避免朗读卡顿接缝）
+  // 按实测时长重算时间戳（保留 0.3s 间隔避免朗读接缝卡顿）
   const GAP = 0.3;
   let t = 0;
   const newSegments = segments.map((seg, i) => {
-    const dur = aiffDuration(aiffPaths[i]);
+    const dur = mediaDuration(paths[i]);
     const updated = { ...seg, t: parseFloat(t.toFixed(2)) };
     t += dur + GAP;
     return updated;
@@ -107,24 +157,26 @@ async function main() {
   const totalDuration = parseFloat(t.toFixed(2));
   console.log(`\n总时长：${totalDuration}s`);
 
-  // 合并为 m4a
+  // 合并 → m4a
   const audioAbs = resolve(ROOT, audioRel || `audio/narrations/${script.personId}.m4a`);
   mkdirSync(dirname(audioAbs), { recursive: true });
   console.log(`▶ 合并音频 → ${audioAbs}`);
-  concatAiffToM4a(aiffPaths, audioAbs);
+  concatToM4a(paths, audioAbs);
 
-  // 写回脚本 JSON
+  // 写回脚本
   const updated = {
     ...script,
     segments: newSegments,
     totalDurationSec: totalDuration,
     audio: audioRel || `audio/narrations/${script.personId}.m4a`,
+    voice: backend === 'edge' ? VOICE : VOICE,
+    ttsBackend: backend,
+    rate: RATE,
     builtAt: new Date().toISOString(),
   };
   writeFileSync(scriptPath, JSON.stringify(updated, null, 2) + '\n', 'utf8');
   console.log(`✅ 写回脚本：${scriptPath}`);
 
-  // 清理临时
   try { rmSync(tmpDir, { recursive: true, force: true }); } catch {}
 }
 

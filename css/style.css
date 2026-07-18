@@ -1847,6 +1847,32 @@ kbd {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* 聚焦模式：narration 期间弱化非主角 UI，地图沉浸式 */
+body.narration-focus #left-panel,
+body.narration-focus #event-list-panel,
+body.narration-focus #timeline-bar,
+body.narration-focus #bottom-toolbar,
+body.narration-focus .brand,
+body.narration-focus #atlas-selector-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity .35s ease;
+}
+body.narration-focus .leaflet-control-zoom,
+body.narration-focus .leaflet-control-attribution {
+  opacity: 0.4;
+  transition: opacity .35s ease;
+}
+/* 弱化非主角的关系线 */
+body.narration-focus .leaflet-overlay-pane svg path.relation-line {
+  opacity: 0.08;
+}
+/* 事件标记（◆）在 narration 时也淡化 */
+body.narration-focus .leaflet-marker-icon .event-marker {
+  opacity: 0.18;
+}
+
 @media (max-width: 768px) {
   .narration-caption { font-size: 14px; bottom: 80px; padding: 8px 14px; }
   .narration-bar { min-width: 260px; font-size: 12px; }
