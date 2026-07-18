@@ -7,6 +7,7 @@ import {
   current, FACTION_NAME, ERA_START, ERA_END,
   getPerson, switchAtlas, getGlobalPersonIndex,
 } from './atlas.js';
+import { syncUrlState } from './url-state.js';
 import { render, updateStats } from './render.js';
 import {
   buildTimelineEvents, buildTimelineTicks, startPlay, stopPlay,
@@ -182,8 +183,16 @@ export function bindControls() {
     if (e.key === 'Escape') {
       if (document.getElementById('detail-panel').classList.contains('open')) closeDetail(true);
       document.getElementById('list-overlay').classList.remove('open');
+      document.getElementById('atlas-overlay')?.classList.remove('open');
+      document.getElementById('atlas-overlay-mask')?.classList.remove('show');
+      document.getElementById('compare-overlay')?.classList.remove('open');
+      document.getElementById('compare-overlay-mask')?.classList.remove('show');
+      closeShortcutsHelp();
+      return;
     }
+    handleShortcut(e);
   });
+  bindShortcutsHelp();
 }
 
 /* ---------- 搜索 ---------- */
@@ -312,5 +321,119 @@ function bindSlider() {
     updateEventTrackCurrent();
     clearTimeout(toastDebounce);
     toastDebounce = setTimeout(() => showYearToasts(year), 250);
+    syncUrlState({ atlas: current().id, year, person: state.selectedPerson });
   });
+}
+
+/* ---------- 键盘快捷键 ---------- */
+function handleShortcut(e) {
+  // 在输入框中不触发
+  const t = e.target;
+  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+  // 浮层打开时除 Esc 外不触发
+  const overlayOpen = document.querySelector('.atlas-overlay.open, .compare-overlay.open, .list-overlay.open, #detail-panel.open');
+  if (overlayOpen) return;
+
+  const slider = document.getElementById('year-slider');
+  switch (e.key) {
+    case ' ':
+      e.preventDefault();
+      if (state.playing) stopPlay();
+      else startPlay();
+      break;
+    case 'ArrowLeft':
+      e.preventDefault();
+      nudgeYear(e.shiftKey ? -10 : -1);
+      break;
+    case 'ArrowRight':
+      e.preventDefault();
+      nudgeYear(e.shiftKey ? 10 : 1);
+      break;
+    case 'Home': {
+      e.preventDefault();
+      const y = ERA_START;
+      applyYear(y);
+      break;
+    }
+    case 'End': {
+      e.preventDefault();
+      const y = ERA_END;
+      applyYear(y);
+      break;
+    }
+    case '/':
+      e.preventDefault();
+      document.getElementById('search').focus();
+      break;
+    case 'l': case 'L':
+      document.getElementById('atlas-selector-btn')?.click();
+      break;
+    case 'c': case 'C':
+      document.getElementById('btn-timeline-compare')?.click();
+      break;
+    case '?':
+      openShortcutsHelp();
+      break;
+  }
+}
+
+function nudgeYear(delta) {
+  const slider = document.getElementById('year-slider');
+  let y = state.yearFilter !== null ? state.yearFilter : ERA_START;
+  y = Math.max(ERA_START, Math.min(ERA_END, y + delta));
+  applyYear(y);
+}
+
+function applyYear(year) {
+  const slider = document.getElementById('year-slider');
+  state.yearFilter = year;
+  state.eventFocus = null;
+  if (state.expandedEvent !== null) { state.expandedEvent = null; buildEventList(); }
+  slider.value = year;
+  document.getElementById('year-display').textContent = formatYear(year);
+  stopPlay();
+  updateStats();
+  render();
+  updateEventTrackCurrent();
+  showYearToasts(year);
+  syncUrlState({ atlas: current().id, year, person: state.selectedPerson });
+}
+
+/* ---------- 快捷键帮助浮层 ---------- */
+function bindShortcutsHelp() {
+  // 动态注入帮助浮层（一次性）
+  if (document.getElementById('shortcuts-overlay')) return;
+  const html = `
+    <div class="shortcuts-mask" id="shortcuts-mask"></div>
+    <div class="shortcuts-overlay" id="shortcuts-overlay" aria-hidden="true">
+      <div class="shortcuts-header">
+        <h3>键盘快捷键</h3>
+        <button class="shortcuts-close" id="shortcuts-close">×</button>
+      </div>
+      <div class="shortcuts-body">
+        <div class="sc-row"><kbd>Space</kbd><span>播放 / 暂停</span></div>
+        <div class="sc-row"><kbd>←</kbd> / <kbd>→</kbd><span>年份 -1 / +1</span></div>
+        <div class="sc-row"><kbd>Shift</kbd> + <kbd>←/→</kbd><span>年份 -10 / +10</span></div>
+        <div class="sc-row"><kbd>Home</kbd> / <kbd>End</kbd><span>跳到起始 / 结束年份</span></div>
+        <div class="sc-row"><kbd>/</kbd><span>聚焦搜索框</span></div>
+        <div class="sc-row"><kbd>L</kbd><span>打开数据集切换</span></div>
+        <div class="sc-row"><kbd>C</kbd><span>打开时代对照</span></div>
+        <div class="sc-row"><kbd>?</kbd><span>显示本帮助</span></div>
+        <div class="sc-row"><kbd>Esc</kbd><span>关闭任何浮层</span></div>
+      </div>
+    </div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
+  document.getElementById('shortcuts-mask').addEventListener('click', closeShortcutsHelp);
+  document.getElementById('shortcuts-close').addEventListener('click', closeShortcutsHelp);
+}
+
+function openShortcutsHelp() {
+  document.getElementById('shortcuts-overlay').classList.add('open');
+  document.getElementById('shortcuts-mask').classList.add('show');
+}
+function closeShortcutsHelp() {
+  const o = document.getElementById('shortcuts-overlay');
+  const m = document.getElementById('shortcuts-mask');
+  if (o) o.classList.remove('open');
+  if (m) m.classList.remove('show');
 }

@@ -10,7 +10,7 @@
  *   6. 都城 + 一般城市标记
  * ========================================================================= */
 
-import { state, DOMAIN_COLOR, LABEL_OFFSET, ll, formatYear } from './state.js';
+import { state, DOMAIN_COLOR, LABEL_OFFSET, ll, formatYear, relationStyle } from './state.js';
 import {
   current, FACTION_COLOR, ERA_START, ERA_END,
   getPerson, getEventCoord, getPersonImage, getPersonPositionAtYear,
@@ -411,14 +411,17 @@ function buildPersonRelationLines(personId) {
       if (!other) return null;
       const otherCoord = getPersonPositionAtYear(other, state.yearFilter);
       if (!otherCoord) return null;
-      const hostile = r.type === '敌对';
+      const style = relationStyle(r.type);
+      const canonicalType = style.label;
+      // 亲属/师承/结义：用关系色；君臣/同时代/其他：用对方势力色（保留原有视觉）
+      const useRelationColor = ['亲属', '师承', '结义', '敌对'].includes(canonicalType);
       return {
         otherId,
         coords: [myCoord, otherCoord],
-        color: hostile ? '#b23a2e' : FACTION_COLOR[other.faction],
+        color: useRelationColor ? style.color : FACTION_COLOR[other.faction],
         weight: 2,
-        opacity: 0.6,
-        dashed: hostile,
+        opacity: 0.65,
+        dashed: style.dashed,
         tooltip: `${person.name} ↔ ${other.name}：${r.type}（${r.label}）`,
       };
     })

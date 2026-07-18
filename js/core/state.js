@@ -36,6 +36,38 @@ export function formatYear(y) {
   return `${formatYearShort(y)}年`;
 }
 
+/* ---------- 关系类型语义化（A4） ----------
+ * 数据集里 relations.type 用自由字符串（亲属/父子/君臣/师承/敌对…），
+ * 这里把常见变体归一化到 7 个规范类型，并给出颜色/线型。
+ * 视图层统一通过 relationStyle(type) 取色，不再硬编码"敌对"判断。 */
+export const RELATION_TYPES = {
+  '亲属':   { color: '#b8893a', dashed: false, label: '亲属' },
+  '君臣':   { color: '#2f5d8a', dashed: false, label: '君臣' },
+  '师承':   { color: '#2d8a6e', dashed: false, label: '师承' },
+  '敌对':   { color: '#b23a2e', dashed: true,  label: '敌对' },
+  '结义':   { color: '#7b4b94', dashed: false, label: '结义' },
+  '同时代': { color: '#8a8a8a', dashed: true,  label: '同时代' },
+  '其他':   { color: '#8a8a8a', dashed: true,  label: '其他' },
+};
+
+const RELATION_ALIASES = {
+  '父子': '亲属', '母子': '亲属', '夫妻': '亲属', '兄弟': '亲属', '姐妹': '亲属',
+  '祖孙': '亲属', '叔侄': '亲属', '兄妹': '亲属', '母女': '亲属',
+  '师徒': '师承', '师生': '师承',
+  '同僚': '同时代', '同朝': '同时代', '同代': '同时代', '同地': '同时代',
+  '同阵营': '同时代', '同名': '同时代', '同乡': '同时代',
+};
+
+export function normalizeRelationType(type) {
+  if (RELATION_TYPES[type]) return type;
+  if (RELATION_ALIASES[type]) return RELATION_ALIASES[type];
+  return '其他';
+}
+
+export function relationStyle(type) {
+  return RELATION_TYPES[normalizeRelationType(type)] || RELATION_TYPES['其他'];
+}
+
 /* 标签朝向 → tooltip 像素偏移 */
 export const LABEL_OFFSET = {
   right: [12, 0], left: [-12, 0], top: [0, -14], bottom: [0, 14],

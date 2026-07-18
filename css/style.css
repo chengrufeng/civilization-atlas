@@ -24,6 +24,26 @@
   --radius: 10px;
 }
 
+/* ---------- 暗色模式（系统自动切换） ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8e2d4;
+    --ink-soft: #c8c0b0;
+    --ink-light: #8a8178;
+    --paper: #1f1c18;
+    --paper-card: #2a2620;
+    --paper-trans: rgba(31,28,24,.92);
+    --seal: #d8594b;
+    --seal-deep: #b23a2e;
+    --line: rgba(232,226,212,.16);
+    --shadow: 0 4px 20px rgba(0,0,0,.4);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
+  }
+  /* 顶栏按钮、搜索框等使用 #fff 背景的元素也跟着翻转 */
+  .search-box, .search-box:focus { background: var(--paper-card) !important; color: var(--ink); }
+  .leaflet-container { background: #0e0d0a; }
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -80,9 +100,17 @@ html, body {
 .compare-close:hover { color: var(--ink); }
 .compare-overlay-body { padding: 24px 28px 16px; overflow-y: auto; }
 
-.compare-axis {
-  position: relative; height: 24px; margin: 0 0 12px 140px; border-bottom: 1px solid var(--line);
+.compare-axis-container { position: relative; margin-bottom: 16px; }
+.compare-axis-container .compare-axis { margin: 0 0 4px 140px; }
+.compare-axis-hint {
+  font-size: 11px; color: var(--ink-light); margin: 6px 0 0 140px;
 }
+.compare-axis-cursor {
+  position: absolute; top: 0; bottom: 0; width: 2px;
+  background: var(--seal); opacity: 0; pointer-events: none;
+  transition: opacity .15s; z-index: 1;
+}
+.compare-axis { position: relative; height: 24px; margin: 0 0 12px 140px; border-bottom: 1px solid var(--line); }
 .compare-axis-line { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); }
 .compare-tick { position: absolute; top: 0; transform: translateX(-50%); }
 .compare-tick-line { width: 1px; height: 8px; background: var(--ink-light); margin: 0 auto; }
@@ -116,7 +144,60 @@ html, body {
 @media (max-width: 600px) {
   .compare-row-label { width: 80px; font-size: 12px; }
   .compare-axis { margin-left: 92px; }
+  .compare-axis-container .compare-axis { margin-left: 92px; }
+  .compare-axis-hint { margin-left: 92px; }
 }
+
+/* ---------- 同时代人物浮层 ---------- */
+.contemp-overlay-mask {
+  position: fixed; inset: 0; background: rgba(0,0,0,.4);
+  opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 92;
+}
+.contemp-overlay-mask.show { opacity: 1; pointer-events: auto; }
+.contemp-overlay {
+  position: fixed; top: 60px; left: 50%; transform: translate(-50%, -10px);
+  width: min(720px, 92vw); max-height: 78vh; overflow: hidden;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.22);
+  z-index: 93; opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  display: flex; flex-direction: column;
+}
+.contemp-overlay.open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.contemp-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+}
+.contemp-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.contemp-close { border: none; background: transparent; font-size: 22px; color: var(--ink-light); cursor: pointer; }
+.contemp-close:hover { color: var(--ink); }
+.contemp-body { padding: 14px 20px; overflow-y: auto; }
+.contemp-loading, .contemp-empty {
+  padding: 24px; text-align: center; color: var(--ink-light); font-size: 13px;
+}
+.contemp-group { margin-bottom: 14px; }
+.contemp-group-title {
+  font-size: 12px; font-weight: 700; color: var(--ink-light);
+  letter-spacing: 1px; margin-bottom: 6px;
+}
+.contemp-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+}
+.contemp-card {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--paper-card);
+  cursor: pointer; transition: all .15s; text-align: left; font-family: inherit;
+}
+.contemp-card:hover { border-color: var(--seal); transform: translateY(-1px); }
+.contemp-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--seal); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+}
+.contemp-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+.contemp-meta { font-size: 10px; color: var(--ink-light); margin-left: auto; }
 .atlas-selector-btn {
   display: flex; align-items: center; gap: 6px;
   font-family: inherit; font-size: 14px; font-weight: 700;
@@ -183,6 +264,11 @@ html, body {
 .atlas-card-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
 .atlas-card.active .atlas-card-name { color: var(--seal); }
 .atlas-card-sub { font-size: 11px; color: var(--ink-light); line-height: 1.4; }
+.atlas-card-stats {
+  display: flex; gap: 10px; margin-top: 6px;
+  font-size: 11px; color: var(--ink-soft); font-weight: 600;
+}
+.atlas-card-stats span { white-space: nowrap; }
 
 @media (max-width: 600px) {
   .atlas-group-grid { grid-template-columns: 1fr; }
@@ -577,10 +663,37 @@ body.no-timeline .line-legend { bottom: 16px; }
 .relation-chip {
   font-size: 11px; padding: 4px 10px; border-radius: 14px;
   background: var(--paper-card); cursor: pointer; transition: all .15s;
-  border: 1px solid var(--line);
+  border: 1px solid var(--rc, var(--line));
+  border-left: 3px solid var(--rc, var(--line));
 }
 .relation-chip:hover { background: var(--ink); color: var(--paper); }
-.relation-chip .rel-type { color: var(--seal); margin-left: 4px; font-size: 10px; }
+.relation-chip .rel-type { color: var(--rc, var(--seal)); margin-left: 4px; font-size: 10px; font-weight: 600; }
+
+/* ---------- 跨数据集关联 ---------- */
+.detail-cross-links { display: flex; flex-direction: column; gap: 8px; }
+.cross-link {
+  padding: 8px 10px; border: 1px dashed var(--line); border-radius: 8px;
+  background: var(--paper-card);
+}
+.cross-link-label {
+  font-size: 12px; color: var(--ink-soft); margin-bottom: 6px; line-height: 1.4;
+}
+.cross-link-tag {
+  display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px;
+  border-radius: 3px; margin-right: 6px; vertical-align: 1px;
+}
+.cross-link-tag-same-person { background: var(--seal); color: #fff; }
+.cross-link-tag-interaction { background: #2d8a6e; color: #fff; }
+.cross-link-others { display: flex; gap: 6px; flex-wrap: wrap; }
+.cross-link-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1px;
+  padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--paper); cursor: pointer; transition: all .15s;
+  font-family: inherit; min-width: 90px;
+}
+.cross-link-card:hover { border-color: var(--seal); transform: translateY(-1px); }
+.cross-link-name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.cross-link-atlas { font-size: 10px; color: var(--ink-light); }
 
 /* ---------- 人物名册浮层 ---------- */
 .list-overlay {
@@ -880,6 +993,41 @@ body.no-timeline .line-legend { bottom: 16px; }
 .ss-group-title {
   font-size: 11px; font-weight: 700; color: var(--ink-light);
   letter-spacing: 1px; padding: 6px 14px 2px;
+}
+
+/* ---------- 快捷键帮助浮层 ---------- */
+.shortcuts-mask {
+  position: fixed; inset: 0; background: rgba(0,0,0,.3);
+  opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 95;
+}
+.shortcuts-mask.show { opacity: 1; pointer-events: auto; }
+.shortcuts-overlay {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -45%);
+  width: min(420px, 92vw); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.22);
+  z-index: 96; opacity: 0; pointer-events: none;
+  transition: opacity .2s, transform .2s;
+}
+.shortcuts-overlay.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%); }
+.shortcuts-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 18px; border-bottom: 1px solid var(--line);
+}
+.shortcuts-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.shortcuts-close { border: none; background: transparent; font-size: 20px; color: var(--ink-light); cursor: pointer; }
+.shortcuts-close:hover { color: var(--ink); }
+.shortcuts-body { padding: 12px 18px; }
+.sc-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 6px 0; font-size: 13px; color: var(--ink-soft);
+}
+.sc-row span { flex: 1; }
+kbd {
+  font-family: inherit; font-size: 11px; font-weight: 600;
+  padding: 3px 7px; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--paper-deep); color: var(--ink);
+  box-shadow: 0 1px 0 var(--line); min-width: 18px; text-align: center;
 }
 
 /* ---------- 加载提示 ---------- */

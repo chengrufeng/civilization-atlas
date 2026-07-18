@@ -18,16 +18,18 @@ import { initMap, clearAllLayers, flyToDefault, updateLabelVisibility } from './
 import { render, updateStats } from './core/render.js';
 import { bindControls, buildFactionFilters, buildDomainFilters } from './core/controls.js';
 import {
-  buildTimelineTicks, buildTimelineEvents, stopPlay,
+  buildTimelineTicks, buildTimelineEvents, stopPlay, updateEventTrackCurrent,
 } from './core/timeline.js';
 import { buildEventList } from './core/event-list.js';
 import { openCompareOverlay, closeCompareOverlay } from './core/compare.js';
+import { readUrlState, syncUrlState, withUrlSuppressed } from './core/url-state.js';
+import { formatYear } from './core/state.js';
 
 /* ---------- 初始化 ---------- */
 async function init() {
-  // 支持 ?atlas=<id> 指定首屏数据集（便于逐个测试/分享）
-  const preferred = new URLSearchParams(location.search).get('atlas');
-  await initAtlas(preferred);          // 先懒加载数据集
+  // 支持 ?atlas=<id>&year=<y>&person=<id> 分享直达
+  const urlState = readUrlState();
+  await initAtlas(urlState.atlas);          // 先懒加载数据集
   initAtlasSwitcher();
   applyAtlasToUI();
   initMap();
@@ -46,6 +48,29 @@ async function init() {
   render();
 
   document.getElementById('loading-overlay').classList.add('hide');
+
+  // 应用 URL 中的年份和人物（若有）
+  if (urlState.year !== null) {
+    withUrlSuppressed(() => {
+      const slider = document.getElementById('year-slider');
+      state.yearFilter = urlState.year;
+      if (slider) slider.value = urlState.year;
+      const yd = document.getElementById('year-display');
+      if (yd) {
+        yd.textContent = formatYear(urlState.year);
+      }
+      updateStats();
+      render();
+      updateEventTrackCurrent?.();
+    });
+  }
+  if (urlState.person) {
+    import('./core/detail.js').then(m => {
+      withUrlSuppressed(() => m.openDetail(urlState.person));
+    });
+  }
+  // 初始 URL 规范化（如缺失 atlas 等）
+  syncUrlState({ atlas: current().id, year: state.yearFilter, person: state.selectedPerson });
 }
 
 /* ---------- 数据集切换器（下拉浮层，按 group 分组） ---------- */
@@ -68,11 +93,21 @@ function initAtlasSwitcher() {
   }
 
   body.innerHTML = groups.map(g => {
-    const cards = g.items.map(a => `
+    const cards = g.items.map(a => {
+      const s = a.stats || {};
+      const badges = s.persons ? `
+        <div class="atlas-card-stats">
+          <span title="人物">👤 ${s.persons}</span>
+          <span title="事件">◆ ${s.events}</span>
+          <span title="势力">⚑ ${s.factions}</span>
+        </div>` : '';
+      return `
       <button class="atlas-card ${a.id === activeId ? 'active' : ''}" data-atlas="${a.id}">
         <div class="atlas-card-name">${a.name}</div>
         <div class="atlas-card-sub">${a.subtitle}</div>
-      </button>`).join('');
+        ${badges}
+      </button>`;
+    }).join('');
     return `<div class="atlas-group">
       <div class="atlas-group-title">${g.name}</div>
       <div class="atlas-group-grid">${cards}</div>
@@ -120,6 +155,13 @@ function bindTopBarExtras() {
   // compare 面板里点条带 → 切换数据集
   window.addEventListener('compare:select', (e) => {
     if (e.detail && e.detail !== current().id) doSwitchAtlas(e.detail);
+  });
+  // 同时代面板里点人物 → 切 + 打开详情
+  window.addEventListener('compare:selectPerson', async (e) => {
+    const { atlasId, personId } = e.detail || {};
+    if (!atlasId || !personId) return;
+    if (atlasId !== current().id) await doSwitchAtlas(atlasId);
+    import('./core/detail.js').then(m => m.openDetail(personId));
   });
 }
 
@@ -186,6 +228,9 @@ onSwitch(() => {
     card.classList.toggle('active', card.dataset.atlas === current().id);
   });
   updateAtlasButtonLabel();
+
+  // URL 状态：切换数据集时清空 year/person（避免引用错位）
+  syncUrlState({ atlas: current().id, year: null, person: null });
 
   render();
 });

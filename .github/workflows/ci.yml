@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 单元测试
+        run: node --test tools/state.test.mjs
+      - name: 数据集静态校验
+        run: node tools/validate.mjs
+      - name: Chrome 安装（用于冒烟）
+        run: |
+          wget -q -O - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | sudo dpkg -i - || true
+          sudo apt-get -f install -y
+      - name: 冒烟测试
+        run: CHROME=/usr/bin/google-chrome node tools/smoke.mjs

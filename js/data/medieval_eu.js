@@ -50,6 +50,7 @@ const PERSONS = [
   { id: 'dante', name: '但丁', courtesy: '', alias: [], faction: 'church', birth: 1265, death: 1321, birthPlace: '佛罗伦萨', title: '诗人', roles: ['意大利文艺复兴先驱'], avatar: '但', bio: '《神曲》意大利文学之父。', events: [ { year: 1320, place: '拉文纳', desc: '完成神曲' } ] },
   { id: 'william_i', name: '征服者威廉', courtesy: '', alias: [], faction: 'holy_roman', birth: 1028, death: 1087, birthPlace: '法莱兹', title: '英格兰国王', roles: ['诺曼征服'], avatar: '威', bio: '黑斯廷斯战役征服英格兰。', events: [ { year: 1066, place: '黑斯廷斯', desc: '黑斯廷斯战役' } ] },
   { id: 'joan', name: '圣女贞德', courtesy: '', alias: [], faction: 'church', birth: 1412, death: 1431, birthPlace: '栋雷米', title: '军事领袖', roles: ['法国民族英雄'], avatar: '贞', bio: '少女率军解奥尔良之围，最终被火刑。', events: [ { year: 1429, place: '奥尔良', desc: '解奥尔良之围' }, { year: 1431, place: '鲁昂', desc: '被处以火刑' } ] },
+  { id: 'marco_polo', name: '马可波罗', courtesy: '', alias: ['Marco Polo'], faction: 'church', birth: 1254, death: 1324, birthPlace: '威尼斯', title: '旅行家', roles: ['东西方交流桥梁'], avatar: '马', bio: '1271-1295 年旅居东方，仕元十七年，口述《马可波罗游记》深刻影响欧洲对东方的想象。', events: [ { year: 1271, place: '罗马', desc: '随父叔从威尼斯东行' }, { year: 1295, place: '罗马', desc: '回到威尼斯' } ] },
   { id: 'mehmed_ii', name: '穆罕默德二世', courtesy: '', alias: [], faction: 'islam', birth: 1432, death: 1481, birthPlace: '埃迪尔内', title: '奥斯曼苏丹', roles: ['征服者'], avatar: '穆', bio: '21岁攻陷君士坦丁堡，灭拜占庭。', events: [ { year: 1453, place: '君士坦丁堡', desc: '攻陷君士坦丁堡' } ] },
 ];
 

@@ -63,10 +63,12 @@ export function startPlay() {
   };
 
   jumpToEvent(idx);
+  // 播放间隔按事件密度自适应：事件多→快、事件少→慢，固定在 1.5–4s 之间
+  const playInterval = Math.max(1500, Math.min(4000, Math.round(60000 / Math.max(8, sortedEvents.length))));
   state.playTimer = setInterval(() => {
     idx = (idx + 1) % sortedEvents.length;
     jumpToEvent(idx);
-  }, 3000);
+  }, playInterval);
 }
 
 export function stopPlay() {

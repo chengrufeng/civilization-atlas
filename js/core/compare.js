@@ -3,12 +3,13 @@
  * 直观呈现不同文明/朝代的同时代关系。
  * ========================================================================= */
 
-import { manifest } from './atlas.js';
-import { formatYearShort } from './state.js';
+import { manifest, getGlobalPersonIndex } from './atlas.js';
+import { formatYear, formatYearShort } from './state.js';
+
+/* 缓存最近一次构建对照面板时的年份映射，供 axis 点击复用 */
+let compareAxis = null;
 
 function eraRange(meta) {
-  // manifest 不含数值年份，需从对应 atlas 取。为避免全部加载，
-  // 这里要求 manifest 携带 startYear/endYear，否则回退解析 subtitle。
   if (typeof meta.startYear === 'number' && typeof meta.endYear === 'number') {
     return [meta.startYear, meta.endYear];
   }
@@ -19,8 +20,6 @@ export function buildCompareOverlay() {
   const body = document.getElementById('compare-overlay-body');
   if (!body) return;
 
-  // 从已加载的 manifest 直接取（manifest 元素带 startYear/endYear 字段）
-  // 若数据集未在 manifest 提供数值年份，从 subtitle 兜底解析
   const items = manifest().map(m => {
     let [s, e] = (typeof m.startYear === 'number' && typeof m.endYear === 'number')
       ? [m.startYear, m.endYear]
@@ -37,8 +36,8 @@ export function buildCompareOverlay() {
   const maxYear = Math.max(...items.map(m => m.endYear));
   const span = Math.max(1, maxYear - minYear);
   const pct = y => ((y - minYear) / span) * 100;
+  compareAxis = { minYear, maxYear, span };
 
-  // 按 group 分组，每组按 startYear 排序
   const groups = [];
   for (const m of items) {
     let g = groups.find(x => x.name === m.group);
@@ -47,20 +46,22 @@ export function buildCompareOverlay() {
   }
   groups.forEach(g => g.items.sort((a, b) => a.startYear - b.startYear));
 
-  // 整数刻度：自动选合适步长
   const step = chooseStep(span);
+  const ticks = [];
+  for (let y = minYear; y <= maxYear; y += step) ticks.push(y);
+  if (ticks[ticks.length - 1] !== maxYear) ticks.push(maxYear);
 
   body.innerHTML = `
-    <div class="compare-axis">
-      <div class="compare-axis-line"></div>
-      ${Array.from({ length: Math.floor(span / step) + 1 }, (_, i) => {
-        const y = minYear + i * step;
-        if (y > maxYear) return '';
-        return `<div class="compare-tick" style="left:${pct(y)}%">
+    <div class="compare-axis-container" id="compare-axis-container">
+      <div class="compare-axis" style="margin-left:0">
+        <div class="compare-axis-line"></div>
+        ${ticks.map(y => `<div class="compare-tick" style="left:${pct(y)}%">
           <div class="compare-tick-line"></div>
           <div class="compare-tick-label">${formatYearShort(y)}</div>
-        </div>`;
-      }).join('')}
+        </div>`).join('')}
+        <div class="compare-axis-cursor" id="compare-axis-cursor"></div>
+      </div>
+      <div class="compare-axis-hint">👆 点击轴上任一年份，查看全球同时代人物</div>
     </div>
     ${groups.map(g => `
       <div class="compare-group">
@@ -79,21 +80,115 @@ export function buildCompareOverlay() {
         </div>
       </div>`).join('')}
     </div>
-    <div class="compare-hint">点击任意条带切换至该数据集</div>
   `;
 
+  // 行点击 → 切数据集
   body.querySelectorAll('.compare-row').forEach(row => {
     row.addEventListener('click', () => {
       const id = row.dataset.atlas;
       closeCompareOverlay();
-      // 用 hash 触发外部 switch（不直接 import 避免循环依赖）
       window.dispatchEvent(new CustomEvent('compare:select', { detail: id }));
+    });
+  });
+
+  // 轴点击/悬停 → 显示该年同时代
+  const axisEl = document.getElementById('compare-axis-container');
+  const cursor = document.getElementById('compare-axis-cursor');
+  const handleMove = (clientX) => {
+    const tracks = document.querySelectorAll('.compare-row-track');
+    if (!tracks.length) return;
+    const rect = tracks[0].getBoundingClientRect();
+    const x = clientX - rect.left;
+    if (x < 0 || x > rect.width) return;
+    cursor.style.left = `${(x / rect.width) * 100 + 0}%`;
+    cursor.style.opacity = '1';
+  };
+  axisEl.addEventListener('mousemove', (e) => handleMove(e.clientX));
+  axisEl.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
+  axisEl.addEventListener('click', (e) => {
+    const tracks = document.querySelectorAll('.compare-row-track');
+    if (!tracks.length) return;
+    const rect = tracks[0].getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if (x < 0 || x > rect.width) return;
+    const ratio = x / rect.width;
+    const year = Math.round(compareAxis.minYear + ratio * compareAxis.span);
+    showContemporaries(year);
+  });
+}
+
+/* 在同时代浮层显示该年所有 atlas 中的人物 */
+async function showContemporaries(year) {
+  const overlay = document.getElementById('contemp-overlay');
+  const mask = document.getElementById('contemp-overlay-mask');
+  const body = document.getElementById('contemp-body');
+  const yearLabel = document.getElementById('contemp-year');
+  if (!overlay || !body) return;
+  yearLabel.textContent = formatYear(year);
+  body.innerHTML = '<div class="contemp-loading">加载中…</div>';
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  mask.classList.add('show');
+
+  let idx;
+  try { idx = await getGlobalPersonIndex(); }
+  catch { body.innerHTML = '<div class="contemp-empty">索引加载失败</div>'; return; }
+
+  const alive = idx.filter(p => p.birth <= year && p.death >= year);
+  if (alive.length === 0) {
+    body.innerHTML = '<div class="contemp-empty">该年份无在世人物数据</div>';
+    return;
+  }
+
+  // 按 atlas 分组
+  const manifestMap = new Map(manifest().map(m => [m.id, m]));
+  const groupsMap = new Map();
+  for (const p of alive) {
+    if (!groupsMap.has(p.atlasId)) groupsMap.set(p.atlasId, []);
+    groupsMap.get(p.atlasId).push(p);
+  }
+
+  // 按 group→atlas 排序
+  const sortedGroups = [...groupsMap.entries()].sort((a, b) => {
+    const ga = manifestMap.get(a[0])?.group || '';
+    const gb = manifestMap.get(b[0])?.group || '';
+    if (ga !== gb) return ga.localeCompare(gb);
+    return (manifestMap.get(a[0])?.startYear || 0) - (manifestMap.get(b[0])?.startYear || 0);
+  });
+
+  body.innerHTML = sortedGroups.map(([atlasId, list]) => {
+    const meta = manifestMap.get(atlasId);
+    const groupTag = meta?.group || '';
+    return `<div class="contemp-group">
+      <div class="contemp-group-title">${groupTag} · ${meta?.name || atlasId}</div>
+      <div class="contemp-cards">
+        ${list.map(p => `
+          <button class="contemp-card" data-atlas="${p.atlasId}" data-id="${p.personId}">
+            <span class="contemp-avatar">${(p.name || '?').slice(0, 1)}</span>
+            <span class="contemp-name">${p.name}</span>
+            <span class="contemp-meta">${p.factionName || ''}</span>
+          </button>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  body.querySelectorAll('.contemp-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const aid = card.dataset.atlas;
+      const pid = card.dataset.id;
+      closeContemporaries();
+      closeCompareOverlay();
+      window.dispatchEvent(new CustomEvent('compare:selectPerson', { detail: { atlasId: aid, personId: pid } }));
     });
   });
 }
 
+export function closeContemporaries() {
+  document.getElementById('contemp-overlay')?.classList.remove('open');
+  document.getElementById('contemp-overlay-mask')?.classList.remove('show');
+}
+
 function parseFromSubtitle(subtitle = '') {
-  // 从 "...（前2100–前771年）" 提取年份
   const matches = [...subtitle.matchAll(/前?\d+/g)];
   if (matches.length < 2) return [NaN, NaN];
   const parse = s => {
@@ -118,6 +213,11 @@ export function openCompareOverlay() {
   document.getElementById('compare-overlay').classList.add('open');
   document.getElementById('compare-overlay').setAttribute('aria-hidden', 'false');
   document.getElementById('compare-overlay-mask').classList.add('show');
+  // 绑定同时代浮层关闭按钮
+  const closeBtn = document.getElementById('contemp-close');
+  const mask2 = document.getElementById('contemp-overlay-mask');
+  if (closeBtn && !closeBtn.__bound) { closeBtn.__bound = true; closeBtn.addEventListener('click', closeContemporaries); }
+  if (mask2 && !mask2.__bound) { mask2.__bound = true; mask2.addEventListener('click', closeContemporaries); }
 }
 
 export function closeCompareOverlay() {

@@ -35,6 +35,7 @@ function validateAtlas(atlas) {
   // 基本字段
   if (!atlas.id) err('缺少 id');
   if (!atlas.name) err('缺少 name');
+  if (!atlas.version) warn('建议添加 version 字段（如 "1.0.0"），便于后续 schema 兼容性检测');
 
   const [start, end] = eraRange(atlas);
   if (start === null || end === null || Number.isNaN(start) || Number.isNaN(end)) {
