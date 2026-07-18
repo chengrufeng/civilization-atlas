@@ -118,7 +118,7 @@ function showYearBanner(seg) {
   banner.classList.add('show');
 }
 
-/** 图片浮动卡片（右下角）：如果 segment 配置了 image，则展示 */
+/** 图片浮动卡片（右侧中部大图）：如果 segment 配置了 image，则展示 */
 function showImageCard(seg) {
   let card = document.getElementById('narration-image-card');
   if (!seg || !seg.image) {
@@ -143,13 +143,16 @@ function showImageCard(seg) {
   card.classList.remove('show');
   img.onload = () => {
     if (session) {
-      cap.textContent = seg.imageCaption || '';
-      src.textContent = seg.imageSource || '';
+      // caption 用脚本预填的 imageCaption；若未填则用 segment.caption 摘要
+      const text = seg.imageCaption || (seg.caption && seg.caption.length > 40
+        ? seg.caption.slice(0, 38) + '…'
+        : (seg.caption || ''));
+      cap.textContent = text;
+      src.textContent = seg.imageSource || '图片来源：网络';
       card.classList.add('show');
     }
   };
   img.onerror = () => {
-    // 加载失败静默
     card.classList.remove('show');
   };
   img.src = seg.image;
@@ -272,6 +275,126 @@ function haversineKm(a, b) {
   return 2 * R * Math.asin(Math.sqrt(x));
 }
 
+let renderRafId = null;   // render 防抖句柄
+let trailLayer = null;    // 累积轨迹 polyline（增量 addLatLng，避免每次全量重画）
+
+/** 段切换：字幕 + 地图状态 + flyTo + 轨迹 + 图片 全部同步切换
+ *  只把 render/buildEventList（重量级 DOM 重建）推迟并防抖。
+ *  修复"字幕先到位、地图后到位"的累积漂移问题。 */
+function applySegment(seg) {
+  if (!seg) return;
+
+  // 1. 字幕（同步）
+  renderCaption(seg);
+
+  // 2. 地图状态（同步，与字幕同一帧）
+  if (typeof seg.step === 'number' && session.steps[seg.step]) {
+    const step = session.steps[seg.step];
+    state.yearFilter = step.year;
+    state.selectedPerson = session.script.personId;
+    state.expandedEvent = null;
+
+    // 关系同期高亮（±10 年）
+    state.highlightedPersons.clear();
+    const atlas = current();
+    const person = getPerson(session.script.personId);
+    if (person) {
+      for (const r of (atlas.relations || [])) {
+        if (r.source !== session.script.personId && r.target !== session.script.personId) continue;
+        const rYear = r.year ?? step.year;
+        if (Math.abs(rYear - step.year) <= 10) {
+          state.highlightedPersons.add(r.source === session.script.personId ? r.target : r.source);
+        }
+      }
+    }
+
+    // flyTo：自适应时长（按地理距离 0.4–0.9s），立即启动
+    // Leaflet 自己调度动画，不阻塞主线程
+    const curCenter = state.map.getCenter();
+    const curLatlng = [curCenter.lat, curCenter.lng];
+    const targetLatlng = ll(step.coord);
+    const dist = haversineKm(curLatlng, targetLatlng);
+    const flyDur = Math.min(0.9, 0.4 + Math.min(dist, 2000) / 4000);
+    state.map.flyTo(targetLatlng, Math.max(state.map.getZoom(), 6), {
+      duration: flyDur,
+      easeLinearity: 0.4,
+    });
+
+    // 轨迹线增量更新（不每次全量重画）
+    redrawTrailIncremental(seg.step);
+
+    // slider / year-display 同步
+    const slider = document.getElementById('year-slider');
+    if (slider) slider.value = step.year;
+    const yd = document.getElementById('year-display');
+    if (yd) yd.textContent = formatYear(step.year);
+
+    // 图片切换（异步加载，不阻塞）
+    showImageCard(seg);
+  } else {
+    // hook / 引入 / 结尾段：清状态 + 移除脉冲
+    state.highlightedPersons.clear();
+    clearPulseMarker();
+    hideImageCard();
+  }
+
+  // 3. render + buildEventList 推迟并防抖（连续段切换时只执行最后一次）
+  //    这是重量级 DOM 重建，避免每段都全量重画阻塞主线程
+  if (renderRafId) cancelAnimationFrame(renderRafId);
+  renderRafId = requestAnimationFrame(() => {
+    renderRafId = null;
+    if (!session) return;
+    updateStats();
+    render();
+    // buildEventList 再次推迟（最重的 DOM 操作）
+    requestAnimationFrame(() => {
+      if (!session) return;
+      buildEventList();
+      applyPulseMarker(session.script.personId);
+    });
+  });
+}
+
+/** 轨迹线增量更新：每次段切换只追加最新点，不重画整条线。
+ *  step 回退（seek 时）则全量重建。 */
+function redrawTrailIncremental(stepIdx) {
+  if (!state.map) return;
+  const allLatLngs = session.steps.slice(0, stepIdx + 1).map(s => ll(s.coord));
+
+  // 头标位置
+  const head = allLatLngs[allLatLngs.length - 1];
+  if (head) {
+    if (!session.headMarker) {
+      session.headMarker = L.circleMarker(head, HEAD_STYLE).addTo(state.map);
+    } else {
+      session.headMarker.setLatLng(head);
+    }
+  }
+
+  // 折线：复用已有 layer，追加或重建
+  if (!session.pathLayer) {
+    if (allLatLngs.length >= 2) {
+      session.pathLayer = L.polyline(allLatLngs, PATH_STYLE).addTo(state.map);
+      session.pathStepCount = stepIdx + 1;
+    }
+    return;
+  }
+  // 段切换检测：如果新长度 > 旧长度，append；否则全量重建（用户 seek 后退）
+  if (stepIdx + 1 > (session.pathStepCount || 0)) {
+    // 增量：只加新点
+    const newPoints = allLatLngs.slice(session.pathStepCount);
+    const cur = session.pathLayer.getLatLngs();
+    newPoints.forEach(p => cur.push(p));
+    session.pathLayer.setLatLngs(cur);
+    session.pathStepCount = stepIdx + 1;
+  } else if (stepIdx + 1 < (session.pathStepCount || 0)) {
+    // 后退：全量重建
+    session.pathLayer.setLatLngs(allLatLngs);
+    session.pathStepCount = stepIdx + 1;
+  }
+  // 相等：不动作（同段重复触发）
+}
+
 function applySegment(seg) {
   if (!seg) return;
   // 1. 快操作：字幕 + 年份水印（立即同步，不阻塞）
@@ -353,27 +476,7 @@ function applySegmentSlow(seg) {
   }
 }
 
-function redrawTrail(stepIdx) {
-  if (!state.map) return;
-  const latlngs = session.steps
-    .slice(0, stepIdx + 1)
-    .map(s => ll(s.coord));
-  if (latlngs.length >= 2) {
-    if (!session.pathLayer) {
-      session.pathLayer = L.polyline(latlngs, PATH_STYLE).addTo(state.map);
-    } else {
-      session.pathLayer.setLatLngs(latlngs);
-    }
-  }
-  const head = latlngs[latlngs.length - 1];
-  if (head) {
-    if (!session.headMarker) {
-      session.headMarker = L.circleMarker(head, HEAD_STYLE).addTo(state.map);
-    } else {
-      session.headMarker.setLatLng(head);
-    }
-  }
-}
+// 旧版 redrawTrail 已被 redrawTrailIncremental 替代（增量更新避免性能退化）
 
 function clearMapArtifacts() {
   if (session?.pathLayer) { session.pathLayer.remove(); session.pathLayer = null; }
