@@ -178,6 +178,7 @@ const STRINGS = {
 
     'narration.btn': '🎧 解说播放',
     'narration.intro': '音频解说',
+    'narration.view_script': '查看解说脚本',
   },
 
   en: {
@@ -348,6 +349,7 @@ const STRINGS = {
 
     'narration.btn': '🎧 Narration',
     'narration.intro': 'Audio narration',
+    'narration.view_script': 'View narration script',
   },
 };
 

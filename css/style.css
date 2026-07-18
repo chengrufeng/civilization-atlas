@@ -2044,6 +2044,111 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   .narration-image-card .nic-source { padding: 0 10px 8px; font-size: 10px; }
 }
 
+/* 解说脚本查看浮层（详情面板 📝 入口） */
+.ns-mask {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+  z-index: 1070;
+}
+.ns-mask.show { opacity: 1; pointer-events: auto; }
+.ns-overlay {
+  position: fixed; top: 6vh; left: 50%; transform: translateX(-50%);
+  width: min(820px, 94vw); max-height: 86vh;
+  background: var(--paper, #f5f0e6);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+  z-index: 1071;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: ns-pop .3s cubic-bezier(.2,.7,.3,1);
+}
+@keyframes ns-pop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.ns-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line, rgba(0,0,0,.08));
+  background: linear-gradient(180deg, rgba(212,105,28,.06), transparent);
+}
+.ns-title h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.ns-sub {
+  font-size: 12px; color: var(--ink-light, #888);
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+.ns-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 24px; line-height: 1; color: var(--ink-light, #888);
+  padding: 4px 8px; border-radius: 6px;
+}
+.ns-close:hover { color: var(--ink, #333); background: rgba(0,0,0,.06); }
+.ns-body {
+  flex: 1; overflow-y: auto;
+  padding: 0 24px 12px;
+}
+.ns-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.ns-table thead th {
+  text-align: left;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-light, #888);
+  padding: 8px 8px;
+  border-bottom: 2px solid var(--line, rgba(0,0,0,.08));
+  position: sticky; top: 0;
+  background: var(--paper, #f5f0e6);
+}
+.ns-table tbody tr {
+  border-bottom: 1px dashed var(--line, rgba(0,0,0,.06));
+  transition: background .15s;
+}
+.ns-table tbody tr:hover {
+  background: rgba(212,105,28,.05);
+}
+.ns-table td {
+  padding: 10px 8px;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.ns-idx { color: var(--ink-light, #888); font-variant-numeric: tabular-nums; width: 32px; }
+.ns-ts { font-variant-numeric: tabular-nums; color: #d4691c; font-weight: 600; width: 56px; }
+.ns-year { font-variant-numeric: tabular-nums; color: var(--ink, #333); width: 110px; white-space: nowrap; }
+.ns-place { color: var(--ink, #333); width: 80px; white-space: nowrap; }
+.ns-caption { color: var(--ink, #333); }
+.ns-footer {
+  padding: 12px 24px 16px;
+  border-top: 1px solid var(--line, rgba(0,0,0,.08));
+  display: flex; justify-content: flex-end;
+}
+.ns-play-btn {
+  padding: 8px 18px;
+  background: #d4691c;
+  color: #fff;
+  border: none; border-radius: 6px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+.ns-play-btn:hover {
+  background: #b85715;
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .ns-overlay { top: 4vh; max-height: 92vh; }
+  .ns-table { font-size: 12px; }
+  .ns-table thead th, .ns-table td { padding: 6px 4px; }
+  .ns-year, .ns-place { width: auto; }
+}
+
 /* 字幕升级：两行（年份 · 地点 / 正文），淡入动效更顺 */
 .narration-caption {
   position: fixed; left: 50%; bottom: 70px;

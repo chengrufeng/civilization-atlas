@@ -649,3 +649,87 @@ export async function hasNarration(personId) {
     return null;
   }
 }
+
+/** 查看完整解说脚本（详情面板入口）：
+ *  弹出 overlay，按时间顺序展示每段的 t / 年份 / 地点 / 文案，可关闭 */
+export async function openScriptOverlay(personId) {
+  let script;
+  try {
+    script = await (await fetch(`${NARRATION_BASE}${personId}.json`)).json();
+  } catch (e) {
+    console.error('脚本加载失败：', e);
+    return;
+  }
+
+  // 移除已存在的
+  document.getElementById('narration-script-overlay')?.remove();
+  document.getElementById('narration-script-mask')?.remove();
+
+  const fmtTs = s => {
+    if (!Number.isFinite(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${String(sec).padStart(2, '0')}`;
+  };
+
+  const rows = script.segments.map((seg, i) => {
+    const yearText = seg.year == null ? '—' : formatYear(seg.year);
+    const place = seg.place || '—';
+    return `<tr>
+      <td class="ns-idx">${i + 1}</td>
+      <td class="ns-ts">${fmtTs(seg.t || 0)}</td>
+      <td class="ns-year">${yearText}</td>
+      <td class="ns-place">${place}</td>
+      <td class="ns-caption">${seg.caption || ''}</td>
+    </tr>`;
+  }).join('');
+
+  const total = script.segments.length;
+  const dur = script.totalDurationSec ? fmtTs(script.totalDurationSec) : '—';
+
+  const html = `
+    <div class="ns-mask" id="narration-script-mask"></div>
+    <div class="ns-overlay" id="narration-script-overlay" aria-hidden="false">
+      <div class="ns-header">
+        <div class="ns-title">
+          <h3>${script.title || personId}</h3>
+          <div class="ns-sub">${total} 段 · 总时长 ${dur}${script.voice ? ` · ${script.voice}` : ''}</div>
+        </div>
+        <button class="ns-close" aria-label="关闭">×</button>
+      </div>
+      <div class="ns-body">
+        <table class="ns-table">
+          <thead><tr>
+            <th>#</th><th>时间</th><th>年份</th><th>地点</th><th>文案</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <div class="ns-footer">
+        <button class="ns-play-btn">🎧 ${t('narration.btn') || '解说播放'}</button>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  const overlay = document.getElementById('narration-script-overlay');
+  const mask = document.getElementById('narration-script-mask');
+  const close = () => {
+    overlay.remove();
+    mask.remove();
+  };
+  overlay.querySelector('.ns-close').addEventListener('click', close);
+  mask.addEventListener('click', close);
+  document.addEventListener('keydown', function onKey(e) {
+    if (e.key === 'Escape') {
+      close();
+      document.removeEventListener('keydown', onKey);
+    }
+  });
+  overlay.querySelector('.ns-play-btn').addEventListener('click', async () => {
+    close();
+    // 关掉详情面板，避免遮挡
+    try { (await import('./detail.js')).closeDetail(); } catch {}
+    await startNarration(personId);
+  });
+}
