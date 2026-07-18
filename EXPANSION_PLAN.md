@@ -172,16 +172,25 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 
 | 类别 | 文件 |
 |---|---|
-| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n,life-journey,favorites,today-in-history,heat-layer,compare-figures,settings}.js` |
+| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n,life-journey,favorites,today-in-history,heat-layer,compare-figures,settings,narration,local-atlas}.js` |
 | 数据层 | `js/data/index.js`（注册表）、`js/data/_template.js`（模板）、`js/data/cross-links.js`（跨集关联）、`js/data/*.js`（28 数据集） |
+| 解说数据 | `data/narrations/<personId>.json`（脚本）、`audio/narrations/<id>.m4a`（音频）、`audio/narrations/images/<id>/`（图片） |
 | 入口 | `js/app.js` |
-| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia,detect-cross-links,check-factions}.mjs` |
+| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia,detect-cross-links,check-factions,build-narration,fetch-narration-images,localize-narration-images}.mjs` |
 | PWA | `manifest.json`、`sw.js` |
-| 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md` |
+| 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md`、`docs/NARRATION_PLAYBOOK.md`（解说制作手册）、`docs/NARRATION_TODO.md`（解说人物计划表） |
 | CI | `.github/workflows/ci.yml` |
 | 工程化 | `.eslintrc.json`、`.prettierrc.json` |
-| 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md` |
-| CI | `.github/workflows/ci.yml` |
+
+---
+
+## 🎙️ 人物解说专题（Narration）
+
+首个完整案例：**刘备 · 从涿郡到白帝城**（17 段 / 173s / 16 张本地图 / 5 个 hero 段 / 3 个特效段）
+
+详见两份专题文档：
+- **`docs/NARRATION_PLAYBOOK.md`** — 制作手册：架构 / Schema / 工具链 / 7 步流程 / 视觉特效 / 同步策略 / 15 条踩坑实录 / 复用 Checklist
+- **`docs/NARRATION_TODO.md`** — 人物计划表：P0-P3 优先级 / 中华文明 25+ / 世界文明 20+ / 单人物 2 小时 / 三国系列先行
 
 ---
 

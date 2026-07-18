@@ -6,10 +6,11 @@
 ## 当前快照
 
 - **规模**：28 数据集 / ~488 人物 / 510 事件 / 公元前 3500 – 公元 2025 年
-- **代码**：`js/core/` 14 个视图模块 + 5 个外挂模块（life-journey / favorites / today-in-history / heat-layer / compare-figures / settings）；`js/data/` 28 个数据集 + cross-links + index
-- **工具**：`tools/` 9 个脚本
+- **代码**：`js/core/` 14 个视图模块 + 7 个外挂模块（life-journey / favorites / today-in-history / heat-layer / compare-figures / settings / **narration** / **local-atlas**）；`js/data/` 28 个数据集 + cross-links + index
+- **工具**：`tools/` **12 个脚本**（含 build-narration / fetch-narration-images / localize-narration-images 解说三件套）
+- **解说案例**：刘备 17 段 / 173s / 16 张本地图 / 5 hero 段 / 3 特效段 ✅
 - **测试**：unit 10/10 PASS · validate 28/28 PASS（0 error 0 warn）· smoke 28/28 PASS（含重试）· check-factions 0 error / 8 warn
-- **里程碑**：M0–M12 全部完成（详见 EXPANSION_PLAN）
+- **里程碑**：M0–M12 全部完成（详见 EXPANSION_PLAN）；解说专题见 `docs/NARRATION_PLAYBOOK.md` + `docs/NARRATION_TODO.md`
 
 ## 5 分钟恢复
 
