@@ -29,6 +29,7 @@ const PLACES = [
   { id: 'newyork_mw', name: '纽约', modern: '美纽约', coord: [-74.0, 40.71], note: '联合国总部' },
   { id: 'delhi', name: '德里', modern: '印度新德里', coord: [77.21, 28.61], note: '印度首都' },
   { id: 'joburg', name: '约翰内斯堡', modern: '南非约翰内斯堡', coord: [28.04, -26.20], note: '南非' },
+  { id: 'paris_mw', name: '巴黎', modern: '法巴黎', coord: [2.35, 48.86], note: '居里夫妇研究地' },
 ];
 
 const PERSONS = [

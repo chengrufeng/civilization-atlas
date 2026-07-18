@@ -62,7 +62,7 @@ export const ATLAS_MANIFEST = [
   { id: 'korea',          name:'朝鲜半岛',  subtitle: '檀君·三国·朝鲜王朝（前2333–1897年）',         group: '世界文明', startYear: -2333, endYear: 1897, load: () => import('./korea.js').then(m => m.koreaAtlas), stats: { persons: 14, events: 13, factions: 6, places: 8 } },
   { id: 'southeast_asia', name:'东南亚',    subtitle: '吴哥·暹罗·越南（100–1900年）',               group: '世界文明', startYear: 100,   endYear: 1900,  load: () => import('./southeast_asia.js').then(m => m.southeast_asiaAtlas), stats: { persons: 11, events: 13, factions: 6, places: 8 } },
   { id: 'africa',         name:'非洲文明',  subtitle: '库施·马里·桑海·埃塞俄比亚（300–1900年）',     group: '世界文明', startYear: 300,   endYear: 1900,  load: () => import('./africa.js').then(m => m.africaAtlas), stats: { persons: 10, events: 12, factions: 6, places: 9 } },
-  { id: 'modern_world',   name:'现代世界',  subtitle: '20 世纪至当代（1900–2025年）',                group: '世界文明', startYear: 1900,  endYear: 2025,  load: () => import('./modern_world.js').then(m => m.modern_worldAtlas), stats: { persons: 14, events: 22, factions: 5, places: 18 } },
+  { id: 'modern_world',   name:'现代世界',  subtitle: '20 世纪至当代（1900–2025年）',                group: '世界文明', startYear: 1900,  endYear: 2025,  load: () => import('./modern_world.js').then(m => m.modern_worldAtlas), stats: { persons: 14, events: 22, factions: 5, places: 19 } },
 ];
 
 /* ---------- 通用辅助函数 ---------- */
