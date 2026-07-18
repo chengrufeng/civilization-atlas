@@ -108,6 +108,13 @@ const STRINGS = {
     'loading.file_error.open_html': '<p>然后打开 <code>http://localhost:8080</code></p>',
     'loading.leaflet_error.title': '地图库加载失败',
     'loading.leaflet_error.body': '无法从 CDN 加载 Leaflet，请检查网络连接后刷新页面。',
+
+    'life_journey.start': '▶ 人生回放',
+    'life_journey.pause': '暂停',
+    'life_journey.resume': '继续',
+    'life_journey.exit': '退出',
+    'life_journey.finished': '人生回放结束',
+    'life_journey.no_events': '该人物暂无生平事件地点，无法回放',
   },
 
   en: {
@@ -208,6 +215,13 @@ const STRINGS = {
     'loading.file_error.open_html': '<p>Then open <code>http://localhost:8080</code></p>',
     'loading.leaflet_error.title': 'Map library failed to load',
     'loading.leaflet_error.body': 'Could not load Leaflet from CDN. Check your network and refresh.',
+
+    'life_journey.start': '▶ Life Replay',
+    'life_journey.pause': 'Pause',
+    'life_journey.resume': 'Resume',
+    'life_journey.exit': 'Exit',
+    'life_journey.finished': 'Life replay finished',
+    'life_journey.no_events': 'No geolocated life events for this figure',
   },
 };
 

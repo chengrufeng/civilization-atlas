@@ -107,7 +107,7 @@ function renderDetailContent(person) {
       <p>${person.bio}</p>
     </div>
     <div class="detail-section">
-      <h4>${t('detail.events_count')}</h4>
+      <h4>${t('detail.events_count')}<button class="lj-start-btn" id="lj-start-btn">${t('life_journey.start')}</button></h4>
       ${eventsHtml || `<p style="color:var(--ink-light)">${t('detail.no_data')}</p>`}
     </div>
     <div class="detail-section">
@@ -123,6 +123,16 @@ function renderDetailContent(person) {
   document.querySelectorAll('.relation-chip').forEach(chip => {
     chip.addEventListener('click', () => openDetail(chip.dataset.person));
   });
+
+  // 人生回放按钮
+  const ljBtn = document.getElementById('lj-start-btn');
+  if (ljBtn) {
+    ljBtn.addEventListener('click', async () => {
+      const { startLifeJourney, isLifeJourneyActive, stopLifeJourney } = await import('./life-journey.js');
+      if (isLifeJourneyActive()) stopLifeJourney();
+      else startLifeJourney(person.id);
+    });
+  }
 
   // 异步填充跨数据集关联
   fillCrossLinks(person);

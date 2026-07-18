@@ -746,6 +746,72 @@ body.no-timeline .line-legend { bottom: 16px; }
 .detail-section h4 {
   font-size: 14px; margin-bottom: 8px;
   padding-left: 10px; border-left: 3px solid var(--seal);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.lj-start-btn {
+  font-size: 11px; font-weight: 600;
+  background: var(--seal); color: #fff;
+  border: none; padding: 4px 10px; border-radius: 12px;
+  cursor: pointer; transition: opacity .15s, transform .15s;
+}
+.lj-start-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+/* Life Journey 浮层 */
+.lj-bar {
+  position: fixed;
+  top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 1100;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--paper, #f5f0e6);
+  border: 1px solid var(--line, #d8d2c4);
+  border-radius: 24px;
+  padding: 6px 8px 6px 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  min-width: 320px; max-width: 90vw;
+}
+.lj-btn {
+  background: var(--seal, #8a2222); color: #fff;
+  border: none; width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.lj-btn:hover { opacity: .88; }
+.lj-info { flex: 1; min-width: 0; }
+.lj-title {
+  font-size: 12px; font-weight: 600; color: var(--ink, #2a2a2a);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+.lj-progress { display: flex; align-items: center; gap: 8px; }
+.lj-progress-track {
+  flex: 1; height: 4px; background: var(--line, #d8d2c4);
+  border-radius: 2px; overflow: hidden;
+}
+.lj-progress-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(to right, var(--gold, #c89b3c), var(--seal, #8a2222));
+  transition: width .35s ease;
+}
+.lj-progress-text {
+  font-size: 11px; color: var(--ink-light, #888);
+  flex-shrink: 0; min-width: 38px; text-align: right;
+}
+.lj-toast {
+  position: fixed; bottom: 80px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink, #2a2a2a); color: #fff;
+  padding: 8px 16px; border-radius: 18px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 1200; box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.lj-toast.show {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+@media (max-width: 480px) {
+  .lj-bar { min-width: auto; width: calc(100vw - 24px); }
 }
 .detail-section p { font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
 .detail-fact { display: flex; gap: 8px; font-size: 12px; line-height: 2; }

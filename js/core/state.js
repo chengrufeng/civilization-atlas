@@ -99,6 +99,7 @@ export const state = {
   eventFocus: null,
   playing: false,
   playTimer: null,
+  lifeJourney: null,           // { personId, total, idx } or null
   detailClosedByUser: false,
   autoTrack: true,
   // Leaflet 图层组

@@ -255,6 +255,8 @@ function applyAtlasToUI() {
 /* ---------- 数据集切换回调 ---------- */
 onSwitch(() => {
   stopPlay();
+  // 切数据集时停止人生回放（避免错位）
+  import('./core/life-journey.js').then(m => m.stopLifeJourney());
 
   // 关闭详情面板
   document.getElementById('detail-panel').classList.remove('open');
