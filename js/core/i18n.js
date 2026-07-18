@@ -44,6 +44,7 @@ const STRINGS = {
     'timeline.year_all': '全部年份',
     'timeline.track': '追踪',
     'timeline.reset': '全部',
+    'timeline.click_to_view': '点击在地图上查看 →',
 
     'atlas_overlay.title': '选择数据集',
     'compare_overlay.title': '时代对照',
@@ -143,6 +144,7 @@ const STRINGS = {
     'timeline.year_all': 'All years',
     'timeline.track': 'Track',
     'timeline.reset': 'All',
+    'timeline.click_to_view': 'Click to view on map →',
 
     'atlas_overlay.title': 'Select Dataset',
     'compare_overlay.title': 'Era Comparison',

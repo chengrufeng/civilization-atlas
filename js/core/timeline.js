@@ -12,6 +12,7 @@ import {
 import { render, updateStats } from './render.js';
 import { buildEventList, highlightCurrentEvent } from './event-list.js';
 import { showPersonDetail, closeDetail } from './detail.js';
+import { t } from './i18n.js';
 
 /* ---------- 播放 ---------- */
 export function startPlay() {
@@ -115,7 +116,7 @@ export function showYearToasts(year, skipAutoTrack) {
         </div>
         <div class="toast-desc">${ev.desc}</div>
         ${participantsHtml}
-        <div class="toast-hint">点击在地图上查看 →</div>
+        <div class="toast-hint">${t('timeline.click_to_view')}</div>
       </div>
     `;
     toast.addEventListener('click', () => {
