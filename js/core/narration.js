@@ -381,8 +381,13 @@ function applySegment(seg) {
   // 1. 字幕（同步）
   renderCaption(seg);
 
-  // 2. 地图状态（同步，与字幕同一帧）
+  // 详情面板：hook / 引入段（step=null）保持显示，
+  // 第一个事件段（step != null）首次触发时收起，让位给地图沉浸式展示
   if (typeof seg.step === 'number' && session.steps[seg.step]) {
+    if (!session.detailClosed) {
+      session.detailClosed = true;
+      try { closeDetail(); } catch {}
+    }
     const step = session.steps[seg.step];
     state.yearFilter = step.year;
     state.selectedPerson = session.script.personId;
@@ -589,10 +594,12 @@ export async function startNarration(personId, opts = {}) {
   // 记录是否由详情面板触发（结束时恢复）
   const detailWasOpen = document.getElementById('detail-panel')?.classList.contains('open');
 
+  // 详情面板：启动时保留显示（让用户看一眼刘备信息），
+  // 等首个事件段（第一个 step != null）触发时再收起，让位给地图
   session = {
     script, audio, steps, idx: 0,
     pathLayer: null, headMarker: null,
-    personId, detailWasOpen,
+    personId, detailWasOpen, detailClosed: false,
   };
   lastSegIdx = -1;
   state.lifeJourney = { personId, total: steps.length, idx: 0, narration: true };
@@ -628,7 +635,7 @@ export async function startNarration(personId, opts = {}) {
 
 export function stopNarration() {
   if (!session) return;
-  const { personId, detailWasOpen } = session;
+  const { personId, detailWasOpen, detailClosed } = session;
   stopTick();
   session.audio.pause();
   session.audio.removeEventListener('timeupdate', onTimeUpdate);
@@ -650,7 +657,8 @@ export function stopNarration() {
   // 触发一次 render 让图层恢复正常显示
   render();
   // 解说结束后：恢复详情面板（如果启动时是打开的）
-  if (detailWasOpen && personId) {
+  // 解说结束后：仅当启动后曾收起过详情面板时才恢复（避免无谓的 openDetail）
+  if (detailWasOpen && detailClosed && personId) {
     setTimeout(() => {
       try { openDetail(personId); } catch {}
     }, 400);
