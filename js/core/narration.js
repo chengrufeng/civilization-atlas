@@ -265,7 +265,7 @@ function hideHeroCard() {
   document.getElementById('narration-hero-card')?.classList.remove('show');
 }
 
-/** 火焰氛围特效（赤壁/夷陵等火攻段落） */
+/** 氛围特效（火焰 / 桃花飘落） */
 function showEffect(effect) {
   hideEffect();
   if (effect === 'fire') {
@@ -281,6 +281,25 @@ function showEffect(effect) {
       p.style.animationDuration = `${(2.8 + Math.random() * 1.6).toFixed(2)}s`;
       p.style.setProperty('--drift', `${(Math.random() * 80 - 40).toFixed(0)}px`);
       const size = 16 + Math.random() * 24;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      layer.appendChild(p);
+    }
+    document.body.appendChild(layer);
+  } else if (effect === 'blossom') {
+    const layer = document.createElement('div');
+    layer.id = 'narration-effect';
+    layer.className = 'nr-effect-blossom';
+    // 生成 24 片花瓣，随机位置 + 错相 + 漂移 + 落速
+    for (let i = 0; i < 24; i++) {
+      const p = document.createElement('div');
+      p.className = 'nr-petal';
+      p.style.left = `${Math.random() * 100}%`;
+      const fallDur = 7 + Math.random() * 6;  // 7–13s 落完一屏
+      p.style.setProperty('--fall-dur', `${fallDur.toFixed(2)}s`);
+      p.style.animationDelay = `${(Math.random() * fallDur).toFixed(2)}s`;
+      p.style.setProperty('--drift', `${(Math.random() * 200 - 100).toFixed(0)}px`);
+      const size = 12 + Math.random() * 14;   // 12–26px
       p.style.width = `${size}px`;
       p.style.height = `${size}px`;
       layer.appendChild(p);

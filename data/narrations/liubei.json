@@ -47,7 +47,8 @@
       "image": "http://i3.qulishi.com/static/2020/3/5ec7820c58fd8.png",
       "imageCaption": "黄巾起义",
       "imageSource": "© Bing 图片搜索结果",
-      "imageMode": "hero"
+      "imageMode": "hero",
+      "effect": "blossom"
     },
     {
       "t": 28.02,
