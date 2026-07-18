@@ -649,9 +649,16 @@ export async function openScriptOverlay(personId) {
 
   const overlay = document.getElementById('narration-script-overlay');
   const mask = document.getElementById('narration-script-mask');
+  // 触发 mask 渐入（默认 opacity:0 + pointer-events:none，需加 .show 才可见 + 可点）
+  requestAnimationFrame(() => mask.classList.add('show'));
   const close = () => {
-    overlay.remove();
-    mask.remove();
+    mask.classList.remove('show');
+    overlay.classList.remove('show');
+    // 等 transition 结束再移除
+    setTimeout(() => {
+      overlay.remove();
+      mask.remove();
+    }, 250);
   };
   overlay.querySelector('.ns-close').addEventListener('click', close);
   mask.addEventListener('click', close);
