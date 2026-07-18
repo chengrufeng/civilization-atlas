@@ -1858,15 +1858,14 @@ kbd {
 /* 底部字幕（样式详见后文 .narration-caption 完整定义） */
 
 /* 聚焦模式：narration 期间弱化非主角 UI，地图沉浸式。
- * 时间轴保留（用户能看年代进度），隐藏图例 / 左面板 / 大事记 / 品牌等 */
+ * 时间轴保留（用户能看年代进度），详情面板保留（持续显示主角信息），
+ * 隐藏图例 / 左面板 / 大事记 / 品牌等 */
 body.narration-focus #left-panel,
 body.narration-focus #event-list-panel,
 body.narration-focus #bottom-toolbar,
 body.narration-focus .brand,
 body.narration-focus #atlas-selector-btn,
-body.narration-focus #line-legend,
-body.narration-focus .detail-panel,
-body.narration-focus .detail-mask {
+body.narration-focus #line-legend {
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity .35s ease;
@@ -2185,6 +2184,22 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   transform-origin: center center;
   animation: nic-kenburns 12s ease-out forwards;
 }
+/* 图片加载失败时的占位（避免卡片完全空白） */
+.narration-image-card .nic-img-wrap.nic-img-fallback {
+  background: linear-gradient(135deg, #3a2a1f 0%, #1a1410 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.narration-image-card .nic-img-wrap.nic-img-fallback::before {
+  content: '🖼';
+  font-size: 64px;
+  filter: drop-shadow(0 4px 12px rgba(212,105,28,.5));
+  z-index: 2;
+  position: relative;
+  background: none;
+  animation: none;
+}
+.narration-image-card .nic-img-wrap.nic-img-fallback::after { display: none; }
+.narration-image-card .nic-img-wrap.nic-img-fallback .nic-img { display: none; }
 @keyframes nic-kenburns {
   0%   { transform: scale(1.0) translate(0, 0); }
   100% { transform: scale(1.15) translate(-2%, -2%); }

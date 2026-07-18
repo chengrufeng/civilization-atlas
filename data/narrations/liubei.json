@@ -5,7 +5,7 @@
   "subtitle": "约 2 分钟浓缩昭烈皇帝的破局一生",
   "lang": "zh",
   "voice": "zh-CN-XiaoxiaoNeural",
-  "totalDurationSec": 172.55,
+  "totalDurationSec": 173.7,
   "audio": "audio/narrations/liubei.m4a",
   "segments": [
     {
@@ -243,10 +243,10 @@
       "year": null,
       "place": null,
       "step": null,
-      "caption": "62 年，从涿郡走到白帝城。刘备的故事告诉咱们：起手再烂都不算输，47 岁还能重新出发——只要你低谷时还有人愿意跟着你。"
+      "caption": "62 年风雨兼程，从涿郡走到白帝城。刘备这一生告诉我们：心怀天下、重情重义、知人善任——只要不放弃，最差的牌也能打出锦绣前程。"
     }
   ],
   "ttsBackend": "edge",
   "rate": "+15%",
-  "builtAt": "2026-07-18T13:54:24.896Z"
+  "builtAt": "2026-07-18T14:12:01.649Z"
 }

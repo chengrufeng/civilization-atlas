@@ -168,11 +168,24 @@ function showImageCard(seg) {
     cap.textContent = text;
     // 设置模糊背景为同图，填充 contain 模式下的空白
     const wrap = card.querySelector('.nic-img-wrap');
-    if (wrap) wrap.style.setProperty('--blur-bg', `url("${seg.image}")`);
+    if (wrap) {
+      wrap.classList.remove('nic-img-fallback');
+      wrap.removeAttribute('data-fallback-text');
+      wrap.style.setProperty('--blur-bg', `url("${seg.image}")`);
+    }
     card.classList.add('show');
   };
   img.onerror = () => {
-    card.classList.remove('show');
+    // 加载失败：不隐藏卡片，显示占位（caption + emoji），让用户知道这里应该有图
+    if (!session) return;
+    const text = seg.imageCaption || (seg.caption && seg.caption.length > 40
+      ? seg.caption.slice(0, 38) + '…'
+      : (seg.caption || ''));
+    cap.textContent = text;
+    card.querySelector('.nic-img-wrap').classList.add('nic-img-fallback');
+    card.querySelector('.nic-img-wrap').setAttribute('data-fallback-text', text.slice(0, 12));
+    card.classList.add('show');
+    console.warn('[narration] 图片加载失败：', seg.image);
   };
   img.src = seg.image;
 }
@@ -565,6 +578,14 @@ export async function startNarration(personId, opts = {}) {
   audio.crossOrigin = 'anonymous';
   audio.preload = 'auto';
 
+  // 5.1 后台预加载所有段图片，避免段切换时才发起请求造成延迟
+  script.segments.forEach(s => {
+    if (s.image) {
+      const pre = new Image();
+      pre.src = s.image;
+    }
+  });
+
   // 记录是否由详情面板触发（结束时恢复）
   const detailWasOpen = document.getElementById('detail-panel')?.classList.contains('open');
 
@@ -587,8 +608,8 @@ export async function startNarration(personId, opts = {}) {
 
   // 聚焦模式：弱化其他 UI（含详情面板，时间轴保留）
   document.body.classList.add('narration-focus');
-  // 启动时收起详情面板
-  try { closeDetail(); } catch {}
+  // 详情面板保持打开：让用户在解说过程中持续看到主角信息（高亮选定）
+  // （之前会收起，现在按用户要求改为保留）
 
   // 主角名章（左下浮动卡片）
   showHeroCard(personId);
