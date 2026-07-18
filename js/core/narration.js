@@ -97,6 +97,7 @@ function removeUI() {
   document.getElementById('narration-caption')?.remove();
   document.getElementById('narration-hero-card')?.remove();
   document.getElementById('narration-year-banner')?.remove();
+  document.getElementById('narration-image-card')?.remove();
 }
 
 /** 地图大字年份浮现：每次段切换时，"公元 184 年 · 涿郡" 居中淡入淡出 2.2s */
@@ -115,6 +116,47 @@ function showYearBanner(seg) {
   banner.innerHTML = `${yearText}${seg.place ? `<span class="nyb-place">${seg.place}</span>` : ''}`;
   void banner.offsetWidth; // reflow
   banner.classList.add('show');
+}
+
+/** 图片浮动卡片（右下角）：如果 segment 配置了 image，则展示 */
+function showImageCard(seg) {
+  let card = document.getElementById('narration-image-card');
+  if (!seg || !seg.image) {
+    hideImageCard();
+    return;
+  }
+  if (!card) {
+    card = document.createElement('div');
+    card.id = 'narration-image-card';
+    card.className = 'narration-image-card';
+    card.innerHTML = `
+      <div class="nic-img-wrap"><img class="nic-img" alt="" /></div>
+      <div class="nic-caption"></div>
+      <div class="nic-source"></div>
+    `;
+    document.body.appendChild(card);
+  }
+  const img = card.querySelector('.nic-img');
+  const cap = card.querySelector('.nic-caption');
+  const src = card.querySelector('.nic-source');
+  // 透明度切换：新图加载完成后才显示
+  card.classList.remove('show');
+  img.onload = () => {
+    if (session) {
+      cap.textContent = seg.imageCaption || '';
+      src.textContent = seg.imageSource || '';
+      card.classList.add('show');
+    }
+  };
+  img.onerror = () => {
+    // 加载失败静默
+    card.classList.remove('show');
+  };
+  img.src = seg.image;
+}
+
+function hideImageCard() {
+  document.getElementById('narration-image-card')?.classList.remove('show');
 }
 
 function updateBar() {
@@ -219,11 +261,35 @@ function currentSegment() {
 
 /* ---------- step 推进（地图 + 轨迹 + 关系高亮） ---------- */
 
+/** 计算两点地理距离（公里），用于自适应 flyTo 时长 */
+function haversineKm(a, b) {
+  const R = 6371;
+  const dLat = (b[0] - a[0]) * Math.PI / 180;
+  const dLng = (b[1] - a[1]) * Math.PI / 180;
+  const x = Math.sin(dLat / 2) ** 2 +
+    Math.cos(a[0] * Math.PI / 180) * Math.cos(b[0] * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+
 function applySegment(seg) {
   if (!seg) return;
-  // 字幕
+  // 1. 快操作：字幕 + 年份水印（立即同步，不阻塞）
   renderCaption(seg);
 
+  // 2. 慢操作：地图 + render（推迟两帧，让字幕先 paint）
+  //    避免同步 render() 阻塞浏览器绘制字幕
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (session && session.audio.currentTime >= (seg.t || 0)) {
+        applySegmentSlow(seg);
+      }
+    });
+  });
+}
+
+function applySegmentSlow(seg) {
+  if (!seg) return;
   // step 对应 person.events 顺序：推进年份 + 镜头 + 关系
   if (typeof seg.step === 'number' && session.steps[seg.step]) {
     const step = session.steps[seg.step];
@@ -245,8 +311,16 @@ function applySegment(seg) {
       }
     }
 
-    // 镜头 flyTo
-    state.map.flyTo(ll(step.coord), Math.max(state.map.getZoom(), 6), { duration: 1.2 });
+    // 镜头 flyTo：自适应时长，按距离 0.5–0.9s（原 1.2s 太慢跟不上字幕）
+    const curCenter = state.map.getCenter();
+    const curLatlng = [curCenter.lat, curCenter.lng];
+    const targetLatlng = ll(step.coord);
+    const dist = haversineKm(curLatlng, targetLatlng);
+    const flyDur = Math.min(0.9, 0.4 + Math.min(dist, 2000) / 4000); // 远距最多 +0.5s
+    state.map.flyTo(targetLatlng, Math.max(state.map.getZoom(), 6), {
+      duration: flyDur,
+      easeLinearity: 0.4,  // 更线性，更可预测
+    });
 
     // 累计轨迹线 + 头标
     redrawTrail(seg.step);
@@ -259,13 +333,22 @@ function applySegment(seg) {
 
     updateStats();
     render();
-    buildEventList();
-    // 视觉特效：当前位置脉冲波纹（render 完后再加 class）
-    requestAnimationFrame(() => applyPulseMarker(session.script.personId));
+    // buildEventList 进一步推迟（不阻塞当前段绘制）
+    requestAnimationFrame(() => {
+      if (session) buildEventList();
+    });
+    // 视觉特效：脉冲波纹（render 完后再加 class）
+    requestAnimationFrame(() => {
+      if (session) applyPulseMarker(session.script.personId);
+    });
+
+    // 图片展示
+    showImageCard(seg);
   } else {
     // hook / 引入 / 结尾段：清状态 + 移除脉冲
     state.highlightedPersons.clear();
     clearPulseMarker();
+    hideImageCard();
     render();
   }
 }
@@ -429,6 +512,7 @@ export function stopNarration() {
   clearMapArtifacts();
   clearPulseMarker();
   hideHeroCard();
+  hideImageCard();
   document.body.classList.remove('narration-focus');
   session = null;
   state.lifeJourney = null;
