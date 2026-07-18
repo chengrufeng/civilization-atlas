@@ -22,6 +22,7 @@ import {
 } from './core/timeline.js';
 import { buildEventList } from './core/event-list.js';
 import { openCompareOverlay, closeCompareOverlay } from './core/compare.js';
+import { openDomainBrowser, closeDomainBrowser } from './core/domain-browser.js';
 import { readUrlState, syncUrlState, withUrlSuppressed } from './core/url-state.js';
 import { formatYear } from './core/state.js';
 
@@ -162,6 +163,16 @@ function bindTopBarExtras() {
     if (!atlasId || !personId) return;
     if (atlasId !== current().id) await doSwitchAtlas(atlasId);
     import('./core/detail.js').then(m => m.openDetail(personId));
+  });
+
+  // B2 跨数据集领域浏览
+  const btnDomain = document.getElementById('btn-domain-browser');
+  if (btnDomain) btnDomain.addEventListener('click', () => openDomainBrowser());
+  window.addEventListener('domainbrowser:select', async (e) => {
+    const { atlasId, eventId } = e.detail || {};
+    if (!atlasId || !eventId) return;
+    if (atlasId !== current().id) await doSwitchAtlas(atlasId);
+    import('./core/detail.js').then(m => m.showEventInfo(eventId));
   });
 }
 

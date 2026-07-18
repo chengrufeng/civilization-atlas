@@ -198,6 +198,85 @@ html, body {
 }
 .contemp-name { font-size: 13px; font-weight: 600; color: var(--ink); }
 .contemp-meta { font-size: 10px; color: var(--ink-light); margin-left: auto; }
+
+/* ---------- 领域浏览按钮（左栏） ---------- */
+.domain-browser-btn {
+  float: right; font-size: 13px; padding: 1px 6px; line-height: 1.4;
+  border: 1px solid var(--line); background: var(--paper-card);
+  color: var(--ink-soft); border-radius: 4px; cursor: pointer;
+}
+.domain-browser-btn:hover { background: var(--seal); color: #fff; border-color: var(--seal); }
+
+/* ---------- 跨数据集领域浏览浮层 ---------- */
+.db-overlay-mask {
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);
+  opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 90;
+}
+.db-overlay-mask.show { opacity: 1; pointer-events: auto; }
+.db-overlay {
+  position: fixed; top: 60px; left: 50%; transform: translate(-50%, -10px);
+  width: min(900px, 94vw); max-height: 82vh; overflow: hidden;
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.22);
+  z-index: 91; opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  display: flex; flex-direction: column;
+}
+.db-overlay.open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.db-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+}
+.db-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.db-close { border: none; background: transparent; font-size: 22px; color: var(--ink-light); cursor: pointer; }
+.db-close:hover { color: var(--ink); }
+.db-body { padding: 14px 20px; overflow-y: auto; }
+.db-loading, .db-empty { padding: 24px; text-align: center; color: var(--ink-light); }
+
+.db-toolbar { margin-bottom: 12px; }
+.db-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.db-chip {
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  padding: 5px 12px; border-radius: 16px;
+  border: 1px solid var(--dc, var(--line));
+  background: var(--paper-card); color: var(--ink-soft);
+  cursor: pointer; transition: all .15s;
+}
+.db-chip:hover { background: var(--dc); color: #fff; }
+.db-chip.active { background: var(--dc); color: #fff; border-color: var(--dc); }
+.db-chip-count {
+  display: inline-block; margin-left: 4px; padding: 0 5px;
+  background: rgba(255,255,255,.25); border-radius: 8px; font-weight: 700;
+  font-size: 10px;
+}
+.db-chip:not(.active) .db-chip-count { background: rgba(0,0,0,.08); color: var(--ink-light); }
+.db-summary { font-size: 11px; color: var(--ink-light); margin-top: 10px; }
+
+.db-group { margin-bottom: 12px; }
+.db-group-title {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  margin-bottom: 6px; padding-left: 2px;
+}
+.db-group-count {
+  font-size: 10px; font-weight: 500; color: var(--ink-light);
+  margin-left: 6px;
+}
+.db-event {
+  display: flex; align-items: baseline; gap: 10px;
+  width: 100%; text-align: left; padding: 6px 10px; margin-bottom: 2px;
+  border: none; background: transparent; border-radius: 4px;
+  cursor: pointer; transition: background .12s; font-family: inherit;
+  border-left: 2px solid transparent;
+}
+.db-event:hover { background: var(--paper-card); border-left-color: var(--seal); }
+.db-event-year { font-size: 11px; font-weight: 700; color: var(--seal); width: 56px; flex-shrink: 0; }
+.db-event-name { font-size: 13px; font-weight: 600; color: var(--ink); flex-shrink: 0; }
+.db-event-desc { font-size: 11px; color: var(--ink-light); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .db-event-desc { display: none; }
+  .db-event { padding: 8px 6px; }
+}
 .atlas-selector-btn {
   display: flex; align-items: center; gap: 6px;
   font-family: inherit; font-size: 14px; font-weight: 700;
