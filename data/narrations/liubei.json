@@ -5,7 +5,7 @@
   "subtitle": "约 2 分钟浓缩昭烈皇帝的破局一生",
   "lang": "zh",
   "voice": "zh-CN-XiaoxiaoNeural",
-  "totalDurationSec": 157.33,
+  "totalDurationSec": 160.81,
   "audio": "audio/narrations/liubei.m4a",
   "segments": [
     {
@@ -146,7 +146,8 @@
       "image": "https://k.sinaimg.cn/www/ent/m/c/2008-04-17/U2519P28T3D1990796F359DT20080417043120.jpg/w700h350z1l10t1039d.jpg",
       "imageCaption": "赤壁之战",
       "imageSource": "© Bing 图片搜索结果",
-      "imageMode": "hero"
+      "imageMode": "hero",
+      "effect": "fire"
     },
     {
       "t": 91.18,
@@ -216,7 +217,8 @@
       "image": "https://pic1.zhimg.com/v2-cc35a5fc124f35464ea098c62f410378_r.jpg",
       "imageCaption": "夷陵之战",
       "imageSource": "© Bing 图片搜索结果",
-      "imageMode": "hero"
+      "imageMode": "hero",
+      "effect": "fire"
     },
     {
       "t": 138.68,
@@ -238,10 +240,10 @@
       "year": null,
       "place": null,
       "step": null,
-      "caption": "62 载风雨，从涿郡走到白帝城。刘备用一生告诉所有人——起点再低，也能登顶帝王之位。"
+      "caption": "62 年，从涿郡走到白帝城。刘备的故事告诉咱们：出身不能决定结局，关键是低谷时还有人愿意跟着你，敢在 47 岁重新出发。"
     }
   ],
   "ttsBackend": "edge",
   "rate": "+15%",
-  "builtAt": "2026-07-18T12:45:06.123Z"
+  "builtAt": "2026-07-18T13:15:04.335Z"
 }

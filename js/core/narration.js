@@ -166,6 +166,9 @@ function showImageCard(seg) {
       ? seg.caption.slice(0, 38) + '…'
       : (seg.caption || ''));
     cap.textContent = text;
+    // 设置模糊背景为同图，填充 contain 模式下的空白
+    const wrap = card.querySelector('.nic-img-wrap');
+    if (wrap) wrap.style.setProperty('--blur-bg', `url("${seg.image}")`);
     card.classList.add('show');
   };
   img.onerror = () => {
@@ -187,9 +190,20 @@ function updateBar() {
   bar.querySelector('.nr-progress-fill').style.width = `${pct}%`;
   bar.querySelector('.nr-progress-text').textContent = `${formatTs(cur)} / ${formatTs(dur)}`;
   const seg = currentSegment();
-  bar.querySelector('.nr-title').textContent = seg
-    ? `${formatYear(seg.year || 0)}${seg.place ? ' · ' + seg.place : ''}`
-    : (session.script.title || '');
+  // 标题：年份 · 地点 · 事件摘要（caption 去除前缀年份后的前 18 字）
+  // 让用户清楚"成都（取益州）" vs "成都（称帝）"的区别
+  if (seg) {
+    const eventHint = (seg.caption || '')
+      .replace(/^公元\s*-?\d+\s*[年载]?[，。、]*/, '')
+      .replace(/^同年冬[—。、]*/, '')
+      .slice(0, 18);
+    const yearText = seg.year ? formatYear(seg.year) : '';
+    const placeText = seg.place || '';
+    bar.querySelector('.nr-title').textContent =
+      [yearText, placeText, eventHint].filter(Boolean).join(' · ');
+  } else {
+    bar.querySelector('.nr-title').textContent = session.script.title || '';
+  }
   bar.querySelector('.nr-play-pause').textContent = session.audio.paused ? '▶' : '⏸';
 }
 
@@ -249,6 +263,34 @@ function showHeroCard(personId) {
 
 function hideHeroCard() {
   document.getElementById('narration-hero-card')?.classList.remove('show');
+}
+
+/** 火焰氛围特效（赤壁/夷陵等火攻段落） */
+function showEffect(effect) {
+  hideEffect();
+  if (effect === 'fire') {
+    const layer = document.createElement('div');
+    layer.id = 'narration-effect';
+    layer.className = 'nr-effect-fire';
+    // 生成 18 个粒子，随机水平位置 + 错相 + 漂移方向
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'nr-fire-particle';
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.animationDelay = `${(Math.random() * 3.2).toFixed(2)}s`;
+      p.style.animationDuration = `${(2.8 + Math.random() * 1.6).toFixed(2)}s`;
+      p.style.setProperty('--drift', `${(Math.random() * 80 - 40).toFixed(0)}px`);
+      const size = 16 + Math.random() * 24;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      layer.appendChild(p);
+    }
+    document.body.appendChild(layer);
+  }
+}
+
+function hideEffect() {
+  document.getElementById('narration-effect')?.remove();
 }
 
 /** 在当前 step 地点 marker 上添加脉冲波纹 class */
@@ -347,11 +389,13 @@ function applySegment(seg) {
 
     // 图片切换（异步加载，不阻塞）
     showImageCard(seg);
+    showEffect(seg.effect);
   } else {
     // hook / 引入 / 结尾段：清状态 + 移除脉冲
     state.highlightedPersons.clear();
     clearPulseMarker();
     hideImageCard();
+    hideEffect();
   }
 
   // 3. render + buildEventList 推迟并防抖（连续段切换时只执行最后一次）
@@ -551,6 +595,7 @@ export function stopNarration() {
   clearPulseMarker();
   hideHeroCard();
   hideImageCard();
+  hideEffect();
   document.body.classList.remove('narration-focus');
   session = null;
   state.lifeJourney = null;
