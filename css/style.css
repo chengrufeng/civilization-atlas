@@ -1972,8 +1972,8 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   font-weight: 500;
 }
 
-/* 图片展示：多模式（side 默认 / hero 关键段全屏 banner）
- * 入场动画按段索引轮换（4 种），Ken Burns 内部缓慢缩放 */
+/* 图片展示：所有模式都不挡地图中央。
+ * 之前 hero 模式居中显示会遮住 flyTo 动画，现改为右侧更大尺寸 */
 
 .narration-image-card {
   position: fixed;
@@ -1986,53 +1986,48 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   pointer-events: none;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(212,105,28,.4);
-  /* 默认 side 模式：右侧大图 */
   right: 28px; top: 50%;
   width: min(420px, 42vw);
   transform: translateY(-50%);
 }
-.narration-image-card.mode-side     { right: 28px; top: 50%; width: min(420px, 42vw); transform: translateY(-50%); }
-.narration-image-card.mode-hero     {
-  /* hero：屏幕中部超大 banner */
-  right: auto; left: 50%; top: 38%;
-  width: min(720px, 70vw);
-  transform: translateX(-50%);
+/* mode-hero 不再居中，改为右侧更大尺寸（仍保留侧边，让地图可见） */
+.narration-image-card.mode-hero {
+  right: 28px; top: 50%;
+  width: min(520px, 50vw);
+  transform: translateY(-50%);
 }
+.narration-image-card.mode-side     { right: 28px; top: 50%; width: min(420px, 42vw); transform: translateY(-50%); }
 .narration-image-card.mode-corner-tl { right: auto; left: 28px; top: 80px; width: min(320px, 36vw); transform: none; }
 .narration-image-card.mode-corner-bl { right: auto; left: 28px; top: auto; bottom: 110px; width: min(320px, 36vw); transform: none; }
 
 /* 4 种入场动画（按段 idx 模 4 轮换） */
-.narration-image-card.anim-0.show { opacity: 1; transform: var(--final-transform, translateY(-50%) translateX(0)); }
 .narration-image-card.anim-0 {
-  --final-transform: translateY(-50%) translateX(0);
   transform: translateY(-50%) translateX(40px);
   transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1);
 }
+.narration-image-card.anim-0.show { opacity: 1; transform: translateY(-50%) translateX(0); }
 .narration-image-card.anim-1 {
   transform: translateY(-50%) scale(0.85);
   transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1);
 }
 .narration-image-card.anim-1.show { opacity: 1; transform: translateY(-50%) scale(1); }
 .narration-image-card.anim-2 {
-  transform: translateY(-30%) translateX(0);
+  transform: translateY(-30%);
   transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1);
 }
-.narration-image-card.anim-2.show { opacity: 1; transform: translateY(-50%) translateX(0); }
+.narration-image-card.anim-2.show { opacity: 1; transform: translateY(-50%); }
 .narration-image-card.anim-3 {
-  transform: translateY(-70%) translateX(0);
+  transform: translateY(-70%);
   transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1);
 }
-.narration-image-card.anim-3.show { opacity: 1; transform: translateY(-50%) translateX(0); }
+.narration-image-card.anim-3.show { opacity: 1; transform: translateY(-50%); }
 
-/* hero 模式覆盖动画终点 */
-.narration-image-card.mode-hero.anim-0.show,
-.narration-image-card.mode-hero.anim-1.show,
+/* hero 模式覆盖动画终点（保持侧边大图，不挡中央地图） */
+.narration-image-card.mode-hero.anim-0.show { transform: translateY(-50%) translateX(0); }
+.narration-image-card.mode-hero.anim-1.show { transform: translateY(-50%) scale(1); }
 .narration-image-card.mode-hero.anim-2.show,
-.narration-image-card.mode-hero.anim-3.show {
-  transform: translateX(-50%) translateY(-50%) scale(1);
-}
-.narration-image-card.mode-hero { top: 50%; transform: translateX(-50%) translateY(-50%) scale(0.9); }
-.narration-image-card.mode-hero.show { opacity: 1; }
+.narration-image-card.mode-hero.anim-3.show { transform: translateY(-50%); }
+
 .narration-image-card.mode-corner-tl.show,
 .narration-image-card.mode-corner-bl.show { opacity: 1; transform: none; }
 .narration-image-card.mode-corner-tl { transform: translateX(-30px); }
@@ -2080,7 +2075,8 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   0%   { transform: translateY(0) scale(0.6); opacity: 0; }
   15%  { opacity: 0.95; }
   60%  { opacity: 0.7; }
-  100% { transform: translateY(-70vh) scale(1.4) translateX(var(--drift, 20px)); opacity: 0; }
+  /* 只飘到屏幕中部 -45vh，避免遮住地图中央的 flyTo 主体 */
+  100% { transform: translateY(-45vh) scale(1.4) translateX(var(--drift, 20px)); opacity: 0; }
 }
 
 /* 桃花飘落特效（桃园结义等段落） */
@@ -2122,7 +2118,8 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
   8%   { opacity: 0.95; }
   90%  { opacity: 0.8; }
-  100% { transform: translate(var(--drift, 60px), 110vh) rotate(720deg); opacity: 0; }
+  /* 只飘到屏幕中部 55vh，下半屏地图可见 */
+  100% { transform: translate(var(--drift, 60px), 55vh) rotate(720deg); opacity: 0; }
 }
 
 .narration-image-card .nic-img-wrap {
@@ -2193,11 +2190,10 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   text-shadow: 0 1px 3px rgba(0,0,0,0.8);
   z-index: 3;
 }
-/* hero 模式 caption 字更大 */
+/* hero 模式 caption 字稍大（不再居中） */
 .narration-image-card.mode-hero .nic-caption {
-  font-size: 18px;
-  padding: 32px 24px 18px;
-  text-align: center;
+  font-size: 15px;
+  padding: 24px 18px 14px;
 }
 
 @media (max-width: 900px) {
