@@ -17,8 +17,10 @@
 | **M6** | 跨数据集领域浏览浮层（B2）+ 跨数据集人物关联（A1）+ 同时代浏览模式（B1） |
 | **M7** | i18n 框架 + 关系线点击（E5）+ smoke 重试机制 + Wikimedia 肖像脚本 |
 | **M8** | i18n 全量覆盖：动态 DOM（详情/事件/对照/领域/快捷键/toast）+ 数据集 name/subtitle/group 三字段双语 + 切换语言时重建动态 UI |
+| **M9** | P0 五连：F1 跨集关联自动检测（`detect-cross-links.mjs` + 15 条新关联）/ F2 数据集预加载 / F3 关系类型 i18n / F4 Timeline hover 预览 / F5 搜索相关度+关键字高亮 |
+| **M10** | 人生回放模式（Life Journey）：独立模块，按生平事件顺序自动推进，镜头跟随 + 关系同期高亮 + 顶部胶囊浮层（暂停/继续/退出） |
 
-**当前规模**：28 数据集 / 约 488 人物 / 510 事件 / 公元前 3500 年 – 公元 2025 年 / validate 全 PASS / 0 error 0 warn / 单元测试 9/9 PASS / smoke 28/28 PASS（含重试）。
+**当前规模**：28 数据集 / 约 488 人物 / 510 事件 / 13 视图模块 / 8 工具脚本 / 30+ 跨集关联 / 公元前 3500 年 – 公元 2025 年 / validate 全 PASS / 0 error 0 warn / 单元测试 10/10 PASS / smoke 28/28 PASS（含重试）。
 
 ---
 
@@ -26,29 +28,27 @@
 
 | 项 | 数据 |
 |---|---|
-| 视图层模块 | **12 个**（state / atlas / map / render / controls / timeline / event-list / detail / compare / domain-browser / url-state / i18n） |
-| 数据集文件 | 28 个（中华 12 + 世界 16），全部走 lazy `import()` |
-| 工具脚本 | 7 个（validate / smoke / state.test / refresh-stats / export-stats / check-images / fetch-wikimedia） |
+| 视图层模块 | **13 个**（state / atlas / map / render / controls / timeline / event-list / detail / compare / domain-browser / url-state / i18n / **life-journey**） |
+| 数据集文件 | 28 个（中华 12 + 世界 16），全部走 lazy `import()` + 空闲预加载 |
+| 工具脚本 | **8 个**（validate / smoke / state.test / refresh-stats / export-stats / check-images / fetch-wikimedia / **detect-cross-links**） |
+| 跨集关联 | 30+ 条（手工 + detect 工具辅助产出） |
 | 最大文件 | `tangsong.js` 866 行 / 72KB；`sanguo.js` 56KB |
-| Git 提交 | 17+（含完整文档与里程碑） |
+| Git 提交 | 20+（含完整文档与里程碑） |
 | CI | GitHub Actions：push / PR 自动跑 unit + validate + smoke |
 
 ---
 
 ## 🎯 下一阶段优化清单（按投入产出比分层）
 
-### 🔥 P0 · 高收益、低投入（优先做）
+> M9 已完成 P0 全部（F1–F5），M10 完成 Life Journey。下列为 P1/P2 + 工程化。
 
-- **F1 跨集人物关联自动检测**
-  当前 `js/data/cross-links.js` 是手工维护的。可写一个 `tools/detect-cross-links.mjs`：扫描所有数据集，把 `alias` / `name` 在多个 atlas 命中的人物列出来，生成候选清单供人工确认。预计能挖出 20+ 条新关联。
-- **F2 数据集预加载**
-  首屏空闲时（`requestIdleCallback`）预加载 group 内相邻 atlas，切换时秒开。对世界文明 16 个数据集收益最大。
-- **F3 关系类型 i18n**
-  7 种关系（亲属 / 君臣 / 师承 / 敌对 / 结义 / 同时代 / 其他）目前详情面板直接显示中文 type。加 `RELATION_LABELS_EN` 表，i18n 切英文时关系 chip 同步切换。低成本补齐 i18n 拼图。
-- **F4 Timeline hover 预览**
-  鼠标悬停在时间轴上显示对应年份的小气泡（"前221年 · 当前数据集 3 件事件"），不点击也能快速定位。对长年代数据集（mesopotamia 跨 3000 年）体验提升明显。
-- **F5 搜索结果按相关度排序**
-  当前 `bindSearch` 只 `filter().slice(0, 20)`，纯按数组顺序。改成：完全匹配 > 名字命中 > 字号命中 > 别名命中，并高亮关键字。
+### 🔥 P0 · 高收益、低投入（已完成 M9）
+
+- ~~**F1 跨集人物关联自动检测**~~ ✅ `tools/detect-cross-links.mjs` + 15 条 same-person 补全
+- ~~**F2 数据集预加载**~~ ✅ `requestIdleCallback` 串行预拉
+- ~~**F3 关系类型 i18n**~~ ✅ 7 类关系双语 + tooltip/chip 同步
+- ~~**F4 Timeline hover 预览**~~ ✅ 鼠标悬停显示年份 + 当年事件数气泡
+- ~~**F5 搜索相关度排序**~~ ✅ 评分排序 + `<mark>` 关键字高亮
 
 ### ⚡ P1 · 中收益、中投入（按需做）
 
@@ -81,6 +81,8 @@
   把播放过程中地图视角变化录成可分享的 webm / gif。需要 `MediaRecorder` + canvas capture，技术可行。
 - **F18 历史上的今天**
   入口页加一个"今天在历史"的小卡片，跳转到对应年份+人物。简单且有趣。
+- **F19 Life Journey 进阶**
+  当前 M10 是按生平事件推进。可扩：① 跨数据集人物（如朱元璋在元/明都出现）按真实时间线串起来回放；② 配音 / 字幕轨道；③ 慢/快速度档；④ 一键导出 mp4。
 
 ### 🧪 工程化（建议在 P0-P1 完成后做一轮）
 
@@ -112,6 +114,7 @@ node tools/validate.mjs sanguo       # 单个
 
 # 冒烟（含重试机制，慢加载自动延长 budget）
 node tools/smoke.mjs                 # 全部，自动起 8199 端口
+node tools/smoke.mjs sanguo          # 单个
 
 # 单元测试
 node --test tools/state.test.mjs
@@ -121,6 +124,7 @@ node tools/refresh-stats.mjs         # 刷新 manifest stats
 node tools/export-stats.mjs          # 导出 Markdown 统计表
 node tools/check-images.mjs          # personImages 404 检查
 node tools/fetch-wikimedia.mjs       # Wikimedia 肖像批量（需网络）
+node tools/detect-cross-links.mjs    # 跨集人物关联候选检测
 ```
 
 CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate.mjs` + `smoke.mjs`。
@@ -129,14 +133,16 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 
 ## 🔑 结构性原则（给后续接手者）
 
-1. **视图层零改动**：`js/core/` **12 个**模块完全通用，跨数据集差异全由数据字段表达
+1. **视图层零改动**：`js/core/` **13 个**模块完全通用，跨数据集差异全由数据字段表达
 2. **数据 schema**：见 `js/data/_template.js`；新增数据集流程见 `README.md`
-3. **跨数据集连接**：`js/data/cross-links.js` 注册 same-person / interaction；`tools/detect-cross-links.mjs`（待做 F1）可自动产出候选
+3. **跨数据集连接**：`js/data/cross-links.js` 注册 same-person / interaction；`tools/detect-cross-links.mjs` 可自动产出候选
 4. **URL 深链**：`?atlas=X&year=Y&person=Z`，分享直达任意视图
 5. **键盘快捷键**：按 `?` 弹出帮助
 6. **四个浮层**：切换器 / 时代对照 / 跨数据集领域 / 同时代；均可用 `Esc` 关闭
-7. **i18n**：`data-i18n` 覆盖静态 DOM；动态 DOM 走 `t()`/`tf()`；切换语言时 `onLangChange` 重建浮层
+7. **i18n**：`data-i18n` 覆盖静态 DOM；动态 DOM 走 `t()`/`tf()`；切换语言时 `onLangChange` 重建浮层；关系类型走 `relationLabel()`
 8. **跨集索引**：`getGlobalPersonIndex()` 首次调用遍历 28 数据集构建扁平索引并缓存，供搜索 / 同时代 / 关联面板复用
+9. **空闲预加载**：首屏后 `requestIdleCallback` 串行预拉所有 atlas，秒切
+10. **人生回放**：`startLifeJourney(personId)`，按生平事件推进；与 timeline play 互斥
 
 ---
 
@@ -144,10 +150,10 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 
 | 类别 | 文件 |
 |---|---|
-| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n}.js` |
+| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n,life-journey}.js` |
 | 数据层 | `js/data/index.js`（注册表）、`js/data/_template.js`（模板）、`js/data/cross-links.js`（跨集关联）、`js/data/*.js`（28 数据集） |
 | 入口 | `js/app.js` |
-| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia}.mjs` |
+| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia,detect-cross-links}.mjs` |
 | 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md` |
 | CI | `.github/workflows/ci.yml` |
 
@@ -160,3 +166,13 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 - **推迟项重排**：原 A5 / D7 / D8 / C6 仍保留，归到 P1/P2
 - **新增 18 条优化点子**（F1–F18），按"投入产出比"分 P0/P1/P2，便于按需选做
 - **工程化建议**：单独列 E1–E4（lint / 类型 / schema 版本 / 快照测试）
+
+## 📌 v4 → v5 变更说明（M9/M10 后）
+
+- **里程碑补 M9**：P0 五连（F1 跨集检测 + F2 预加载 + F3 关系 i18n + F4 timeline hover + F5 搜索高亮）
+- **里程碑补 M10**：人生回放模式（Life Journey）
+- **模块数**：12 → 13（新增 `life-journey.js`）
+- **工具数**：7 → 8（新增 `detect-cross-links.mjs`）
+- **跨集关联**：12 → 30+（detect 工具辅助产出 15 条 same-person）
+- **结构性原则**：补 9（空闲预加载）、10（人生回放）
+- **F1–F5 全部标记 ✅ 完成**；新增 F19（Life Journey 进阶方向）

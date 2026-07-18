@@ -10,21 +10,23 @@ From the Three Kingdoms to the Roman Empire, from the pharaohs of Egypt to the p
 
 ## Features
 
-- **Interactive timeline** — scrub through years and watch the map reorganize in real time. History is not static; neither should its presentation be.
+- **Interactive timeline** — scrub through years and watch the map reorganize in real time. History is not static; neither should its presentation be. Hovering the slider shows a year preview bubble.
 - **Geolocated figures & events** — every person and event is pinned to where it actually happened. Zoom in to see a single battle; zoom out to see an entire era.
-- **Relationship networks** — visualized connections between historical figures. Allies, rivals, mentors, family — the human web behind the history. Relation types are normalized into 7 canonical categories (亲属 / 君臣 / 师承 / 敌对 / 结义 / 同时代 / 其他) with distinct colors and line styles.
+- **Relationship networks** — visualized connections between historical figures. Allies, rivals, mentors, family — the human web behind the history. Relation types are normalized into 7 canonical categories (亲属 / 君臣 / 师承 / 敌对 / 结义 / 同时代 / 其他) with distinct colors and line styles, bilingual labels.
 - **Event trajectories** — trace the journeys of key figures across the map. Cao Cao's march to the north, Zhuge Liang's northern expeditions, Alexander's eastward campaign — follow them step by step.
+- **Life Journey replay** — click ▶ 人生回放 / Life Replay on a person's detail panel; the camera auto-flies through each life event in chronological order, with contemporaneous relations highlighted at each stop and a top progress bar (pause / resume / exit).
 - **Faction-based styling** — Wei, Shu, Wu, and beyond, each with distinct visual identity.
 - **Smart label de-cluttering** — labels adapt to zoom level and spatial density, so even the most eventful locations remain readable.
 - **Era comparison overlay** — all 28 datasets drawn on a single proportional axis, so you can see which civilizations overlapped in time. Click any year to view contemporaries worldwide.
 - **Cross-dataset domain browser** — filter all events across all atlases by domain (军事 / 政治 / 文化 / 科技 / 宗教 …), grouped by civilization.
-- **Cross-dataset figure links** — the same person appearing in multiple atlases (e.g. 朱元璋 in 元/明, 哥伦布 in 文艺复兴/现代世界), plus documented interactions between civilizations (马可波罗, 利玛窦徐光启, 亚历山大与大流士).
-- **Cross-civilization search** — find any figure across all 28 datasets; clicking a result switches atlas and opens detail.
+- **Cross-dataset figure links** — 30+ registered links: same person in multiple atlases (朱元璋/努尔哈赤/秦始皇/林则徐/孙中山 …) + documented cross-civilization interactions (马可波罗, 利玛窦徐光启, 亚历山大与大流士). Use `tools/detect-cross-links.mjs` to mine more candidates.
+- **Cross-civilization search** — find any figure across all 28 datasets; results are relevance-scored (exact > name > courtesy > alias) with keyword highlighting. Clicking a result switches atlas and opens detail.
 - **URL deep-linking** — share any exact view via `?atlas=<id>&year=<y>&person=<id>`.
-- **i18n (中文 / English)** — toggle the language button (中/EN) in the topbar. All UI strings and dataset metadata (name / subtitle / group) are bilingual.
+- **i18n (中文 / English)** — toggle the language button (中/EN) in the topbar. All UI strings, dataset metadata (name / subtitle / group), and relation-type labels are bilingual.
 - **Keyboard shortcuts** — `Space` play/pause, `←/→` ±1 year, `Shift+←/→` ±10 years, `Home/End` jump to era bounds, `/` focus search, `L` atlas switcher, `C` era comparison, `?` shortcuts help, `Esc` close any overlay.
 - **Mobile responsive** — touch-friendly layout for narrow screens.
 - **Dark mode** — respects `prefers-color-scheme`.
+- **Lazy + preload** — datasets load on demand via dynamic `import()`; browser idle time preloads the rest so atlas switches are instant.
 
 ## Current Coverage
 
@@ -103,21 +105,22 @@ civilization-atlas/
 │   ├── app.js               # entry / orchestration
 │   ├── core/                # view layer (generic, dataset-agnostic)
 │   │   ├── state.js         # global state + domains + year formatting + relation types
-│   │   ├── atlas.js         # dataset manager (lazy load + switch + global index)
+│   │   ├── atlas.js         # dataset manager (lazy load + switch + global index + preload)
 │   │   ├── map.js           # Leaflet init + per-atlas mapView
 │   │   ├── render.js        # main render pipeline (persons/events/relations/trajectories)
-│   │   ├── controls.js      # control bindings + search + shortcuts
+│   │   ├── controls.js      # control bindings + search + shortcuts + slider hover
 │   │   ├── timeline.js      # timeline (play, event dots, ticks, toast)
 │   │   ├── event-list.js    # chronicle panel + figure roster overlay
-│   │   ├── detail.js        # person/event detail panel + cross-links
+│   │   ├── detail.js        # person/event detail panel + cross-links + life-journey trigger
 │   │   ├── compare.js       # era comparison overlay + contemporaries
 │   │   ├── domain-browser.js # cross-dataset domain browser overlay
 │   │   ├── url-state.js     # ?atlas=&year=&person= deep-link
-│   │   └── i18n.js          # bilingual UI + dataset metadata
+│   │   ├── i18n.js          # bilingual UI + dataset metadata + relation labels
+│   │   └── life-journey.js  # life replay mode (auto-flies through a person's events)
 │   └── data/                # data layer (historical content)
 │       ├── index.js         # ATLAS_MANIFEST registry + helpers
 │       ├── _template.js     # template for new datasets
-│       ├── cross-links.js   # cross-dataset figure links registry
+│       ├── cross-links.js   # cross-dataset figure links registry (30+ entries)
 │       └── sandai.js  chunqiu.js  qinhan.js  ... (28 datasets)
 ├── tools/
 │   ├── validate.mjs         # static dataset validator
@@ -126,7 +129,8 @@ civilization-atlas/
 │   ├── refresh-stats.mjs    # auto-update manifest stats from data files
 │   ├── export-stats.mjs     # export Markdown stats table
 │   ├── check-images.mjs     # HEAD-check personImages URLs
-│   └── fetch-wikimedia.mjs  # batch-fetch portrait images from Wikipedia REST API
+│   ├── fetch-wikimedia.mjs  # batch-fetch portrait images from Wikipedia REST API
+│   └── detect-cross-links.mjs # scan for cross-dataset same-person / interaction candidates
 ├── .github/workflows/ci.yml # CI: state.test + validate + smoke on push/PR
 └── package.json
 ```
@@ -201,21 +205,23 @@ node tools/validate.mjs              # validate all datasets
 node tools/validate.mjs sanguo       # validate one
 node --test tools/state.test.mjs     # unit tests (state.js helpers)
 node tools/smoke.mjs                 # headless smoke (auto-spawns port 8199, retries on slow loads)
+node tools/smoke.mjs sanguo          # smoke one dataset
 
 # Maintenance
 node tools/refresh-stats.mjs         # refresh manifest stats from data files
 node tools/export-stats.mjs          # export Markdown stats table
 node tools/check-images.mjs          # HEAD-check personImages URLs
 node tools/fetch-wikimedia.mjs       # batch-fetch portraits (requires network)
+node tools/detect-cross-links.mjs    # scan for cross-dataset figure-link candidates
 ```
 
 `smoke.mjs` loads each dataset via headless Chrome and asserts: loading overlay hides, persons > 0, no JS errors. Default Chrome path is `Google Chrome.app`; override with `CHROME=...`. Includes a retry mechanism: if the first attempt (20s budget) looks empty but has no JS errors, it retries with a 35s budget to accommodate slow lazy-loads.
 
 ## Design Pillars
 
-- **View/data decoupled** — 11 view modules are generic; new datasets need zero view-layer changes
+- **View/data decoupled** — 13 view modules are generic; new datasets need zero view-layer changes
 - **Differences via fields, not code** — era span, geography, domains, zoom thresholds, default base layer, importance, tick marks are all data-driven
-- **Cross-dataset first** — search, era comparison, domain browser, contemporaries, and figure links all treat the 28 atlases as one knowledge graph
+- **Cross-dataset first** — search, era comparison, domain browser, contemporaries, figure links, and life replay all treat the 28 atlases as one knowledge graph
 - **Shareable URLs** — every view state is encoded in `?atlas=&year=&person=`
 
 ## Contributing
@@ -229,7 +235,7 @@ History is vast, and no single person knows it all. If you have expertise in a p
 ## Roadmap
 
 - [x] Three Kingdoms interactive map with timeline
-- [x] Figure relationship visualization (with 7 canonical types)
+- [x] Figure relationship visualization (with 7 canonical types, bilingual labels)
 - [x] Event trajectory tracking
 - [x] Tang–Song dataset with atlas switcher
 - [x] 5,000 years of Chinese history (12 datasets)
@@ -237,17 +243,21 @@ History is vast, and no single person knows it all. If you have expertise in a p
 - [x] BCE support (negative years, era-aware formatting)
 - [x] Lazy-loaded manifest with grouped switcher
 - [x] Dataset validators & headless smoke tests + unit tests + CI
-- [x] Cross-era figure connections (cross-links registry)
-- [x] Cross-civilization search (global person index)
+- [x] Cross-era figure connections (cross-links registry + auto-detector)
+- [x] Cross-civilization search (global person index, relevance-ranked, keyword-highlighted)
 - [x] Era comparison overlay + contemporaries view
 - [x] Cross-dataset domain browser
-- [x] Multi-language support (Chinese / English)
+- [x] Multi-language support (Chinese / English, full UI + dataset metadata)
 - [x] Mobile-optimized experience
 - [x] Dark mode
 - [x] URL deep-linking (`?atlas=&year=&person=`)
+- [x] Atlas preload on browser idle (instant switching)
+- [x] Life Journey replay mode (per-person chronological auto-flythrough)
+- [x] Timeline hover year preview
 - [ ] Wikimedia portrait batch injection (`tools/fetch-wikimedia.mjs` ready; needs network environment)
 - [ ] Optional: split large datasets (sanguo / tangsong) by theme for faster switching
 - [ ] Optional: render diff updates for smoother scrubbing on dense atlases
+- [ ] Optional: Life Journey across atlases (for cross-era figures like 朱元璋)
 
 ## License
 
