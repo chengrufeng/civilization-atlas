@@ -101,12 +101,8 @@
 > 随着 v6 多个里程碑的达成，项目在功能完备度（Life Journey、Heatmap、Compare 等）、基础体验（PWA、i18n、性能）和工程化上已趋近成熟。为了打破当前的框架天花板，以下是针对未来大版本（v7 及以后）的头脑风暴与深度改进建议：
 
 ### 🎨 1. 交互与可视化进阶 (Advanced UX & Visuals)
-- **F20 人物关系图谱 (Knowledge Graph)**
-  - **现状痛点**：目前人物关系（君臣、亲属等）依附于地图标记上，难以一眼看清盘根错节的跨代交际圈。
-  - **改进方案**：引入轻量级图表（如 D3.js Force Graph），支持点击人物时弹出独立于地理坐标的"社交网络力导向图"，可视化人物的师承、政敌等圈层结构。
-- **F21 动态地理轨迹线 (Trajectory Paths)**
-  - **现状痛点**：Life Journey 模式展示了事件点和地点，但缺乏连贯的移动感。
-  - **改进方案**：用带箭头的虚线或流动粒子效果（如 Leaflet.AntPath）将人物一生中的事件地理坐标按时间串联，一览人物的迁徙、流放或出征路线。
+- ~~**F20 人物关系图谱 (Knowledge Graph)**~~ ⏸️ 待做（D3 力导向图）
+- ~~**F21 动态地理轨迹线 (Trajectory Paths)**~~ ✅ 纯 Leaflet `polyline`（橙色虚线）+ 头部 `circleMarker`，advance 时实时重画
 - **F22 时间轴非线性与微观缩放 (Timeline Zooming)**
   - **现状痛点**：上古史时间跨度极大（几百年无事件），近现代史极密（精确到天），线性的 `<input type="range">` 难以兼顾。
   - **改进方案**：改造 Timeline，引入类似股票 K 线图的可缩放时间轴组件；在滑动特定区域时，自动放大展示其微观刻度（月/日）。
@@ -118,14 +114,10 @@
 - **E6 IndexedDB 本地结构化数据**
   - **现状痛点**：目前的纯对象/数组遍历模式，在应对上万条级事件或人物时，存在内存峰值问题。
   - **改进方案**：依托 PWA 的 Service Worker 环境，在空闲时将 JSON 解析后打入本地的 IndexedDB。未来不仅支持"断网浏览"，更能执行秒级的本地聚合查询（类似 SQL 查询），无需加载所有源文件入内存。
-- **E7 深度状态分享路由 (Deep URL Sync)**
-  - **现状痛点**：当前 URL `?atlas&year&person` 已跑通，但未能深度下钻到复杂视图。
-  - **改进方案**：扩充 `url-state.js`，使其支持分享复杂应用状态。例如 `?compare=曹操,刘备,孙权`（直接拉起三人对比浮层）、`?search=政治&layer=heat`（直接复原热力图与特定搜索结果）、`?journey=王安石`（打开即播人生回放）。
+- ~~**E7 深度状态分享路由 (Deep URL Sync)**~~ ✅ `url-state.js` 扩展 `?journey` / `?search` / `?compare` 参数；`app.js` 启动时按参数自动触发回放 / 检索 / 对比浮层
 
 ### 🌍 3. 生态与平台扩展 (Ecosystem)
-- **C6 本地用户数据集导入 (UGC / Local Mode)**
-  - **现状痛点**：很多用户、教师想自制小说地图（如《冰与火之歌》）或专属课件地图，必须提 PR 到源码仓库。
-  - **改进方案**：在 UI 增设"本地导入"沙盒入口。用户将符合 Schema 规范的 JSON 文件拖拽进浏览器，完全通过纯前端解析渲染。将该项目转变为一个通用的地理历史编辑/展示器。
+- ~~**C6 本地用户数据集导入 (UGC / Local Mode)**~~ ✅ `js/core/local-atlas.js`：拖拽 / 选择 JSON → 浏览器内 schema 校验（与 `validate.mjs` 同规则）→ `registerLocalAtlas()` 运行时注入 manifest → 一键切换
 - **C7 原生多端打包 (Tauri / Capacitor)**
   - **现状痛点**：Web 体验虽好，但部分场景（特别是教学展示、独立分发）依然需要客户端。
   - **改进方案**：得益于项目现有的"无构建、纯前端 ES Modules"极简架构，能完美且零成本地通过 Tauri 打包为极小体积的桌面端（Win/Mac/Linux），或用 Capacitor 打包分发到 App Store / Google Play。
