@@ -108,7 +108,7 @@ function renderDetailContent(person) {
       <p>${person.bio}</p>
     </div>
     <div class="detail-section">
-      <h4>${t('detail.events_count')}<button class="lj-start-btn" id="lj-start-btn">${t('life_journey.start')}</button><button class="lj-start-btn nr-start-btn" id="nr-start-btn" style="display:none;margin-left:8px">🎧 ${t('narration.btn') || '解说播放'}</button><button class="lj-start-btn nr-script-btn" id="nr-script-btn" style="display:none;margin-left:8px" title="${t('narration.view_script') || '查看解说脚本'}">📝</button></h4>
+      <h4>${t('detail.events_count')}<button class="lj-start-btn" id="lj-start-btn">${t('life_journey.start')}</button><button class="lj-start-btn nr-start-btn" id="nr-start-btn" style="display:none;margin-left:8px">${t('narration.btn') || '🎧 解说播放'}</button><button class="lj-start-btn nr-script-btn" id="nr-script-btn" style="display:none;margin-left:8px" title="${t('narration.view_script') || '查看解说脚本'}">📝</button></h4>
       ${eventsHtml || `<p style="color:var(--ink-light)">${t('detail.no_data')}</p>`}
     </div>
     <div class="detail-section">
