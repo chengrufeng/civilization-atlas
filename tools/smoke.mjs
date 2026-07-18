@@ -37,7 +37,7 @@ function dumpDom(url) {
       '--no-first-run', '--no-default-browser-check', '--disable-extensions',
       '--disable-background-networking', '--disable-sync',
       `--user-data-dir=${profile}`,
-      '--virtual-time-budget=10000', '--timeout=20000',
+      '--virtual-time-budget=15000', '--timeout=25000',
       '--dump-dom', '--enable-logging=stderr', '--v=0', url,
     ], { maxBuffer: 20 * 1024 * 1024, timeout: 45000, killSignal: 'SIGKILL' },
     (error, stdout, stderr) => {
