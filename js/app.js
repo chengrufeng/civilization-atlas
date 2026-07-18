@@ -135,6 +135,7 @@ function initAtlasSwitcher() {
     overlay.classList.add('open');
     overlay.setAttribute('aria-hidden', 'false');
     mask.classList.add('show');
+    refreshQuickRow();
   };
   const closeAtlasOverlay = () => {
     overlay.classList.remove('open');
@@ -146,6 +147,41 @@ function initAtlasSwitcher() {
   if (mask) mask.addEventListener('click', closeAtlasOverlay);
 
   updateAtlasButtonLabel();
+}
+
+/** F8 填充切换器顶部的收藏/最近 chip 行 */
+function refreshQuickRow() {
+  const favBox = document.getElementById('quick-favorites');
+  const recBox = document.getElementById('quick-recent');
+  if (!favBox || !recBox) return;
+  const renderChips = (box, items) => {
+    if (!items.length) {
+      box.innerHTML = `<span class="aq-empty">${t('quick.empty')}</span>`;
+      return;
+    }
+    box.innerHTML = items.map(it => {
+      const meta = manifest().find(m => m.id === it.atlas);
+      const atlasName = meta ? localized(meta, 'name') : it.atlas;
+      return `<button class="aq-chip" data-atlas="${it.atlas}" data-id="${it.id}" title="${atlasName}">
+        <span class="aq-name">${it.name}</span>
+        <span class="aq-atlas">${atlasName}</span>
+      </button>`;
+    }).join('');
+    box.querySelectorAll('.aq-chip').forEach(chip => {
+      chip.addEventListener('click', async () => {
+        const aid = chip.dataset.atlas;
+        const pid = chip.dataset.id;
+        if (aid !== current().id) await doSwitchAtlas(aid);
+        document.getElementById('atlas-overlay')?.classList.remove('open');
+        document.getElementById('atlas-overlay-mask')?.classList.remove('show');
+        import('./core/detail.js').then(m => m.openDetail(pid));
+      });
+    });
+  };
+  import('./core/favorites.js').then(({ getFavorites, getRecent }) => {
+    renderChips(favBox, getFavorites().slice(0, 12));
+    renderChips(recBox, getRecent().slice(0, 8));
+  });
 }
 
 /** 更新顶栏按钮显示的当前数据集名 */
@@ -332,4 +368,13 @@ if (document.readyState === 'loading') {
 } else {
   // 模块脚本延迟执行，DOMContentLoaded 可能已触发
   boot();
+}
+
+// F10 注册 Service Worker（生产环境 / https / localhost）
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {
+      // 注册失败不影响主功能
+    });
+  });
 }

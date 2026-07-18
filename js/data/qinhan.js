@@ -5,7 +5,7 @@ import { makeImportance } from './index.js';
 const FACTIONS = [
   { id: 'qin', name: '秦', color: '#b23a2e', founded: -221, capital: '咸阳', capitalFrom: -350, desc: '中国第一个大一统帝国。' },
   { id: 'chu', name: '西楚', color: '#7b4b94', founded: -206, capital: '彭城', capitalFrom: -206, desc: '项羽所建，楚汉之争的一方。' },
-  { id: 'han', name: '西汉', color: '#b23a2e', founded: -202, capital: '长安', capitalFrom: -202, desc: '刘邦所建，定都长安。' },
+  { id: 'han', name: '西汉', color: '#8a2222', founded: -202, capital: '长安', capitalFrom: -202, desc: '刘邦所建，定都长安。' },
   { id: 'xin', name: '新莽', color: '#8a6d3b', founded: 9, capital: '长安', capitalFrom: 9, desc: '王莽代汉所建短命王朝。' },
   { id: 'donghan', name: '东汉', color: '#2f5d8a', founded: 25, capital: '洛阳', capitalFrom: 25, desc: '光武中兴，定都洛阳。' },
 ];

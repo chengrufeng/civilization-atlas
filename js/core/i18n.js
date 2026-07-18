@@ -115,6 +115,11 @@ const STRINGS = {
     'life_journey.exit': '退出',
     'life_journey.finished': '人生回放结束',
     'life_journey.no_events': '该人物暂无生平事件地点，无法回放',
+
+    'quick.favorites': '★ 收藏',
+    'quick.recent': '🕒 最近',
+    'quick.empty': '—',
+    'detail.toggle_favorite': '加入/移除收藏',
   },
 
   en: {
@@ -222,6 +227,11 @@ const STRINGS = {
     'life_journey.exit': 'Exit',
     'life_journey.finished': 'Life replay finished',
     'life_journey.no_events': 'No geolocated life events for this figure',
+
+    'quick.favorites': '★ Favorites',
+    'quick.recent': '🕒 Recent',
+    'quick.empty': '—',
+    'detail.toggle_favorite': 'Toggle favorite',
   },
 };
 

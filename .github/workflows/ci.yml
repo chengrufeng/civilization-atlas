@@ -18,6 +18,8 @@ jobs:
         run: node --test tools/state.test.mjs
       - name: 数据集静态校验
         run: node tools/validate.mjs
+      - name: Faction 颜色冲突检测
+        run: node tools/check-factions.mjs
       - name: Chrome 安装（用于冒烟）
         run: |
           wget -q -O - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | sudo dpkg -i - || true

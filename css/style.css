@@ -318,6 +318,58 @@ html, body {
 .atlas-close:hover { color: var(--ink); }
 .atlas-overlay-body { padding: 16px 20px; overflow-y: auto; }
 
+/* F8 切换器顶部：收藏 / 最近 */
+.atlas-quick-row {
+  padding: 10px 20px 6px;
+  border-bottom: 1px dashed var(--line);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.atlas-quick-section { display: flex; align-items: flex-start; gap: 8px; }
+.atlas-quick-label {
+  font-size: 11px; color: var(--ink-light);
+  flex-shrink: 0; padding-top: 4px; width: 48px;
+}
+.atlas-quick-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  flex: 1; min-width: 0;
+}
+.aq-chip {
+  display: inline-flex; flex-direction: column;
+  background: rgba(178, 58, 46, .06);
+  border: 1px solid rgba(178, 58, 46, .2);
+  border-radius: 6px;
+  padding: 4px 8px; cursor: pointer;
+  transition: background .15s, border-color .15s;
+  max-width: 120px; min-width: 0;
+}
+.aq-chip:hover {
+  background: rgba(178, 58, 46, .12);
+  border-color: var(--seal);
+}
+.aq-name {
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.aq-atlas {
+  font-size: 10px; color: var(--ink-light);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.aq-empty {
+  font-size: 11px; color: var(--ink-light); padding: 4px 0;
+}
+
+/* F8 详情面板收藏按钮 */
+.fav-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; line-height: 1;
+  color: var(--ink-light);
+  padding: 0 4px; margin-left: 6px;
+  transition: color .15s, transform .15s;
+  vertical-align: middle;
+}
+.fav-btn:hover { color: var(--gold, #c89b3c); transform: scale(1.15); }
+.fav-btn.fav { color: var(--gold, #c89b3c); }
+
 .atlas-group { margin-bottom: 16px; }
 .atlas-group:last-child { margin-bottom: 0; }
 .atlas-group-title {

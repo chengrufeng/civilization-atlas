@@ -16,6 +16,7 @@ import { syncUrlState } from './url-state.js';
 import { findCrossLinks } from '../data/cross-links.js';
 import { ATLAS_MANIFEST } from '../data/index.js';
 import { t, tf, localized } from './i18n.js';
+import { pushRecent, toggleFavorite, isFavorite, onChange as onFavChange } from './favorites.js';
 
 /* 缓存其它数据集的 atlas 对象，避免每次详情打开都重新加载 */
 const otherAtlasCache = new Map();
@@ -90,7 +91,7 @@ function renderDetailContent(person) {
     <div class="detail-hero">
       <div class="detail-avatar" style="background:${faction.color}">${avatarHtml}</div>
       <div class="detail-hero-info">
-        <h3>${person.name}</h3>
+        <h3>${person.name}<button class="fav-btn ${isFavorite(current().id, person.id) ? 'fav' : ''}" id="fav-btn" title="${t('detail.toggle_favorite')}" aria-label="${t('detail.toggle_favorite')}">${isFavorite(current().id, person.id) ? '★' : '☆'}</button></h3>
         <div class="courtesy">${t('detail.courtesy_label')} ${person.courtesy}${person.alias.length ? ' · ' + person.alias.join(t('detail.alias_sep')) : ''}</div>
         <span class="detail-tag" style="background:${faction.color}">${faction.name}</span>
       </div>
@@ -123,6 +124,19 @@ function renderDetailContent(person) {
   document.querySelectorAll('.relation-chip').forEach(chip => {
     chip.addEventListener('click', () => openDetail(chip.dataset.person));
   });
+
+  // F8 收藏按钮
+  const favBtn = document.getElementById('fav-btn');
+  if (favBtn) {
+    favBtn.addEventListener('click', () => {
+      const nowFav = toggleFavorite({ atlas: current().id, id: person.id, name: person.name });
+      favBtn.textContent = nowFav ? '★' : '☆';
+      favBtn.classList.toggle('fav', nowFav);
+    });
+  }
+
+  // F8 推入最近浏览
+  pushRecent({ atlas: current().id, id: person.id, name: person.name });
 
   // 人生回放按钮
   const ljBtn = document.getElementById('lj-start-btn');
