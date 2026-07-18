@@ -29,6 +29,11 @@ const atlasCache = new Map();   // id → 已加载的 atlas 对象
 
 export function current() { return currentAtlas; }
 export function manifest() { return ATLAS_MANIFEST; }
+/** 当前数据集对应的 manifest 条目（含 nameEn/subtitleEn 等元信息） */
+export function currentMeta() {
+  if (!currentAtlas) return null;
+  return ATLAS_MANIFEST.find(m => m.id === currentAtlas.id) || null;
+}
 
 /* ---------- 从数据集派生的常量 ---------- */
 export let FACTION_COLOR = {};
@@ -130,7 +135,8 @@ export async function getGlobalPersonIndex() {
       const factionName = id => (atlas.factions.find(f => f.id === id) || {}).name || '';
       for (const p of atlas.persons) {
         idx.push({
-          atlasId: atlas.id, atlasName: atlas.name,
+          atlasId: atlas.id, atlasName: atlas.name, atlasNameEn: meta.nameEn || atlas.name,
+          group: meta.group, groupEn: meta.groupEn || meta.group,
           personId: p.id, name: p.name,
           courtesy: p.courtesy || '', alias: p.alias || [],
           factionName: factionName(p.faction),

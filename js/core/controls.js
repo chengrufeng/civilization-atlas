@@ -16,6 +16,7 @@ import {
 import { buildEventList, buildListOverlay } from './event-list.js';
 import { openDetail, closeDetail } from './detail.js';
 import { flyToDefault } from './map.js';
+import { t, localized } from './i18n.js';
 
 /* ---------- 通用面板切换 ---------- */
 function togglePanel(panelId, btnId) {
@@ -245,21 +246,21 @@ function bindSearch() {
           p.alias.some(a => a.includes(kw))
         ).slice(0, 20);
         if (matches.length === 0) {
-          suggestBox.innerHTML = '<div class="ss-empty">未找到匹配人物</div>';
+          suggestBox.innerHTML = `<div class="ss-empty">${t('toast.not_found')}</div>`;
         } else {
           // 按 atlasId 分组
           const groups = [];
           for (const m of matches) {
             let g = groups.find(x => x.atlasId === m.atlasId);
-            if (!g) { g = { atlasId: m.atlasId, atlasName: m.atlasName, items: [] }; groups.push(g); }
+            if (!g) { g = { atlasId: m.atlasId, atlasName: m.atlasName, atlasNameEn: m.atlasNameEn, items: [] }; groups.push(g); }
             g.items.push(m);
           }
           suggestBox.innerHTML = groups.map(g => `
             <div class="ss-group">
-              <div class="ss-group-title">${g.atlasName}</div>
+              <div class="ss-group-title">${localized({ name: g.atlasName, nameEn: g.atlasNameEn }, 'name')}</div>
               ${g.items.map(p => `
                 <div class="ss-item" data-atlas="${p.atlasId}" data-id="${p.personId}">
-                  <b>${p.name}</b><span class="ss-sub">${p.courtesy ? '字 ' + p.courtesy + ' · ' : ''}${p.factionName}</span>
+                  <b>${p.name}</b><span class="ss-sub">${p.courtesy ? t('detail.courtesy_label') + ' ' + p.courtesy + ' · ' : ''}${p.factionName}</span>
                 </div>`).join('')}
             </div>`).join('');
           suggestBox.querySelectorAll('.ss-item').forEach(el => {
@@ -407,19 +408,19 @@ function bindShortcutsHelp() {
     <div class="shortcuts-mask" id="shortcuts-mask"></div>
     <div class="shortcuts-overlay" id="shortcuts-overlay" aria-hidden="true">
       <div class="shortcuts-header">
-        <h3>键盘快捷键</h3>
-        <button class="shortcuts-close" id="shortcuts-close">×</button>
+        <h3>${t('shortcuts.title')}</h3>
+        <button class="shortcuts-close" id="shortcuts-close" aria-label="${t('common.close')}">×</button>
       </div>
       <div class="shortcuts-body">
-        <div class="sc-row"><kbd>Space</kbd><span>播放 / 暂停</span></div>
-        <div class="sc-row"><kbd>←</kbd> / <kbd>→</kbd><span>年份 -1 / +1</span></div>
-        <div class="sc-row"><kbd>Shift</kbd> + <kbd>←/→</kbd><span>年份 -10 / +10</span></div>
-        <div class="sc-row"><kbd>Home</kbd> / <kbd>End</kbd><span>跳到起始 / 结束年份</span></div>
-        <div class="sc-row"><kbd>/</kbd><span>聚焦搜索框</span></div>
-        <div class="sc-row"><kbd>L</kbd><span>打开数据集切换</span></div>
-        <div class="sc-row"><kbd>C</kbd><span>打开时代对照</span></div>
-        <div class="sc-row"><kbd>?</kbd><span>显示本帮助</span></div>
-        <div class="sc-row"><kbd>Esc</kbd><span>关闭任何浮层</span></div>
+        <div class="sc-row"><kbd>Space</kbd><span>${t('shortcuts.space')}</span></div>
+        <div class="sc-row"><kbd>←</kbd> / <kbd>→</kbd><span>${t('shortcuts.arrows')}</span></div>
+        <div class="sc-row"><kbd>Shift</kbd> + <kbd>←/→</kbd><span>${t('shortcuts.shift_arrows')}</span></div>
+        <div class="sc-row"><kbd>Home</kbd> / <kbd>End</kbd><span>${t('shortcuts.home_end')}</span></div>
+        <div class="sc-row"><kbd>/</kbd><span>${t('shortcuts.slash')}</span></div>
+        <div class="sc-row"><kbd>L</kbd><span>${t('shortcuts.l')}</span></div>
+        <div class="sc-row"><kbd>C</kbd><span>${t('shortcuts.c')}</span></div>
+        <div class="sc-row"><kbd>?</kbd><span>${t('shortcuts.question')}</span></div>
+        <div class="sc-row"><kbd>Esc</kbd><span>${t('shortcuts.esc')}</span></div>
       </div>
     </div>`;
   document.body.insertAdjacentHTML('beforeend', html);

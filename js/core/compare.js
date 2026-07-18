@@ -5,6 +5,7 @@
 
 import { manifest, getGlobalPersonIndex } from './atlas.js';
 import { formatYear, formatYearShort } from './state.js';
+import { t, localized } from './i18n.js';
 
 /* 缓存最近一次构建对照面板时的年份映射，供 axis 点击复用 */
 let compareAxis = null;
@@ -28,7 +29,7 @@ export function buildCompareOverlay() {
   }).filter(m => Number.isFinite(m.startYear) && Number.isFinite(m.endYear));
 
   if (items.length === 0) {
-    body.innerHTML = '<p class="compare-empty">暂无可对照数据</p>';
+    body.innerHTML = `<p class="compare-empty">${t('compare_overlay.empty')}</p>`;
     return;
   }
 
@@ -61,18 +62,18 @@ export function buildCompareOverlay() {
         </div>`).join('')}
         <div class="compare-axis-cursor" id="compare-axis-cursor"></div>
       </div>
-      <div class="compare-axis-hint">👆 点击轴上任一年份，查看全球同时代人物</div>
+      <div class="compare-axis-hint">${t('compare_overlay.hint')}</div>
     </div>
     ${groups.map(g => `
       <div class="compare-group">
-        <div class="compare-group-title">${g.name}</div>
+        <div class="compare-group-title">${localized({ group: g.name, groupEn: g.items[0]?.groupEn || g.name }, 'group')}</div>
         <div class="compare-rows">
           ${g.items.map(m => `
             <div class="compare-row" data-atlas="${m.id}">
-              <div class="compare-row-label">${m.name}</div>
+              <div class="compare-row-label">${localized(m, 'name')}</div>
               <div class="compare-row-track">
                 <div class="compare-bar" style="left:${pct(m.startYear)}%; width:${pct(m.endYear) - pct(m.startYear)}%"
-                  title="${m.name}：${formatYearShort(m.startYear)}–${formatYearShort(m.endYear)}">
+                  title="${localized(m, 'name')}：${formatYearShort(m.startYear)}–${formatYearShort(m.endYear)}">
                   <span class="compare-bar-text">${formatYearShort(m.startYear)}–${formatYearShort(m.endYear)}</span>
                 </div>
               </div>
@@ -125,18 +126,18 @@ async function showContemporaries(year) {
   const yearLabel = document.getElementById('contemp-year');
   if (!overlay || !body) return;
   yearLabel.textContent = formatYear(year);
-  body.innerHTML = '<div class="contemp-loading">加载中…</div>';
+  body.innerHTML = `<div class="contemp-loading">${t('contemp.loading')}</div>`;
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   mask.classList.add('show');
 
   let idx;
   try { idx = await getGlobalPersonIndex(); }
-  catch { body.innerHTML = '<div class="contemp-empty">索引加载失败</div>'; return; }
+  catch { body.innerHTML = `<div class="contemp-empty">${t('contemp.index_failed')}</div>`; return; }
 
   const alive = idx.filter(p => p.birth <= year && p.death >= year);
   if (alive.length === 0) {
-    body.innerHTML = '<div class="contemp-empty">该年份无在世人物数据</div>';
+    body.innerHTML = `<div class="contemp-empty">${t('contemp.empty')}</div>`;
     return;
   }
 
@@ -160,7 +161,7 @@ async function showContemporaries(year) {
     const meta = manifestMap.get(atlasId);
     const groupTag = meta?.group || '';
     return `<div class="contemp-group">
-      <div class="contemp-group-title">${groupTag} · ${meta?.name || atlasId}</div>
+      <div class="contemp-group-title">${localized({ group: groupTag, groupEn: meta?.groupEn || groupTag }, 'group')} · ${localized(meta || {}, 'name') || atlasId}</div>
       <div class="contemp-cards">
         ${list.map(p => `
           <button class="contemp-card" data-atlas="${p.atlasId}" data-id="${p.personId}">

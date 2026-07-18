@@ -37,6 +37,7 @@ const STRINGS = {
     'panel.stat_persons': '人物',
     'panel.stat_relations': '关系',
     'panel.stat_events': '事件',
+    'atlas.stat_factions': '势力',
 
     'timeline.play': '▶',
     'timeline.pause': '⏸',
@@ -48,10 +49,16 @@ const STRINGS = {
     'compare_overlay.title': '时代对照',
     'compare_overlay.hint': '👆 点击轴上任一年份，查看全球同时代人物',
     'compare_overlay.row_hint': '点击任意条带切换至该数据集',
+    'compare_overlay.empty': '暂无可对照数据',
     'contemp_overlay.title': ' 年 · 同时代人物',
     'contemp.loading': '加载中…',
     'contemp.empty': '该年份无在世人物数据',
+    'contemp.index_failed': '索引加载失败',
     'domain_browser.title': '跨数据集领域浏览',
+    'domain_browser.summary': '共 {events} 条「{domain}」事件，分布于 {atlases} 个数据集',
+    'domain_browser.empty': '该领域无事件数据',
+    'common.close': '关闭',
+    'common.all_years': '全部年份',
 
     'list_overlay.title': '人物名册',
     'shortcuts.title': '键盘快捷键',
@@ -81,6 +88,13 @@ const STRINGS = {
     'toast.not_found': '未找到匹配人物',
     'event_list.title': '大事记',
     'event_list.count_suffix': ' 件',
+    'list.courtesy_prefix': '字',
+    'detail.courtesy_label': '字',
+    'detail.alias_sep': '、',
+    'detail.age': '享年{n}岁',
+    'detail.year_range': '{a}–{b}年',
+    'detail.relations_count': '人物关系（{n}）',
+    'detail.events_count': '生平大事（地图轨迹）',
 
     'loading.text': '地图加载中…',
     'loading.error.title': '页面初始化失败',
@@ -122,6 +136,7 @@ const STRINGS = {
     'panel.stat_persons': 'Figures',
     'panel.stat_relations': 'Relations',
     'panel.stat_events': 'Events',
+    'atlas.stat_factions': 'Factions',
 
     'timeline.play': '▶',
     'timeline.pause': '⏸',
@@ -133,10 +148,16 @@ const STRINGS = {
     'compare_overlay.title': 'Era Comparison',
     'compare_overlay.hint': '👆 Click any year on the axis to view contemporaries worldwide',
     'compare_overlay.row_hint': 'Click any bar to switch to that dataset',
+    'compare_overlay.empty': 'No data to compare',
     'contemp_overlay.title': ' · Contemporaries',
     'contemp.loading': 'Loading…',
     'contemp.empty': 'No data for this year',
+    'contemp.index_failed': 'Index load failed',
     'domain_browser.title': 'Cross-dataset Domain Browser',
+    'domain_browser.summary': '{events} "{domain}" events across {atlases} datasets',
+    'domain_browser.empty': 'No events for this domain',
+    'common.close': 'Close',
+    'common.all_years': 'All years',
 
     'list_overlay.title': 'Figure Roster',
     'shortcuts.title': 'Keyboard Shortcuts',
@@ -166,6 +187,13 @@ const STRINGS = {
     'toast.not_found': 'No matching figures',
     'event_list.title': 'Chronicle',
     'event_list.count_suffix': '',
+    'list.courtesy_prefix': 'Courtesy',
+    'detail.courtesy_label': 'Courtesy',
+    'detail.alias_sep': ', ',
+    'detail.age': 'lived {n} y',
+    'detail.year_range': '{a}–{b}',
+    'detail.relations_count': 'Relationships ({n})',
+    'detail.events_count': 'Life Events (Trajectory)',
 
     'loading.text': 'Loading map…',
     'loading.error.title': 'Initialization failed',
@@ -197,6 +225,25 @@ export function setLang(newLang) {
 
 export function t(key) {
   return (STRINGS[lang] && STRINGS[lang][key]) || (STRINGS.zh[key]) || key;
+}
+
+/** 模板替换：tf('key', { n: 3 }) 把 {n} 替换为 3 */
+export function tf(key, vars = {}) {
+  let s = t(key);
+  for (const [k, v] of Object.entries(vars)) {
+    s = s.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
+  }
+  return s;
+}
+
+/** 取数据集 manifest 条目的本地化字段（name/subtitle/group） */
+export function localized(meta, field) {
+  if (!meta) return '';
+  if (lang === 'en') {
+    const en = meta[`${field}En`];
+    if (en) return en;
+  }
+  return meta[field] || meta[`${field}En`] || '';
 }
 
 export function onLangChange(fn) { listeners.add(fn); }

@@ -5,6 +5,7 @@
 
 import { ATLAS_MANIFEST } from '../data/index.js';
 import { formatYear, formatYearShort } from './state.js';
+import { t, tf, localized } from './i18n.js';
 
 const otherAtlasCache = new Map();
 async function loadAtlasCached(id) {
@@ -59,7 +60,7 @@ let currentDomain = null;
 async function renderDomainBrowser(initialDomain) {
   const body = document.getElementById('domain-browser-body');
   if (!body) return;
-  body.innerHTML = '<div class="db-loading">加载中…</div>';
+  body.innerHTML = `<div class="db-loading">${t('contemp.loading')}</div>`;
 
   const domainsList = await listAllDomains();
   if (!currentDomain) currentDomain = initialDomain || domainsList[0]?.name;
@@ -73,8 +74,8 @@ async function renderDomainBrowser(initialDomain) {
   const eventsByAtlas = [];
   for (const meta of ATLAS_MANIFEST) {
     const a = await loadAtlasCached(meta.id);
-    const evs = a.events.filter(e => e.domain === currentDomain).map(e => ({ ...e, atlasId: meta.id, atlasName: meta.name, atlasStart: meta.startYear }));
-    if (evs.length) eventsByAtlas.push({ atlasId: meta.id, atlasName: meta.name, events: evs });
+    const evs = a.events.filter(e => e.domain === currentDomain).map(e => ({ ...e, atlasId: meta.id, atlasName: localized(meta, 'name'), atlasStart: meta.startYear }));
+    if (evs.length) eventsByAtlas.push({ atlasId: meta.id, atlasName: localized(meta, 'name'), events: evs });
   }
   eventsByAtlas.sort((a, b) => (ATLAS_MANIFEST.find(m => m.id === a.atlasId)?.startYear || 0) -
                               (ATLAS_MANIFEST.find(m => m.id === b.atlasId)?.startYear || 0));
@@ -82,10 +83,10 @@ async function renderDomainBrowser(initialDomain) {
   body.innerHTML = `
     <div class="db-toolbar">
       <div class="db-chips">${chips}</div>
-      <div class="db-summary">共 ${eventsByAtlas.reduce((s, g) => s + g.events.length, 0)} 条「${currentDomain}」事件，分布于 ${eventsByAtlas.length} 个数据集</div>
+      <div class="db-summary">${tf('domain_browser.summary', { events: eventsByAtlas.reduce((s, g) => s + g.events.length, 0), domain: currentDomain, atlases: eventsByAtlas.length })}</div>
     </div>
     <div class="db-list">
-      ${eventsByAtlas.length === 0 ? '<div class="db-empty">该领域无事件数据</div>' :
+      ${eventsByAtlas.length === 0 ? `<div class="db-empty">${t('domain_browser.empty')}</div>` :
         eventsByAtlas.map(g => `
           <div class="db-group">
             <div class="db-group-title">${g.atlasName} <span class="db-group-count">${g.events.length}</span></div>
@@ -121,8 +122,8 @@ function ensureOverlay() {
     <div class="db-overlay-mask" id="domain-browser-mask"></div>
     <div class="db-overlay" id="domain-browser-overlay" aria-hidden="true">
       <div class="db-header">
-        <h3>跨数据集领域浏览</h3>
-        <button class="db-close" id="domain-browser-close" aria-label="关闭">×</button>
+        <h3>${t('domain_browser.title')}</h3>
+        <button class="db-close" id="domain-browser-close" aria-label="${t('common.close')}">×</button>
       </div>
       <div class="db-body" id="domain-browser-body"></div>
     </div>`;

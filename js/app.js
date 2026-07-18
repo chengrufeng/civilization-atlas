@@ -11,7 +11,7 @@
 
 import { state } from './core/state.js';
 import {
-  current, manifest, switchAtlas, onSwitch, initAtlas,
+  current, currentMeta, manifest, switchAtlas, onSwitch, initAtlas,
   ERA_START, ERA_END,
 } from './core/atlas.js';
 import { initMap, clearAllLayers, flyToDefault, updateLabelVisibility } from './core/map.js';
@@ -23,9 +23,11 @@ import {
 import { buildEventList } from './core/event-list.js';
 import { openCompareOverlay, closeCompareOverlay } from './core/compare.js';
 import { openDomainBrowser, closeDomainBrowser } from './core/domain-browser.js';
-import { setLang, applyToDOM, currentLang, onLangChange } from './core/i18n.js';
+import { showPersonDetail } from './core/detail.js';
+import { setLang, applyToDOM, currentLang, onLangChange, t, localized } from './core/i18n.js';
 import { readUrlState, syncUrlState, withUrlSuppressed } from './core/url-state.js';
 import { formatYear } from './core/state.js';
+import { getPerson } from './core/atlas.js';
 
 /* ---------- 初始化 ---------- */
 async function init() {
@@ -96,23 +98,24 @@ function initAtlasSwitcher() {
   }
 
   body.innerHTML = groups.map(g => {
+    const groupMeta = { group: g.name, groupEn: g.items[0]?.groupEn || g.name };
     const cards = g.items.map(a => {
       const s = a.stats || {};
       const badges = s.persons ? `
         <div class="atlas-card-stats">
-          <span title="人物">👤 ${s.persons}</span>
-          <span title="事件">◆ ${s.events}</span>
-          <span title="势力">⚑ ${s.factions}</span>
+          <span title="${t('panel.stat_persons')}">👤 ${s.persons}</span>
+          <span title="${t('panel.stat_events')}">◆ ${s.events}</span>
+          <span title="${t('atlas.stat_factions')}">⚑ ${s.factions}</span>
         </div>` : '';
       return `
       <button class="atlas-card ${a.id === activeId ? 'active' : ''}" data-atlas="${a.id}">
-        <div class="atlas-card-name">${a.name}</div>
-        <div class="atlas-card-sub">${a.subtitle}</div>
+        <div class="atlas-card-name">${localized(a, 'name')}</div>
+        <div class="atlas-card-sub">${localized(a, 'subtitle')}</div>
         ${badges}
       </button>`;
     }).join('');
     return `<div class="atlas-group">
-      <div class="atlas-group-title">${g.name}</div>
+      <div class="atlas-group-title">${localized(groupMeta, 'group')}</div>
       <div class="atlas-group-grid">${cards}</div>
     </div>`;
   }).join('');
@@ -144,7 +147,30 @@ function initAtlasSwitcher() {
 /** 更新顶栏按钮显示的当前数据集名 */
 function updateAtlasButtonLabel() {
   const el = document.getElementById('atlas-current-name');
-  if (el) el.textContent = current().name;
+  if (el) el.textContent = localized(currentMeta() || current(), 'name');
+}
+
+/** 语言切换后，原地刷新切换器浮层里的 atlas 名称/subtitle/分组标题 */
+function rebuildAtlasSwitcherLabels() {
+  const body = document.getElementById('atlas-overlay-body');
+  if (!body) return;
+  const cards = body.querySelectorAll('.atlas-card');
+  cards.forEach(card => {
+    const id = card.dataset.atlas;
+    const meta = manifest().find(m => m.id === id);
+    if (!meta) return;
+    const nameEl = card.querySelector('.atlas-card-name');
+    const subEl = card.querySelector('.atlas-card-sub');
+    if (nameEl) nameEl.textContent = localized(meta, 'name');
+    if (subEl) subEl.textContent = localized(meta, 'subtitle');
+  });
+  body.querySelectorAll('.atlas-group').forEach((groupEl, idx) => {
+    const titleEl = groupEl.querySelector('.atlas-group-title');
+    if (!titleEl) return;
+    const firstCard = groupEl.querySelector('.atlas-card');
+    const meta = firstCard ? manifest().find(m => m.id === firstCard.dataset.atlas) : null;
+    if (meta) titleEl.textContent = localized(meta, 'group');
+  });
 }
 
 /* ---------- 顶栏附加按钮（时代对照等） ---------- */
@@ -198,20 +224,20 @@ async function doSwitchAtlas(atlasId) {
   } catch (err) {
     console.error('切换数据集失败：', err);
     overlay.innerHTML = `<div class="loading-error">
-      <h3>数据集加载失败</h3>
+      <h3>${t('loading.atlas_error.title')}</h3>
       <p>${err.message}</p>
-      <p>请检查网络或数据文件后重试。</p>
+      <p>${t('loading.atlas_error.hint')}</p>
     </div>`;
   }
 }
 
 /** 将当前数据集的元信息同步到 DOM */
 function applyAtlasToUI() {
-  const atlas = current();
+  const meta = currentMeta() || current();
   const h1 = document.querySelector('.brand-text h1');
   const sub = document.querySelector('.brand-text .brand-sub');
-  if (h1) h1.textContent = atlas.name;
-  if (sub) sub.textContent = atlas.subtitle;
+  if (h1) h1.textContent = localized(meta, 'name');
+  if (sub) sub.textContent = localized(meta, 'subtitle');
   const slider = document.getElementById('year-slider');
   if (slider) {
     slider.min = ERA_START;
@@ -219,7 +245,7 @@ function applyAtlasToUI() {
     slider.value = ERA_START;
   }
   const yd = document.getElementById('year-display');
-  if (yd) yd.textContent = '全部年份';
+  if (yd) yd.textContent = t('common.all_years');
 }
 
 /* ---------- 数据集切换回调 ---------- */
@@ -261,14 +287,32 @@ onSwitch(() => {
 async function boot() {
   try {
     await init();
+    // 语言切换时重建动态 DOM（i18n 覆盖动态生成的浮层/面板）
+    onLangChange(() => {
+      // 静态 data-i18n 已在 setLang() 内部刷新
+      applyAtlasToUI();
+      updateAtlasButtonLabel();
+      rebuildAtlasSwitcherLabels();
+      buildEventList();
+      // 重建快捷键浮层（如果存在）— 下次打开会重新注入
+      const sc = document.getElementById('shortcuts-overlay');
+      if (sc) sc.remove();
+      const sm = document.getElementById('shortcuts-mask');
+      if (sm) sm.remove();
+      // 若详情面板打开，重新渲染当前人物（不改变地图状态）
+      if (state.selectedPerson) {
+        const p = getPerson(state.selectedPerson);
+        if (p) showPersonDetail(state.selectedPerson);
+      }
+    });
   } catch (err) {
     console.error('初始化失败：', err);
     const overlay = document.getElementById('loading-overlay');
     if (overlay) {
       overlay.innerHTML = `<div class="loading-error">
-        <h3>页面初始化失败</h3>
+        <h3>${t('loading.error.title')}</h3>
         <p>${err.message}</p>
-        <p>请打开浏览器控制台（F12）查看详细错误。</p>
+        <p>${t('loading.error.hint')}</p>
       </div>`;
     }
     throw err;

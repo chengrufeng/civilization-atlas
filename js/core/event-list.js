@@ -7,6 +7,7 @@ import { current, FACTION_NAME, getPerson } from './atlas.js';
 import { render, updateStats } from './render.js';
 import { buildTimelineEvents } from './timeline.js';
 import { showEventInfo, openDetail } from './detail.js';
+import { t } from './i18n.js';
 
 /* ---------- 事件一览表 ---------- */
 export function buildEventList() {
@@ -14,7 +15,7 @@ export function buildEventList() {
   const atlas = current();
   const allEvents = [...atlas.events].sort((a, b) => a.year - b.year || a.id.localeCompare(b.id));
   const visibleCount = allEvents.filter(e => state.domainFilter.has(e.domain)).length;
-  document.getElementById('event-list-count').textContent = `${visibleCount} 件`;
+  document.getElementById('event-list-count').textContent = `${visibleCount}${t('event_list.count_suffix')}`;
 
   let html = '';
   for (const domain of DOMAIN_ORDER) {
@@ -133,7 +134,7 @@ export function buildListOverlay() {
     <div class="person-card ${p.faction}" data-id="${p.id}">
       <div class="person-avatar">${p.avatar}</div>
       <div class="person-name">${p.name}</div>
-      <div class="person-courtesy">字 ${p.courtesy}</div>
+      <div class="person-courtesy">${t('list.courtesy_prefix')} ${p.courtesy}</div>
       <div class="person-role">${FACTION_NAME[p.faction]} · ${p.title}</div>
       <div class="person-years">${formatYearShort(p.birth)}–${formatYearShort(p.death)}年</div>
     </div>

@@ -15,6 +15,7 @@ import { stopPlay, updateEventTrackCurrent } from './timeline.js';
 import { syncUrlState } from './url-state.js';
 import { findCrossLinks } from '../data/cross-links.js';
 import { ATLAS_MANIFEST } from '../data/index.js';
+import { t, tf, localized } from './i18n.js';
 
 /* 缓存其它数据集的 atlas 对象，避免每次详情打开都重新加载 */
 const otherAtlasCache = new Map();
@@ -90,32 +91,32 @@ function renderDetailContent(person) {
       <div class="detail-avatar" style="background:${faction.color}">${avatarHtml}</div>
       <div class="detail-hero-info">
         <h3>${person.name}</h3>
-        <div class="courtesy">字 ${person.courtesy}${person.alias.length ? ' · ' + person.alias.join('、') : ''}</div>
+        <div class="courtesy">${t('detail.courtesy_label')} ${person.courtesy}${person.alias.length ? ' · ' + person.alias.join(t('detail.alias_sep')) : ''}</div>
         <span class="detail-tag" style="background:${faction.color}">${faction.name}</span>
       </div>
     </div>
     <div class="detail-section">
-      <h4>基本信息</h4>
-      <div class="detail-fact"><span class="k">生卒</span><span>${formatYearShort(person.birth)}–${formatYearShort(person.death)}年（享年${person.death - person.birth}岁）</span></div>
-      <div class="detail-fact"><span class="k">故里</span><span>${person.birthPlace}${getBirthplaceModern(person.birthPlace) ? `<span class="modern-loc">（${getBirthplaceModern(person.birthPlace)}）</span>` : ''}</span></div>
-      <div class="detail-fact"><span class="k">官职</span><span>${person.title}</span></div>
-      <div class="detail-fact"><span class="k">身份</span><span>${person.roles.join('、')}</span></div>
+      <h4>${t('detail.basic')}</h4>
+      <div class="detail-fact"><span class="k">${t('detail.birth_death')}</span><span>${tf('detail.year_range', { a: formatYearShort(person.birth), b: formatYearShort(person.death) })}（${tf('detail.age', { n: person.death - person.birth })}）</span></div>
+      <div class="detail-fact"><span class="k">${t('detail.hometown')}</span><span>${person.birthPlace}${getBirthplaceModern(person.birthPlace) ? `<span class="modern-loc">（${getBirthplaceModern(person.birthPlace)}）</span>` : ''}</span></div>
+      <div class="detail-fact"><span class="k">${t('detail.title')}</span><span>${person.title}</span></div>
+      <div class="detail-fact"><span class="k">${t('detail.identity')}</span><span>${person.roles.join(t('detail.alias_sep'))}</span></div>
     </div>
     <div class="detail-section">
-      <h4>生平简介</h4>
+      <h4>${t('detail.bio')}</h4>
       <p>${person.bio}</p>
     </div>
     <div class="detail-section">
-      <h4>生平大事（地图轨迹）</h4>
-      ${eventsHtml || '<p style="color:var(--ink-light)">暂无</p>'}
+      <h4>${t('detail.events_count')}</h4>
+      ${eventsHtml || `<p style="color:var(--ink-light)">${t('detail.no_data')}</p>`}
     </div>
     <div class="detail-section">
-      <h4>人物关系（${relations.length}）</h4>
-      <div class="detail-relations">${relationsHtml || '<span style="color:var(--ink-light)">暂无</span>'}</div>
+      <h4>${tf('detail.relations_count', { n: relations.length })}</h4>
+      <div class="detail-relations">${relationsHtml || `<span style="color:var(--ink-light)">${t('detail.no_data')}</span>`}</div>
     </div>
     <div class="detail-section" id="cross-links-section" style="display:none">
-      <h4>跨数据集关联</h4>
-      <div class="detail-cross-links" id="cross-links-body"><span style="color:var(--ink-light)">加载中…</span></div>
+      <h4>${t('detail.cross_links')}</h4>
+      <div class="detail-cross-links" id="cross-links-body"><span style="color:var(--ink-light)">${t('contemp.loading')}</span></div>
     </div>
   `;
 
@@ -161,9 +162,9 @@ async function fillCrossLinks(person) {
       const otherAtlas = await getOtherAtlas(o.atlas);
       const otherPerson = otherAtlas?.persons.find(p => p.id === o.id);
       const meta = manifestMap.get(o.atlas);
-      others.push({ ...o, name: otherPerson?.name || o.id, atlasName: meta?.name || o.atlas });
+      others.push({ ...o, name: otherPerson?.name || o.id, atlasName: localized(meta || {}, 'name') || o.atlas });
     }
-    const tag = link.kind === 'same-person' ? '同一人物' : '互动';
+    const tag = link.kind === 'same-person' ? t('detail.cross_same_person') : t('detail.cross_interaction');
     cards.push(`
       <div class="cross-link">
         <div class="cross-link-label"><span class="cross-link-tag cross-link-tag-${link.kind}">${tag}</span>${link.label}</div>
@@ -176,7 +177,7 @@ async function fillCrossLinks(person) {
         </div>
       </div>`);
   }
-  body.innerHTML = cards.join('') || '<span style="color:var(--ink-light)">暂无</span>';
+  body.innerHTML = cards.join('') || `<span style="color:var(--ink-light)">${t('detail.no_data')}</span>`;
 
   body.querySelectorAll('.cross-link-card').forEach(btn => {
     btn.addEventListener('click', async () => {
