@@ -411,10 +411,11 @@ function applySegment(seg) {
     showEffect(seg.effect);
   } else {
     // hook / 引入 / 结尾段：清状态 + 移除脉冲
+    // 图片和特效仍按 seg 配置展示（无 step 也能有图）
     state.highlightedPersons.clear();
     clearPulseMarker();
-    hideImageCard();
-    hideEffect();
+    showImageCard(seg);
+    showEffect(seg.effect);
   }
 
   // 3. render + buildEventList 推迟并防抖（连续段切换时只执行最后一次）
