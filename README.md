@@ -14,19 +14,26 @@ From the Three Kingdoms to the Roman Empire, from the pharaohs of Egypt to the p
 - **Geolocated figures & events** — every person and event is pinned to where it actually happened. Zoom in to see a single battle; zoom out to see an entire era.
 - **Relationship networks** — visualized connections between historical figures. Allies, rivals, mentors, family — the human web behind the history. Relation types are normalized into 7 canonical categories (亲属 / 君臣 / 师承 / 敌对 / 结义 / 同时代 / 其他) with distinct colors and line styles, bilingual labels.
 - **Event trajectories** — trace the journeys of key figures across the map. Cao Cao's march to the north, Zhuge Liang's northern expeditions, Alexander's eastward campaign — follow them step by step.
-- **Life Journey replay** — click ▶ 人生回放 / Life Replay on a person's detail panel; the camera auto-flies through each life event in chronological order, with contemporaneous relations highlighted at each stop and a top progress bar (pause / resume / exit).
+- **Life Journey replay** — click ▶ 人生回放 / Life Replay on a person's detail panel; the camera auto-flies through each life event in chronological order, with contemporaneous relations highlighted at each stop and a top progress bar (pause / resume / exit). For cross-era figures (e.g. 朱元璋 in 元/明, 孙中山 in 清/近现代), replays stitch events from multiple atlases automatically.
 - **Faction-based styling** — Wei, Shu, Wu, and beyond, each with distinct visual identity.
 - **Smart label de-cluttering** — labels adapt to zoom level and spatial density, so even the most eventful locations remain readable.
 - **Era comparison overlay** — all 28 datasets drawn on a single proportional axis, so you can see which civilizations overlapped in time. Click any year to view contemporaries worldwide.
 - **Cross-dataset domain browser** — filter all events across all atlases by domain (军事 / 政治 / 文化 / 科技 / 宗教 …), grouped by civilization.
+- **Event heatmap** — toggle 🔥 in the layers panel to see event density as a canvas radial gradient (blue → cyan → yellow → red), respects domain and year filters.
+- **Figure compare** — open the roster overlay, select 2-3 figures (+/✓ on each card), and compare them side-by-side (lifespan, age, events, relations, bio). Max values are highlighted.
 - **Cross-dataset figure links** — 30+ registered links: same person in multiple atlases (朱元璋/努尔哈赤/秦始皇/林则徐/孙中山 …) + documented cross-civilization interactions (马可波罗, 利玛窦徐光启, 亚历山大与大流士). Use `tools/detect-cross-links.mjs` to mine more candidates.
-- **Cross-civilization search** — find any figure across all 28 datasets; results are relevance-scored (exact > name > courtesy > alias) with keyword highlighting. Clicking a result switches atlas and opens detail.
+- **Cross-civilization search** — find any figure across all 28 datasets with relevance ranking (exact > name > courtesy > alias) and keyword highlighting. Supports `domain:军事 刘` syntax to filter by domain.
 - **URL deep-linking** — share any exact view via `?atlas=<id>&year=<y>&person=<id>`.
 - **i18n (中文 / English)** — toggle the language button (中/EN) in the topbar. All UI strings, dataset metadata (name / subtitle / group), and relation-type labels are bilingual.
 - **Keyboard shortcuts** — `Space` play/pause, `←/→` ±1 year, `Shift+←/→` ±10 years, `Home/End` jump to era bounds, `/` focus search, `L` atlas switcher, `C` era comparison, `?` shortcuts help, `Esc` close any overlay.
+- **Favorites & recent** — star any figure (☆/★ in detail panel); recently opened figures appear as chips at the top of the atlas switcher. Both persist in localStorage.
+- **Settings panel** — ⚙ in topbar. Play speed (auto / slow / normal / fast), default layers, preload toggle, reset prefs.
+- **Today in History** — first-load widget shows events that happened on today's date across all datasets.
+- **Print / Export PDF** — 🖨 button triggers `window.print()` with a dedicated print stylesheet (A4 landscape, hides all chrome, includes title banner with current atlas/year/stats).
 - **Mobile responsive** — touch-friendly layout for narrow screens.
 - **Dark mode** — respects `prefers-color-scheme`.
-- **Lazy + preload** — datasets load on demand via dynamic `import()`; browser idle time preloads the rest so atlas switches are instant.
+- **PWA / offline** — installable + service worker caches all static assets and dataset JS for offline use after first visit.
+- **Lazy + preload** — datasets load on demand via dynamic `import()`; browser idle time preloads the rest so atlas switches are instant (toggleable in settings).
 
 ## Current Coverage
 
@@ -104,34 +111,44 @@ civilization-atlas/
 ├── js/
 │   ├── app.js               # entry / orchestration
 │   ├── core/                # view layer (generic, dataset-agnostic)
-│   │   ├── state.js         # global state + domains + year formatting + relation types
+│   │   ├── state.js         # global state + domains + year formatting + relation types + ts-check
 │   │   ├── atlas.js         # dataset manager (lazy load + switch + global index + preload)
 │   │   ├── map.js           # Leaflet init + per-atlas mapView
-│   │   ├── render.js        # main render pipeline (persons/events/relations/trajectories)
-│   │   ├── controls.js      # control bindings + search + shortcuts + slider hover
-│   │   ├── timeline.js      # timeline (play, event dots, ticks, toast)
-│   │   ├── event-list.js    # chronicle panel + figure roster overlay
-│   │   ├── detail.js        # person/event detail panel + cross-links + life-journey trigger
+│   │   ├── render.js        # main render pipeline (persons/events/relations/trajectories/heat)
+│   │   ├── controls.js      # control bindings + search + shortcuts + slider hover + domain syntax
+│   │   ├── timeline.js      # timeline (play, event dots, ticks, toast) — speed pref-aware
+│   │   ├── event-list.js    # chronicle panel + figure roster overlay (multi-select for compare)
+│   │   ├── detail.js        # person/event detail panel + cross-links + life-journey trigger + favorite
 │   │   ├── compare.js       # era comparison overlay + contemporaries
 │   │   ├── domain-browser.js # cross-dataset domain browser overlay
 │   │   ├── url-state.js     # ?atlas=&year=&person= deep-link
-│   │   ├── i18n.js          # bilingual UI + dataset metadata + relation labels
-│   │   └── life-journey.js  # life replay mode (auto-flies through a person's events)
+│   │   ├── i18n.js          # bilingual UI + dataset metadata + relation labels + tf() template
+│   │   ├── life-journey.js  # life replay mode (single + cross-atlas same-person stitching)
+│   │   ├── favorites.js     # localStorage favorites + recent (LRU)
+│   │   ├── today-in-history.js # first-load widget matching today's date
+│   │   ├── heat-layer.js    # canvas-based event density heatmap (no deps)
+│   │   ├── compare-figures.js # 2-3 figures side-by-side compare overlay
+│   │   └── settings.js      # prefs: play speed / default layers / preload / reset
 │   └── data/                # data layer (historical content)
 │       ├── index.js         # ATLAS_MANIFEST registry + helpers
 │       ├── _template.js     # template for new datasets
 │       ├── cross-links.js   # cross-dataset figure links registry (30+ entries)
 │       └── sandai.js  chunqiu.js  qinhan.js  ... (28 datasets)
 ├── tools/
-│   ├── validate.mjs         # static dataset validator
+│   ├── validate.mjs         # static dataset validator (version-aware)
 │   ├── smoke.mjs            # headless Chrome smoke (with retry)
 │   ├── state.test.mjs       # unit tests (node:test)
 │   ├── refresh-stats.mjs    # auto-update manifest stats from data files
 │   ├── export-stats.mjs     # export Markdown stats table
 │   ├── check-images.mjs     # HEAD-check personImages URLs
 │   ├── fetch-wikimedia.mjs  # batch-fetch portrait images from Wikipedia REST API
-│   └── detect-cross-links.mjs # scan for cross-dataset same-person / interaction candidates
-├── .github/workflows/ci.yml # CI: state.test + validate + smoke on push/PR
+│   ├── detect-cross-links.mjs # scan for cross-dataset same-person / interaction candidates
+│   └── check-factions.mjs   # faction color / id conflict detector
+├── manifest.json            # PWA manifest
+├── sw.js                    # service worker (offline cache)
+├── .eslintrc.json           # ESLint config
+├── .prettierrc.json         # Prettier config
+├── .github/workflows/ci.yml # CI: state.test + validate + check-factions + optional lint + smoke
 └── package.json
 ```
 
@@ -206,6 +223,7 @@ node tools/validate.mjs sanguo       # validate one
 node --test tools/state.test.mjs     # unit tests (state.js helpers)
 node tools/smoke.mjs                 # headless smoke (auto-spawns port 8199, retries on slow loads)
 node tools/smoke.mjs sanguo          # smoke one dataset
+node tools/check-factions.mjs        # faction color/id conflict detector
 
 # Maintenance
 node tools/refresh-stats.mjs         # refresh manifest stats from data files
@@ -213,6 +231,11 @@ node tools/export-stats.mjs          # export Markdown stats table
 node tools/check-images.mjs          # HEAD-check personImages URLs
 node tools/fetch-wikimedia.mjs       # batch-fetch portraits (requires network)
 node tools/detect-cross-links.mjs    # scan for cross-dataset figure-link candidates
+
+# Linting (optional)
+npm install                          # installs eslint
+npm run lint                         # checks js/ and tools/
+npm run lint:fix                     # auto-fixes
 ```
 
 `smoke.mjs` loads each dataset via headless Chrome and asserts: loading overlay hides, persons > 0, no JS errors. Default Chrome path is `Google Chrome.app`; override with `CHROME=...`. Includes a retry mechanism: if the first attempt (20s budget) looks empty but has no JS errors, it retries with a 35s budget to accommodate slow lazy-loads.
@@ -244,20 +267,32 @@ History is vast, and no single person knows it all. If you have expertise in a p
 - [x] Lazy-loaded manifest with grouped switcher
 - [x] Dataset validators & headless smoke tests + unit tests + CI
 - [x] Cross-era figure connections (cross-links registry + auto-detector)
-- [x] Cross-civilization search (global person index, relevance-ranked, keyword-highlighted)
+- [x] Cross-civilization search (global person index, relevance-ranked, keyword-highlighted, domain-syntax)
 - [x] Era comparison overlay + contemporaries view
 - [x] Cross-dataset domain browser
-- [x] Multi-language support (Chinese / English, full UI + dataset metadata)
+- [x] Multi-language support (Chinese / English, full UI + dataset metadata + relation labels)
 - [x] Mobile-optimized experience
 - [x] Dark mode
 - [x] URL deep-linking (`?atlas=&year=&person=`)
-- [x] Atlas preload on browser idle (instant switching)
-- [x] Life Journey replay mode (per-person chronological auto-flythrough)
+- [x] Atlas preload on browser idle (instant switching, toggleable)
+- [x] Life Journey replay mode (per-person chronological auto-flythrough, cross-atlas stitching)
 - [x] Timeline hover year preview
+- [x] Event heatmap layer (canvas-based, no dependency)
+- [x] Figure side-by-side compare (2-3 figures with max/min highlight)
+- [x] Favorites & recent (localStorage, with chips in atlas switcher)
+- [x] Settings panel (play speed / default layers / preload / reset)
+- [x] Today in History first-load widget
+- [x] Print / Export PDF (window.print + dedicated stylesheet)
+- [x] PWA / offline support (manifest + service worker)
+- [x] Faction color/id conflict detector + CI
+- [x] ESLint + Prettier config
+- [x] JSDoc + ts-check on core state module
+- [x] Schema version field validation
 - [ ] Wikimedia portrait batch injection (`tools/fetch-wikimedia.mjs` ready; needs network environment)
+- [ ] Optional: render diff updates for smoother scrubbing on dense atlases (perf acceptable, deferred)
 - [ ] Optional: split large datasets (sanguo / tangsong) by theme for faster switching
-- [ ] Optional: render diff updates for smoother scrubbing on dense atlases
-- [ ] Optional: Life Journey across atlases (for cross-era figures like 朱元璋)
+- [ ] Optional: headless snapshot pixel-diff tests (E4)
+- [ ] Optional: data-level bilingual names (low ROI for 488 figures)
 
 ## License
 

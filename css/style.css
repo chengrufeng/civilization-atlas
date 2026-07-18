@@ -1587,3 +1587,83 @@ kbd {
   .contemp-cards { grid-template-columns: 1fr; }
   .atlas-group-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================
+ * F17 打印 / 导出 PDF
+ * ============================================ */
+.print-banner { display: none; }
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+  html, body {
+    background: #fff !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  /* 隐藏所有 UI chrome */
+  .top-bar,
+  .left-panel,
+  .event-list-panel,
+  .timeline-bar,
+  .detail-panel,
+  .detail-mask,
+  .list-overlay,
+  .atlas-overlay,
+  .atlas-overlay-mask,
+  .compare-overlay,
+  .compare-overlay-mask,
+  .contemp-overlay,
+  .contemp-overlay-mask,
+  .db-overlay,
+  .db-overlay-mask,
+  .shortcuts-overlay,
+  .shortcuts-mask,
+  .cf-overlay,
+  .cf-mask,
+  .st-overlay,
+  .st-mask,
+  .lj-bar,
+  .lj-toast,
+  .tih-widget,
+  .leaflet-control-container {
+    display: none !important;
+  }
+  /* 地图区域占满页面 */
+  #map {
+    position: static !important;
+    width: 100% !important;
+    height: 170mm !important;
+    border: 1px solid #999;
+    page-break-after: avoid;
+  }
+  /* 顶部加打印横幅 */
+  .print-banner {
+    display: block !important;
+    padding: 4px 0 10px;
+    border-bottom: 2px solid #8a2222;
+    margin-bottom: 10px;
+  }
+  .pb-title {
+    font-size: 20px; font-weight: 700; color: #8a2222;
+    font-family: 'Noto Serif SC', serif;
+  }
+  .pb-meta {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: #555;
+    margin-top: 4px;
+  }
+  /* 详情面板如有打开，作为附录页打印 */
+  .detail-panel.open {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-height: none !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    page-break-before: always;
+  }
+  .detail-mask { background: transparent !important; }
+}

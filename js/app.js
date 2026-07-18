@@ -25,7 +25,7 @@ import { buildEventList } from './core/event-list.js';
 import { openCompareOverlay, closeCompareOverlay } from './core/compare.js';
 import { openDomainBrowser, closeDomainBrowser } from './core/domain-browser.js';
 import { showPersonDetail } from './core/detail.js';
-import { setLang, applyToDOM, currentLang, onLangChange, t, localized } from './core/i18n.js';
+import { setLang, applyToDOM, currentLang, onLangChange, t, tf, localized } from './core/i18n.js';
 import { readUrlState, syncUrlState, withUrlSuppressed } from './core/url-state.js';
 import { formatYear } from './core/state.js';
 import { getPerson } from './core/atlas.js';
@@ -260,6 +260,28 @@ function bindTopBarExtras() {
     btnSettings.addEventListener('click', async () => {
       const m = await import('./core/settings.js');
       m.openSettingsOverlay();
+    });
+  }
+
+  // F17 打印 / 导出 PDF
+  const btnPrint = document.getElementById('btn-print');
+  if (btnPrint) {
+    btnPrint.addEventListener('click', () => {
+      const meta = currentMeta();
+      const atlas = current();
+      const stats = atlas.persons.length;
+      const events = atlas.events.length;
+      const factions = atlas.factions.length;
+      const yearText = state.yearFilter === null ? t('common.all_years') : formatYear(state.yearFilter);
+      const banner = document.getElementById('print-banner');
+      if (banner) {
+        banner.querySelector('.pb-title').textContent = tf('print.title', { atlas: meta ? localized(meta, 'name') : '' });
+        banner.querySelector('.pb-year').textContent = tf('print.year', { year: yearText });
+        banner.querySelector('.pb-stats').textContent = tf('print.stats', { persons: stats, events, factions });
+      }
+      document.body.classList.add('printing');
+      window.print();
+      setTimeout(() => document.body.classList.remove('printing'), 500);
     });
   }
 }

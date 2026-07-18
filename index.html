@@ -18,6 +18,15 @@
 </head>
 <body>
 
+  <!-- ====== 打印横幅（仅在打印时显示） ====== -->
+  <div class="print-banner" id="print-banner">
+    <div class="pb-title"></div>
+    <div class="pb-meta">
+      <span class="pb-year"></span>
+      <span class="pb-stats"></span>
+    </div>
+  </div>
+
   <!-- ====== 顶部栏 ====== -->
   <header class="top-bar">
     <div class="brand">
@@ -41,6 +50,7 @@
       <button class="icon-btn" id="btn-lang" title="Language / 语言">中/EN</button>
       <button class="icon-btn" id="btn-settings" data-i18n="topbar.settings" title="设置">⚙</button>
       <button class="icon-btn" id="btn-fullscreen" title="全屏切换">⤢</button>
+      <button class="icon-btn" id="btn-print" data-i18n-title="topbar.print" title="打印 / 导出 PDF">🖨</button>
     </div>
   </header>
 

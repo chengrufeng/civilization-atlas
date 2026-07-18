@@ -1,4 +1,6 @@
-# 文明图鉴 · 扩展计划 v4
+# 文明图鉴 · 扩展计划 v6
+
+> v5 计划 P0/P1 主体已落地。v6 标记 M9/M10/M11/M12 四个里程碑并梳理剩余项。
 
 > v3 的大多数事项已落地。v4 主要做两件事：①把当前实际状态对齐到文档；②列出下一阶段可落地的优化清单，按"投入产出比"分层。
 
@@ -19,8 +21,10 @@
 | **M8** | i18n 全量覆盖：动态 DOM（详情/事件/对照/领域/快捷键/toast）+ 数据集 name/subtitle/group 三字段双语 + 切换语言时重建动态 UI |
 | **M9** | P0 五连：F1 跨集关联自动检测（`detect-cross-links.mjs` + 15 条新关联）/ F2 数据集预加载 / F3 关系类型 i18n / F4 Timeline hover 预览 / F5 搜索相关度+关键字高亮 |
 | **M10** | 人生回放模式（Life Journey）：独立模块，按生平事件顺序自动推进，镜头跟随 + 关系同期高亮 + 顶部胶囊浮层（暂停/继续/退出） |
+| **M11** | P1/P2 多项：F7 图片懒加载 / F8 收藏+最近 / F9 设置面板 / F10 PWA 离线 / F11 faction 颜色检测 / F13 领域搜索 / F14 事件热力图层 / F15 人物并排对比 / F18 历史上的今天 / F19 Life Journey 跨集串联 |
+| **M12** | 工程化与导出：E1 ESLint + Prettier / E2 JSDoc + ts-check / E3 schema 版本化 / F17 打印与导出 PDF |
 
-**当前规模**：28 数据集 / 约 488 人物 / 510 事件 / 13 视图模块 / 8 工具脚本 / 30+ 跨集关联 / 公元前 3500 年 – 公元 2025 年 / validate 全 PASS / 0 error 0 warn / 单元测试 10/10 PASS / smoke 28/28 PASS（含重试）。
+**当前规模**：28 数据集 / 约 488 人物 / 510 事件 / **14 视图模块** / **8 工具脚本** / 30+ 跨集关联 / 公元前 3500 年 – 公元 2025 年 / validate 全 PASS / 0 error 0 warn / 单元测试 10/10 PASS / smoke 28/28 PASS（含重试）。
 
 ---
 
@@ -28,13 +32,13 @@
 
 | 项 | 数据 |
 |---|---|
-| 视图层模块 | **13 个**（state / atlas / map / render / controls / timeline / event-list / detail / compare / domain-browser / url-state / i18n / **life-journey**） |
-| 数据集文件 | 28 个（中华 12 + 世界 16），全部走 lazy `import()` + 空闲预加载 |
-| 工具脚本 | **8 个**（validate / smoke / state.test / refresh-stats / export-stats / check-images / fetch-wikimedia / **detect-cross-links**） |
+| 视图层模块 | **14 个**（state / atlas / map / render / controls / timeline / event-list / detail / compare / domain-browser / url-state / i18n / life-journey / **favorites / today-in-history / heat-layer / compare-figures / settings**，外挂 5 个） |
+| 数据集文件 | 28 个（中华 12 + 世界 16），全部走 lazy `import()` + 空闲预加载（受设置开关控制） |
+| 工具脚本 | **9 个**（validate / smoke / state.test / refresh-stats / export-stats / check-images / fetch-wikimedia / detect-cross-links / **check-factions**） |
 | 跨集关联 | 30+ 条（手工 + detect 工具辅助产出） |
-| 最大文件 | `tangsong.js` 866 行 / 72KB；`sanguo.js` 56KB |
-| Git 提交 | 20+（含完整文档与里程碑） |
-| CI | GitHub Actions：push / PR 自动跑 unit + validate + smoke |
+| PWA | `manifest.json` + Service Worker（同源 SWR + CDN cache-first） |
+| 偏好持久化 | localStorage：收藏 / 最近 / 设置（含播放速度、默认图层、预加载开关） |
+| CI | GitHub Actions：state.test + validate + check-factions + 可选 lint |
 
 ---
 
@@ -52,48 +56,35 @@
 
 ### ⚡ P1 · 中收益、中投入（按需做）
 
-- **F6 关系/事件图层差分更新（D8）**
-  render() 仍是 `clearLayers + 重建`。改成 diff：未变的 marker/线 保留，只增删差异。tangsong 47 人物 + 95 place，scrub 时间轴时明显有掉帧空间。
-- **F7 人物图像懒加载 + 占位骨架**
-  `personImages` 用 `<img loading="lazy">`，加载失败回退到字符头像（已有 `onerror`，但可加骨架屏避免布局抖动）。
-- **F8 最近浏览 / 收藏**
-  `localStorage` 存最近 5 个 atlas + 收藏的人物列表，加在切换器浮层顶部一行 chip。
-- **F9 设置面板**
-  目前图层开关散落在左面板。集中到一个 settings overlay：默认图层 / 默认播放速度 / 默认语言 / 关系线粗细 / 标签密度。
-- **F10 PWA 离线支持**
-  Leaflet 已经 CDN 加载，加 `manifest.json` + 一个 service worker 缓存静态资源 + Leaflet JS/CSS，可离线浏览（数据也走缓存）。一次配置，长期受益。
-- **F11 Faction 颜色冲突检测**
-  不同 dataset 用了相同色（如多个数据集 `#b23a2e` 红色）。加 `tools/check-factions.mjs` 在同 atlas 内做颜色唯一性检查。
+- ~~**F6 render 差分更新（D8）**~~ ⏸️ 性能可接受，diff 复杂度高，暂不做
+- ~~**F7 人物图像懒加载 + 占位骨架**~~ ✅ `loading="lazy" decoding="async"`
+- ~~**F8 最近浏览 / 收藏**~~ ✅ `localStorage` + 切换器顶部 chip 行 + 详情 ☆ 按钮
+- ~~**F9 设置面板**~~ ✅ 播放速度 / 默认图层 / 预加载开关 / 危险区重置
+- ~~**F10 PWA 离线支持**~~ ✅ manifest + SW（SWR / cache-first / network-first）
+- ~~**F11 Faction 颜色冲突检测**~~ ✅ `tools/check-factions.mjs` + CI，已修 qinhan 秦/西汉同色
 
 ### 🌱 P2 · 探索性 / 边际收益（想做但不急）
 
 - **F12 大数据集按主题拆分（D7）**
   `tangsong.js` 866 行覆盖唐+宋+五代 660 年。可拆成 `tang.js` + `song.js`，但 M0 数据驱动架构下"合并"成本低于"拆分切换成本"，目前不推荐做。
-- **F13 事件 / 人物的领域权重搜索**
-  支持 `domain:军事 liu` 这种语法，搜军事领域含 "liu" 的人物。低成本，效益小众。
-- **F14 Heatmap / 密度图模式**
-  切到"密度视图"，把事件密度做成热力图，一眼看清"哪段时间哪里事多"。需要引 leaflet.heat 插件，~10KB。
-- **F15 人物并排对比**
-  选中 2-3 个人物，详情面板变并排布局，方便对比生卒/官职/关系。要重构 detail.js，工作量大。
+- ~~**F13 事件 / 人物的领域权重搜索**~~ ✅ `domain:军事 刘` 语法
+- ~~**F14 Heatmap / 密度图模式**~~ ✅ 纯 Canvas `heat-layer.js`
+- ~~**F15 人物并排对比**~~ ✅ 名册多选 → 2-3 列对比浮层，最值高亮
 - **F16 多语言扩到数据**
-  把人物名/事件名/bio 也做双语。488 人物 × 3 字段，工作量大、收益与维护成本不成比例，暂不推荐。但可优先做"30 位世界级历史人物"的英文名（用于跨集搜索命中英文输入）。
-- **F17 录制 / 回放**
-  把播放过程中地图视角变化录成可分享的 webm / gif。需要 `MediaRecorder` + canvas capture，技术可行。
-- **F18 历史上的今天**
-  入口页加一个"今天在历史"的小卡片，跳转到对应年份+人物。简单且有趣。
-- **F19 Life Journey 进阶**
-  当前 M10 是按生平事件推进。可扩：① 跨数据集人物（如朱元璋在元/明都出现）按真实时间线串起来回放；② 配音 / 字幕轨道；③ 慢/快速度档；④ 一键导出 mp4。
+  把人物名/事件名/bio 也做双语。488 人物 × 3 字段，工作量大、收益与维护成本不成比例。可优先做"30 位世界级历史人物"的英文名（用于跨集搜索命中英文输入）。
+- ~~**F17 录制 / 回放~~ ✅ 简化版：打印 / 导出 PDF（`window.print()` + 打印样式 + 横幅）
+  - 完整版"录制 mp4"暂不做（涉及 canvas stream + 跨源 tile 限制）
+- ~~**F18 历史上的今天**~~ ✅ 首屏右下角浮卡片
+- ~~**F19 Life Journey 进阶~~ ✅ 跨数据集 same-person 缝合 + 自动 switchAtlas
+  - 配音 / 字幕 / 导出 mp4 仍未做
 
 ### 🧪 工程化（建议在 P0-P1 完成后做一轮）
 
-- **E1 ESLint + Prettier**
-  统一代码风格，CI 卡 lint。零 build 成本（`npx eslint`）。
-- **E2 JSDoc 类型注解 + ts-check**
-  在 `// @ts-check` 模式下用 JSDoc 给核心模块加类型，VSCode 直接出类型提示，不需要 build。
-- **E3 Schema 版本化**
-  `_template.js` 加 `version: '1.0.0'`，validate 按 version 走不同分支，为未来 schema 升级留口子（已经有占位但未实际使用）。
+- ~~**E1 ESLint + Prettier**~~ ✅ `.eslintrc.json` + `.prettierrc.json` + CI 可选 lint 步骤
+- ~~**E2 JSDoc 类型注解 + ts-check**~~ ✅ state.js 加 `@ts-check` + `AppState` typedef
+- ~~**E3 Schema 版本化**~~ ✅ validate 检查 version 字段格式 + 白名单
 - **E4 数据集快照测试**
-  对每个 atlas 渲染一张 headless 截图，CI 里 diff 像素。比当前 smoke（只断言 persons>0）严格得多。
+  对每个 atlas 渲染一张 headless 截图，CI 里 diff 像素。比当前 smoke（只断言 persons>0）严格得多。需要 `pixelmatch` 之类依赖。
 
 ### 📚 内容补充（永远做不完，按需）
 
@@ -133,16 +124,18 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 
 ## 🔑 结构性原则（给后续接手者）
 
-1. **视图层零改动**：`js/core/` **13 个**模块完全通用，跨数据集差异全由数据字段表达
+1. **视图层零改动**：`js/core/` **14 + 5 个**模块完全通用，跨数据集差异全由数据字段表达
 2. **数据 schema**：见 `js/data/_template.js`；新增数据集流程见 `README.md`
 3. **跨数据集连接**：`js/data/cross-links.js` 注册 same-person / interaction；`tools/detect-cross-links.mjs` 可自动产出候选
 4. **URL 深链**：`?atlas=X&year=Y&person=Z`，分享直达任意视图
 5. **键盘快捷键**：按 `?` 弹出帮助
-6. **四个浮层**：切换器 / 时代对照 / 跨数据集领域 / 同时代；均可用 `Esc` 关闭
+6. **多个浮层**：切换器 / 时代对照 / 跨数据集领域 / 同时代 / 设置 / 对比 / 历史上的今天；均可用 `Esc` 关闭
 7. **i18n**：`data-i18n` 覆盖静态 DOM；动态 DOM 走 `t()`/`tf()`；切换语言时 `onLangChange` 重建浮层；关系类型走 `relationLabel()`
-8. **跨集索引**：`getGlobalPersonIndex()` 首次调用遍历 28 数据集构建扁平索引并缓存，供搜索 / 同时代 / 关联面板复用
-9. **空闲预加载**：首屏后 `requestIdleCallback` 串行预拉所有 atlas，秒切
-10. **人生回放**：`startLifeJourney(personId)`，按生平事件推进；与 timeline play 互斥
+8. **跨集索引**：`getGlobalPersonIndex()` 首次调用遍历 28 数据集构建扁平索引并缓存，供搜索 / 同时代 / 关联面板复用；索引项含 `domains` 字段供 F13 过滤
+9. **空闲预加载**：首屏后 `requestIdleCallback` 串行预拉所有 atlas（受设置开关控制），秒切
+10. **人生回放**：`startLifeJourney(personId)`，按生平事件推进；与 timeline play 互斥；F19 支持跨 atlas same-person 缝合
+11. **偏好持久化**：收藏/最近/设置（播放速度、默认图层、预加载）均走 localStorage，单一命名空间
+12. **PWA 离线**：`manifest.json` + `sw.js`，离线后首次访问的 atlas 仍可用
 
 ---
 
@@ -150,10 +143,14 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 
 | 类别 | 文件 |
 |---|---|
-| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n,life-journey}.js` |
+| 视图层 | `js/core/{state,atlas,map,render,controls,timeline,event-list,detail,compare,domain-browser,url-state,i18n,life-journey,favorites,today-in-history,heat-layer,compare-figures,settings}.js` |
 | 数据层 | `js/data/index.js`（注册表）、`js/data/_template.js`（模板）、`js/data/cross-links.js`（跨集关联）、`js/data/*.js`（28 数据集） |
 | 入口 | `js/app.js` |
-| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia,detect-cross-links}.mjs` |
+| 工具 | `tools/{validate,smoke,state.test,refresh-stats,export-stats,check-images,fetch-wikimedia,detect-cross-links,check-factions}.mjs` |
+| PWA | `manifest.json`、`sw.js` |
+| 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md` |
+| CI | `.github/workflows/ci.yml` |
+| 工程化 | `.eslintrc.json`、`.prettierrc.json` |
 | 文档 | `README.md`、`EXPANSION_PLAN.md`（本文）、`PROGRESS.md` |
 | CI | `.github/workflows/ci.yml` |
 
@@ -167,12 +164,13 @@ CI（GitHub Actions）：每次 push / PR 自动跑 `state.test.mjs` + `validate
 - **新增 18 条优化点子**（F1–F18），按"投入产出比"分 P0/P1/P2，便于按需选做
 - **工程化建议**：单独列 E1–E4（lint / 类型 / schema 版本 / 快照测试）
 
-## 📌 v4 → v5 变更说明（M9/M10 后）
+## 📌 v5 → v6 变更说明
 
-- **里程碑补 M9**：P0 五连（F1 跨集检测 + F2 预加载 + F3 关系 i18n + F4 timeline hover + F5 搜索高亮）
-- **里程碑补 M10**：人生回放模式（Life Journey）
-- **模块数**：12 → 13（新增 `life-journey.js`）
-- **工具数**：7 → 8（新增 `detect-cross-links.mjs`）
-- **跨集关联**：12 → 30+（detect 工具辅助产出 15 条 same-person）
-- **结构性原则**：补 9（空闲预加载）、10（人生回放）
-- **F1–F5 全部标记 ✅ 完成**；新增 F19（Life Journey 进阶方向）
+- **新增 M11 里程碑**：F7 / F8 / F9 / F10 / F11 / F13 / F14 / F15 / F18 / F19 共 10 项
+- **新增 M12 里程碑**：E1 / E2 / E3 + F17 打印导出
+- **模块数**：13 → 14 + 5 外挂模块（favorites / today-in-history / heat-layer / compare-figures / settings）
+- **工具数**：8 → 9（新增 `check-factions.mjs`）
+- **结构性原则**：补 11（偏好持久化）、12（PWA 离线）
+- **P1 全部 ✅ / ⏸️（F6 显式延后）**
+- **P2 完成 6/7（F13/F14/F15/F17/F18/F19，仅 F16 数据双语暂不做）**
+- **工程化完成 3/4（E1/E2/E3，E4 快照测试仍开）**
