@@ -6,6 +6,15 @@
   "description": "数据驱动的历史人物地图图鉴（纯前端 ES Modules，无构建）",
   "scripts": {
     "validate": "node tools/validate.mjs",
-    "smoke": "node tools/smoke.mjs"
+    "smoke": "node tools/smoke.mjs",
+    "test": "node --test tools/state.test.mjs",
+    "check-factions": "node tools/check-factions.mjs",
+    "detect-cross-links": "node tools/detect-cross-links.mjs",
+    "refresh-stats": "node tools/refresh-stats.mjs",
+    "lint": "eslint js/ tools/",
+    "lint:fix": "eslint --fix js/ tools/"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
   }
 }

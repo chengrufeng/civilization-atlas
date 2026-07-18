@@ -89,7 +89,7 @@ export const LABEL_OFFSET = {
 export const state = {
   map: null,
   factionFilter: 'all',
-  layers: { persons: true, events: true, capitals: true },
+  layers: { persons: true, events: true, capitals: true, heat: false },
   domainFilter: new Set(DOMAINS),
   collapsedDomains: new Set(),
   expandedEvent: null,

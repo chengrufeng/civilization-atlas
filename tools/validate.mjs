@@ -35,7 +35,17 @@ function validateAtlas(atlas) {
   // 基本字段
   if (!atlas.id) err('缺少 id');
   if (!atlas.name) err('缺少 name');
-  if (!atlas.version) warn('建议添加 version 字段（如 "1.0.0"），便于后续 schema 兼容性检测');
+  // Schema 版本：未声明视为 1.0.0；声明则必须能解析
+  const SCHEMA_VERSIONS = ['1.0.0'];
+  if (atlas.version) {
+    if (!/^\d+\.\d+\.\d+$/.test(atlas.version)) {
+      err(`version 字段格式错误（应为 x.y.z），当前为 "${atlas.version}"`);
+    } else if (!SCHEMA_VERSIONS.includes(atlas.version)) {
+      warn(`version "${atlas.version}" 不在已知 schema 版本列表（${SCHEMA_VERSIONS.join(' / ')}），可能存在不兼容字段`);
+    }
+  } else {
+    // 未声明 version 视为 1.0.0，静默通过
+  }
 
   const [start, end] = eraRange(atlas);
   if (start === null || end === null || Number.isNaN(start) || Number.isNaN(end)) {

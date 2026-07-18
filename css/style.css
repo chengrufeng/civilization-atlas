@@ -932,6 +932,13 @@ body.no-timeline .line-legend { bottom: 16px; }
 @media (max-width: 480px) {
   .tih-widget { width: calc(100vw - 24px); right: 12px; bottom: 12px; }
 }
+
+/* F14 热力图层 */
+.leaflet-heat-layer {
+  pointer-events: none;
+  z-index: 200;
+  mix-blend-mode: multiply;
+}
 .detail-section p { font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
 .detail-fact { display: flex; gap: 8px; font-size: 12px; line-height: 2; }
 .detail-fact .k { color: var(--ink-light); width: 60px; flex-shrink: 0; }

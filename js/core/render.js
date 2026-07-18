@@ -120,6 +120,9 @@ export function render() {
     renderCapitalAndCities();
   }
 
+  // F14 热力图层
+  renderHeatLayer();
+
   updateLineLegend();
 }
 
@@ -457,6 +460,43 @@ function buildTrajectory(personId) {
     });
   }
   return { lines, points };
+}
+
+/* ---------- F14 事件热力图 ---------- */
+let heatLayer = null;
+function renderHeatLayer() {
+  if (!state.layers.heat) {
+    if (heatLayer) {
+      state.map.removeLayer(heatLayer);
+      heatLayer = null;
+    }
+    return;
+  }
+  const atlas = current();
+  const latlngs = [];
+  for (const e of atlas.events || []) {
+    if (state.domainFilter.size && !state.domainFilter.has(e.domain)) continue;
+    if (state.yearFilter !== null && e.year !== state.yearFilter) continue;
+    const coord = getEventCoord(e);
+    if (coord) latlngs.push([coord[1], coord[0]]);  // [lat, lng]
+  }
+  // 懒加载 heat-layer 模块
+  if (!window.__heatLayerLoaded) {
+    import('./heat-layer.js').then(() => {
+      window.__heatLayerLoaded = true;
+      drawHeat(latlngs);
+    });
+  } else {
+    drawHeat(latlngs);
+  }
+}
+function drawHeat(latlngs) {
+  if (heatLayer) {
+    heatLayer.setLatLngs(latlngs);
+  } else {
+    heatLayer = L.heatLayer(latlngs, { radius: 35, maxOpacity: 0.55 });
+    heatLayer.addTo(state.map);
+  }
 }
 
 /* ---------- 线条说明浮层 ---------- */

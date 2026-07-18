@@ -30,6 +30,7 @@ const STRINGS = {
     'panel.persons': '● 人物',
     'panel.events_layer': '◆ 事件',
     'panel.capitals': '📍 都城',
+    'panel.heat': '🔥 事件热力',
     'panel.layer_hint': '选中人物后显示 ──关系 ┄┄敌对 ━▶轨迹',
     'panel.domains': '事件领域',
     'panel.domains_browser': '跨数据集领域浏览',
@@ -87,6 +88,7 @@ const STRINGS = {
     'detail.cross_interaction': '互动',
 
     'toast.not_found': '未找到匹配人物',
+    'search.domain_hint': '在「{domain}」领域继续输入人物关键字…',
     'event_list.title': '大事记',
     'event_list.count_suffix': ' 件',
     'list.courtesy_prefix': '字',
@@ -144,6 +146,7 @@ const STRINGS = {
     'panel.persons': '● Figures',
     'panel.events_layer': '◆ Events',
     'panel.capitals': '📍 Capitals',
+    'panel.heat': '🔥 Event Heatmap',
     'panel.layer_hint': 'After selecting a figure ──relation ┄┄rival ━▶trajectory',
     'panel.domains': 'Event Domains',
     'panel.domains_browser': 'Cross-dataset domain browser',
@@ -201,6 +204,7 @@ const STRINGS = {
     'detail.cross_interaction': 'Interaction',
 
     'toast.not_found': 'No matching figures',
+    'search.domain_hint': 'Type a name to search within "{domain}" domain…',
     'event_list.title': 'Chronicle',
     'event_list.count_suffix': '',
     'list.courtesy_prefix': 'Courtesy',

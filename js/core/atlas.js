@@ -157,12 +157,20 @@ export async function getGlobalPersonIndex() {
       const atlas = await loadAtlas(meta);
       const factionName = id => (atlas.factions.find(f => f.id === id) || {}).name || '';
       for (const p of atlas.persons) {
+        // 收集该人物参与的事件领域（用于 F13 domain: 搜索）
+        const domainsSet = new Set();
+        for (const ev of atlas.events || []) {
+          if (ev.participants && ev.participants.includes(p.id) && ev.domain) {
+            domainsSet.add(ev.domain);
+          }
+        }
         idx.push({
           atlasId: atlas.id, atlasName: atlas.name, atlasNameEn: meta.nameEn || atlas.name,
           group: meta.group, groupEn: meta.groupEn || meta.group,
           personId: p.id, name: p.name,
           courtesy: p.courtesy || '', alias: p.alias || [],
           factionName: factionName(p.faction),
+          domains: [...domainsSet],
           birth: p.birth, death: p.death,
         });
       }

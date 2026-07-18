@@ -240,8 +240,34 @@ function bindSearch() {
   searchInput.addEventListener('input', () => {
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(async () => {
-      const kw = searchInput.value.trim();
-      if (!kw) { hideSuggest(); return; }
+      const raw = searchInput.value.trim();
+      if (!raw) { hideSuggest(); return; }
+
+      // F13 解析 domain:军事 刘 这种语法；非人物部分作为关键字
+      let kw = raw;
+      let domainFilter = null;
+      const m = raw.match(/^domain:([^:\s]+)\s*(.*)$/i) || raw.match(/^([^:\s]+):domain\s+(.*)$/i);
+      if (m) {
+        if (m.length === 3 && /^domain:/i.test(raw)) {
+          domainFilter = m[1];
+          kw = m[2].trim();
+        } else if (m.length === 3) {
+          domainFilter = m[1];
+          kw = m[2].trim();
+        }
+      }
+      if (!kw) {
+        // 只输入 domain:军事 时给提示
+        if (domainFilter) {
+          showSuggest();
+          const rect = searchInput.getBoundingClientRect();
+          suggestBox.style.left = `${rect.left}px`;
+          suggestBox.style.top = `${rect.bottom + 6}px`;
+          suggestBox.style.minWidth = `${rect.width}px`;
+          suggestBox.innerHTML = `<div class="ss-empty">${t('search.domain_hint', { domain: domainFilter })}</div>`;
+        }
+        return;
+      }
       const rect = searchInput.getBoundingClientRect();
       suggestBox.style.left = `${rect.left}px`;
       suggestBox.style.top = `${rect.bottom + 6}px`;
@@ -253,6 +279,8 @@ function bindSearch() {
         // 评分：完全匹配 0 > 名字命中 1 > 字号 2 > 别名 3
         const scored = [];
         for (const p of idx) {
+          // F13 领域过滤：只保留 domains 包含 domainFilter 的人物
+          if (domainFilter && !(p.domains || []).some(d => d === domainFilter || d.includes(domainFilter))) continue;
           let score = -1;
           if (p.name === kw) score = 0;
           else if (p.name.includes(kw)) score = 1;
