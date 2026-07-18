@@ -96,6 +96,25 @@ function removeUI() {
   document.getElementById('narration-bar')?.remove();
   document.getElementById('narration-caption')?.remove();
   document.getElementById('narration-hero-card')?.remove();
+  document.getElementById('narration-year-banner')?.remove();
+}
+
+/** 地图大字年份浮现：每次段切换时，"公元 184 年 · 涿郡" 居中淡入淡出 2.2s */
+function showYearBanner(seg) {
+  if (!seg || seg.year == null) return;
+  let banner = document.getElementById('narration-year-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'narration-year-banner';
+    banner.className = 'narration-year-banner';
+    document.body.appendChild(banner);
+  }
+  // 重启动动画：先去 class → 强制 reflow → 加 class
+  banner.classList.remove('show');
+  const yearText = seg.year < 0 ? `公元前 ${Math.abs(seg.year)} 年` : `公元 ${seg.year} 年`;
+  banner.innerHTML = `${yearText}${seg.place ? `<span class="nyb-place">${seg.place}</span>` : ''}`;
+  void banner.offsetWidth; // reflow
+  banner.classList.add('show');
 }
 
 function updateBar() {
@@ -134,6 +153,8 @@ function renderCaption(seg) {
     ? `<span class="nc-meta">${meta}</span><span class="nc-body">${seg.caption}</span>`
     : `<span class="nc-body">${seg.caption}</span>`;
   cap.classList.add('show');
+  // 地图大字年份水印（每次段切换浮现一次）
+  showYearBanner(seg);
 }
 
 /** 主角名章：左下浮动卡片，半透明头像 + 姓名 + 生卒年 */
