@@ -1,0 +1,133 @@
+/* 中国近现代（1840–1949年）· 中华文明 · 史实客观陈述 */
+
+import { makeImportance } from './index.js';
+
+const FACTIONS = [
+  { id: 'qingmo', name: '清末', color: '#2f5d8a', founded: 1840, capital: '北京', capitalFrom: 1840, desc: '晚清政府' },
+  { id: 'taiping', name: '太平天国', color: '#b23a2e', founded: 1851, capital: '天京', capitalFrom: 1853, desc: '太平天国运动' },
+  { id: 'beiyang', name: '北洋', color: '#8a6d3b', founded: 1912, capital: '北京', capitalFrom: 1912, desc: '北洋政府时期' },
+  { id: 'geming', name: '革命派/民国', color: '#2d8a6e', founded: 1894, capital: '南京', capitalFrom: 1912, desc: '兴中会至民国' },
+  { id: 'wenhua', name: '文化界', color: '#7b4b94', founded: 1840, capital: '—', capitalFrom: 1840, desc: '文化与科技界人物' },
+];
+
+const PLACES = [
+  { id: 'beijing', name: '北京', modern: '北京', coord: [116.40, 39.90], note: '清都/北洋都' },
+  { id: 'nanjing', name: '南京', modern: '江苏南京', coord: [118.79, 32.06], note: '民国首都' },
+  { id: 'guangzhou', name: '广州', modern: '广东广州', coord: [113.26, 23.13], note: '南方革命重镇' },
+  { id: 'shanghai', name: '上海', modern: '上海', coord: [121.47, 31.23], note: '经济中心' },
+  { id: 'wuhan', name: '武昌', modern: '湖北武汉', coord: [114.31, 30.52], note: '辛亥首义' },
+  { id: 'tianjin', name: '天津', modern: '天津', coord: [117.20, 39.13], note: '北方通商口岸' },
+  { id: 'weihai', name: '威海', modern: '山东威海', coord: [122.12, 37.51], note: '北洋水师基地' },
+  { id: 'humen', name: '虎门', modern: '广东东莞', coord: [113.66, 22.82], note: '虎门销烟' },
+  { id: 'tianjing_city', name: '天京', modern: '江苏南京', coord: [118.79, 32.06], note: '太平天国都' },
+  { id: 'changsha', name: '长沙', modern: '湖南长沙', coord: [112.94, 28.23], note: '湖南重镇' },
+  { id: 'anqing', name: '安庆', modern: '安徽安庆', coord: [117.05, 30.53], note: '太平军重镇' },
+  { id: 'fuzhou', name: '福州', modern: '福建福州', coord: [119.30, 26.08], note: '船政学堂' },
+  { id: 'lishui', name: '京张铁路', modern: '北京-张家口', coord: [115.5, 40.6], note: '詹天佑主持修筑' },
+  { id: 'zhanjiang', name: '湛江', modern: '广东湛江', coord: [110.36, 21.27], note: '南方口岸' },
+  { id: 'xinjiang', name: '新疆', modern: '新疆', coord: [87.60, 43.80], note: '西北边疆' },
+  { id: 'jintian', name: '金田', modern: '广西桂平', coord: [110.05, 23.30], note: '金田起义' },
+  { id: 'riben', name: '日本', modern: '日本', coord: [139.0, 36.0], note: '梁启超流亡' },
+  { id: 'tanxiangshan', name: '檀香山', modern: '美国夏威夷', coord: [-157.85, 21.31], note: '兴中会成立' },
+  { id: 'dongjing', name: '东京', modern: '日本东京', coord: [139.65, 35.68], note: '同盟会成立' },
+];
+
+const PERSONS = [
+  { id: 'lin_ze_xu', name: '林则徐', courtesy: '元抚', alias: [], faction: 'qingmo', birth: 1785, death: 1850, birthPlace: '福州', title: '钦差大臣', roles: ['政治家','民族英雄'], avatar: '林', bio: '虎门销烟，开眼看世界第一人。', events: [ { year: 1839, place: '虎门', desc: '虎门销烟' }, { year: 1840, place: '广州', desc: '鸦片战争中遭贬' } ] },
+  { id: 'hong_xiu_quan', name: '洪秀全', courtesy: '', alias: [], faction: 'taiping', birth: 1814, death: 1864, birthPlace: '花县', title: '天王', roles: ['太平天国领袖'], avatar: '洪', bio: '创立拜上帝会，发动太平天国运动。', events: [ { year: 1851, place: '金田', desc: '金田起义' }, { year: 1853, place: '天京', desc: '定都天京' }, { year: 1864, place: '天京', desc: '天京陷落前夕病逝' } ] },
+  { id: 'zeng_guo_fan', name: '曾国藩', courtesy: '伯涵', alias: [], faction: 'qingmo', birth: 1811, death: 1872, birthPlace: '湘乡', title: '两江总督', roles: ['理学家','湘军统帅'], avatar: '曾', bio: '组建湘军镇压太平天国，洋务运动发起者之一。', events: [ { year: 1853, place: '长沙', desc: '组建湘军' }, { year: 1864, place: '天京', desc: '攻陷天京' } ] },
+  { id: 'li_hong_zhang', name: '李鸿章', courtesy: '少荃', alias: [], faction: 'qingmo', birth: 1823, death: 1901, birthPlace: '合肥', title: '直隶总督', roles: ['洋务派首领'], avatar: '李', bio: '淮军创始人，主持洋务、北洋水师，签多项条约。', events: [ { year: 1872, place: '上海', desc: '轮船招商局成立' }, { year: 1895, place: '威海', desc: '马关议和' } ] },
+  { id: 'zuo_zong_tang', name: '左宗棠', courtesy: '季高', alias: [], faction: 'qingmo', birth: 1812, death: 1885, birthPlace: '湘阴', title: '陕甘总督', roles: ['洋务派','军事家'], avatar: '左', bio: '抬棺西征收复新疆。', events: [ { year: 1876, place: '新疆', desc: '收复新疆' } ] },
+  { id: 'ci_xi', name: '慈禧太后', courtesy: '', alias: ['叶赫那拉氏'], faction: 'qingmo', birth: 1835, death: 1908, birthPlace: '北京', title: '皇太后', roles: ['实际统治者'], avatar: '慈', bio: '同治光绪两朝垂帘听政，左右晚清近半世纪。', events: [ { year: 1861, place: '北京', desc: '辛酉政变，开始垂帘听政' }, { year: 1898, place: '北京', desc: '戊戌政变，囚光绪' } ] },
+  { id: 'kang_you_wei', name: '康有为', courtesy: '广厦', alias: [], faction: 'qingmo', birth: 1858, death: 1927, birthPlace: '南海', title: '工部主事', roles: ['维新派领袖'], avatar: '康', bio: '公车上书、百日维新主要推动者。', events: [ { year: 1895, place: '北京', desc: '公车上书' }, { year: 1898, place: '北京', desc: '百日维新' } ] },
+  { id: 'liang_qi_chao', name: '梁启超', courtesy: '卓如', alias: [], faction: 'qingmo', birth: 1873, death: 1929, birthPlace: '新会', title: '思想家', roles: ['维新派','学者'], avatar: '梁', bio: '戊戌变法、新文化运动健将，著述宏富。', events: [ { year: 1898, place: '北京', desc: '参与百日维新' }, { year: 1902, place: '日本', desc: '创办新民丛报' } ] },
+  { id: 'guang_xu', name: '光绪帝', courtesy: '', alias: ['载湉'], faction: 'qingmo', birth: 1871, death: 1908, birthPlace: '北京', title: '皇帝', roles: ['戊戌变法支持者'], avatar: '光', bio: '亲政短暂，百日维新后遭囚。', events: [ { year: 1898, place: '北京', desc: '颁布明定国是诏，变法' } ] },
+  { id: 'sun_zhong_shan', name: '孙中山', courtesy: '逸仙', alias: ['孙文'], faction: 'geming', birth: 1866, death: 1925, birthPlace: '香山', title: '临时大总统', roles: ['革命先行者'], avatar: '孙', bio: '创建兴中会、同盟会，领导辛亥革命，推翻帝制。', events: [ { year: 1894, place: '檀香山', desc: '创建兴中会' }, { year: 1905, place: '东京', desc: '组建同盟会' }, { year: 1912, place: '南京', desc: '就任中华民国临时大总统' } ] },
+  { id: 'huang_xing', name: '黄兴', courtesy: '克强', alias: [], faction: 'geming', birth: 1874, death: 1916, birthPlace: '长沙', title: '革命军总司令', roles: ['革命家','军事家'], avatar: '黄', bio: '辛亥革命军事领袖，与孙中山并称孙黄。', events: [ { year: 1911, place: '武昌', desc: '武汉保卫战（阳夏之战）' } ] },
+  { id: 'song_jiao_ren', name: '宋教仁', courtesy: '遁初', alias: [], faction: 'geming', birth: 1882, death: 1913, birthPlace: '桃源', title: '国民党理事长', roles: ['宪政派','革命家'], avatar: '宋', bio: '主张责任内阁、议会道路，遇刺身亡。', events: [ { year: 1913, place: '上海', desc: '沪宁车站遇刺' } ] },
+  { id: 'yuan_shi_kai', name: '袁世凯', courtesy: '慰亭', alias: [], faction: 'beiyang', birth: 1859, death: 1916, birthPlace: '项城', title: '大总统/洪宪帝', roles: ['北洋领袖'], avatar: '袁', bio: '小站练兵起家，辛亥后任大总统，1915称帝，旋败亡。', events: [ { year: 1912, place: '北京', desc: '就任临时大总统' }, { year: 1915, place: '北京', desc: '复辟帝制，引发护国战争' } ] },
+  { id: 'cai_yuan_pei', name: '蔡元培', courtesy: '鹤卿', alias: [], faction: 'wenhua', birth: 1868, death: 1940, birthPlace: '绍兴', title: '北大校长', roles: ['教育家'], avatar: '蔡', bio: '兼容并包，改造北大为新文化运动中心。', events: [ { year: 1917, place: '北京', desc: '出任北大校长' } ] },
+  { id: 'chen_du_xiu', name: '陈独秀', courtesy: '仲甫', alias: [], faction: 'wenhua', birth: 1879, death: 1942, birthPlace: '安庆', title: '新青年主编', roles: ['思想家'], avatar: '陈', bio: '创办《新青年》，发起新文化运动。', events: [ { year: 1915, place: '上海', desc: '创办青年杂志（次年改新青年）' } ] },
+  { id: 'lu_xun', name: '鲁迅', courtesy: '豫才', alias: ['周树人'], faction: 'wenhua', birth: 1881, death: 1936, birthPlace: '绍兴', title: '作家', roles: ['作家','思想家'], avatar: '鲁', bio: '《狂人日记》《阿Q正传》，新文化运动主将。', events: [ { year: 1918, place: '北京', desc: '发表狂人日记' } ] },
+  { id: 'zhan_tian_you', name: '詹天佑', courtesy: '眷诚', alias: [], faction: 'wenhua', birth: 1861, death: 1919, birthPlace: '南海', title: '铁路工程师', roles: ['工程师'], avatar: '詹', bio: '主持修建中国人自建的第一条铁路——京张铁路。', events: [ { year: 1909, place: '京张铁路', desc: '京张铁路全线通车' } ] },
+  { id: 'yan_fu', name: '严复', courtesy: '几道', alias: [], faction: 'wenhua', birth: 1854, death: 1921, birthPlace: '福州', title: '翻译家', roles: ['翻译家','思想家'], avatar: '严', bio: '译《天演论》，传播"物竞天择"思想。', events: [ { year: 1898, place: '北京', desc: '刊行天演论' } ] },
+];
+
+const RELATIONS = [
+  { source: 'zeng_guo_fan', target: 'li_hong_zhang', type: '师承', label: '师生', year: 1853 },
+  { source: 'zeng_guo_fan', target: 'hong_xiu_quan', type: '敌对', label: '湘军对太平天国', year: 1853 },
+  { source: 'zeng_guo_fan', target: 'zuo_zong_tang', type: '同僚', label: '中兴名臣', year: 1860 },
+  { source: 'li_hong_zhang', target: 'ci_xi', type: '同朝', label: '洋务重臣', year: 1870 },
+  { source: 'kang_you_wei', target: 'liang_qi_chao', type: '师承', label: '康梁', year: 1895 },
+  { source: 'kang_you_wei', target: 'guang_xu', type: '君臣', label: '维新', year: 1898 },
+  { source: 'kang_you_wei', target: 'ci_xi', type: '敌对', label: '维新与守旧', year: 1898 },
+  { source: 'sun_zhong_shan', target: 'huang_xing', type: '同僚', label: '孙黄', year: 1905 },
+  { source: 'sun_zhong_shan', target: 'yuan_shi_kai', type: '敌对', label: '革命与北洋', year: 1913 },
+  { source: 'chen_du_xiu', target: 'lu_xun', type: '同僚', label: '新青年同人', year: 1918 },
+  { source: 'cai_yuan_pei', target: 'chen_du_xiu', type: '同僚', label: '北大同人', year: 1917 },
+];
+
+const EVENTS = [
+  { id: 'e1', name: '虎门销烟', year: 1839, domain: '政治', location: '虎门', desc: '林则徐收缴并销毁鸦片两万余箱。', participants: ['lin_ze_xu'] },
+  { id: 'e2', name: '第一次鸦片战争', year: 1840, domain: '军事', location: '广州', desc: '英国发动侵略，中国近代史开端。', participants: ['lin_ze_xu'] },
+  { id: 'e3', name: '金田起义', year: 1851, domain: '军事', location: '广州', desc: '洪秀全在广西金田村起义，建号太平天国。', participants: ['hong_xiu_quan'] },
+  { id: 'e4', name: '定都天京', year: 1853, domain: '政治', location: '天京', desc: '太平军攻克南京，改名天京定都。', participants: ['hong_xiu_quan', 'zeng_guo_fan'] },
+  { id: 'e5', name: '湘军组建', year: 1853, domain: '军事', location: '长沙', desc: '曾国藩奉命办团练，组建湘军。', participants: ['zeng_guo_fan'] },
+  { id: 'e6', name: '天京陷落', year: 1864, domain: '军事', location: '天京', desc: '湘军攻入天京，太平天国败亡。', participants: ['zeng_guo_fan', 'hong_xiu_quan'] },
+  { id: 'e7', name: '洋务运动', year: 1861, domain: '科技', location: '上海', desc: '曾国藩李鸿章等发起自强求富运动。', participants: ['zeng_guo_fan', 'li_hong_zhang', 'zuo_zong_tang'] },
+  { id: 'e8', name: '轮船招商局', year: 1872, domain: '科技', location: '上海', desc: '近代第一家官督商办企业。', participants: ['li_hong_zhang'] },
+  { id: 'e9', name: '收复新疆', year: 1876, domain: '军事', location: '新疆', desc: '左宗棠率军收复新疆全境。', participants: ['zuo_zong_tang'] },
+  { id: 'e10', name: '甲午海战', year: 1894, domain: '军事', location: '威海', desc: '北洋水师全军覆没。', participants: ['li_hong_zhang'] },
+  { id: 'e11', name: '公车上书', year: 1895, domain: '政治', location: '北京', desc: '康有为梁启超联名列折，维新思潮高涨。', participants: ['kang_you_wei', 'liang_qi_chao'] },
+  { id: 'e12', name: '天演论刊行', year: 1898, domain: '文化', location: '北京', desc: '严复译作正式出版，影响几代人。', participants: ['yan_fu'] },
+  { id: 'e13', name: '百日维新', year: 1898, domain: '政治', location: '北京', desc: '光绪颁布新政，慈禧发动政变而止。', participants: ['guang_xu', 'kang_you_wei', 'ci_xi'] },
+  { id: 'e14', name: '京张铁路通车', year: 1909, domain: '科技', location: '京张铁路', desc: '詹天佑主持建成中国人自办的第一条铁路。', participants: ['zhan_tian_you'] },
+  { id: 'e15', name: '辛亥革命', year: 1911, domain: '政治', location: '武昌', desc: '武昌起义爆发，各省响应独立。', participants: ['sun_zhong_shan', 'huang_xing'] },
+  { id: 'e16', name: '民国建立', year: 1912, domain: '政治', location: '南京', desc: '孙中山就任临时大总统，清朝结束。', participants: ['sun_zhong_shan', 'yuan_shi_kai'] },
+  { id: 'e17', name: '新文化运动', year: 1915, domain: '文化', location: '上海', desc: '陈独秀办《新青年》，倡导民主科学。', participants: ['chen_du_xiu', 'lu_xun'] },
+  { id: 'e18', name: '蔡元培长北大', year: 1917, domain: '文化', location: '北京', desc: '兼容并包，北大成为新文化运动中心。', participants: ['cai_yuan_pei'] },
+  { id: 'e19', name: '狂人日记', year: 1918, domain: '文化', location: '北京', desc: '鲁迅发表中国第一篇现代白话小说。', participants: ['lu_xun'] },
+  { id: 'e20', name: '五四运动', year: 1919, domain: '政治', location: '北京', desc: '反帝反封建的爱国运动，新民主主义革命开端。', participants: ['chen_du_xiu', 'lu_xun'] },
+];
+
+export const jinxiandaiAtlas = {
+  id: 'jinxiandai',
+  name: '近现代',
+  subtitle: '从鸦片战争到新中国（1840–1949年）',
+  startYear: 1840,
+  endYear: 1949,
+  mapView: { center: [114, 32], zoom: 4, minZoom: 2, maxZoom: 12, labelZoom: { hideAll: 3, hideEvents: 6 }, importanceZoom: [4, 6], cityZoom: 5, baseLayer: 'satellite' },
+  domains: [
+    { name: '政治', color: '#2f5d8a' },
+    { name: '军事', color: '#b23a2e' },
+    { name: '文化', color: '#7b4b94' },
+    { name: '科技', color: '#2d8a6e' },
+    { name: '外交', color: '#b8893a' },
+  ],
+  factions: FACTIONS,
+  places: PLACES,
+  persons: PERSONS,
+  relations: RELATIONS,
+  events: EVENTS,
+  importance: makeImportance({
+    personRank: {
+      lin_ze_xu: 1, sun_zhong_shan: 1, zeng_guo_fan: 1, li_hong_zhang: 1, ci_xi: 1,
+      yuan_shi_kai: 1, lu_xun: 1, kang_you_wei: 1, liang_qi_chao: 1, zhan_tian_you: 1,
+      hong_xiu_quan: 1, zuo_zong_tang: 1, chen_du_xiu: 1, cai_yuan_pei: 1,
+      guang_xu: 2, huang_xing: 2, song_jiao_ren: 2, yan_fu: 2,
+    },
+    eventRank: { e2: 1, e6: 1, e13: 1, e15: 1, e16: 1, e20: 1 },
+    defaultEvent: 2,
+  }),
+  birthplaceModern: {},
+  birthplaceCoords: {
+    '花县': [113.22, 23.40], '湘乡': [112.50, 27.70], '合肥': [117.23, 31.82],
+    '湘阴': [112.88, 28.69], '南海': [113.12, 23.03], '新会': [113.04, 22.46],
+    '香山': [113.39, 22.52], '桃源': [112.00, 28.90], '项城': [114.90, 33.46],
+    '绍兴': [120.58, 30.03], '安庆': [117.05, 30.53], '新疆': [87.60, 43.80],
+    '金田': [110.05, 23.30], '檀香山': [-157.85, 21.31], '东京': [139.65, 35.68],
+    '日本': [139.0, 36.0],
+  },
+  personImages: {},
+  timelineTicks: [1840, 1851, 1894, 1898, 1911, 1919, 1949],
+};

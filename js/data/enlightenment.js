@@ -1,0 +1,133 @@
+/* 近代（1600–1900年）· 世界文明 · 启蒙·革命·工业 */
+
+import { makeImportance } from './index.js';
+
+const FACTIONS = [
+  { id: 'britain', name: '英国', color: '#2f5d8a', founded: 1603, capital: '伦敦', capitalFrom: 1066, desc: '君主立宪·日不落帝国' },
+  { id: 'france', name: '法国', color: '#b23a2e', founded: 1600, capital: '巴黎', capitalFrom: 987, desc: '绝对王权→大革命' },
+  { id: 'america', name: '美国', color: '#2d8a6e', founded: 1776, capital: '华盛顿', capitalFrom: 1790, desc: '独立革命' },
+  { id: 'germany2', name: '普鲁士/德意志', color: '#b8893a', founded: 1701, capital: '柏林', capitalFrom: 1701, desc: '军国主义·德意志统一' },
+  { id: 'science', name: '科学与思想', color: '#7b4b94', founded: 1600, capital: '—', capitalFrom: 1600, desc: '科学家与思想家' },
+];
+
+const PLACES = [
+  { id: 'london2', name: '伦敦', modern: '英国伦敦', coord: [-0.13, 51.51], note: '帝国心脏' },
+  { id: 'paris2', name: '巴黎', modern: '法国巴黎', coord: [2.35, 48.86], note: '法国都' },
+  { id: 'washington', name: '华盛顿', modern: '美国华盛顿', coord: [-77.04, 38.91], note: '美国都' },
+  { id: 'philadelphia', name: '费城', modern: '美国费城', coord: [-75.16, 39.95], note: '独立宣言地' },
+  { id: 'berlin', name: '柏林', modern: '德国柏林', coord: [13.41, 52.52], note: '普鲁士都' },
+  { id: 'vienna', name: '维也纳', modern: '奥地利维也纳', coord: [16.37, 48.21], note: '音乐之都' },
+  { id: 'waterloo', name: '滑铁卢', modern: '比利时滑铁卢', coord: [4.39, 50.68], note: '拿破仑最后一战' },
+  { id: 'trafalgar', name: '特拉法加', modern: '西班牙特拉法加', coord: [-6.04, 36.18], note: '海战' },
+  { id: 'moscow2', name: '莫斯科', modern: '俄罗斯莫斯科', coord: [37.62, 55.75], note: '俄罗斯都' },
+  { id: 'sarajevo', name: '萨拉热窝', modern: '波黑萨拉热窝', coord: [18.41, 43.85], note: '一战导火索' },
+  { id: 'bastille', name: '巴士底狱', modern: '法国巴黎', coord: [2.37, 48.85], note: '大革命起点' },
+  { id: 'grafton', name: '约克镇', modern: '美国约克镇', coord: [-76.51, 37.23], note: '独立战争终战' },
+  { id: 'bangladesh', name: '普拉西', modern: '印度普拉西', coord: [88.27, 23.80], note: '英国征服印度' },
+  { id: 'getty', name: '葛底斯堡', modern: '美国葛底斯堡', coord: [-77.23, 39.83], note: '南北战争转折' },
+  { id: 'princeton', name: '普林斯顿', modern: '美国普林斯顿', coord: [-74.66, 40.35], note: '高等研究院' },
+  { id: 'cambridge', name: '剑桥', modern: '英国剑桥', coord: [0.12, 52.21], note: '牛顿执教' },
+  { id: 'glasgow', name: '格拉斯哥', modern: '英国格拉斯哥', coord: [-4.25, 55.86], note: '瓦特工作处' },
+  { id: 'menlopark', name: '门洛帕克', modern: '美国门洛帕克', coord: [-122.18, 37.45], note: '爱迪生实验室' },
+  { id: 'geneva_e', name: '日内瓦', modern: '瑞士日内瓦', coord: [6.14, 46.20], note: '伏尔泰/孟德斯鸠居地' },
+  { id: 'newyork', name: '纽约', modern: '美国纽约', coord: [-74.0, 40.71], note: '华盛顿就任处' },
+];
+
+const PERSONS = [
+  { id: 'bacon', name: '培根', courtesy: '', alias: ['弗朗西斯·培根'], faction: 'science', birth: 1561, death: 1626, birthPlace: '伦敦', title: '哲学家', roles: ['经验主义'], avatar: '培', bio: '知识就是力量，归纳法奠基。', events: [ { year: 1620, place: '伦敦', desc: '出版新工具论' } ] },
+  { id: 'descartes', name: '笛卡尔', courtesy: '', alias: [], faction: 'science', birth: 1596, death: 1650, birthPlace: '拉海', title: '哲学家·数学家', roles: ['理性主义之父'], avatar: '笛', bio: '我思故我在、解析几何。', events: [ { year: 1637, place: '巴黎', desc: '出版方法谈' } ] },
+  { id: 'newton', name: '牛顿', courtesy: '', alias: [], faction: 'britain', birth: 1643, death: 1727, birthPlace: '伍尔索普', title: '物理学家', roles: ['经典力学奠基'], avatar: '牛', bio: '万有引力、三大定律、微积分。', events: [ { year: 1687, place: '剑桥', desc: '出版自然哲学的数学原理' } ] },
+  { id: 'locke', name: '洛克', courtesy: '', alias: [], faction: 'britain', birth: 1632, death: 1704, birthPlace: '灵顿', title: '哲学家', roles: ['经验主义','自由主义'], avatar: '洛', bio: '《政府论》社会契约、天赋人权。', events: [ { year: 1689, place: '伦敦', desc: '出版政府论' } ] },
+  { id: 'voltaire', name: '伏尔泰', courtesy: '', alias: ['弗朗索瓦-马里·阿鲁埃'], faction: 'france', birth: 1694, death: 1778, birthPlace: '巴黎', title: '思想家', roles: ['启蒙运动领袖'], avatar: '伏', bio: '理性、宽容、反对教会专制。', events: [ { year: 1759, place: '日内瓦', desc: '出版老实人' } ] },
+  { id: 'rousseau', name: '卢梭', courtesy: '', alias: [], faction: 'france', birth: 1712, death: 1778, birthPlace: '日内瓦', title: '哲学家', roles: ['社会契约论'], avatar: '卢', bio: '《社会契约论》《爱弥儿》。', events: [ { year: 1762, place: '巴黎', desc: '出版社会契约论' } ] },
+  { id: 'montesquieu', name: '孟德斯鸠', courtesy: '', alias: [], faction: 'france', birth: 1689, death: 1755, birthPlace: '波尔多', title: '思想家', roles: ['三权分立'], avatar: '孟', bio: '《论法的精神》三权分立。', events: [ { year: 1748, place: '日内瓦', desc: '出版论法的精神' } ] },
+  { id: 'smith', name: '亚当·斯密', courtesy: '', alias: [], faction: 'britain', birth: 1723, death: 1790, birthPlace: '柯科迪', title: '经济学家', roles: ['经济学之父'], avatar: '斯', bio: '《国富论》看不见的手。', events: [ { year: 1776, place: '伦敦', desc: '出版国富论' } ] },
+  { id: 'watt', name: '瓦特', courtesy: '', alias: [], faction: 'britain', birth: 1736, death: 1819, birthPlace: '格里诺克', title: '工程师', roles: ['工业革命'], avatar: '瓦', bio: '改良蒸汽机，开启工业革命。', events: [ { year: 1769, place: '格拉斯哥', desc: '改良蒸汽机获专利' } ] },
+  { id: 'washington_g', name: '华盛顿', courtesy: '', alias: [], faction: 'america', birth: 1732, death: 1799, birthPlace: '弗吉尼亚', title: '总统', roles: ['美国国父'], avatar: '华', bio: '大陆军总司令、首任总统。', events: [ { year: 1775, place: '费城', desc: '就任大陆军总司令' }, { year: 1781, place: '约克镇', desc: '约克镇战役胜利' }, { year: 1789, place: '纽约', desc: '就任首任总统' } ] },
+  { id: 'jefferson', name: '杰斐逊', courtesy: '', alias: [], faction: 'america', birth: 1743, death: 1826, birthPlace: '弗吉尼亚', title: '总统', roles: ['独立宣言起草'], avatar: '杰', bio: '《独立宣言》主要起草人。', events: [ { year: 1776, place: '费城', desc: '起草独立宣言' } ] },
+  { id: 'napoleon', name: '拿破仑', courtesy: '', alias: [], faction: 'france', birth: 1769, death: 1821, birthPlace: '阿雅克肖', title: '法国皇帝', roles: ['军事家','征服者'], avatar: '拿', bio: '横扫欧洲、《拿破仑法典》、滑铁卢终结。', events: [ { year: 1799, place: '巴黎', desc: '雾月政变掌权' }, { year: 1804, place: '巴黎', desc: '加冕称帝' }, { year: 1815, place: '滑铁卢', desc: '滑铁卢战败' } ] },
+  { id: 'robespierre', name: '罗伯斯庇尔', courtesy: '', alias: [], faction: 'france', birth: 1758, death: 1794, birthPlace: '阿拉斯', title: '雅各宾领袖', roles: ['革命家'], avatar: '罗', bio: '恐怖统治核心，最终被推上断头台。', events: [ { year: 1793, place: '巴黎', desc: '处决路易十六' }, { year: 1794, place: '巴黎', desc: '热月政变被处死' } ] },
+  { id: 'beethoven', name: '贝多芬', courtesy: '', alias: [], faction: 'germany2', birth: 1770, death: 1827, birthPlace: '波恩', title: '作曲家', roles: ['古典-浪漫过渡'], avatar: '贝', bio: '《命运》《田园》《合唱》。', events: [ { year: 1824, place: '维也纳', desc: '首演第九交响曲' } ] },
+  { id: 'darwin', name: '达尔文', courtesy: '', alias: [], faction: 'britain', birth: 1809, death: 1882, birthPlace: '什鲁斯伯里', title: '生物学家', roles: ['进化论'], avatar: '达', bio: '《物种起源》自然选择。', events: [ { year: 1859, place: '伦敦', desc: '出版物种起源' } ] },
+  { id: 'marx', name: '马克思', courtesy: '', alias: [], faction: 'germany2', birth: 1818, death: 1883, birthPlace: '特里尔', title: '思想家', roles: ['科学社会主义'], avatar: '马', bio: '《资本论》《共产党宣言》。', events: [ { year: 1848, place: '伦敦', desc: '与恩格斯发表共产党宣言' } ] },
+  { id: 'lincoln', name: '林肯', courtesy: '', alias: [], faction: 'america', birth: 1809, death: 1865, birthPlace: '肯塔基', title: '总统', roles: ['废奴总统'], avatar: '林', bio: '南北战争领袖、解放奴隶、遇刺身亡。', events: [ { year: 1862, place: '华盛顿', desc: '颁布解放奴隶宣言' }, { year: 1863, place: '葛底斯堡', desc: '葛底斯堡演说' } ] },
+  { id: 'edison', name: '爱迪生', courtesy: '', alias: [], faction: 'america', birth: 1847, death: 1931, birthPlace: '米兰', title: '发明家', roles: ['电灯·留声机'], avatar: '爱', bio: '一千余项专利，开启电力时代。', events: [ { year: 1879, place: '门洛帕克', desc: '电灯泡实用化' } ] },
+];
+
+const RELATIONS = [
+  { source: 'locke', target: 'voltaire', type: '师承', label: '影响', year: 1726 },
+  { source: 'voltaire', target: 'rousseau', type: '同代', label: '启蒙运动', year: 1750 },
+  { source: 'montesquieu', target: 'rousseau', type: '同代', label: '启蒙三杰', year: 1750 },
+  { source: 'newton', target: 'smith', type: '同代', label: '苏格兰启蒙', year: 1750 },
+  { source: 'washington_g', target: 'jefferson', type: '同僚', label: '国父', year: 1776 },
+  { source: 'robespierre', target: 'napoleon', type: '同朝', label: '革命-帝国', year: 1795 },
+  { source: 'darwin', target: 'marx', type: '同代', label: '19世纪两大思潮', year: 1859 },
+  { source: 'napoleon', target: 'beethoven', type: '同代', label: '英雄与音乐', year: 1804 },
+];
+
+const EVENTS = [
+  { id: 'e1', name: '新工具论', year: 1620, domain: '科技', location: '伦敦', desc: '培根倡导归纳法。', participants: ['bacon'] },
+  { id: 'e2', name: '方法谈', year: 1637, domain: '科技', location: '巴黎', desc: '笛卡尔理性主义。', participants: ['descartes'] },
+  { id: 'e3', name: '自然哲学的数学原理', year: 1687, domain: '科技', location: '剑桥', desc: '牛顿力学体系建立。', participants: ['newton'] },
+  { id: 'e4', name: '英国光荣革命', year: 1688, domain: '政治', location: '伦敦', desc: '君主立宪制确立。', participants: ['locke'] },
+  { id: 'e5', name: '改良蒸汽机', year: 1769, domain: '科技', location: '格拉斯哥', desc: '瓦特开启工业革命。', participants: ['watt'] },
+  { id: 'e6', name: '国富论', year: 1776, domain: '科技', location: '伦敦', desc: '亚当·斯密现代经济学奠基。', participants: ['smith'] },
+  { id: 'e7', name: '美国独立宣言', year: 1776, domain: '政治', location: '费城', desc: '杰斐逊起草、华盛顿领导独立。', participants: ['washington_g', 'jefferson'] },
+  { id: 'e8', name: '约克镇大捷', year: 1781, domain: '军事', location: '约克镇', desc: '美国独立战争胜利。', participants: ['washington_g'] },
+  { id: 'e9', name: '美国立宪', year: 1787, domain: '政治', location: '费城', desc: '三权分立宪法制定。', participants: ['washington_g', 'jefferson'] },
+  { id: 'e10', name: '攻占巴士底狱', year: 1789, domain: '军事', location: '巴黎', desc: '法国大革命爆发。', participants: ['robespierre'] },
+  { id: 'e11', name: '处决路易十六', year: 1793, domain: '政治', location: '巴黎', desc: '雅各宾派恐怖统治。', participants: ['robespierre'] },
+  { id: 'e12', name: '雾月政变', year: 1799, domain: '政治', location: '巴黎', desc: '拿破仑掌权。', participants: ['napoleon'] },
+  { id: 'e13', name: '拿破仑加冕', year: 1804, domain: '政治', location: '巴黎', desc: '建立法兰西第一帝国。', participants: ['napoleon'] },
+  { id: 'e14', name: '特拉法加海战', year: 1805, domain: '军事', location: '特拉法加', desc: '纳尔逊击败法西联合舰队。', participants: ['napoleon'] },
+  { id: 'e15', name: '滑铁卢战役', year: 1815, domain: '军事', location: '滑铁卢', desc: '拿破仑最终战败。', participants: ['napoleon'] },
+  { id: 'e16', name: '第九交响曲', year: 1824, domain: '文化', location: '维也纳', desc: '贝多芬欢乐颂首演。', participants: ['beethoven'] },
+  { id: 'e17', name: '物种起源', year: 1859, domain: '科技', location: '伦敦', desc: '达尔文进化论发表。', participants: ['darwin'] },
+  { id: 'e18', name: '解放奴隶宣言', year: 1862, domain: '政治', location: '华盛顿', desc: '林肯废除奴隶制。', participants: ['lincoln'] },
+  { id: 'e19', name: '葛底斯堡演说', year: 1863, domain: '政治', location: '葛底斯堡', desc: '民有民治民享。', participants: ['lincoln'] },
+  { id: 'e20', name: '共产党宣言', year: 1848, domain: '政治', location: '伦敦', desc: '马克思恩格斯发表。', participants: ['marx'] },
+  { id: 'e21', name: '电灯泡实用', year: 1879, domain: '科技', location: '门洛帕克', desc: '爱迪生照亮世界。', participants: ['edison'] },
+];
+
+export const enlightenmentAtlas = {
+  id: 'enlightenment',
+  name: '近代',
+  subtitle: '启蒙 · 革命 · 工业（1600–1900年）',
+  startYear: 1600,
+  endYear: 1900,
+  mapView: { center: [5, 47], zoom: 3, minZoom: 2, maxZoom: 12, labelZoom: { hideAll: 2, hideEvents: 5 }, importanceZoom: [3, 5], cityZoom: 4, baseLayer: 'satellite' },
+  domains: [
+    { name: '政治', color: '#2f5d8a' },
+    { name: '军事', color: '#b23a2e' },
+    { name: '科技', color: '#2d8a6e' },
+    { name: '文化', color: '#7b4b94' },
+    { name: '外交', color: '#b8893a' },
+    { name: '哲学', color: '#8a6d3b' },
+  ],
+  factions: FACTIONS,
+  places: PLACES,
+  persons: PERSONS,
+  relations: RELATIONS,
+  events: EVENTS,
+  importance: makeImportance({
+    personRank: {
+      newton: 1, locke: 1, voltaire: 1, rousseau: 1, montesquieu: 1, smith: 1,
+      washington_g: 1, jefferson: 1, napoleon: 1, darwin: 1, marx: 1, lincoln: 1,
+      watt: 1, edison: 1, beethoven: 1,
+      descartes: 2, bacon: 2, robespierre: 2,
+    },
+    eventRank: { e3: 1, e5: 1, e7: 1, e10: 1, e13: 1, e17: 1, e20: 1, e21: 1 },
+    defaultEvent: 2,
+  }),
+  birthplaceModern: {},
+  birthplaceCoords: {
+    '伍尔索普': [-0.62, 52.81], '灵顿': [-1.97, 51.45], '柯科迪': [-3.14, 56.11],
+    '格里诺克': [-4.77, 55.95], '剑桥': [0.12, 52.21], '格拉斯哥': [-4.25, 55.86],
+    '弗吉尼亚': [-78.0, 38.0], '纽约': [-74.0, 40.71], '阿雅克肖': [8.93, 41.93],
+    '阿拉斯': [2.78, 50.29], '波恩': [7.10, 50.73], '什鲁斯伯里': [-2.75, 52.71],
+    '特里尔': [6.64, 49.76], '肯塔基': [-85.0, 37.5], '米兰': [-82.61, 41.30],
+    '门洛帕克': [-122.18, 37.45], '拉海': [0.17, 47.30], '波尔多': [-0.58, 44.84],
+  },
+  personImages: {},
+  timelineTicks: [1600, 1687, 1776, 1789, 1815, 1859, 1879, 1900],
+};

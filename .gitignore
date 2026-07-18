@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build / cache
+.cache/
+dist/
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Comate 工具产物（如临时）
+.comate/

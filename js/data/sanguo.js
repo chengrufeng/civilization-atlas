@@ -1,27 +1,11 @@
 /* =========================================================================
- * 华夏人物图鉴 · 数据层
+ * 华夏人物图鉴 · 三国人物志 数据集
  *
- * 设计为"数据集驱动"的可扩展结构：
- *   - 每个"图鉴集"(AtlasSet) 描述一个时代/主题（如三国、春秋、欧洲中世纪）
- *   - 统一的人物 / 关系 / 事件 / 地点 / 势力 数据模型
- *   - 视图层只依赖统一字段，新增数据集即可生成新图鉴
- *
- * 后续扩展方式：
- *   1. 新增 js/data/xxx.js 导出新的 AtlasSet
- *   2. 在 app.js 的 ATLAS_REGISTRY 注册
- *   3. 顶部切换数据集即可复用全部视图
+ * 涵盖东汉末年至三国鼎立时期（184–280年）。
+ * 统一数据模型见 data/index.js 的类型定义。
  * ========================================================================= */
 
-/* ---------- 通用类型定义（注释说明，便于维护） ----------
- * Person: { id, name, courtesy, alias[], faction, factionName,
- *   birth, death, birthPlace, title, roles[], avatar(char), bio,
- *   events: [{ year, place, desc }] }
- * Relation: { source, target, type, label, year? }
- * Event: { id, name, year, type, location, desc, participants[] }
- * Faction: { id, name, color, founded, capital, desc }
- * Place: { id, name, modern, coord:[lng,lat], note }
- * -------------------------------------------------------- */
-
+/* ---------- 势力 ---------- */
 const FACTIONS = [
   { id: 'shu', name: '蜀汉', color: '#4a7c59', founded: 221, capital: '成都', capitalFrom: 214, desc: '刘备建立的政权，以汉室正统自居，据西南益州。仁德立国，人才称盛而国力偏弱。' },
   { id: 'wei', name: '曹魏', color: '#2f5d8a', founded: 220, capital: '洛阳', capitalFrom: 184, desc: '曹操奠基、曹丕代汉而立，占据中原北方，国力最强、人才最盛。' },
@@ -29,6 +13,7 @@ const FACTIONS = [
   { id: 'other', name: '汉末群雄', color: '#8a6d3b', founded: 184, capital: '—', capitalFrom: 184, desc: '东汉末年皇权倾颓，诸侯并起：董卓、袁绍、吕布、刘表等轮番登场。' },
 ];
 
+/* ---------- 地点 ---------- */
 const PLACES = [
   { id: 'luoyang', name: '洛阳', modern: '河南洛阳', coord: [112.45, 34.62], note: '东汉都城，董卓焚毁后残破，曹魏复都于此。' },
   { id: 'changan', name: '长安', modern: '陕西西安', coord: [108.95, 34.27], note: '西汉旧都，董卓挟献帝西迁之所。' },
@@ -87,6 +72,7 @@ const PLACES = [
   { id: 'chenxian', name: '陈县', modern: '河南淮阳', coord: [114.88, 33.73], note: '曹植封陈王、郁郁而终之地。' },
 ];
 
+/* ---------- 人物 ---------- */
 const PERSONS = [
   /* ===== 蜀汉 ===== */
   { id: 'liubei', name: '刘备', courtesy: '玄德', alias: ['先主','昭烈帝'], faction: 'shu', birth: 161, death: 223, birthPlace: '涿郡', title: '汉昭烈帝', roles: ['蜀汉开国皇帝'], avatar: '备',
@@ -433,10 +419,7 @@ const PERSONS = [
   },
 ];
 
-/* ---------- 人物关系 ----------
- * type: 君臣 / 结义 / 父子 / 夫妻 / 兄弟 / 师徒 / 同僚 / 敌对 / 亲属
- * label 为图谱上显示的边标签
- */
+/* ---------- 人物关系 ---------- */
 const RELATIONS = [
   // 蜀 — year = 关系建立年份，null 表示始终存在（如血缘）
   { source: 'liubei', target: 'guanyu', type: '结义', label: '桃园结义', year: 184 },
@@ -486,9 +469,7 @@ const RELATIONS = [
   { source: 'lvbu', target: 'liubei', type: '敌对', label: '夺徐州', year: 196 },
 ];
 
-/* ---------- 历史事件 ----------
- * domain: 军事 / 政治 / 文学 / 科技 / 外交 / 文化
- */
+/* ---------- 历史事件 ---------- */
 const EVENTS = [
   /* ===== 军事 ===== */
   { id: 'e1', name: '黄巾起义', year: 184, domain: '军事', location: '巨鹿', desc: '张角于巨鹿率太平道信徒起事，波及全国，动摇东汉根基，拉开乱世序幕。', participants: ['liubei','guanyu','zhangfei','caocao','dongzhuo'] },
@@ -544,7 +525,7 @@ const EVENTS = [
   { id: 'e39', name: '空城计', year: 228, domain: '文化', location: '祁山', desc: '马谡失街亭后，司马懿大军逼近西城。诸葛亮城中空虚，大开城门抚琴退敌。演义经典。', participants: ['zhugeliang','simayi'] },
 ];
 
-/* ---------- 主要河流（简化坐标，用于地图山水底图） ---------- */
+/* ---------- 主要河流 ---------- */
 const RIVERS = [
   {
     name: '黄河',
@@ -581,49 +562,7 @@ const RIVERS = [
   },
 ];
 
-/* ---------- 组装数据集 ---------- */
-export const sanguoAtlas = {
-  id: 'sanguo',
-  name: '三国人物志',
-  subtitle: '东汉末年 · 三国鼎立（184–280年）',
-  era: '184–280',
-  factions: FACTIONS,
-  places: PLACES,
-  persons: PERSONS,
-  relations: RELATIONS,
-  events: EVENTS,
-  rivers: RIVERS,
-  mapRegion: 'china',
-};
-
-/* ---------- 数据集注册表（扩展用） ----------
- * 未来添加：
- *   { id:'chunqiu', name:'春秋战国人物志', ... }
- *   { id:'tang', name:'大唐人物志', ... }
- *   { id:'europe-medieval', name:'欧洲中世纪人物志', mapRegion:'europe', ... }
- * 视图层根据 mapRegion 切换地图底图。
- */
-export const ATLAS_REGISTRY = [sanguoAtlas];
-
-/* ---------- 通用辅助函数 ---------- */
-export function getPerson(id, atlas = sanguoAtlas) {
-  return atlas.persons.find(p => p.id === id);
-}
-export function getFaction(id, atlas = sanguoAtlas) {
-  return atlas.factions.find(f => f.id === id);
-}
-export function getPlace(id, atlas = sanguoAtlas) {
-  return atlas.places.find(p => p.id === id);
-}
-export function getRelationsOf(id, atlas = sanguoAtlas) {
-  return atlas.relations.filter(r => r.source === id || r.target === id);
-}
-
-/* ---------- 重要性分级 ---------- 
- * Level 1（核心，始终可见）: 三国主帅 + 关键统帅
- * Level 2（重要，zoom>=5 可见）: 名将/谋士/群雄首脑
- * Level 3（次要，zoom>=7 可见）: 其余人物
- */
+/* ---------- 重要性分级 ---------- */
 const PERSON_L1 = new Set(['liubei','caocao','sunquan','zhugeliang','simayi']);
 const PERSON_L2 = new Set([
   'guanyu','zhangfei','zhaoyun','machao','huangzhong','pangtong','jiangwei',
@@ -631,31 +570,25 @@ const PERSON_L2 = new Set([
   'zhouyu','lusu','lvmeng','luxun','ganning',
   'dongzhuo','lvbu','yuanshao','liubiao','huatuo',
 ]);
-export function getPersonImportance(personId) {
+function getPersonImportance(personId) {
   if (PERSON_L1.has(personId)) return 1;
   if (PERSON_L2.has(personId)) return 2;
   return 3;
 }
 
-/* 事件重要性 */
 const EVENT_L1 = new Set([
   'e1','e34','e2','e3','e4','e5','e6','e8','e9','e10','e12','e13','e15',
 ]);
 const EVENT_L2 = new Set([
   'e7','e11','e14','e16','e18','e19','e22','e35','e36','e37','e38','e39','e24','e33',
 ]);
-export function getEventImportance(eventId) {
+function getEventImportance(eventId) {
   if (EVENT_L1.has(eventId)) return 1;
   if (EVENT_L2.has(eventId)) return 2;
   return 3;
 }
 
-/* ---------- 人物地理坐标查找 ----------
- * 人物的 birthPlace 字符串不一定与 PLACES 中的 name 完全匹配，
- * 这里提供一份"出生地→经纬度"的补充查找表，覆盖所有人物的故里。
- * 视图层用 getPersonCoord() 获取人物在地图上的坐标。
- */
-/* 出生地对应的现代地区（用于详情面板显示） */
+/* ---------- 人物地理坐标查找 ---------- */
 const BIRTHPLACE_MODERN = {
   '涿郡': '今河北涿州',
   '河东解县': '今山西运城',
@@ -696,23 +629,17 @@ const BIRTHPLACE_MODERN = {
   '东平宁阳': '今山东宁阳',
 };
 
-export function getBirthplaceModern(birthPlace) {
-  return BIRTHPLACE_MODERN[birthPlace] || '';
-}
-
 const BIRTHPLACE_COORDS = {
-
-  // 补充新增人物的出生地
-  '谯县': [115.78, 33.85], // 华佗
-  '南阳涅阳': [112.53, 33.00], // 张仲景
-  '谯国铚县': [116.23, 33.93], // 嵇康
-  '淄乡': [120.38, 36.07], // 刘徽（山东淄博近似）
-  '鲁国曲阜': [117.01, 35.59], // 孔融
-  '广陵射阳': [119.55, 33.78], // 陈琳
-  '北海': [119.10, 36.70], // 徐干
-  '陈留尉氏': [114.18, 34.41], // 阮瑀
-  '汝南': [114.35, 33.00], // 应玚
-  '东平宁阳': [116.80, 35.76], // 刘桢
+  '谯县': [115.78, 33.85],
+  '南阳涅阳': [112.53, 33.00],
+  '谯国铚县': [116.23, 33.93],
+  '淄乡': [120.38, 36.07],
+  '鲁国曲阜': [117.01, 35.59],
+  '广陵射阳': [119.55, 33.78],
+  '北海': [119.10, 36.70],
+  '陈留尉氏': [114.18, 34.41],
+  '汝南': [114.35, 33.00],
+  '东平宁阳': [116.80, 35.76],
   '涿郡': [115.98, 39.49],
   '河东解县': [111.00, 35.03],
   '琅琊阳都': [118.47, 35.55],
@@ -742,8 +669,6 @@ const BIRTHPLACE_COORDS = {
   '山阳高平': [116.97, 35.39],
 };
 
-/* 获取人物在地图上的坐标：优先出生地，其次第一个事件地点 */
-/* 人物肖像图片 URL（Wikimedia Commons 公有领域画像） */
 const PERSON_IMAGES = {
   liubei:    'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Liu_Bei_Tang.jpg/120px-Liu_Bei_Tang.jpg',
   guanyu:    'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Guanyu-1.jpg/120px-Guanyu-1.jpg',
@@ -774,43 +699,24 @@ const PERSON_IMAGES = {
   huatuo:    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/HuaTuo.jpg/120px-HuaTuo.jpg',
 };
 
-export function getPersonImage(personId) {
-  return PERSON_IMAGES[personId] || null;
-}
-
-export function getPersonCoord(person, atlas = sanguoAtlas) {
-  if (person.coord) return person.coord;
-  // 查出生地补充表
-  if (BIRTHPLACE_COORDS[person.birthPlace]) return BIRTHPLACE_COORDS[person.birthPlace];
-  // 查 PLACES 表（按 name 匹配）
-  const place = atlas.places.find(p => p.name === person.birthPlace);
-  if (place) return place.coord;
-  // 用第一个事件的地点
-  if (person.events && person.events.length > 0) {
-    const evPlace = atlas.places.find(p => p.name === person.events[0].place);
-    if (evPlace) return evPlace.coord;
-  }
-  return null;
-}
-
-/* 获取事件地点坐标 */
-export function getEventCoord(event, atlas = sanguoAtlas) {
-  const place = atlas.places.find(p => p.name === event.location);
-  return place ? place.coord : null;
-}
-
-/* 获取人物在特定年份的地图位置：
- *   - 无年份(null)：返回出生地
- *   - 有年份：返回该年最近一次事件发生的地点
- *   - 无事件：返回出生地
- */
-export function getPersonPositionAtYear(person, year, atlas = sanguoAtlas) {
-  if (year === null || year === undefined) return getPersonCoord(person, atlas);
-  const events = (person.events || [])
-    .filter(e => e.year <= year)
-    .sort((a, b) => b.year - a.year);
-  if (events.length === 0) return getPersonCoord(person, atlas);
-  const place = atlas.places.find(p => p.name === events[0].place);
-  return place ? place.coord : getPersonCoord(person, atlas);
-}
-
+/* ---------- 组装数据集 ---------- */
+export const sanguoAtlas = {
+  id: 'sanguo',
+  name: '三国人物志',
+  subtitle: '东汉末年 · 三国鼎立（184–280年）',
+  era: '184–280',
+  startYear: 184,
+  endYear: 280,
+  mapView: { center: [112, 33], zoom: 6, minZoom: 3, maxZoom: 12 },
+  factions: FACTIONS,
+  places: PLACES,
+  persons: PERSONS,
+  relations: RELATIONS,
+  events: EVENTS,
+  rivers: RIVERS,
+  importance: { getPersonImportance, getEventImportance },
+  birthplaceModern: BIRTHPLACE_MODERN,
+  birthplaceCoords: BIRTHPLACE_COORDS,
+  personImages: PERSON_IMAGES,
+  timelineTicks: [184, 200, 208, 220, 229, 234, 263, 280],
+};

@@ -1,0 +1,11 @@
+{
+  "name": "civilization-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "数据驱动的历史人物地图图鉴（纯前端 ES Modules，无构建）",
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "smoke": "node tools/smoke.mjs"
+  }
+}

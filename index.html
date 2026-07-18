@@ -23,12 +23,17 @@
         <p class="brand-sub">三国人物志 · 184–280</p>
       </div>
     </div>
+    <button class="atlas-selector-btn" id="atlas-selector-btn" title="切换数据集">
+      <span class="atlas-selector-label" id="atlas-current-name">数据集</span>
+      <span class="atlas-caret">▾</span>
+    </button>
     <div class="top-controls">
       <input class="search-box" id="search" placeholder="搜索人物…" />
       <button class="icon-btn" id="btn-left-panel" title="筛选面板">筛选</button>
       <button class="icon-btn active" id="btn-events" title="事件一览表">大事记</button>
       <button class="icon-btn active" id="btn-timeline" title="时间轴">时间轴</button>
       <button class="icon-btn" id="btn-list" title="人物名册">名册</button>
+      <button class="icon-btn" id="btn-timeline-compare" title="时代对照">对照</button>
       <button class="icon-btn" id="btn-fullscreen" title="全屏切换">⤢</button>
     </div>
   </header>
@@ -59,14 +64,7 @@
     </div>
     <div class="panel-section">
       <h4 class="panel-title">事件领域</h4>
-      <div class="domain-filters" id="domain-filters">
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="军事" checked /> <span class="domain-tag" style="--dc:#b23a2e">军事</span></label>
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="政治" checked /> <span class="domain-tag" style="--dc:#2f5d8a">政治</span></label>
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="文学" checked /> <span class="domain-tag" style="--dc:#7b4b94">文学</span></label>
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="科技" checked /> <span class="domain-tag" style="--dc:#2d8a6e">科技</span></label>
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="外交" checked /> <span class="domain-tag" style="--dc:#b8893a">外交</span></label>
-        <label class="toggle domain-toggle"><input type="checkbox" data-domain="文化" checked /> <span class="domain-tag" style="--dc:#8a6d3b">文化</span></label>
-      </div>
+      <div class="domain-filters" id="domain-filters"></div>
     </div>
     <div class="panel-section">
       <h4 class="panel-title">统计</h4>
@@ -84,8 +82,7 @@
     </div>
     <div class="timeline-slider-wrap">
       <div class="event-track" id="event-track"></div>
-      <input type="range" id="year-slider" min="184" max="280" value="184" step="1" />
-      <div class="timeline-ticks" id="timeline-ticks"></div>
+      <input type="range" id="year-slider" min="184" max="280" value="184" step="1" />      <div class="timeline-ticks" id="timeline-ticks"></div>
     </div>
     <button class="track-btn active" id="track-btn" title="自动追踪事件位置">追踪</button>
     <button class="reset-btn" id="reset-btn" title="重置时间">全部</button>
@@ -106,6 +103,26 @@
     <div class="detail-content" id="detail-content"></div>
   </aside>
   <div class="detail-mask" id="detail-mask"></div>
+
+  <!-- ====== 时代对照浮层 ====== -->
+  <div class="compare-overlay-mask" id="compare-overlay-mask"></div>
+  <div class="compare-overlay" id="compare-overlay" aria-hidden="true">
+    <div class="compare-overlay-header">
+      <h3>时代对照</h3>
+      <button class="compare-close" id="compare-close" aria-label="关闭">×</button>
+    </div>
+    <div class="compare-overlay-body" id="compare-overlay-body"></div>
+  </div>
+
+  <!-- ====== 数据集选择浮层 ====== -->
+  <div class="atlas-overlay-mask" id="atlas-overlay-mask"></div>
+  <div class="atlas-overlay" id="atlas-overlay" aria-hidden="true">
+    <div class="atlas-overlay-header">
+      <h3>选择数据集</h3>
+      <button class="atlas-close" id="atlas-close" aria-label="关闭">×</button>
+    </div>
+    <div class="atlas-overlay-body" id="atlas-overlay-body"></div>
+  </div>
 
   <!-- ====== 人物名册浮层 ====== -->
   <div class="list-overlay" id="list-overlay" aria-hidden="true">
@@ -133,6 +150,38 @@
     <p>地图加载中…</p>
   </div>
 
+  <script>
+    // 加载失败兜底：ES Module 在 file:// 下会被 CORS 拦截，导致页面永远停在“地图加载中”
+    (function () {
+      function showLoadError(html) {
+        var overlay = document.getElementById('loading-overlay');
+        if (!overlay || overlay.classList.contains('hide')) return;
+        overlay.innerHTML = '<div class="loading-error">' + html + '</div>';
+      }
+      if (location.protocol === 'file:') {
+        document.addEventListener('DOMContentLoaded', function () {
+          showLoadError(
+            '<h3>无法直接双击打开</h3>' +
+            '<p>本项目使用 ES Modules，浏览器禁止通过 <code>file://</code> 加载模块脚本。</p>' +
+            '<p>请在项目目录下启动本地 HTTP 服务后访问：</p>' +
+            '<pre>python3 -m http.server 8080\n# 或\nnpx serve .</pre>' +
+            '<p>然后打开 <code>http://localhost:8080</code></p>'
+          );
+        });
+        return;
+      }
+      window.addEventListener('error', function (e) {
+        var msg = (e && e.message) ? e.message : '脚本加载失败';
+        showLoadError('<h3>页面初始化失败</h3><p>' + msg + '</p><p>请打开浏览器控制台（F12）查看详细错误。</p>');
+      });
+      // Leaflet CDN 加载失败检测
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof L === 'undefined') {
+          showLoadError('<h3>地图库加载失败</h3><p>无法从 CDN 加载 Leaflet，请检查网络连接后刷新页面。</p>');
+        }
+      });
+    })();
+  </script>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>
