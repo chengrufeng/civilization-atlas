@@ -28,12 +28,13 @@
       <span class="atlas-caret">▾</span>
     </button>
     <div class="top-controls">
-      <input class="search-box" id="search" placeholder="搜索人物…" />
-      <button class="icon-btn" id="btn-left-panel" title="筛选面板">筛选</button>
-      <button class="icon-btn active" id="btn-events" title="事件一览表">大事记</button>
-      <button class="icon-btn active" id="btn-timeline" title="时间轴">时间轴</button>
-      <button class="icon-btn" id="btn-list" title="人物名册">名册</button>
-      <button class="icon-btn" id="btn-timeline-compare" title="时代对照">对照</button>
+      <input class="search-box" id="search" data-i18n-placeholder="topbar.search_placeholder" placeholder="搜索人物…" />
+      <button class="icon-btn" id="btn-left-panel" data-i18n="topbar.filter" title="筛选面板">筛选</button>
+      <button class="icon-btn active" id="btn-events" data-i18n="topbar.events" title="事件一览表">大事记</button>
+      <button class="icon-btn active" id="btn-timeline" data-i18n="topbar.timeline" title="时间轴">时间轴</button>
+      <button class="icon-btn" id="btn-list" data-i18n="topbar.list" title="人物名册">名册</button>
+      <button class="icon-btn" id="btn-timeline-compare" data-i18n="topbar.compare" title="时代对照">对照</button>
+      <button class="icon-btn" id="btn-lang" title="Language / 语言">中/EN</button>
       <button class="icon-btn" id="btn-fullscreen" title="全屏切换">⤢</button>
     </div>
   </header>
@@ -44,7 +45,7 @@
   <!-- ====== 左侧浮层面板 ====== -->
   <aside class="left-panel hidden" id="left-panel">
     <div class="panel-section">
-      <h4 class="panel-title">势力</h4>
+      <h4 class="panel-title" data-i18n="panel.factions">势力</h4>
       <div class="faction-filters" id="faction-filters">
         <button class="chip active" data-faction="all">全部</button>
         <button class="chip shu" data-faction="shu">蜀汉</button>
@@ -54,23 +55,23 @@
       </div>
     </div>
     <div class="panel-section">
-      <h4 class="panel-title">图层</h4>
+      <h4 class="panel-title" data-i18n="panel.layers">图层</h4>
       <div class="layer-toggles" id="layer-toggles">
-        <label class="toggle"><input type="checkbox" data-layer="persons" checked /> <span>● 人物</span></label>
-        <label class="toggle"><input type="checkbox" data-layer="events" checked /> <span>◆ 事件</span></label>
-        <label class="toggle"><input type="checkbox" data-layer="capitals" checked /> <span>📍 都城</span></label>
+        <label class="toggle"><input type="checkbox" data-layer="persons" checked /> <span data-i18n="panel.persons">● 人物</span></label>
+        <label class="toggle"><input type="checkbox" data-layer="events" checked /> <span data-i18n="panel.events_layer">◆ 事件</span></label>
+        <label class="toggle"><input type="checkbox" data-layer="capitals" checked /> <span data-i18n="panel.capitals">📍 都城</span></label>
       </div>
-      <div class="layer-hint">选中人物后显示 ──关系 ┄┄敌对 ━▶轨迹</div>
+      <div class="layer-hint" data-i18n="panel.layer_hint">选中人物后显示 ──关系 ┄┄敌对 ━▶轨迹</div>
     </div>
     <div class="panel-section">
-      <h4 class="panel-title">事件领域 <button class="domain-browser-btn" id="btn-domain-browser" title="跨数据集领域浏览">🌐</button></h4>
+      <h4 class="panel-title">事件领域 <button class="domain-browser-btn" id="btn-domain-browser" data-i18n-title="panel.domains_browser" title="跨数据集领域浏览">🌐</button></h4>
       <div class="domain-filters" id="domain-filters"></div>
     </div>
     <div class="panel-section">
-      <h4 class="panel-title">统计</h4>
-      <div class="stat-line"><span>人物</span><b id="stat-persons">0</b></div>
-      <div class="stat-line"><span>关系</span><b id="stat-relations">0</b></div>
-      <div class="stat-line"><span>事件</span><b id="stat-events">0</b></div>
+      <h4 class="panel-title" data-i18n="panel.stats">统计</h4>
+      <div class="stat-line"><span data-i18n="panel.stat_persons">人物</span><b id="stat-persons">0</b></div>
+      <div class="stat-line"><span data-i18n="panel.stat_relations">关系</span><b id="stat-relations">0</b></div>
+      <div class="stat-line"><span data-i18n="panel.stat_events">事件</span><b id="stat-events">0</b></div>
     </div>
   </aside>
 
@@ -84,8 +85,8 @@
       <div class="event-track" id="event-track"></div>
       <input type="range" id="year-slider" min="184" max="280" value="184" step="1" />      <div class="timeline-ticks" id="timeline-ticks"></div>
     </div>
-    <button class="track-btn active" id="track-btn" title="自动追踪事件位置">追踪</button>
-    <button class="reset-btn" id="reset-btn" title="重置时间">全部</button>
+    <button class="track-btn active" id="track-btn" data-i18n="timeline.track" title="自动追踪事件位置">追踪</button>
+    <button class="reset-btn" id="reset-btn" data-i18n="timeline.reset" title="重置时间">全部</button>
   </div>
 
   <!-- ====== 右侧事件一览表（常驻） ====== -->

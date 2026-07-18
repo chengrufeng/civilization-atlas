@@ -1,0 +1,222 @@
+/* =========================================================================
+ * i18n：UI 文案中英双语。
+ *   - 静态 UI（按钮、面板标题、提示语）通过 setLang() 切换
+ *   - 数据集内容（朝代名、人名、事件）保持原文（多为专有名词）
+ *
+ * 用法：
+ *   import { setLang, t, currentLang } from './core/i18n.js';
+ *   setLang('en');          // 切到英文
+ *   t('search.placeholder') // 取当前语言的字符串
+ * ========================================================================= */
+
+const STRINGS = {
+  zh: {
+    'app.title': '华夏人物图鉴',
+    'app.subtitle': '文明图谱',
+
+    'topbar.atlas_selector': '数据集',
+    'topbar.search_placeholder': '搜索人物…',
+    'topbar.filter': '筛选',
+    'topbar.events': '大事记',
+    'topbar.timeline': '时间轴',
+    'topbar.list': '名册',
+    'topbar.compare': '对照',
+    'topbar.fullscreen_on': '⤢',
+    'topbar.fullscreen_off': '⤡',
+
+    'panel.factions': '势力',
+    'panel.factions_all': '全部',
+    'panel.layers': '图层',
+    'panel.persons': '● 人物',
+    'panel.events_layer': '◆ 事件',
+    'panel.capitals': '📍 都城',
+    'panel.layer_hint': '选中人物后显示 ──关系 ┄┄敌对 ━▶轨迹',
+    'panel.domains': '事件领域',
+    'panel.domains_browser': '跨数据集领域浏览',
+    'panel.stats': '统计',
+    'panel.stat_persons': '人物',
+    'panel.stat_relations': '关系',
+    'panel.stat_events': '事件',
+
+    'timeline.play': '▶',
+    'timeline.pause': '⏸',
+    'timeline.year_all': '全部年份',
+    'timeline.track': '追踪',
+    'timeline.reset': '全部',
+
+    'atlas_overlay.title': '选择数据集',
+    'compare_overlay.title': '时代对照',
+    'compare_overlay.hint': '👆 点击轴上任一年份，查看全球同时代人物',
+    'compare_overlay.row_hint': '点击任意条带切换至该数据集',
+    'contemp_overlay.title': ' 年 · 同时代人物',
+    'contemp.loading': '加载中…',
+    'contemp.empty': '该年份无在世人物数据',
+    'domain_browser.title': '跨数据集领域浏览',
+
+    'list_overlay.title': '人物名册',
+    'shortcuts.title': '键盘快捷键',
+    'shortcuts.space': '播放 / 暂停',
+    'shortcuts.arrows': '年份 -1 / +1',
+    'shortcuts.shift_arrows': '年份 -10 / +10',
+    'shortcuts.home_end': '跳到起始 / 结束年份',
+    'shortcuts.slash': '聚焦搜索框',
+    'shortcuts.l': '打开数据集切换',
+    'shortcuts.c': '打开时代对照',
+    'shortcuts.question': '显示本帮助',
+    'shortcuts.esc': '关闭任何浮层',
+
+    'detail.basic': '基本信息',
+    'detail.birth_death': '生卒',
+    'detail.hometown': '故里',
+    'detail.title': '官职',
+    'detail.identity': '身份',
+    'detail.bio': '生平简介',
+    'detail.events': '生平大事（地图轨迹）',
+    'detail.relations': '人物关系',
+    'detail.cross_links': '跨数据集关联',
+    'detail.no_data': '暂无',
+    'detail.cross_same_person': '同一人物',
+    'detail.cross_interaction': '互动',
+
+    'toast.not_found': '未找到匹配人物',
+    'event_list.title': '大事记',
+    'event_list.count_suffix': ' 件',
+
+    'loading.text': '地图加载中…',
+    'loading.error.title': '页面初始化失败',
+    'loading.error.hint': '请打开浏览器控制台（F12）查看详细错误。',
+    'loading.atlas_error.title': '数据集加载失败',
+    'loading.atlas_error.hint': '请检查网络或数据文件后重试。',
+    'loading.file_error.title': '无法直接双击打开',
+    'loading.file_error.body_html': '<p>本项目使用 ES Modules，浏览器禁止通过 <code>file://</code> 加载模块脚本。</p>',
+    'loading.file_error.cmd_html': '<pre>python3 -m http.server 8080\n# 或\nnpx serve .</pre>',
+    'loading.file_error.open_html': '<p>然后打开 <code>http://localhost:8080</code></p>',
+    'loading.leaflet_error.title': '地图库加载失败',
+    'loading.leaflet_error.body': '无法从 CDN 加载 Leaflet，请检查网络连接后刷新页面。',
+  },
+
+  en: {
+    'app.title': 'Civilization Atlas',
+    'app.subtitle': 'ATLAS',
+
+    'topbar.atlas_selector': 'Dataset',
+    'topbar.search_placeholder': 'Search figures…',
+    'topbar.filter': 'Filter',
+    'topbar.events': 'Chronicle',
+    'topbar.timeline': 'Timeline',
+    'topbar.list': 'Roster',
+    'topbar.compare': 'Compare',
+    'topbar.fullscreen_on': '⤢',
+    'topbar.fullscreen_off': '⤡',
+
+    'panel.factions': 'Factions',
+    'panel.factions_all': 'All',
+    'panel.layers': 'Layers',
+    'panel.persons': '● Figures',
+    'panel.events_layer': '◆ Events',
+    'panel.capitals': '📍 Capitals',
+    'panel.layer_hint': 'After selecting a figure ──relation ┄┄rival ━▶trajectory',
+    'panel.domains': 'Event Domains',
+    'panel.domains_browser': 'Cross-dataset domain browser',
+    'panel.stats': 'Stats',
+    'panel.stat_persons': 'Figures',
+    'panel.stat_relations': 'Relations',
+    'panel.stat_events': 'Events',
+
+    'timeline.play': '▶',
+    'timeline.pause': '⏸',
+    'timeline.year_all': 'All years',
+    'timeline.track': 'Track',
+    'timeline.reset': 'All',
+
+    'atlas_overlay.title': 'Select Dataset',
+    'compare_overlay.title': 'Era Comparison',
+    'compare_overlay.hint': '👆 Click any year on the axis to view contemporaries worldwide',
+    'compare_overlay.row_hint': 'Click any bar to switch to that dataset',
+    'contemp_overlay.title': ' · Contemporaries',
+    'contemp.loading': 'Loading…',
+    'contemp.empty': 'No data for this year',
+    'domain_browser.title': 'Cross-dataset Domain Browser',
+
+    'list_overlay.title': 'Figure Roster',
+    'shortcuts.title': 'Keyboard Shortcuts',
+    'shortcuts.space': 'Play / Pause',
+    'shortcuts.arrows': 'Year -1 / +1',
+    'shortcuts.shift_arrows': 'Year -10 / +10',
+    'shortcuts.home_end': 'Jump to start / end year',
+    'shortcuts.slash': 'Focus search box',
+    'shortcuts.l': 'Open dataset switcher',
+    'shortcuts.c': 'Open era comparison',
+    'shortcuts.question': 'Show this help',
+    'shortcuts.esc': 'Close any overlay',
+
+    'detail.basic': 'Basic Info',
+    'detail.birth_death': 'Born–Died',
+    'detail.hometown': 'Origin',
+    'detail.title': 'Title',
+    'detail.identity': 'Roles',
+    'detail.bio': 'Biography',
+    'detail.events': 'Life Events (Trajectory)',
+    'detail.relations': 'Relationships',
+    'detail.cross_links': 'Cross-dataset Links',
+    'detail.no_data': 'None',
+    'detail.cross_same_person': 'Same person',
+    'detail.cross_interaction': 'Interaction',
+
+    'toast.not_found': 'No matching figures',
+    'event_list.title': 'Chronicle',
+    'event_list.count_suffix': '',
+
+    'loading.text': 'Loading map…',
+    'loading.error.title': 'Initialization failed',
+    'loading.error.hint': 'Please open the browser console (F12) for details.',
+    'loading.atlas_error.title': 'Dataset load failed',
+    'loading.atlas_error.hint': 'Please check the network or data files and retry.',
+    'loading.file_error.title': 'Cannot open via double-click',
+    'loading.file_error.body_html': '<p>This project uses ES Modules; browsers block module scripts over <code>file://</code>.</p>',
+    'loading.file_error.cmd_html': '<pre>python3 -m http.server 8080\n# or\nnpx serve .</pre>',
+    'loading.file_error.open_html': '<p>Then open <code>http://localhost:8080</code></p>',
+    'loading.leaflet_error.title': 'Map library failed to load',
+    'loading.leaflet_error.body': 'Could not load Leaflet from CDN. Check your network and refresh.',
+  },
+};
+
+let lang = 'zh';
+const listeners = new Set();
+
+export function currentLang() { return lang; }
+
+export function setLang(newLang) {
+  if (!STRINGS[newLang]) return false;
+  if (lang === newLang) return true;
+  lang = newLang;
+  applyToDOM();
+  listeners.forEach(fn => fn(lang));
+  return true;
+}
+
+export function t(key) {
+  return (STRINGS[lang] && STRINGS[lang][key]) || (STRINGS.zh[key]) || key;
+}
+
+export function onLangChange(fn) { listeners.add(fn); }
+
+/** 把 data-i18n 标注的 DOM 元素全部刷新到当前语言 */
+export function applyToDOM() {
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const val = t(key);
+    if (val) el.setAttribute('placeholder', val);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.getAttribute('data-i18n-title');
+    const val = t(key);
+    if (val) el.setAttribute('title', val);
+  });
+}

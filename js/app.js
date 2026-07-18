@@ -23,6 +23,7 @@ import {
 import { buildEventList } from './core/event-list.js';
 import { openCompareOverlay, closeCompareOverlay } from './core/compare.js';
 import { openDomainBrowser, closeDomainBrowser } from './core/domain-browser.js';
+import { setLang, applyToDOM, currentLang, onLangChange } from './core/i18n.js';
 import { readUrlState, syncUrlState, withUrlSuppressed } from './core/url-state.js';
 import { formatYear } from './core/state.js';
 
@@ -47,6 +48,7 @@ async function init() {
   updateStats();
   bindTopBarExtras();
   render();
+  applyToDOM();  // 应用 i18n 到 DOM（首次渲染）
 
   document.getElementById('loading-overlay').classList.add('hide');
 
@@ -174,6 +176,15 @@ function bindTopBarExtras() {
     if (atlasId !== current().id) await doSwitchAtlas(atlasId);
     import('./core/detail.js').then(m => m.showEventInfo(eventId));
   });
+
+  // E3 语言切换
+  const btnLang = document.getElementById('btn-lang');
+  if (btnLang) {
+    btnLang.addEventListener('click', () => {
+      setLang(currentLang() === 'zh' ? 'en' : 'zh');
+    });
+    btnLang.textContent = '中/EN';
+  }
 }
 
 /** 带加载态的数据集切换：懒加载期间显示遮罩，失败时提示 */
