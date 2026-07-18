@@ -18,8 +18,9 @@
         "刘备"
       ],
       "image": "https://so1.360tres.com/t01c201bcccbb396049.jpg",
-      "imageCaption": "刘备",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageCaption": "刘备 · 昭烈帝",
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 7.12,
@@ -31,8 +32,9 @@
         "刘备"
       ],
       "image": "https://so1.360tres.com/t01c201bcccbb396049.jpg",
-      "imageCaption": "刘备",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageCaption": "刘备 · 早年",
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 17.5,
@@ -41,11 +43,11 @@
       "step": 0,
       "caption": "公元 184 年，黄巾起义席卷天下。24 岁的刘备招兵讨贼，与关羽、张飞桃园结义——这一拜，就是一辈子。",
       "keywords": [
-        "黄巾起义",
-        "桃园三结义"
+        "桃园三结义",
+        "黄巾起义"
       ],
-      "image": "http://i3.qulishi.com/static/2020/3/5ec7820c58fd8.png",
-      "imageCaption": "黄巾起义",
+      "image": "https://bkimg.cdn.bcebos.com/pic/fcfaaf51f3deb48f8c5433d122462d292df5e0fed230?x-bce-process=image/resize,m_lfit,w_1050,h_700,limit_0/quality,Q_90",
+      "imageCaption": "桃园三结义",
       "imageSource": "© Bing 图片搜索结果",
       "imageMode": "hero",
       "effect": "blossom"
