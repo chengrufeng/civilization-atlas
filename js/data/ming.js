@@ -56,6 +56,7 @@ const PERSONS = [
   { id: 'yuan_chong_huan', name: '袁崇焕', courtesy: '自如', alias: [], faction: 'ming', birth: 1584, death: 1630, birthPlace: '东莞', title: '蓟辽督师', roles: ['抗清名将'], avatar: '袁', bio: '宁远大捷、宁锦大捷，终被崇祯凌迟。', events: [ { year: 1626, place: '宁远', desc: '宁远大捷，努尔哈赤重伤' } ] },
   { id: 'nu_er_ha_chi', name: '努尔哈赤', courtesy: '', alias: ['清太祖'], faction: 'houjin', birth: 1559, death: 1626, birthPlace: '建州', title: '后金大汗', roles: ['后金建立者'], avatar: '努', bio: '统一女真、创立八旗，攻明不止。', events: [ { year: 1616, place: '盛京', desc: '建后金，称覆育列国英明汗' }, { year: 1619, place: '萨尔浒', desc: '萨尔浒大捷' }, { year: 1626, place: '宁远', desc: '宁远战败，重伤去世' } ] },
   { id: 'huang_tai_ji', name: '皇太极', courtesy: '', alias: ['清太宗'], faction: 'houjin', birth: 1592, death: 1643, birthPlace: '建州', title: '大汗/清帝', roles: ['清朝奠基者'], avatar: '皇', bio: '1636 改国号清，统一东北，五入长城。', events: [ { year: 1636, place: '盛京', desc: '称帝，改国号大清' } ] },
+  { id: 'qin_liangyu', name: '秦良玉', courtesy: '贞素', alias: [], faction: 'ming', birth: 1574, death: 1648, birthPlace: '应天', title: '石柱宣慰使·将军', roles: ['女将军','正史立传唯一女将'], avatar: '秦', bio: '明末女将军，率白杆兵抗清平叛，《明史》将相列传中唯一女将。', events: [ { year: 1621, place: '应天', desc: '率兵勤王抗后金' }, { year: 1644, place: '顺天', desc: '率军护卫京师' } ] },
 ];
 
 const RELATIONS = [

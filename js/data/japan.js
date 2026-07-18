@@ -49,6 +49,7 @@ const PERSONS = [
   { id: 'michimo', name: '宫本武藏', courtesy: '', alias: [], faction: 'edog', birth: 1584, death: 1645, birthPlace: '冈山', title: '剑客', roles: ['二天一流'], avatar: '武', bio: '《五轮书》，未尝败绩的剑圣。', events: [ { year: 1612, place: '下关', desc: '岩流岛决斗' } ] },
   { id: 'basho', name: '松尾芭蕉', courtesy: '', alias: [], faction: 'edog', birth: 1644, death: 1694, birthPlace: '伊贺', title: '俳谐师', roles: ['俳圣'], avatar: '芭', bio: '《奥之细道》，俳句艺术化。', events: [ { year: 1689, place: '奥州', desc: '完成奥之细道之旅' } ] },
   { id: 'hokusai', name: '葛饰北斋', courtesy: '', alias: [], faction: 'edog', birth: 1760, death: 1849, birthPlace: '江户', title: '浮世绘师', roles: ['浮世绘大师'], avatar: '北', bio: '《富岳三十六景》之《神奈川冲浪里》。', events: [ { year: 1831, place: '江户', desc: '出版富岳三十六景' } ] },
+  { id: 'hojo_masako', name: '北条政子', courtesy: '', alias: ['尼将军'], faction: 'kamakura', birth: 1156, death: 1225, birthPlace: '伊豆', title: '尼将军', roles: ['女政治家'], avatar: '政', bio: '源赖朝正妻，赖朝死后出家为尼仍掌握幕府实权，称"尼将军"。', events: [ { year: 1199, place: '镰仓', desc: '赖朝死后掌权' }, { year: 1219, place: '镰仓', desc: '镇压承久之乱' } ] },
   { id: 'perry', name: '佩里', courtesy: '', alias: ['Matthew C. Perry'], faction: 'edog', birth: 1794, death: 1858, birthPlace: '美国', title: '海军准将', roles: ['打开日本国门'], avatar: '佩', bio: '1853 年率黑船抵浦贺，迫使日本开国。', events: [ { year: 1853, place: '江户湾', desc: '黑船来航' } ] },
 ];
 

@@ -1061,13 +1061,38 @@ kbd {
 /* ---------- 响应式 ---------- */
 @media (max-width: 768px) {
   .left-panel { width: 180px; top: 64px; }
-  .top-bar { padding: 8px 12px; }
+  .top-bar { padding: 8px 12px; gap: 6px; }
   .brand-text h1 { font-size: 15px; }
-  .search-box { width: 120px; }
+  .brand-text .brand-sub { font-size: 9px; letter-spacing: 1px; }
+  .search-box { width: 110px; padding: 6px 10px; }
   .detail-panel { width: 100vw; }
-  .timeline-bar { padding: 12px 12px; gap: 8px; }
+  .timeline-bar { padding: 10px 8px; gap: 6px; }
   .year-display { font-size: 18px; }
   .event-list-panel { width: 78vw; }
   .event-list-panel.hidden { transform: translateX(80vw); }
   .toast-container { max-width: 92vw; }
+  .icon-btn { padding: 4px 8px; font-size: 12px; }
+  .atlas-selector-btn { padding: 6px 12px; font-size: 12px; }
+  .atlas-selector-label { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+@media (max-width: 480px) {
+  /* 极小屏：折叠次要按钮 */
+  .brand-text .brand-sub { display: none; }
+  .search-box { width: 90px; font-size: 12px; }
+  .icon-btn[title="筛选面板"],
+  .icon-btn[title="人物名册"],
+  .icon-btn[title="时代对照"] { display: none; }
+  /* 时间轴更紧凑 */
+  .timeline-bar { padding: 6px 4px; }
+  .year-display { font-size: 16px; }
+  .play-btn, .reset-btn, .track-btn { width: 32px; height: 32px; font-size: 14px; }
+  .compare-overlay, .atlas-overlay, .contemp-overlay {
+    width: 96vw; max-height: 88vh; top: 50px;
+  }
+  .compare-row-label { width: 70px; font-size: 11px; }
+  .compare-axis, .compare-axis-container .compare-axis { margin-left: 78px; }
+  .compare-axis-hint { margin-left: 78px; font-size: 10px; }
+  .contemp-cards { grid-template-columns: 1fr; }
+  .atlas-group-grid { grid-template-columns: 1fr; }
 }

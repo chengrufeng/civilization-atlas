@@ -45,6 +45,7 @@ const PERSONS = [
   { id: 'alexander', name: '亚历山大大帝', courtesy: '', alias: [], faction: 'macedon', birth: -356, death: -323, birthPlace: '佩拉', title: '马其顿国王', roles: ['征服者'], avatar: '历', bio: '横扫欧亚非，建立亚历山大帝国。', events: [ { year: -334, place: '特洛伊', desc: '东征开始' }, { year: -331, place: '高加米拉', desc: '高加米拉之战灭波斯' }, { year: -323, place: '巴比伦', desc: '病逝于巴比伦' } ] },
   { id: 'archimedes', name: '阿基米德', courtesy: '', alias: [], faction: 'sicily', birth: -287, death: -212, birthPlace: '叙拉古', title: '数学家·工程师', roles: ['古代科学家'], avatar: '阿', bio: '浮力定律、防御罗马围攻叙拉古。', events: [ { year: -212, place: '叙拉古', desc: '城破被罗马士兵所杀' } ] },
   { id: 'hippocrates', name: '希波克拉底', courtesy: '', alias: [], faction: 'ionia', birth: -460, death: -370, birthPlace: '科斯', title: '医生', roles: ['医学之父'], avatar: '希', bio: '希波克拉底誓言。', events: [ { year: -420, place: '科林斯', desc: '创立医学学派' } ] },
+  { id: 'sappho', name: '萨福', courtesy: '', alias: ['Sappho'], faction: 'ionia', birth: -630, death: -570, birthPlace: '莱斯沃斯', title: '女诗人', roles: ['第十位缪斯'], avatar: '萨', bio: '古希腊最伟大的抒情诗人，柏拉图称她"第十位缪斯"。', events: [ { year: -600, place: '科林斯', desc: '在莱斯沃斯创办女子诗社' } ] },
 ];
 
 const RELATIONS = [

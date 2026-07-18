@@ -46,6 +46,7 @@ const PERSONS = [
   { id: 'constantine', name: '君士坦丁大帝', courtesy: '', alias: [], faction: 'empire', birth: 272, death: 337, birthPlace: '尼什', title: '皇帝', roles: ['基督教合法化'], avatar: '君', bio: '米兰敕令、迁都拜占庭。', events: [ { year: 313, place: '米兰', desc: '颁布米兰敕令，承认基督教' }, { year: 330, place: '拜占庭', desc: '迁都拜占庭，命名君士坦丁堡' } ] },
   { id: 'theodosius', name: '狄奥多西一世', courtesy: '', alias: [], faction: 'empire', birth: 347, death: 395, birthPlace: '西班牙', title: '皇帝', roles: ['最后统一皇帝'], avatar: '狄', bio: '基督教国教化、死前分帝国为东西。', events: [ { year: 380, place: '罗马', desc: '确立基督教为国教' }, { year: 395, place: '米兰', desc: '临终分帝国为东西两部' } ] },
   { id: 'romulus_augustulus', name: '罗慕路斯·奥古斯都路斯', courtesy: '', alias: [], faction: 'empire', birth: 460, death: 507, birthPlace: '拉文纳', title: '西罗马末代皇帝', roles: ['末帝'], avatar: '罗', bio: '少年傀儡，被奥多亚塞废黜，西罗马亡。', events: [ { year: 476, place: '拉文纳', desc: '被废黜，西罗马帝国灭亡' } ] },
+  { id: 'agrippina', name: '小阿格里皮娜', courtesy: '', alias: ['Agrippina the Younger'], faction: 'empire', birth: 15, death: 59, birthPlace: '罗马', title: '皇后·太后', roles: ['女政治家'], avatar: '阿', bio: '克劳狄乌斯之妻、尼禄之母，左右帝国政局，被尼禄派人杀害。', events: [ { year: 49, place: '罗马', desc: '嫁克劳狄乌斯，影响皇位继承' }, { year: 54, place: '罗马', desc: '推动尼禄登基' } ] },
 ];
 
 const RELATIONS = [

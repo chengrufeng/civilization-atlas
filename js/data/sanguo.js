@@ -417,6 +417,12 @@ const PERSONS = [
       { year: 207, place: '邺城', desc: '建安七子汇聚邺城' },
     ]
   },
+  { id: 'caowenji', name: '蔡文姬', courtesy: '昭姬', alias: ['蔡琰'], faction: 'other', birth: 177, death: 249, birthPlace: '陈留', title: '才女', roles: ['诗人','音乐家'], avatar: '文', bio: '蔡邕之女，被匈奴掳走十二年，曹操重金赎回，作《胡笳十八拍》《悲愤诗》。',
+    events: [
+      { year: 195, place: '长安', desc: '被匈奴左部掳走' },
+      { year: 207, place: '邺城', desc: '曹操以金璧赎归，文姬归汉' },
+    ]
+  },
 ];
 
 /* ---------- 人物关系 ---------- */

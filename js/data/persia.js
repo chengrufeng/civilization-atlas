@@ -41,6 +41,7 @@ const PERSONS = [
   { id: 'zoroaster', name: '扎拉图斯特拉', courtesy: '', alias: ['琐罗亚斯德'], faction: 'achaemenid', birth: -1000, death: -900, birthPlace: '伊朗', title: '先知', roles: ['琐罗亚斯德教创立者'], avatar: '扎', bio: '创立善恶二元论，影响后世多种宗教。', events: [ { year: -1000, place: '巴尔赫', desc: '传教' } ] },
   { id: 'saadi', name: '萨迪', courtesy: '', alias: [], faction: 'safavid', birth: 1210, death: 1291, birthPlace: '设拉子', title: '诗人', roles: ['诗人'], avatar: '萨', bio: '《果园》《玫瑰园》，波斯文学经典。', events: [ { year: 1258, place: '设拉子', desc: '完成玫瑰园' } ] },
   { id: 'hafez', name: '哈菲兹', courtesy: '', alias: [], faction: 'safavid', birth: 1315, death: 1390, birthPlace: '设拉子', title: '诗人', roles: ['抒情诗大师'], avatar: '哈', bio: '波斯抒情诗巅峰，歌德极力推崇。', events: [ { year: 1368, place: '设拉子', desc: '创作抒情诗集' } ] },
+  { id: 'atossws', name: '阿托莎', courtesy: '', alias: ['Atossa'], faction: 'achaemenid', birth: -550, death: -475, birthPlace: '波斯波利斯', title: '皇后', roles: ['王后·女政治家'], avatar: '托', bio: '居鲁士之女、大流士之妻、薛西斯之母，影响王位继承。', events: [ { year: -522, place: '波斯波利斯', desc: '嫁大流士，巩固王权' } ] },
 ];
 
 const RELATIONS = [

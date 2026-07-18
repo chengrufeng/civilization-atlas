@@ -52,6 +52,7 @@ const PERSONS = [
   { id: 'marx', name: '马克思', courtesy: '', alias: [], faction: 'germany2', birth: 1818, death: 1883, birthPlace: '特里尔', title: '思想家', roles: ['科学社会主义'], avatar: '马', bio: '《资本论》《共产党宣言》。', events: [ { year: 1848, place: '伦敦', desc: '与恩格斯发表共产党宣言' } ] },
   { id: 'lincoln', name: '林肯', courtesy: '', alias: [], faction: 'america', birth: 1809, death: 1865, birthPlace: '肯塔基', title: '总统', roles: ['废奴总统'], avatar: '林', bio: '南北战争领袖、解放奴隶、遇刺身亡。', events: [ { year: 1862, place: '华盛顿', desc: '颁布解放奴隶宣言' }, { year: 1863, place: '葛底斯堡', desc: '葛底斯堡演说' } ] },
   { id: 'edison', name: '爱迪生', courtesy: '', alias: [], faction: 'america', birth: 1847, death: 1931, birthPlace: '米兰', title: '发明家', roles: ['电灯·留声机'], avatar: '爱', bio: '一千余项专利，开启电力时代。', events: [ { year: 1879, place: '门洛帕克', desc: '电灯泡实用化' } ] },
+  { id: 'wollstonecraft', name: '玛丽·沃斯通克拉夫特', courtesy: '', alias: ['Mary Wollstonecraft'], faction: 'britain', birth: 1759, death: 1797, birthPlace: '伦敦', title: '作家', roles: ['女权先驱'], avatar: '玛', bio: '《女权辩护》早期女权主义奠基文献。', events: [ { year: 1792, place: '伦敦', desc: '出版《女权辩护》' } ] },
 ];
 
 const RELATIONS = [
