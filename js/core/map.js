@@ -18,7 +18,10 @@ const DEFAULT_MAP_VIEW = {
 
 export function mapView() {
   const atlas = current();
-  return (atlas && atlas.mapView) ? { ...DEFAULT_MAP_VIEW, ...atlas.mapView } : DEFAULT_MAP_VIEW;
+  const v = (atlas && atlas.mapView) ? { ...DEFAULT_MAP_VIEW, ...atlas.mapView } : DEFAULT_MAP_VIEW;
+  // 所有数据集默认使用卫星图图层（用户仍可通过图层切换器手动切换）
+  v.baseLayer = 'satellite';
+  return v;
 }
 
 export function initMap() {
