@@ -37,12 +37,17 @@ export function render() {
       const otherMarker = state.personMarkers.get(line.otherId);
       const from = myMarker ? myMarker.getLatLng() : ll(line.coords[0]);
       const to = otherMarker ? otherMarker.getLatLng() : ll(line.coords[1]);
-      L.polyline([from, to], {
+      const poly = L.polyline([from, to], {
         color: line.color, weight: line.weight, opacity: line.opacity,
         dashArray: line.dashed ? '4,4' : null,
       }).bindTooltip(line.tooltip, {
         sticky: true, direction: 'top', className: 'relation-tooltip',
-      }).addTo(state.layerRelations);
+      });
+      // E5: 点击连线 → 打开对方人物详情
+      poly.on('click', () => {
+        import('./detail.js').then(m => m.openDetail(line.otherId));
+      });
+      poly.addTo(state.layerRelations);
     });
   }
 
