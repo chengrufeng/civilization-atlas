@@ -291,8 +291,10 @@ function applyAtlasToUI() {
 /* ---------- 数据集切换回调 ---------- */
 onSwitch(() => {
   stopPlay();
-  // 切数据集时停止人生回放（避免错位）
-  import('./core/life-journey.js').then(m => m.stopLifeJourney());
+  // 切数据集时停止人生回放（除非是 life journey 自己触发的切换）
+  import('./core/life-journey.js').then(m => {
+    if (!m.isSwitchingAtlas()) m.stopLifeJourney();
+  });
 
   // 关闭详情面板
   document.getElementById('detail-panel').classList.remove('open');
@@ -378,3 +380,14 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// F18 历史上的今天：首屏后空闲时拉
+window.addEventListener('load', () => {
+  import('./core/today-in-history.js').then(m => m.showTodayInHistory());
+  window.addEventListener('tih:select', async (e) => {
+    const { atlasId, eventId } = e.detail || {};
+    if (!atlasId || !eventId) return;
+    if (atlasId !== current().id) await doSwitchAtlas(atlasId);
+    import('./core/detail.js').then(m => m.showEventInfo(eventId));
+  });
+});

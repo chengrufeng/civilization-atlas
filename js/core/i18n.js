@@ -115,6 +115,8 @@ const STRINGS = {
     'life_journey.exit': '退出',
     'life_journey.finished': '人生回放结束',
     'life_journey.no_events': '该人物暂无生平事件地点，无法回放',
+    'life_journey.cross_badge': '🔗 跨 {n} 个数据集',
+    'life_journey.switching': '切换数据集',
 
     'quick.favorites': '★ 收藏',
     'quick.recent': '🕒 最近',
@@ -227,6 +229,8 @@ const STRINGS = {
     'life_journey.exit': 'Exit',
     'life_journey.finished': 'Life replay finished',
     'life_journey.no_events': 'No geolocated life events for this figure',
+    'life_journey.cross_badge': '🔗 across {n} datasets',
+    'life_journey.switching': 'Switching dataset',
 
     'quick.favorites': '★ Favorites',
     'quick.recent': '🕒 Recent',

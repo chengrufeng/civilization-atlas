@@ -84,7 +84,7 @@ function renderDetailContent(person) {
 
   const img = getPersonImage(person.id);
   const avatarHtml = img
-    ? `<img src="${img}" alt="${person.name}" onerror="this.outerHTML='${person.avatar}'" />`
+    ? `<img src="${img}" alt="${person.name}" loading="lazy" decoding="async" onerror="this.outerHTML='${person.avatar}'" />`
     : person.avatar;
 
   document.getElementById('detail-content').innerHTML = `

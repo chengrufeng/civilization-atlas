@@ -849,6 +849,10 @@ body.no-timeline .line-legend { bottom: 16px; }
   font-size: 11px; color: var(--ink-light, #888);
   flex-shrink: 0; min-width: 38px; text-align: right;
 }
+.lj-cross-badge {
+  font-size: 10px; color: var(--seal, #8a2222);
+  margin-top: 2px; font-weight: 600;
+}
 .lj-toast {
   position: fixed; bottom: 80px; left: 50%;
   transform: translateX(-50%) translateY(20px);
@@ -864,6 +868,69 @@ body.no-timeline .line-legend { bottom: 16px; }
 }
 @media (max-width: 480px) {
   .lj-bar { min-width: auto; width: calc(100vw - 24px); }
+}
+
+/* F18 历史上的今天 */
+.tih-widget {
+  position: fixed;
+  right: 16px; bottom: 16px;
+  z-index: 950;
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  background: var(--paper, #f5f0e6);
+  border: 1px solid var(--line, #d8d2c4);
+  border-left: 3px solid var(--seal, #8a2222);
+  border-radius: 8px;
+  padding: 10px 12px 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  font-size: 12px;
+  animation: tih-slide-in .35s ease;
+}
+@keyframes tih-slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.tih-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.tih-title { font-weight: 700; color: var(--ink); font-size: 13px; }
+.tih-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--ink-light); font-size: 18px; line-height: 1;
+  padding: 0 4px;
+}
+.tih-close:hover { color: var(--ink); }
+.tih-body { display: flex; flex-direction: column; gap: 4px; }
+.tih-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 8px; align-items: baseline;
+  text-align: left;
+  background: none; border: none; cursor: pointer;
+  padding: 6px 4px; border-radius: 4px;
+  transition: background .15s;
+  width: 100%;
+}
+.tih-item:hover { background: rgba(178,58,46,.08); }
+.tih-year {
+  font-size: 11px; font-weight: 600;
+  color: var(--seal, #8a2222);
+  font-variant-numeric: tabular-nums;
+}
+.tih-name {
+  font-size: 12px; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tih-atlas {
+  font-size: 10px; color: var(--ink-light);
+}
+.tih-more {
+  font-size: 10px; color: var(--ink-light);
+  text-align: right; padding: 2px 4px;
+}
+@media (max-width: 480px) {
+  .tih-widget { width: calc(100vw - 24px); right: 12px; bottom: 12px; }
 }
 .detail-section p { font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
 .detail-fact { display: flex; gap: 8px; font-size: 12px; line-height: 2; }

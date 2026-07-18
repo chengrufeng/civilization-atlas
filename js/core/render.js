@@ -176,7 +176,7 @@ function renderPersonMarkers() {
         || `https://ui-avatars.com/api/?name=${encodeURIComponent(avatarChar)}&size=64&background=${fcHex}&color=fff&bold=true&font-size=0.5`;
       const icon = L.divIcon({
         html: `<div class="person-avatar-marker" style="--fc:${fc}">
-          <img src="${imgUrl}" alt="${d.name}" onerror="this.style.display='none';this.parentNode.classList.add('fallback')" />
+          <img src="${imgUrl}" alt="${d.name}" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentNode.classList.add('fallback')" />
           <span class="avatar-char">${avatarChar}</span>
         </div>`,
         className: '', iconSize: [30, 30], iconAnchor: [15, 15],

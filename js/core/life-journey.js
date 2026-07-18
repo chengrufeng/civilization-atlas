@@ -15,20 +15,88 @@
  * ========================================================================= */
 
 import { state, ll, formatYear } from './state.js';
-import { current, getPerson, getRelationsOf } from './atlas.js';
+import { current, getPerson, manifest } from './atlas.js';
+import { switchAtlas } from './atlas.js';
 import { render } from './render.js';
 import { stopPlay, showYearToasts } from './timeline.js';
 import { buildEventList } from './event-list.js';
 import { updateStats } from './render.js';
 import { syncUrlState } from './url-state.js';
-import { t } from './i18n.js';
+import { t, tf, localized } from './i18n.js';
+import { findCrossLinks } from '../data/cross-links.js';
 
 const STEP_DURATION = 3000;   // 每站停留 3s
 const FLY_DURATION = 1.2;     // 镜头飞行动画时长
+const ATLAS_SWITCH_BUFFER = 600;  // 切换 atlas 后额外等待
 
-let journey = null;           // { personId, steps, idx, timer, paused }
+let journey = null;           // { personId, steps, idx, timer, paused, crossAtlases }
+let switchingAtlas = false;   // life journey 自己触发的 atlas 切换中
+export function isSwitchingAtlas() { return switchingAtlas; }
 
-function ensureBar() {
+/* 缓存其他 atlas（已在 atlas.js 内有缓存，这里只是再缓存 promise） */
+const otherAtlasCache = new Map();
+async function loadOtherAtlas(id) {
+  if (otherAtlasCache.has(id)) return otherAtlasCache.get(id);
+  const promise = (async () => {
+    const meta = manifest().find(m => m.id === id);
+    if (!meta) return null;
+    return await meta.load();
+  })();
+  otherAtlasCache.set(id, promise);
+  return promise;
+}
+
+/** 找出该人物在所有 atlas 中的"同一个人"映射。
+ *  返回 [{ atlasId, personId }]，第一项总是当前 (atlasId, personId)。 */
+function findPersonaVariants(personId) {
+  const startAtlasId = current().id;
+  const variants = [{ atlasId: startAtlasId, personId }];
+  for (const link of findCrossLinks(startAtlasId, personId)) {
+    if (link.kind !== 'same-person') continue;
+    for (const other of link.others) {
+      if (variants.some(v => v.atlasId === other.atlas && v.personId === other.id)) continue;
+      variants.push({ atlasId: other.atlas, personId: other.id });
+    }
+  }
+  return variants;
+}
+
+/** 构建跨 atlas 的生平步骤：合并所有同人的 events，按年份排序，标注每步的 atlas */
+async function buildStepsCrossAtlas(personId) {
+  const variants = findPersonaVariants(personId);
+  const allSteps = [];
+  for (const v of variants) {
+    const atlas = await loadOtherAtlas(v.atlasId);
+    if (!atlas) continue;
+    const person = atlas.persons.find(p => p.id === v.personId);
+    if (!person || !person.events) continue;
+    for (const e of person.events) {
+      const place = atlas.places.find(p => p.name === e.place);
+      if (!place || !place.coord) continue;
+      allSteps.push({
+        year: e.year,
+        place: e.place,
+        coord: place.coord,
+        desc: e.desc,
+        atlasId: v.atlasId,
+        personId: v.personId,
+        personName: person.name,
+      });
+    }
+  }
+  // 按年份排序；同年内同 atlas 排在一起
+  allSteps.sort((a, b) => a.year - b.year || a.atlasId.localeCompare(b.atlasId));
+  // 去重：完全相同的 (year, place, desc) 只保留一条
+  const seen = new Set();
+  return allSteps.filter(s => {
+    const key = `${s.year}|${s.place}|${s.desc}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function ensureBar(crossAtlases = []) {
   let bar = document.getElementById('lj-bar');
   if (bar) return bar;
   bar = document.createElement('div');
@@ -42,6 +110,7 @@ function ensureBar() {
         <div class="lj-progress-track"><div class="lj-progress-fill"></div></div>
         <div class="lj-progress-text"></div>
       </div>
+      ${crossAtlases.length > 1 ? `<div class="lj-cross-badge">${tf('life_journey.cross_badge', { n: crossAtlases.length })}</div>` : ''}
     </div>
     <button class="lj-btn lj-stop" title="${t('life_journey.exit')}">✕</button>
   `;
@@ -56,7 +125,7 @@ function removeBar() {
   if (bar) bar.remove();
 }
 
-/** 构建人物的生平事件步骤（按年份排序，过滤无坐标的） */
+/** 构建当前数据集内人物的生平事件步骤（按年份排序，过滤无坐标的） */
 function buildSteps(personId) {
   const person = getPerson(personId);
   if (!person || !person.events || person.events.length === 0) return [];
@@ -75,6 +144,9 @@ function buildSteps(personId) {
       place: e.place,
       coord: place.coord,
       desc: e.desc,
+      atlasId: atlas.id,
+      personId,
+      personName: person.name,
     };
   });
 }
@@ -82,10 +154,15 @@ function buildSteps(personId) {
 function updateBar() {
   const bar = document.getElementById('lj-bar');
   if (!bar || !journey) return;
-  const person = getPerson(journey.personId);
+  const step = journey.steps[journey.idx];
   const total = journey.steps.length;
   const idx = journey.idx + 1; // 1-based
-  bar.querySelector('.lj-title').textContent = `${person?.name || ''} · ${formatYear(journey.steps[journey.idx]?.year || 0)}`;
+  const crossBadge = bar.querySelector('.lj-cross-badge');
+  if (crossBadge && journey.crossAtlases?.length > 1) {
+    const meta = manifest().find(m => m.id === step?.atlasId);
+    crossBadge.textContent = `${tf('life_journey.cross_badge', { n: journey.crossAtlases.length })} · ${meta ? localized(meta, 'name') : ''}`;
+  }
+  bar.querySelector('.lj-title').textContent = `${step?.personName || ''} · ${formatYear(step?.year || 0)}`;
   bar.querySelector('.lj-progress-text').textContent = `${idx} / ${total}`;
   bar.querySelector('.lj-progress-fill').style.width = `${(idx / total) * 100}%`;
   bar.querySelector('.lj-play-pause').textContent = journey.paused ? '▶' : '⏸';
@@ -99,27 +176,46 @@ function clearTimer() {
   }
 }
 
-function advance() {
+async function advance() {
   if (!journey || journey.paused) return;
   const step = journey.steps[journey.idx];
   if (!step) { finish(); return; }
 
-  // 1. 推进年份 + 同步 UI（关系/事件图层会跟着刷新）
+  // 0. 跨集切换：若步骤在另一个 atlas，先切过去
+  if (step.atlasId !== current().id) {
+    clearTimer();
+    showJourneyToast(`${t('life_journey.switching')} · ${localized(manifest().find(m => m.id === step.atlasId) || {}, 'name')}`, 1500);
+    switchingAtlas = true;
+    try { await switchAtlas(step.atlasId); }
+    catch (e) { /* 切换失败也继续 */ }
+    finally { switchingAtlas = false; }
+    await new Promise(r => setTimeout(r, ATLAS_SWITCH_BUFFER));
+    if (journey?.paused || !journey) return;
+  }
+
+  // 1. 推进年份 + 同步 UI
   state.yearFilter = step.year;
   state.expandedEvent = null;
+  state.selectedPerson = step.personId;
 
-  // 2. 高亮：清除旧的，按当前年份重算活跃关系
+  // 2. 高亮同期关系（用 step 的 atlas/person 上下文）
   state.highlightedPersons.clear();
-  for (const r of getRelationsOf(journey.personId)) {
-    const rYear = r.year ?? step.year;
-    // 关系记录年份 ±10 年内的算"同期"
-    if (Math.abs(rYear - step.year) <= 10) {
-      const otherId = r.source === journey.personId ? r.target : r.source;
-      state.highlightedPersons.add(otherId);
+  const atlas = current();
+  const person = atlas.persons.find(p => p.id === step.personId);
+  if (person) {
+    const rels = atlas.relations || [];
+    for (const r of rels) {
+      const involved = r.source === step.personId || r.target === step.personId;
+      if (!involved) continue;
+      const rYear = r.year ?? step.year;
+      if (Math.abs(rYear - step.year) <= 10) {
+        const otherId = r.source === step.personId ? r.target : r.source;
+        state.highlightedPersons.add(otherId);
+      }
     }
   }
 
-  // 3. 镜头 flyTo + 显示事件 toast
+  // 3. 镜头 flyTo + toast
   state.map.flyTo(ll(step.coord), Math.max(state.map.getZoom(), 6), { duration: FLY_DURATION });
   showYearToasts(step.year, true);
 
@@ -128,46 +224,55 @@ function advance() {
   if (slider) slider.value = step.year;
   const yd = document.getElementById('year-display');
   if (yd) yd.textContent = formatYear(step.year);
-  syncUrlState({ atlas: current().id, year: step.year, person: journey.personId });
+  syncUrlState({ atlas: current().id, year: step.year, person: step.personId });
   updateStats();
   render();
   buildEventList();
   updateBar();
 
-  // 5. 安排下一站
+  // 5. 下一站
   journey.idx += 1;
   if (journey.idx >= journey.steps.length) {
     journey.timer = setTimeout(finish, STEP_DURATION);
   } else {
-    journey.timer = setTimeout(advance, STEP_DURATION);
+    const next = journey.steps[journey.idx];
+    const needSwitch = next && next.atlasId !== current().id;
+    journey.timer = setTimeout(advance, STEP_DURATION + (needSwitch ? ATLAS_SWITCH_BUFFER : 0));
   }
 }
 
 function finish() {
   if (!journey) return;
   clearTimer();
-  const person = getPerson(journey.personId);
+  const lastName = journey.steps[journey.idx - 1]?.personName || '';
   journey = null;
   state.lifeJourney = null;
   removeBar();
-  // 不清理 selectedPerson / yearFilter，停留在最后一站
-  if (person) {
-    showJourneyToast(`${person.name} · ${t('life_journey.finished')}`, 2500);
+  if (lastName) {
+    showJourneyToast(`${lastName} · ${t('life_journey.finished')}`, 2500);
   }
 }
 
 /* ---------- 公共 API ---------- */
 
-export function startLifeJourney(personId) {
+export async function startLifeJourney(personId) {
   const person = getPerson(personId);
   if (!person) return;
-  const steps = buildSteps(personId);
+
+  // F19 跨集：优先用跨 atlas 步骤；没跨集时回退到单数据集
+  let steps = await buildStepsCrossAtlas(personId);
+  let crossAtlases = [];
+  if (steps.length > 0) {
+    crossAtlases = [...new Set(steps.map(s => s.atlasId))];
+  } else {
+    steps = buildSteps(personId);  // 单数据集内
+  }
   if (steps.length === 0) {
     showJourneyToast(t('life_journey.no_events'), 2200);
     return;
   }
   stopPlay();
-  stopLifeJourney();  // 清理上一次
+  stopLifeJourney();
 
   journey = {
     personId,
@@ -175,13 +280,13 @@ export function startLifeJourney(personId) {
     idx: 0,
     timer: null,
     paused: false,
+    crossAtlases,
   };
-  state.lifeJourney = { personId, total: steps.length, idx: 0 };
+  state.lifeJourney = { personId, total: steps.length, idx: 0, crossAtlases };
   state.selectedPerson = personId;
   state.eventFocus = null;
-  ensureBar();
+  ensureBar(crossAtlases);
   updateBar();
-  // 立即触发首站
   advance();
 }
 
