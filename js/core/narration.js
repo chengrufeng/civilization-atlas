@@ -132,25 +132,41 @@ function showImageCard(seg) {
     card.innerHTML = `
       <div class="nic-img-wrap"><img class="nic-img" alt="" /></div>
       <div class="nic-caption"></div>
-      <div class="nic-source"></div>
     `;
     document.body.appendChild(card);
   }
   const img = card.querySelector('.nic-img');
   const cap = card.querySelector('.nic-caption');
-  const src = card.querySelector('.nic-source');
-  // 透明度切换：新图加载完成后才显示
-  card.classList.remove('show');
+
+  // 决定展示模式：
+  //   - seg.imageMode 显式指定时优先
+  //   - 否则按段索引轮换（避免单调）：0/1=side, 2=corner-tl, 3=corner-bl，hero 只能手动指定
+  const idx = seg._idx != null ? seg._idx : 0;
+  let mode = seg.imageMode;
+  if (!mode) {
+    const rotation = ['mode-side', 'mode-side', 'mode-corner-tl', 'mode-corner-bl'];
+    mode = rotation[idx % rotation.length];
+  } else {
+    mode = `mode-${seg.imageMode}`;
+  }
+  const animClass = `anim-${idx % 4}`;
+
+  // 重置 class，触发动画
+  card.classList.remove('show', 'mode-side', 'mode-hero', 'mode-corner-tl', 'mode-corner-bl',
+    'anim-0', 'anim-1', 'anim-2', 'anim-3');
+  // 强制 reflow 让动画重启
+  void card.offsetWidth;
+  card.classList.add(mode, animClass);
+
+  // 新图加载完成后才显示
   img.onload = () => {
-    if (session) {
-      // caption 用脚本预填的 imageCaption；若未填则用 segment.caption 摘要
-      const text = seg.imageCaption || (seg.caption && seg.caption.length > 40
-        ? seg.caption.slice(0, 38) + '…'
-        : (seg.caption || ''));
-      cap.textContent = text;
-      src.textContent = seg.imageSource || '图片来源：网络';
-      card.classList.add('show');
-    }
+    if (!session) return;
+    // caption 优先用脚本预填的 imageCaption；否则用 segment.caption 摘要
+    const text = seg.imageCaption || (seg.caption && seg.caption.length > 40
+      ? seg.caption.slice(0, 38) + '…'
+      : (seg.caption || ''));
+    cap.textContent = text;
+    card.classList.add('show');
   };
   img.onerror = () => {
     card.classList.remove('show');

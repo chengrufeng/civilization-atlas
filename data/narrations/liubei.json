@@ -46,7 +46,8 @@
       ],
       "image": "http://i3.qulishi.com/static/2020/3/5ec7820c58fd8.png",
       "imageCaption": "黄巾起义",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 28.02,
@@ -116,7 +117,8 @@
       ],
       "image": "https://pic3.zhimg.com/v2-5a75b39e4ebfd22c4b4b73ea2c1101d6_r.jpg",
       "imageCaption": "三顾茅庐",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 74.18,
@@ -143,7 +145,8 @@
       ],
       "image": "https://k.sinaimg.cn/www/ent/m/c/2008-04-17/U2519P28T3D1990796F359DT20080417043120.jpg/w700h350z1l10t1039d.jpg",
       "imageCaption": "赤壁之战",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 91.18,
@@ -212,7 +215,8 @@
       ],
       "image": "https://pic1.zhimg.com/v2-cc35a5fc124f35464ea098c62f410378_r.jpg",
       "imageCaption": "夷陵之战",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 138.68,
@@ -226,7 +230,8 @@
       ],
       "image": "https://img1.qunarzz.com/travel/d1/1808/d6/a85f900f9ce3bab5.jpg",
       "imageCaption": "白帝城",
-      "imageSource": "© Bing 图片搜索结果"
+      "imageSource": "© Bing 图片搜索结果",
+      "imageMode": "hero"
     },
     {
       "t": 149.14,
