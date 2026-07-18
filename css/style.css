@@ -1694,3 +1694,83 @@ kbd {
   }
   .detail-mask { background: transparent !important; }
 }
+
+/* =========================================================================
+ * C6 本地数据集导入浮层
+ * ========================================================================= */
+.la-mask {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+  z-index: 1050;
+}
+.la-mask.show { opacity: 1; pointer-events: auto; }
+.la-overlay {
+  position: fixed; top: 10vh; left: 50%; transform: translateX(-50%);
+  width: min(520px, 92vw); max-height: 84vh;
+  background: var(--paper, #f5f0e6);
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.25);
+  z-index: 1051;
+  display: none; flex-direction: column;
+  overflow: hidden;
+}
+.la-overlay.open { display: flex; }
+.la-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--line);
+}
+.la-header h3 { margin: 0; font-size: 17px; }
+.la-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 22px; line-height: 1; color: var(--ink-light);
+}
+.la-close:hover { color: var(--ink); }
+.la-body { padding: 18px 20px; overflow-y: auto; }
+.la-hint { margin: 0 0 14px; color: var(--ink-light); font-size: 13px; line-height: 1.6; }
+.la-dropzone {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 130px;
+  padding: 20px;
+  border: 2px dashed var(--line, #c8b890);
+  border-radius: 8px;
+  background: rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  text-align: center;
+}
+.la-dropzone:hover, .la-dropzone.drag {
+  background: rgba(212,105,28,.08);
+  border-color: #d4691c;
+}
+.la-dropzone-text { color: var(--ink-light); font-size: 14px; }
+.la-result { margin-top: 16px; min-height: 24px; font-size: 13px; }
+.la-status { color: var(--ink-light); }
+.la-success {
+  color: #2e7d32; padding: 8px 10px; background: rgba(46,125,50,.08);
+  border-radius: 6px; margin-bottom: 8px;
+}
+.la-error {
+  color: #c62828; padding: 8px 10px; background: rgba(198,40,40,.08);
+  border-radius: 6px; margin-bottom: 6px;
+}
+.la-error-list {
+  margin: 6px 0 0; padding-left: 18px; color: var(--ink-light);
+  font-size: 12px; max-height: 160px; overflow-y: auto;
+}
+.la-switch-btn {
+  margin-top: 6px; padding: 8px 16px;
+  background: #d4691c; color: #fff;
+  border: none; border-radius: 6px; cursor: pointer;
+  font-size: 13px;
+}
+.la-switch-btn:hover { background: #b85715; }
+.la-schema-link {
+  display: inline-block; margin-top: 14px;
+  color: var(--ink-light); font-size: 12px;
+  text-decoration: underline;
+}
+
+/* F21 Life Journey 轨迹线样式（地图图层；Leaflet 用 inline style，这里只是占位） */
+.leaflet-overlay-pane path.lj-trail { pointer-events: none; }

@@ -29,9 +29,60 @@ const STEP_DURATION = 3000;   // 每站停留 3s
 const FLY_DURATION = 1.2;     // 镜头飞行动画时长
 const ATLAS_SWITCH_BUFFER = 600;  // 切换 atlas 后额外等待
 
-let journey = null;           // { personId, steps, idx, timer, paused, crossAtlases }
+let journey = null;           // { personId, steps, idx, timer, paused, crossAtlases, path:[latlngs], pathLayer, headMarker }
 let switchingAtlas = false;   // life journey 自己触发的 atlas 切换中
 export function isSwitchingAtlas() { return switchingAtlas; }
+
+/* F21 轨迹线样式（纯 Leaflet，不引入新依赖） */
+const PATH_STYLE = {
+  color: '#d4691c',
+  weight: 3,
+  opacity: 0.85,
+  dashArray: '6 8',
+  lineCap: 'round',
+  lineJoin: 'round',
+};
+const HEAD_STYLE = {
+  radius: 7,
+  color: '#fff',
+  weight: 2,
+  fillColor: '#d4691c',
+  fillOpacity: 1,
+};
+
+function clearPathArtifacts() {
+  if (journey?.pathLayer) { journey.pathLayer.remove(); journey.pathLayer = null; }
+  if (journey?.headMarker) { journey.headMarker.remove(); journey.headMarker = null; }
+  if (journey) journey.path = [];
+}
+
+/** 按 steps 截至当前 idx 重画路径 + 头部标记 */
+function redrawPath() {
+  if (!journey || !state.map) return;
+  const latlngs = journey.steps
+    .slice(0, journey.idx + 1)
+    .map(s => ll(s.coord))
+    .filter(Boolean);
+  journey.path = latlngs;
+  if (latlngs.length >= 2) {
+    if (!journey.pathLayer) {
+      journey.pathLayer = L.polyline(latlngs, PATH_STYLE).addTo(state.map);
+    } else {
+      journey.pathLayer.setLatLngs(latlngs);
+    }
+  } else if (journey.pathLayer) {
+    journey.pathLayer.remove();
+    journey.pathLayer = null;
+  }
+  const head = latlngs[latlngs.length - 1];
+  if (head) {
+    if (!journey.headMarker) {
+      journey.headMarker = L.circleMarker(head, HEAD_STYLE).addTo(state.map);
+    } else {
+      journey.headMarker.setLatLng(head);
+    }
+  }
+}
 
 /* 缓存其他 atlas（已在 atlas.js 内有缓存，这里只是再缓存 promise） */
 const otherAtlasCache = new Map();
@@ -126,6 +177,8 @@ function removeBar() {
   // 同时清掉当前 step 的 toast（避免停止后还停留）
   const stepToast = document.getElementById('lj-step-toast');
   if (stepToast) stepToast.classList.remove('show');
+  // F21 清除轨迹线与头部标记
+  if (journey) clearPathArtifacts();
 }
 
 /** 构建当前数据集内人物的生平事件步骤（按年份排序，过滤无坐标的） */
@@ -221,6 +274,8 @@ async function advance() {
   // 3. 镜头 flyTo + 当前 step 的专用 toast（只显示这一个事件，不再调用 showYearToasts 把同年的其他事件都弹出来）
   state.map.flyTo(ll(step.coord), Math.max(state.map.getZoom(), 6), { duration: FLY_DURATION });
   showJourneyStepToast(step);
+  // F21 重画轨迹线 + 头部标记
+  redrawPath();
 
   // 4. 同步 slider / year-display / URL / 事件列表
   const slider = document.getElementById('year-slider');

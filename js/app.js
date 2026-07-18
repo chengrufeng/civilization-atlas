@@ -80,6 +80,27 @@ async function init() {
       withUrlSuppressed(() => m.openDetail(urlState.person));
     });
   }
+  // E7 深度 URL：search / journey / compare
+  if (urlState.search) {
+    const input = document.getElementById('search');
+    if (input) {
+      input.value = urlState.search;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }
+  if (urlState.compare && urlState.compare.length >= 2) {
+    import('./core/compare-figures.js').then(m => {
+      m.clearSelection();
+      urlState.compare.forEach(id => { m.toggleSelect(id); });
+      m.openCompareOverlay();
+    });
+  }
+  if (urlState.journey) {
+    import('./core/life-journey.js').then(m => {
+      // 等其他初始化完后再启动，避免被 onSwitch / render 抢风头
+      setTimeout(() => m.startLifeJourney(urlState.journey), 400);
+    });
+  }
   // 初始 URL 规范化（如缺失 atlas 等）
   syncUrlState({ atlas: current().id, year: state.yearFilter, person: state.selectedPerson });
 }
@@ -282,6 +303,15 @@ function bindTopBarExtras() {
       document.body.classList.add('printing');
       window.print();
       setTimeout(() => document.body.classList.remove('printing'), 500);
+    });
+  }
+
+  // C6 本地数据集导入
+  const btnLocalAtlas = document.getElementById('btn-local-atlas');
+  if (btnLocalAtlas) {
+    btnLocalAtlas.addEventListener('click', async () => {
+      const m = await import('./core/local-atlas.js');
+      m.openLocalAtlasOverlay();
     });
   }
 }

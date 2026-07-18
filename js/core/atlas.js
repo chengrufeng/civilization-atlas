@@ -113,6 +113,39 @@ export async function initAtlas(preferredId) {
   return currentAtlas;
 }
 
+/* ---------- C6 本地数据集导入（运行时注入 manifest） ----------
+ * 用户在前端拖入符合 schema 的 JSON 对象，运行时注册一条 manifest 项。
+ *   registerLocalAtlas({id, name, ...}) → 返回注入的 manifest entry。
+ * 同 id 已存在会抛错。注入后立即可被 switchAtlas / 全局搜索使用。 */
+export function registerLocalAtlas(atlasObj, meta = {}) {
+  if (!atlasObj || !atlasObj.id) throw new Error('atlas.id 缺失');
+  if (ATLAS_MANIFEST.some(m => m.id === atlasObj.id)) {
+    throw new Error(`数据集 id "${atlasObj.id}" 已存在`);
+  }
+  const entry = {
+    id: atlasObj.id,
+    name: meta.name || atlasObj.name || atlasObj.id,
+    nameEn: meta.nameEn || atlasObj.name || atlasObj.id,
+    subtitle: meta.subtitle || atlasObj.subtitle || '本地导入数据集',
+    subtitleEn: meta.subtitleEn || meta.subtitle || atlasObj.subtitle || 'Locally imported atlas',
+    group: meta.group || '本地数据集',
+    groupEn: meta.groupEn || 'Local',
+    startYear: atlasObj.startYear,
+    endYear: atlasObj.endYear,
+    load: () => Promise.resolve(atlasObj),
+    stats: {
+      persons: (atlasObj.persons || []).length,
+      events: (atlasObj.events || []).length,
+      factions: (atlasObj.factions || []).length,
+      places: (atlasObj.places || []).length,
+    },
+    _local: true,
+  };
+  ATLAS_MANIFEST.push(entry);
+  atlasCache.set(entry.id, atlasObj);
+  return entry;
+}
+
 /* ---------- 辅助函数包装：自动传入当前 atlas ---------- */
 export function getPerson(id)             { return _getPerson(id, currentAtlas); }
 export function getFaction(id)            { return _getFaction(id, currentAtlas); }

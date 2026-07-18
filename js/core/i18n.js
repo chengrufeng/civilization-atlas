@@ -164,6 +164,17 @@ const STRINGS = {
     'quick.recent': '🕒 最近',
     'quick.empty': '—',
     'detail.toggle_favorite': '加入/移除收藏',
+
+    'local_atlas.btn': '📁 导入本地数据集',
+    'local_atlas.title': '导入本地数据集',
+    'local_atlas.hint': '拖拽 / 选择符合 schema 的 JSON 文件，浏览器内即时解析，不会上传到服务器。',
+    'local_atlas.drop_hint': '将 .json 文件拖到这里，或点击选择',
+    'local_atlas.parsing': '正在解析…',
+    'local_atlas.validating': '正在校验…',
+    'local_atlas.loaded': '已导入「{name}」（人物 {persons} · 事件 {events}）',
+    'local_atlas.load_failed': '导入失败：{msg}',
+    'local_atlas.schema_link': '查看 schema 模板',
+    'local_atlas.switch_now': '立即切换',
   },
 
   en: {
@@ -320,6 +331,17 @@ const STRINGS = {
     'quick.recent': '🕒 Recent',
     'quick.empty': '—',
     'detail.toggle_favorite': 'Toggle favorite',
+
+    'local_atlas.btn': '📁 Import local dataset',
+    'local_atlas.title': 'Import local dataset',
+    'local_atlas.hint': 'Drop or pick a schema-compliant JSON file. Parsed fully in-browser, never uploaded.',
+    'local_atlas.drop_hint': 'Drop a .json here, or click to pick',
+    'local_atlas.parsing': 'Parsing…',
+    'local_atlas.validating': 'Validating…',
+    'local_atlas.loaded': 'Imported "{name}" ({persons} figures · {events} events)',
+    'local_atlas.load_failed': 'Import failed: {msg}',
+    'local_atlas.schema_link': 'View schema template',
+    'local_atlas.switch_now': 'Switch now',
   },
 };
 
