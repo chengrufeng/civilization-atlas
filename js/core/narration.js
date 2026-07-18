@@ -331,7 +331,11 @@ function clearPulseMarker() {
 
 function currentSegment() {
   if (!session) return null;
-  const t0 = session.audio.currentTime;
+  // 提前 200ms 切换字幕，补偿：
+  //   1) 人眼视觉处理比听觉快约 100-200ms（视觉优先才能感觉"同步"）
+  //   2) audio.currentTime 在浏览器底层有微小 buffer 延迟
+  //   3) rAF tick 16ms 周期的最坏情况
+  const t0 = session.audio.currentTime + 0.2;
   const segs = session.script.segments;
   for (let i = segs.length - 1; i >= 0; i--) {
     if (t0 >= segs[i].t) return { ...segs[i], _idx: i };
