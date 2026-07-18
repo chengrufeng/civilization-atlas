@@ -7,7 +7,8 @@ import { current, FACTION_NAME, getPerson } from './atlas.js';
 import { render, updateStats } from './render.js';
 import { buildTimelineEvents } from './timeline.js';
 import { showEventInfo, openDetail } from './detail.js';
-import { t } from './i18n.js';
+import { t, tf } from './i18n.js';
+import * as CompareFigures from './compare-figures.js';
 
 /* ---------- 事件一览表 ---------- */
 export function buildEventList() {
@@ -131,7 +132,8 @@ export function buildListOverlay() {
   const body = document.getElementById('list-overlay-body');
   const atlas = current();
   const grid = atlas.persons.map(p => `
-    <div class="person-card ${p.faction}" data-id="${p.id}">
+    <div class="person-card ${p.faction} ${CompareFigures.isSelected(p.id) ? 'cf-selected' : ''}" data-id="${p.id}">
+      <button class="person-card-select" data-id="${p.id}" title="${t('compare_figures.toggle_select')}">${CompareFigures.isSelected(p.id) ? '✓' : '+'}</button>
       <div class="person-avatar">${p.avatar}</div>
       <div class="person-name">${p.name}</div>
       <div class="person-courtesy">${t('list.courtesy_prefix')} ${p.courtesy}</div>
@@ -139,11 +141,36 @@ export function buildListOverlay() {
       <div class="person-years">${formatYearShort(p.birth)}–${formatYearShort(p.death)}年</div>
     </div>
   `).join('');
-  body.innerHTML = `<div class="person-grid">${grid}</div>`;
+  body.innerHTML = `
+    <div class="person-grid">${grid}</div>
+    <div class="list-overlay-actions">
+      <span class="loa-count">${tf('compare_figures.selected_count', { n: CompareFigures.selectedCount(), max: 3 })}</span>
+      <button class="loa-btn" id="loa-compare" ${CompareFigures.selectedCount() < 2 ? 'disabled' : ''}>${t('compare_figures.open_btn')}</button>
+      <button class="loa-btn loa-clear" id="loa-clear">${t('compare_figures.clear_btn')}</button>
+    </div>
+  `;
   body.querySelectorAll('.person-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.classList.contains('person-card-select')) return;
       document.getElementById('list-overlay').classList.remove('open');
       openDetail(card.dataset.id);
     });
+  });
+  body.querySelectorAll('.person-card-select').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      CompareFigures.toggleSelect(btn.dataset.id);
+      buildListOverlay();
+    });
+  });
+  const cmpBtn = document.getElementById('loa-compare');
+  if (cmpBtn) cmpBtn.addEventListener('click', () => {
+    document.getElementById('list-overlay').classList.remove('open');
+    CompareFigures.openCompareOverlay();
+  });
+  const clrBtn = document.getElementById('loa-clear');
+  if (clrBtn) clrBtn.addEventListener('click', () => {
+    CompareFigures.clearSelection();
+    buildListOverlay();
   });
 }

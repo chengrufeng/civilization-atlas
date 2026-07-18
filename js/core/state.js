@@ -1,7 +1,11 @@
+// @ts-check
 /* =========================================================================
  * 华夏人物图鉴 · 全局状态
  *
  * 整个应用唯一的可变状态对象，所有模块通过 import { state } 读写。
+ *
+ * 启用 VSCode 的 ts-check：在文件首行加 // @ts-check，即可获得
+ * 基于 JSDoc 类型注解的实时类型检查与自动补全，无需 TypeScript。
  * ========================================================================= */
 
 import { currentLang } from './i18n.js';
@@ -86,6 +90,29 @@ export const LABEL_OFFSET = {
   right: [12, 0], left: [-12, 0], top: [0, -14], bottom: [0, 14],
 };
 
+/**
+ * 应用全局可变状态。所有视图层模块共享。
+ * @typedef {Object} AppState
+ * @property {any} map - Leaflet 地图实例（运行时赋值）
+ * @property {string} factionFilter - 当前势力筛选，'all' 或 faction id
+ * @property {{persons: boolean, events: boolean, capitals: boolean, heat: boolean}} layers - 图层开关
+ * @property {Set<string>} domainFilter - 启用的事件领域集合
+ * @property {Set<string>} collapsedDomains - 事件一览表中折叠的领域
+ * @property {(string|null)} expandedEvent - 当前在事件列表中展开的事件 id
+ * @property {(number|null)} yearFilter - 当前选中年份；null = 显示全部
+ * @property {(string|null)} selectedPerson - 当前选中人物 id
+ * @property {Set<string>} highlightedPersons - 高亮人物集合（关系另一方）
+ * @property {Object} eventFocus - 事件焦点（含坐标与参与者）
+ * @property {boolean} playing - 时间轴播放中
+ * @property {number} playTimer - setInterval 句柄
+ * @property {Object} lifeJourney - 人生回放状态
+ * @property {boolean} detailClosedByUser - 用户手动关闭详情
+ * @property {boolean} autoTrack - 播放时是否自动追踪事件位置
+ */
+
+/**
+ * @type {AppState}
+ */
 export const state = {
   map: null,
   factionFilter: 'all',

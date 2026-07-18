@@ -55,8 +55,10 @@ async function init() {
 
   document.getElementById('loading-overlay').classList.add('hide');
 
-  // F2 浏览器空闲时预加载其他数据集，切换时秒开
-  preloadAllAtlases();
+  // F2 浏览器空闲时预加载其他数据集，切换时秒开（受设置开关控制）
+  import('./core/settings.js').then(({ isPreloadEnabled }) => {
+    if (isPreloadEnabled()) preloadAllAtlases();
+  });
 
   // 应用 URL 中的年份和人物（若有）
   if (urlState.year !== null) {
@@ -250,6 +252,15 @@ function bindTopBarExtras() {
       setLang(currentLang() === 'zh' ? 'en' : 'zh');
     });
     btnLang.textContent = '中/EN';
+  }
+
+  // F9 设置浮层
+  const btnSettings = document.getElementById('btn-settings');
+  if (btnSettings) {
+    btnSettings.addEventListener('click', async () => {
+      const m = await import('./core/settings.js');
+      m.openSettingsOverlay();
+    });
   }
 }
 

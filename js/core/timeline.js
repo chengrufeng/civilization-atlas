@@ -15,7 +15,7 @@ import { showPersonDetail, closeDetail } from './detail.js';
 import { t } from './i18n.js';
 
 /* ---------- 播放 ---------- */
-export function startPlay() {
+export async function startPlay() {
   state.playing = true;
   state.detailClosedByUser = false;
   document.getElementById('play-btn').textContent = '⏸';
@@ -64,8 +64,14 @@ export function startPlay() {
   };
 
   jumpToEvent(idx);
-  // 播放间隔按事件密度自适应：事件多→快、事件少→慢，固定在 1.5–4s 之间
-  const playInterval = Math.max(1500, Math.min(4000, Math.round(60000 / Math.max(8, sortedEvents.length))));
+  // 播放间隔：默认按事件密度自适应（事件多→快、事件少→慢，固定在 1.5–4s）
+  // 若用户在设置里手动指定速度，则用固定值
+  let playInterval = Math.max(1500, Math.min(4000, Math.round(60000 / Math.max(8, sortedEvents.length))));
+  try {
+    const { playSpeedMultiplier } = await import('./settings.js');
+    const mult = playSpeedMultiplier();
+    if (mult !== null) playInterval = Math.round(2200 * mult);
+  } catch {}
   state.playTimer = setInterval(() => {
     idx = (idx + 1) % sortedEvents.length;
     jumpToEvent(idx);
