@@ -103,6 +103,7 @@
 ### 🎨 1. 交互与可视化进阶 (Advanced UX & Visuals)
 - ~~**F20 人物关系图谱 (Knowledge Graph)**~~ ⏸️ 待做（D3 力导向图）
 - ~~**F21 动态地理轨迹线 (Trajectory Paths)**~~ ✅ 纯 Leaflet `polyline`（橙色虚线）+ 头部 `circleMarker`，advance 时实时重画
+- ~~**F23 人物解说播放（Narration）**~~ ✅ 音频驱动版 Life Journey：TTS 预生成 → `data/narrations/<id>.json` 时间戳 → 音频 `timeupdate` 同步推进年份/地图/轨迹线 → 底部居中字幕。已用刘备跑通（120s · 17 段）
 - **F22 时间轴非线性与微观缩放 (Timeline Zooming)**
   - **现状痛点**：上古史时间跨度极大（几百年无事件），近现代史极密（精确到天），线性的 `<input type="range">` 难以兼顾。
   - **改进方案**：改造 Timeline，引入类似股票 K 线图的可缩放时间轴组件；在滑动特定区域时，自动放大展示其微观刻度（月/日）。
