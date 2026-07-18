@@ -171,7 +171,10 @@ function showImageCard(seg) {
     if (wrap) {
       wrap.classList.remove('nic-img-fallback');
       wrap.removeAttribute('data-fallback-text');
-      wrap.style.setProperty('--blur-bg', `url("${seg.image}")`);
+      // 注意：CSS url() 中的相对路径是相对 CSS 文件位置解析（/css/），
+      // 不是页面位置，所以必须转成绝对路径，否则 404
+      const absUrl = new URL(seg.image, location.href).href;
+      wrap.style.setProperty('--blur-bg', `url("${absUrl}")`);
     }
     card.classList.add('show');
   };
