@@ -66,7 +66,7 @@ function ensureBar() {
   bar.id = 'narration-bar';
   bar.className = 'narration-bar';
   bar.innerHTML = `
-    <button class="nr-play-pause" title="${t('common.pause') || '暂停'}">⏸</button>
+    <button class="nr-stop" title="${t('common.close') || '退出'}">✕</button>
     <div class="nr-info">
       <div class="nr-title"></div>
       <div class="nr-progress">
@@ -74,7 +74,7 @@ function ensureBar() {
         <div class="nr-progress-text"></div>
       </div>
     </div>
-    <button class="nr-stop" title="${t('common.close') || '退出'}">✕</button>
+    <button class="nr-play-pause" title="${t('common.pause') || '暂停'}">⏸</button>
   `;
   document.body.appendChild(bar);
   bar.querySelector('.nr-play-pause').addEventListener('click', togglePause);

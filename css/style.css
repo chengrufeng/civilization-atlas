@@ -1792,6 +1792,29 @@ kbd {
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.5);
+  /* 默认收缩到左侧，只露出最右侧的暂停按钮 + 一小段 */
+  transform: translateX(calc(-100% + 56px));
+  transition: transform .35s cubic-bezier(.2,.7,.3,1), opacity .25s ease;
+}
+/* 鼠标靠近浮窗（含露出的部分）时展开 */
+.narration-bar:hover,
+.narration-bar:focus-within {
+  transform: translateX(0);
+}
+/* 隐藏标题和进度条文字（收缩时不可见，展开时显示）*/
+.narration-bar .nr-title,
+.narration-bar .nr-progress,
+.narration-bar .nr-stop {
+  opacity: 0.55;
+  transition: opacity .25s ease;
+}
+.narration-bar:hover .nr-title,
+.narration-bar:hover .nr-progress,
+.narration-bar:hover .nr-stop,
+.narration-bar:focus-within .nr-title,
+.narration-bar:focus-within .nr-progress,
+.narration-bar:focus-within .nr-stop {
+  opacity: 1;
 }
 .narration-bar .nr-play-pause,
 .narration-bar .nr-stop {
