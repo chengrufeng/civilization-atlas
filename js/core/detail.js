@@ -108,7 +108,7 @@ function renderDetailContent(person) {
       <p>${person.bio}</p>
     </div>
     <div class="detail-section">
-      <h4>${t('detail.events_count')}<button class="lj-start-btn" id="lj-start-btn">${t('life_journey.start')}</button></h4>
+      <h4>${t('detail.events_count')}<button class="lj-start-btn" id="lj-start-btn">${t('life_journey.start')}</button><button class="lj-start-btn nr-start-btn" id="nr-start-btn" style="display:none;margin-left:8px">🎧 ${t('narration.btn') || '解说播放'}</button></h4>
       ${eventsHtml || `<p style="color:var(--ink-light)">${t('detail.no_data')}</p>`}
     </div>
     <div class="detail-section">
@@ -145,6 +145,20 @@ function renderDetailContent(person) {
       const { startLifeJourney, isLifeJourneyActive, stopLifeJourney } = await import('./life-journey.js');
       if (isLifeJourneyActive()) stopLifeJourney();
       else startLifeJourney(person.id);
+    });
+  }
+
+  // 解说播放按钮（仅当存在该人物的解说脚本时显示）
+  const nrBtn = document.getElementById('nr-start-btn');
+  if (nrBtn) {
+    import('./narration.js').then(({ hasNarration, isNarrationActive, startNarration, stopNarration }) => {
+      hasNarration(person.id).then(url => {
+        if (url) nrBtn.style.display = '';
+      });
+      nrBtn.addEventListener('click', async () => {
+        if (isNarrationActive()) stopNarration();
+        else await startNarration(person.id);
+      });
     });
   }
 

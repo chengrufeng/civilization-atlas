@@ -1774,3 +1774,80 @@ kbd {
 
 /* F21 Life Journey 轨迹线样式（地图图层；Leaflet 用 inline style，这里只是占位） */
 .leaflet-overlay-pane path.lj-trail { pointer-events: none; }
+
+/* =========================================================================
+ * 解说播放（Narration）UI
+ * ========================================================================= */
+.narration-bar {
+  position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+  z-index: 1060;
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 18px;
+  background: rgba(28, 22, 18, .92);
+  color: #f5f0e6;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  min-width: 320px; max-width: 90vw;
+  font-size: 13px;
+  backdrop-filter: blur(8px);
+}
+.narration-bar .nr-play-pause,
+.narration-bar .nr-stop {
+  background: rgba(255,255,255,.12);
+  border: none; color: #f5f0e6;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  cursor: pointer; font-size: 13px;
+  transition: background .15s;
+}
+.narration-bar .nr-play-pause:hover,
+.narration-bar .nr-stop:hover { background: rgba(255,255,255,.22); }
+.narration-bar .nr-info { flex: 1; min-width: 0; }
+.narration-bar .nr-title {
+  font-size: 13px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+.narration-bar .nr-progress { display: flex; align-items: center; gap: 8px; }
+.narration-bar .nr-progress-track {
+  flex: 1; height: 4px;
+  background: rgba(255,255,255,.15);
+  border-radius: 2px; overflow: hidden;
+}
+.narration-bar .nr-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4691c, #f0a050);
+  width: 0%; transition: width .15s linear;
+}
+.narration-bar .nr-progress-text {
+  font-size: 11px; color: rgba(245,240,230,.7);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 底部字幕 */
+.narration-caption {
+  position: fixed; left: 50%; bottom: 70px;
+  transform: translateX(-50%) translateY(10px);
+  max-width: min(680px, 90vw);
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, .72);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px; line-height: 1.55;
+  text-align: center;
+  letter-spacing: 0.5px;
+  z-index: 1059;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  backdrop-filter: blur(6px);
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
+}
+.narration-caption.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+@media (max-width: 768px) {
+  .narration-caption { font-size: 14px; bottom: 80px; padding: 8px 14px; }
+  .narration-bar { min-width: 260px; font-size: 12px; }
+}

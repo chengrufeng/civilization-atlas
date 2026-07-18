@@ -358,6 +358,8 @@ onSwitch(() => {
   import('./core/life-journey.js').then(m => {
     if (!m.isSwitchingAtlas()) m.stopLifeJourney();
   });
+  // 切数据集时停止解说播放
+  import('./core/narration.js').then(m => m.stopNarration());
 
   // 关闭详情面板
   document.getElementById('detail-panel').classList.remove('open');

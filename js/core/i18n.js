@@ -175,6 +175,9 @@ const STRINGS = {
     'local_atlas.load_failed': '导入失败：{msg}',
     'local_atlas.schema_link': '查看 schema 模板',
     'local_atlas.switch_now': '立即切换',
+
+    'narration.btn': '🎧 解说播放',
+    'narration.intro': '音频解说',
   },
 
   en: {
@@ -342,6 +345,9 @@ const STRINGS = {
     'local_atlas.load_failed': 'Import failed: {msg}',
     'local_atlas.schema_link': 'View schema template',
     'local_atlas.switch_now': 'Switch now',
+
+    'narration.btn': '🎧 Narration',
+    'narration.intro': 'Audio narration',
   },
 };
 
