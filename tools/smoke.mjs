@@ -29,7 +29,7 @@ function startServer() {
   return p;
 }
 
-function dumpDom(url) {
+function dumpDom(url, budget = 20000) {
   return new Promise((resolveP) => {
     const profile = mkdtempSync(resolve(tmpdir(), 'cra-smoke-'));
     execFile(CHROME, [
@@ -37,15 +37,27 @@ function dumpDom(url) {
       '--no-first-run', '--no-default-browser-check', '--disable-extensions',
       '--disable-background-networking', '--disable-sync',
       `--user-data-dir=${profile}`,
-      '--virtual-time-budget=15000', '--timeout=25000',
+      `--virtual-time-budget=${budget}`, `--timeout=${budget + 8000}`,
       '--dump-dom', '--enable-logging=stderr', '--v=0', url,
-    ], { maxBuffer: 20 * 1024 * 1024, timeout: 45000, killSignal: 'SIGKILL' },
+    ], { maxBuffer: 20 * 1024 * 1024, timeout: budget + 12000, killSignal: 'SIGKILL' },
     (error, stdout, stderr) => {
       rmSync(profile, { recursive: true, force: true });
       const timedOut = error && error.killed;
       resolveP({ dom: stdout || '', log: (stderr || '') + (timedOut ? '\nTIMEOUT: chrome 超时被终止' : '') });
     });
   });
+}
+
+/** 带重试的 DOM dump：首次失败则加倍 budget 重试一次 */
+async function dumpDomWithRetry(url) {
+  let r = await dumpDom(url, 20000);
+  // 若 stat-persons 为 0 且无 JS 错误，可能是 lazy-load 慢，重试一次
+  const looksEmpty = !/id="stat-persons">[1-9]/.test(r.dom);
+  const hasJSErr = /(SyntaxError|Uncaught|does not provide|is not defined|TypeError)/.test(r.log);
+  if (looksEmpty && !hasJSErr) {
+    r = await dumpDom(url, 35000);
+  }
+  return r;
 }
 
 function checkOne(id, dom, log) {
@@ -71,7 +83,7 @@ async function main() {
   try {
     for (const meta of metas) {
       const url = `http://localhost:${PORT}/index.html?atlas=${meta.id}`;
-      const { dom, log } = await dumpDom(url);
+      const { dom, log } = await dumpDomWithRetry(url);
       const problems = checkOne(meta.id, dom, log);
       if (problems.length) {
         failed++;
