@@ -1824,37 +1824,18 @@ kbd {
   font-variant-numeric: tabular-nums;
 }
 
-/* 底部字幕 */
-.narration-caption {
-  position: fixed; left: 50%; bottom: 70px;
-  transform: translateX(-50%) translateY(10px);
-  max-width: min(680px, 90vw);
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, .72);
-  color: #fff;
-  border-radius: 8px;
-  font-size: 16px; line-height: 1.55;
-  text-align: center;
-  letter-spacing: 0.5px;
-  z-index: 1059;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .25s ease, transform .25s ease;
-  backdrop-filter: blur(6px);
-  text-shadow: 0 1px 3px rgba(0,0,0,.8);
-}
-.narration-caption.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+/* 底部字幕（样式详见后文 .narration-caption 完整定义） */
 
-/* 聚焦模式：narration 期间弱化非主角 UI，地图沉浸式 */
+/* 聚焦模式：narration 期间弱化非主角 UI，地图沉浸式。
+ * 时间轴保留（用户能看年代进度），隐藏图例 / 左面板 / 大事记 / 品牌等 */
 body.narration-focus #left-panel,
 body.narration-focus #event-list-panel,
-body.narration-focus #timeline-bar,
 body.narration-focus #bottom-toolbar,
 body.narration-focus .brand,
-body.narration-focus #atlas-selector-btn {
+body.narration-focus #atlas-selector-btn,
+body.narration-focus #line-legend,
+body.narration-focus .detail-panel,
+body.narration-focus .detail-mask {
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity .35s ease;
@@ -1873,7 +1854,124 @@ body.narration-focus .leaflet-marker-icon .event-marker {
   opacity: 0.18;
 }
 
+/* 配图特效：主角名章（左下浮动卡片，半透明头像 + 姓名 + 生卒年） */
+.narration-hero-card {
+  position: fixed; left: 24px; bottom: 24px;
+  z-index: 1058;
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 20px 12px 12px;
+  background: linear-gradient(135deg, rgba(28,22,18,.92), rgba(60,40,30,.85));
+  color: #f5f0e6;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity .5s ease, transform .5s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212,105,28,.4);
+  max-width: 320px;
+}
+.narration-hero-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.narration-hero-card .nhc-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 700;
+  color: #fff;
+  background: var(--fc, #d4691c);
+  box-shadow: 0 0 0 3px rgba(212,105,28,.5), 0 4px 12px rgba(0,0,0,.3);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.narration-hero-card .nhc-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.narration-hero-card .nhc-info {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+.narration-hero-card .nhc-name {
+  font-size: 19px; font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.narration-hero-card .nhc-meta {
+  font-size: 12px;
+  color: rgba(245,240,230,.75);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* 当前 step 地点的脉冲波纹（CSS keyframes，作用于 leaflet 自定义 marker） */
+@keyframes nr-pulse {
+  0%   { transform: scale(0.8); opacity: 0.9; }
+  70%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.narration-focus .nr-pulse-marker {
+  position: relative;
+}
+.narration-focus .nr-pulse-marker::before,
+.narration-focus .nr-pulse-marker::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 30px; height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  background: rgba(212,105,28,.55);
+  animation: nr-pulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+.narration-focus .nr-pulse-marker::after {
+  animation-delay: 0.9s;
+}
+
+/* 字幕升级：两行（年份 · 地点 / 正文），淡入动效更顺 */
+.narration-caption {
+  position: fixed; left: 50%; bottom: 70px;
+  transform: translateX(-50%) translateY(10px);
+  max-width: min(720px, 92vw);
+  padding: 12px 24px;
+  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.82));
+  color: #fff;
+  border-radius: 10px;
+  border-top: 1px solid rgba(212,105,28,.45);
+  font-size: 17px; line-height: 1.6;
+  text-align: center;
+  letter-spacing: 0.5px;
+  z-index: 1059;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease, transform .35s ease;
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
+  box-shadow: 0 8px 32px rgba(0,0,0,.45);
+}
+.narration-caption.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.narration-caption .nc-meta {
+  display: block;
+  font-size: 12px;
+  color: #f0a050;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.narration-caption .nc-body { display: block; }
+
 @media (max-width: 768px) {
   .narration-caption { font-size: 14px; bottom: 80px; padding: 8px 14px; }
   .narration-bar { min-width: 260px; font-size: 12px; }
+  .narration-hero-card {
+    left: 12px; bottom: 90px; padding: 8px 14px 8px 8px;
+    max-width: 220px;
+  }
+  .narration-hero-card .nhc-avatar { width: 40px; height: 40px; font-size: 18px; }
+  .narration-hero-card .nhc-name { font-size: 15px; }
 }

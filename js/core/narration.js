@@ -19,7 +19,9 @@ import { stopLifeJourney } from './life-journey.js';
 import { render, updateStats } from './render.js';
 import { buildEventList } from './event-list.js';
 import { syncUrlState } from './url-state.js';
-import { t } from './i18n.js';
+import { t, localized } from './i18n.js';
+import { getPersonImage } from './atlas.js';
+import { closeDetail, openDetail } from './detail.js';
 
 const NARRATION_BASE = '../data/narrations/';
 
@@ -93,6 +95,7 @@ function ensureCaption() {
 function removeUI() {
   document.getElementById('narration-bar')?.remove();
   document.getElementById('narration-caption')?.remove();
+  document.getElementById('narration-hero-card')?.remove();
 }
 
 function updateBar() {
@@ -117,13 +120,69 @@ function formatTs(s) {
   return `${m}:${String(sec).padStart(2, '0')}`;
 }
 
+/** 字幕渲染：双行（meta + body）。
+ *  - 有 year/place 时显示"公元 184 年 · 涿郡"作为小标题
+ *  - body 是 caption 正文 */
 function renderCaption(seg) {
   const cap = document.getElementById('narration-caption');
   if (!cap) return;
-  if (!seg) { cap.classList.remove('show'); cap.textContent = ''; return; }
-  cap.textContent = seg.caption || '';
+  if (!seg || !seg.caption) { cap.classList.remove('show'); return; }
+  const meta = (seg.year || seg.place)
+    ? `${seg.year ? formatYear(seg.year) : ''}${seg.year && seg.place ? ' · ' : ''}${seg.place || ''}`
+    : '';
+  cap.innerHTML = meta
+    ? `<span class="nc-meta">${meta}</span><span class="nc-body">${seg.caption}</span>`
+    : `<span class="nc-body">${seg.caption}</span>`;
   cap.classList.add('show');
 }
+
+/** 主角名章：左下浮动卡片，半透明头像 + 姓名 + 生卒年 */
+function showHeroCard(personId) {
+  const atlas = current();
+  const person = getPerson(personId);
+  if (!person) return;
+  let card = document.getElementById('narration-hero-card');
+  if (!card) {
+    card = document.createElement('div');
+    card.id = 'narration-hero-card';
+    card.className = 'narration-hero-card';
+    document.body.appendChild(card);
+  }
+  const imgUrl = getPersonImage(personId);
+  const faction = (atlas.factions.find(f => f.id === person.faction) || {});
+  const fc = faction.color || '#d4691c';
+  const avatarHtml = imgUrl
+    ? `<img src="${imgUrl}" alt="${person.name}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'${person.avatar || person.name[0]}',className:'avatar-fallback'}))" />`
+    : (person.avatar || person.name[0]);
+  card.innerHTML = `
+    <div class="nhc-avatar" style="--fc:${fc}">${avatarHtml}</div>
+    <div class="nhc-info">
+      <div class="nhc-name">${person.name}</div>
+      <div class="nhc-meta">${person.birth && person.death ? `${formatYear(person.birth)} – ${formatYear(person.death)}` : ''}${person.title ? ' · ' + person.title : ''}</div>
+    </div>
+  `;
+  // 触发 transition
+  requestAnimationFrame(() => card.classList.add('show'));
+}
+
+function hideHeroCard() {
+  document.getElementById('narration-hero-card')?.classList.remove('show');
+}
+
+/** 在当前 step 地点 marker 上添加脉冲波纹 class */
+function applyPulseMarker(personId) {
+  // 清除旧的
+  document.querySelectorAll('.nr-pulse-marker').forEach(el => el.classList.remove('nr-pulse-marker'));
+  const marker = state.personMarkers?.get(personId);
+  if (!marker) return;
+  const el = marker.getElement();
+  if (el) el.classList.add('nr-pulse-marker');
+}
+
+function clearPulseMarker() {
+  document.querySelectorAll('.nr-pulse-marker').forEach(el => el.classList.remove('nr-pulse-marker'));
+}
+
 
 /* ---------- 时间 → segment ---------- */
 
@@ -180,9 +239,12 @@ function applySegment(seg) {
     updateStats();
     render();
     buildEventList();
+    // 视觉特效：当前位置脉冲波纹（render 完后再加 class）
+    requestAnimationFrame(() => applyPulseMarker(session.script.personId));
   } else {
-    // hook / 引入 / 结尾段：清状态
+    // hook / 引入 / 结尾段：清状态 + 移除脉冲
     state.highlightedPersons.clear();
+    clearPulseMarker();
     render();
   }
 }
@@ -293,12 +355,17 @@ export async function startNarration(personId, opts = {}) {
   audio.crossOrigin = 'anonymous';
   audio.preload = 'auto';
 
+  // 记录是否由详情面板触发（结束时恢复）
+  const detailWasOpen = document.getElementById('detail-panel')?.classList.contains('open');
+
   session = {
     script, audio, steps, idx: 0,
     pathLayer: null, headMarker: null,
+    personId, detailWasOpen,
   };
   lastSegIdx = -1;
   state.lifeJourney = { personId, total: steps.length, idx: 0, narration: true };
+  state.selectedPerson = personId;
 
   ensureBar();
   ensureCaption();
@@ -308,8 +375,13 @@ export async function startNarration(personId, opts = {}) {
   audio.addEventListener('ended', onEnded);
   audio.addEventListener('seeked', onTimeUpdate);
 
-  // 聚焦模式：弱化其他 UI
+  // 聚焦模式：弱化其他 UI（含详情面板，时间轴保留）
   document.body.classList.add('narration-focus');
+  // 启动时收起详情面板
+  try { closeDetail(); } catch {}
+
+  // 主角名章（左下浮动卡片）
+  showHeroCard(personId);
 
   try {
     await audio.play();
@@ -325,6 +397,7 @@ export async function startNarration(personId, opts = {}) {
 
 export function stopNarration() {
   if (!session) return;
+  const { personId, detailWasOpen } = session;
   stopTick();
   session.audio.pause();
   session.audio.removeEventListener('timeupdate', onTimeUpdate);
@@ -333,6 +406,8 @@ export function stopNarration() {
   session.audio.removeEventListener('ended', onEnded);
   session.audio.removeEventListener('seeked', onTimeUpdate);
   clearMapArtifacts();
+  clearPulseMarker();
+  hideHeroCard();
   document.body.classList.remove('narration-focus');
   session = null;
   state.lifeJourney = null;
@@ -341,6 +416,12 @@ export function stopNarration() {
   removeUI();
   // 触发一次 render 让图层恢复正常显示
   render();
+  // 解说结束后：恢复详情面板（如果启动时是打开的）
+  if (detailWasOpen && personId) {
+    setTimeout(() => {
+      try { openDetail(personId); } catch {}
+    }, 400);
+  }
 }
 
 export function togglePause() {
