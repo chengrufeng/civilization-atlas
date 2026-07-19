@@ -1,0 +1,121 @@
+{
+  "personId": "mandela",
+  "atlasId": "modern_world",
+  "title": "曼德拉 · 27年牢狱，宽恕一个国家",
+  "subtitle": "约 2 分钟看完南非国父的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 70.7,
+  "audio": "audio/narrations/mandela.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "曼德拉",
+        "反种族隔离"
+      ],
+      "caption": "27年的牢狱，没有熄灭他眼中的光。他用宽恕缝合了一个国家的伤口。纳尔逊·曼德拉。",
+      "image": "audio/narrations/images/mandela/seg-00.jpg",
+      "imageCaption": "曼德拉",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.34,
+      "year": 1918,
+      "place": "姆韦佐",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1918年，南非东开普的小村庄姆韦佐。腾布王室的支系中，一个男孩出生，本可继承酋长之位，却选择了抗争之路。",
+      "image": "audio/narrations/images/mandela/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.84,
+      "year": 1944,
+      "place": "约翰内斯堡",
+      "step": 1,
+      "keywords": [
+        "非国大"
+      ],
+      "caption": "1944年，约翰内斯堡。他加入非洲人国民大会，立志要推翻种族隔离这道把人按肤色分类的高墙。",
+      "image": "audio/narrations/images/mandela/seg-02.png",
+      "imageCaption": "非国大",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.09,
+      "year": 1962,
+      "place": "约翰内斯堡",
+      "step": 2,
+      "keywords": [
+        "被捕"
+      ],
+      "caption": "1962年，他被捕入狱，被判终身监禁。审判席上他平静地说：'这是我为之献身的事业。'",
+      "image": "audio/narrations/images/mandela/seg-03.jpg",
+      "imageCaption": "被捕",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.31,
+      "year": 1964,
+      "place": "罗本岛",
+      "step": 3,
+      "keywords": [
+        "罗本岛"
+      ],
+      "caption": "1964年，他被转押到开普敦海上的罗本岛监狱。编号46664，每天砸碎石头，一砸就是十八年。",
+      "image": "audio/narrations/images/mandela/seg-04.jpg",
+      "imageCaption": "罗本岛",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.64,
+      "year": 1990,
+      "place": "索韦托",
+      "step": 4,
+      "keywords": [
+        "出狱"
+      ],
+      "caption": "1990年2月11日，72岁的曼德拉走出监狱，举着右拳，微笑着向世人致意。世界为之欢呼。",
+      "image": "audio/narrations/images/mandela/seg-05.png",
+      "imageCaption": "出狱",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.79,
+      "year": 1994,
+      "place": "比勒陀利亚",
+      "step": 5,
+      "keywords": [
+        "就职总统"
+      ],
+      "caption": "1994年，南非第一次全民普选。他当选首任民选总统，曾经的狱卒成了他的座上宾。",
+      "image": "audio/narrations/images/mandela/seg-06.jpg",
+      "imageCaption": "就职总统",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.82,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：仇恨出于本能，宽恕才是修行。当你拥抱对手的那一刻，你才真正赢得了自由。",
+      "image": "audio/narrations/images/mandela/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:45:08.115Z"
+}

@@ -1,0 +1,138 @@
+{
+  "personId": "augustus",
+  "atlasId": "rome",
+  "title": "屋大维 · 我把罗马从砖瓦变成了大理石",
+  "subtitle": "约 2 分钟看完罗马开国皇帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 69.95,
+  "audio": "audio/narrations/augustus.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "屋大维",
+        "奥古斯都"
+      ],
+      "caption": "他把罗马从砖瓦之城，变成大理石的帝国。凯撒的养子，罗马开国皇帝——屋大维。",
+      "image": "audio/narrations/images/augustus/seg-00.jpg",
+      "imageCaption": "屋大维",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.64,
+      "year": -63,
+      "place": "罗马",
+      "step": 0,
+      "keywords": [
+        "出生",
+        "凯撒养子"
+      ],
+      "caption": "公元前63年，罗马。少年屋大维出身骑士家庭，却是凯撒的甥孙，命运早已为他埋下伏笔。",
+      "image": "audio/narrations/images/augustus/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.56,
+      "year": -45,
+      "place": "阿波罗尼亚",
+      "step": 1,
+      "keywords": [
+        "凯撒遇刺",
+        "继承"
+      ],
+      "caption": "公元前45年，他在阿波罗尼亚求学，凯撒遇刺的噩耗传来，少年毅然承继了凯撒的名字与遗产。",
+      "image": "audio/narrations/images/augustus/seg-02.jpg",
+      "imageCaption": "凯撒遇刺",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.8,
+      "year": -43,
+      "place": "罗马",
+      "step": 2,
+      "keywords": [
+        "后三头同盟"
+      ],
+      "caption": "回到罗马，他与安东尼、雷必达结成'后三头同盟'，三人共分天下。",
+      "image": "audio/narrations/images/augustus/seg-03.jpg",
+      "imageCaption": "后三头同盟",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 30.96,
+      "year": -31,
+      "place": "亚克兴",
+      "step": 4,
+      "keywords": [
+        "亚克兴海战"
+      ],
+      "caption": "公元前31年，亚克兴海战。屋大维一举击败安东尼与埃及艳后，成为地中海唯一的主人。",
+      "image": "audio/narrations/images/augustus/seg-04.jpg",
+      "imageCaption": "亚克兴海战",
+      "effect": "fire",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.18,
+      "year": -27,
+      "place": "罗马",
+      "step": 5,
+      "keywords": [
+        "奥古斯都",
+        "帝国"
+      ],
+      "caption": "公元前27年，元老院授予他'奥古斯都'——意为'神圣'的称号。罗马共和国悄然落幕，帝国悄然诞生。",
+      "image": "audio/narrations/images/augustus/seg-05.jpg",
+      "imageCaption": "奥古斯都",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 48.31,
+      "year": -18,
+      "place": "罗马",
+      "step": 6,
+      "keywords": [
+        "罗马和平"
+      ],
+      "caption": "他改革风俗、修缮道路、整饬军队，开启了延续两百年的'罗马和平'。",
+      "image": "audio/narrations/images/augustus/seg-06.jpg",
+      "imageCaption": "罗马和平",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.42,
+      "year": 14,
+      "place": "诺拉",
+      "step": 7,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "公元14年，屋大维病逝于诺拉，养子提比略继位。罗马帝国在他身后又延续了五百年。",
+      "image": "audio/narrations/images/augustus/seg-07.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.57,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他教给我们一件事：真正的强者，不是摧毁对手，而是把混乱的世界，重新捏成秩序。",
+      "image": "audio/narrations/images/augustus/seg-08.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:43:13.542Z"
+}

@@ -1,0 +1,121 @@
+{
+  "personId": "leonardo",
+  "atlasId": "renaissance",
+  "title": "达·芬奇 · 永远的全能天才",
+  "subtitle": "约 2 分钟看完文艺复兴巨匠的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 71.5,
+  "audio": "audio/narrations/leonardo.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "达·芬奇",
+        "文艺复兴"
+      ],
+      "caption": "画家、解剖学家、工程师、发明家……五百年前，他就画过直升机、坦克和潜水艇。列奥纳多·达·芬奇。",
+      "image": "audio/narrations/images/leonardo/seg-00.jpg",
+      "imageCaption": "达·芬奇",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.8,
+      "year": 1452,
+      "place": "芬奇镇",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1452年，佛罗伦萨郊外的芬奇镇。一个公证员的私生子降生，没有人想到，他将成为人类史上最博学的人。",
+      "image": "audio/narrations/images/leonardo/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.1,
+      "year": 1466,
+      "place": "佛罗伦萨",
+      "step": 1,
+      "keywords": [
+        "学画"
+      ],
+      "caption": "1466年，少年芬奇进入委罗基奥工坊学画。据说他画的天使太美，老师从此放下了画笔。",
+      "image": "audio/narrations/images/leonardo/seg-02.jpg",
+      "imageCaption": "学画",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.68,
+      "year": 1482,
+      "place": "米兰",
+      "step": 2,
+      "keywords": [
+        "最后的晚餐"
+      ],
+      "caption": "1482年，他北上米兰。在圣玛利亚修道院的墙上，画下了《最后的晚餐》，耶稣与十二门徒的瞬间，从此凝固。",
+      "image": "audio/narrations/images/leonardo/seg-03.jpg",
+      "imageCaption": "最后的晚餐",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.25,
+      "year": 1503,
+      "place": "佛罗伦萨",
+      "step": 4,
+      "keywords": [
+        "蒙娜丽莎"
+      ],
+      "caption": "1503年，他开始绘制《蒙娜丽莎》。那个神秘的微笑，他随身携带了十六年，直到生命尽头。",
+      "image": "audio/narrations/images/leonardo/seg-04.jpg",
+      "imageCaption": "蒙娜丽莎",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.54,
+      "year": 1513,
+      "place": "罗马",
+      "step": 5,
+      "keywords": [
+        "教廷"
+      ],
+      "caption": "他解剖尸体研究人体，设计飞行器研究天空。在他的手稿里，藏着比时代早了五百年的未来。",
+      "image": "audio/narrations/images/leonardo/seg-05.jpg",
+      "imageCaption": "教廷",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.71,
+      "year": 1516,
+      "place": "昂布瓦斯",
+      "step": 6,
+      "keywords": [
+        "赴法"
+      ],
+      "caption": "1516年，64岁的他应法王弗朗索瓦一世之邀，翻越阿尔卑斯赴法国，在昂布瓦斯的城堡里安度晚年。",
+      "image": "audio/narrations/images/leonardo/seg-06.jpg",
+      "imageCaption": "赴法",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.82,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：好奇心，是人类最珍贵的礼物。当你对世界保持孩童般的惊奇，每一个清晨都是奇迹。",
+      "image": "audio/narrations/images/leonardo/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:44:46.414Z"
+}

@@ -25,6 +25,9 @@ const PLACES = [
   { id: '-vesuvius', name: '维苏威', modern: '意大利维苏威', coord: [14.43, 40.82], note: '火山' },
   { id: 'rhine', name: '莱茵河', modern: '莱茵河', coord: [7.0, 50.0], note: '北方边界' },
   { id: 'syracuse_rome', name: '叙拉古', modern: '意大利锡拉库萨', coord: [15.29, 37.07], note: '罗马征服' },
+  { id: 'apollonia', name: '阿波罗尼亚', modern: '阿尔巴尼亚发罗拉', coord: [19.45, 40.99], note: '屋大维接信地' },
+  { id: 'philippi', name: '腓力比', modern: '希腊腓力比', coord: [24.28, 41.01], note: '腓力比之战' },
+  { id: 'nola', name: '诺拉', modern: '意大利诺拉', coord: [14.53, 40.93], note: '屋大维逝地' },
 ];
 
 const PERSONS = [
@@ -38,7 +41,7 @@ const PERSONS = [
   { id: 'spartacus', name: '斯巴达克斯', courtesy: '', alias: [], faction: 'republic', birth: -109, death: -71, birthPlace: '色雷斯', title: '奴隶起义领袖', roles: ['角斗士'], avatar: '斯', bio: '领导最大规模奴隶起义。', events: [ { year: -73, place: '罗马', desc: '发动奴隶大起义' }, { year: -71, place: '罗马', desc: '起义失败' } ] },
   { id: 'caesar', name: '凯撒', courtesy: '', alias: ['尤利乌斯·凯撒'], faction: 'republic', birth: -100, death: -44, birthPlace: '罗马', title: '终身独裁官', roles: ['军事家','政治家'], avatar: '凯', bio: '《高卢战记》、跨越卢比孔、终身独裁。', events: [ { year: -60, place: '罗马', desc: '与庞培、克拉苏结成"前三头同盟"' }, { year: -58, place: '高卢', desc: '开启高卢战争，八年征服高卢' }, { year: -52, place: '阿莱西亚', desc: '阿莱西亚之围，击败维钦托利' }, { year: -49, place: '罗马', desc: '跨越卢比孔河，"骰子已经掷下"' }, { year: -48, place: '法萨卢斯', desc: '法萨卢斯战役，击败庞培' }, { year: -47, place: '亚历山大', desc: '埃及介入王位之争，与克娄巴特拉七世结合' }, { year: -46, place: '罗马', desc: '凯旋式，被推为终身独裁官' }, { year: -44, place: '罗马', desc: '三月十五日，元老院遇刺身亡' } ] },
   { id: 'cicero', name: '西塞罗', courtesy: '', alias: [], faction: 'republic', birth: -106, death: -43, birthPlace: '阿尔皮努姆', title: '执政官·演说家', roles: ['演说家','思想家'], avatar: '西', bio: '粉碎喀提林阴谋、罗马散文巅峰。', events: [ { year: -63, place: '罗马', desc: '揭发喀提林阴谋' } ] },
-  { id: 'augustus', name: '屋大维', courtesy: '', alias: ['奥古斯都'], faction: 'empire', birth: -63, death: 14, birthPlace: '罗马', title: '首任皇帝', roles: ['帝国建立者'], avatar: '奥', bio: '亚克兴海战击败安东尼，开创帝国。', events: [ { year: -31, place: '亚克兴', desc: '亚克兴海战' }, { year: -27, place: '罗马', desc: '获奥古斯都称号，开创帝国' } ] },
+  { id: 'augustus', name: '屋大维', courtesy: '', alias: ['奥古斯都'], faction: 'empire', birth: -63, death: 14, birthPlace: '罗马', title: '首任皇帝', roles: ['帝国建立者'], avatar: '奥', bio: '亚克兴海战击败安东尼，开创帝国。', events: [ { year: -63, place: '罗马', desc: '出生于骑士家庭，是凯撒的甥孙与养子' }, { year: -45, place: '阿波罗尼亚', desc: '凯撒遇刺消息传来，他承继凯撒遗产' }, { year: -43, place: '罗马', desc: '与安东尼、雷必达结成"后三头同盟"' }, { year: -42, place: '腓力比', desc: '腓力比之战，击败刺杀凯撒的共和派' }, { year: -31, place: '亚克兴', desc: '亚克兴海战，击败安东尼与埃及艳后' }, { year: -27, place: '罗马', desc: '元老院授予"奥古斯都"称号，开创帝国' }, { year: -18, place: '罗马', desc: '推行道德与婚姻改革，重塑罗马风俗' }, { year: 14, place: '诺拉', desc: '病逝，养子提比略继位，帝国延续' } ] },
   { id: 'nero', name: '尼禄', courtesy: '', alias: [], faction: 'empire', birth: 37, death: 68, birthPlace: '罗马', title: '皇帝', roles: ['暴君'], avatar: '尼', bio: '罗马大火、迫害基督徒。', events: [ { year: 64, place: '罗马', desc: '罗马大火' } ] },
   { id: 'trajan', name: '图拉真', courtesy: '', alias: [], faction: 'empire', birth: 53, death: 117, birthPlace: '西班牙', title: '皇帝', roles: ['五贤帝之一'], avatar: '图', bio: '罗马版图最大的时期。', events: [ { year: 106, place: '罗马', desc: '征服达契亚，版图极盛' } ] },
   { id: 'hadrian', name: '哈德良', courtesy: '', alias: [], faction: 'empire', birth: 76, death: 138, birthPlace: '西班牙', title: '皇帝', roles: ['五贤帝之一'], avatar: '哈', bio: '哈德良长城、万神殿、巡视帝国。', events: [ { year: 122, place: '不列颠', desc: '建哈德良长城' } ] },

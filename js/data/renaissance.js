@@ -30,13 +30,15 @@ const PLACES = [
   { id: 'mainz', name: '美因茨', modern: '德国美因茨', coord: [8.25, 50.00], note: '古腾堡印刷地' },
   { id: 'geneva', name: '日内瓦', modern: '瑞士日内瓦', coord: [6.14, 46.20], note: '加尔文改革中心' },
   { id: 'london3', name: '伦敦', modern: '英国伦敦', coord: [-0.13, 51.51], note: '环球剧场' },
+  { id: 'vinci', name: '芬奇镇', modern: '意大利托斯卡纳芬奇', coord: [10.92, 43.79], note: '达·芬奇出生地' },
+  { id: 'amboise', name: '昂布瓦斯', modern: '法国昂布瓦斯', coord: [0.98, 47.41], note: '达·芬奇晚年居地' },
 ];
 
 const PERSONS = [
   { id: 'petrarch', name: '彼特拉克', courtesy: '', alias: [], faction: 'italy', birth: 1304, death: 1374, birthPlace: '阿雷佐', title: '诗人', roles: ['文艺复兴之父'], avatar: '彼', bio: '人文主义先驱，重新发现古典文化。', events: [ { year: 1341, place: '罗马', desc: '在罗马获桂冠诗人' } ] },
   { id: 'medici', name: '科西莫·美第奇', courtesy: '', alias: [], faction: 'italy', birth: 1389, death: 1464, birthPlace: '佛罗伦萨', title: '僭主', roles: ['艺术赞助人'], avatar: '美', bio: '建立美第奇家族对佛罗伦萨的统治。', events: [ { year: 1434, place: '佛罗伦萨', desc: '成为佛罗伦萨实际统治者' } ] },
   { id: 'lorenzo_medici', name: '豪华者洛伦佐', courtesy: '', alias: [], faction: 'italy', birth: 1449, death: 1492, birthPlace: '佛罗伦萨', title: '僭主', roles: ['文艺复兴黄金时代'], avatar: '洛', bio: '集权、艺术与诗歌赞助的极盛时期。', events: [ { year: 1469, place: '佛罗伦萨', desc: '继任家族领袖' } ] },
-  { id: 'leonardo', name: '达·芬奇', courtesy: '', alias: [], faction: 'italy', birth: 1452, death: 1519, birthPlace: '芬奇', title: '画家·发明家', roles: ['全能天才'], avatar: '达', bio: '《蒙娜丽莎》《最后的晚餐》、科学家、工程师。', events: [ { year: 1503, place: '佛罗伦萨', desc: '开始绘制蒙娜丽莎' } ] },
+  { id: 'leonardo', name: '达·芬奇', courtesy: '', alias: [], faction: 'italy', birth: 1452, death: 1519, birthPlace: '芬奇', title: '画家·发明家', roles: ['全能天才'], avatar: '达', bio: '《蒙娜丽莎》《最后的晚餐》、科学家、工程师。', events: [ { year: 1452, place: '芬奇镇', desc: '生于佛罗伦萨郊外芬奇镇，私生子' }, { year: 1466, place: '佛罗伦萨', desc: '入委罗基奥工坊学画，师从名师' }, { year: 1482, place: '米兰', desc: '仕于米兰公爵，绘制《最后的晚餐》' }, { year: 1502, place: '佛罗伦萨', desc: '为切萨雷·波吉亚任军事工程师' }, { year: 1503, place: '佛罗伦萨', desc: '开始绘制《蒙娜丽莎》' }, { year: 1513, place: '罗马', desc: '赴罗马教廷寻求教皇赞助' }, { year: 1516, place: '昂布瓦斯', desc: '应法王弗朗索瓦一世邀赴法国' }, { year: 1519, place: '昂布瓦斯', desc: '病逝于克鲁庄园，据传在法王怀中离世' } ] },
   { id: 'michelangelo', name: '米开朗基罗', courtesy: '', alias: [], faction: 'italy', birth: 1475, death: 1564, birthPlace: '卡普雷塞', title: '雕塑家·画家', roles: ['文艺复兴艺术巅峰'], avatar: '米', bio: '《大卫》、西斯廷天顶画。', events: [ { year: 1504, place: '佛罗伦萨', desc: '完成大卫像' }, { year: 1512, place: '罗马', desc: '完成西斯廷天顶画' } ] },
   { id: 'raphael', name: '拉斐尔', courtesy: '', alias: [], faction: 'italy', birth: 1483, death: 1520, birthPlace: '乌尔比诺', title: '画家', roles: ['古典美典范'], avatar: '拉', bio: '《雅典学院》和谐之美。', events: [ { year: 1511, place: '罗马', desc: '完成雅典学院' } ] },
   { id: 'galileo', name: '伽利略', courtesy: '', alias: [], faction: 'italy', birth: 1564, death: 1642, birthPlace: '比萨', title: '物理·天文学家', roles: ['近代科学之父'], avatar: '伽', bio: '改进望远镜、倡导日心说。', events: [ { year: 1610, place: '佛罗伦萨', desc: '发现木星卫星' } ] },

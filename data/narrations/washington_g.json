@@ -1,0 +1,134 @@
+{
+  "personId": "washington_g",
+  "atlasId": "enlightenment",
+  "title": "华盛顿 · 开国者转身归农",
+  "subtitle": "约 2 分钟看完美国国父的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 69.28,
+  "audio": "audio/narrations/washington_g.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "华盛顿",
+        "美国国父"
+      ],
+      "caption": "打下了江山，却亲手把权力还给人民。美国国父——乔治·华盛顿。",
+      "image": "audio/narrations/images/washington_g/seg-00.jpg",
+      "imageCaption": "华盛顿",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.52,
+      "year": 1732,
+      "place": "弗吉尼亚",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1732年，弗吉尼亚。一个种植园家庭的男孩出生，没有人想到，他会成为一个新国家的奠基人。",
+      "image": "audio/narrations/images/washington_g/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 14.81,
+      "year": 1775,
+      "place": "费城",
+      "step": 1,
+      "keywords": [
+        "大陆军总司令"
+      ],
+      "caption": "1775年，北美十三殖民地与英国决裂。大陆会议任命华盛顿为大陆军总司令，率民兵对抗世界最强帝国。",
+      "image": "audio/narrations/images/washington_g/seg-02.jpg",
+      "imageCaption": "大陆军总司令",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.9,
+      "year": 1776,
+      "place": "特伦顿",
+      "step": 2,
+      "keywords": [
+        "渡特拉华河"
+      ],
+      "caption": "1776年圣诞夜，风雪交加，他率军渡过冰冷的特拉华河，特伦顿一役扭转战局。",
+      "image": "audio/narrations/images/washington_g/seg-03.jpg",
+      "imageCaption": "渡特拉华河",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 32.4,
+      "year": 1781,
+      "place": "约克镇",
+      "step": 4,
+      "keywords": [
+        "约克镇战役"
+      ],
+      "caption": "1781年，约克镇。英军主帅康华利斯投降，独立战争胜利告终。",
+      "image": "audio/narrations/images/washington_g/seg-04.jpg",
+      "imageCaption": "约克镇战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.18,
+      "year": 1787,
+      "place": "费城",
+      "step": 5,
+      "keywords": [
+        "制宪会议"
+      ],
+      "caption": "1787年，他主持费城制宪会议，奠定美国宪法的根基，三权分立从此成为模板。",
+      "image": "audio/narrations/images/washington_g/seg-05.jpg",
+      "imageCaption": "制宪会议",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.82,
+      "year": 1789,
+      "place": "纽约",
+      "step": 6,
+      "keywords": [
+        "首任总统"
+      ],
+      "caption": "1789年，他全票当选美国首任总统。八年后，他主动卸任，开创总统任期的传统。",
+      "image": "audio/narrations/images/washington_g/seg-00.jpg",
+      "imageCaption": "首任总统",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.88,
+      "year": 1799,
+      "place": "弗吉尼亚",
+      "step": 7,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "1799年，华盛顿病逝于弗农山庄。他临终前解放了自己的所有奴隶。",
+      "image": "audio/narrations/images/washington_g/seg-07.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 61.58,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他留给世界最重要的遗产不是打赢战争，而是放下权力——权力属于人民，不属于任何英雄。",
+      "image": "audio/narrations/images/washington_g/seg-08.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:43:38.895Z"
+}

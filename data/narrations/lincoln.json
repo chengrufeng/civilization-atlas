@@ -1,0 +1,122 @@
+{
+  "personId": "lincoln",
+  "atlasId": "enlightenment",
+  "title": "林肯 · 民有、民治、民享之国",
+  "subtitle": "约 2 分钟看完解放奴隶的总统的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 66.89,
+  "audio": "audio/narrations/lincoln.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "林肯",
+        "废奴总统"
+      ],
+      "caption": "他从边陲小屋走到白宫，用一场战争结束了奴隶制，又用生命守护了联邦。亚伯拉罕·林肯。",
+      "image": "audio/narrations/images/lincoln/seg-00.jpg",
+      "imageCaption": "林肯",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.44,
+      "year": 1809,
+      "place": "肯塔基",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1809年，肯塔基州的边陲小屋。林肯出生在一个贫寒的伐木工家庭，全靠借来的书自学成才。",
+      "image": "audio/narrations/images/lincoln/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.97,
+      "year": 1830,
+      "place": "斯普林菲尔德",
+      "step": 1,
+      "keywords": [
+        "自学",
+        "律师"
+      ],
+      "caption": "1830年，全家迁居伊利诺伊。年轻的林肯劈木头、当船工、自学法律，凭一张嘴成了律师。",
+      "image": "audio/narrations/images/lincoln/seg-00.jpg",
+      "imageCaption": "自学",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 25.74,
+      "year": 1860,
+      "place": "费城",
+      "step": 2,
+      "keywords": [
+        "当选总统"
+      ],
+      "caption": "1860年，林肯当选美国第16任总统。南方各州随即宣布独立，南北战争爆发。",
+      "image": "audio/narrations/images/lincoln/seg-03.jpg",
+      "imageCaption": "当选总统",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.55,
+      "year": 1862,
+      "place": "华盛顿",
+      "step": 3,
+      "keywords": [
+        "解放奴隶宣言"
+      ],
+      "caption": "1862年，他签署《解放奴隶宣言》——四百万黑人，从此走向自由。",
+      "image": "audio/narrations/images/lincoln/seg-04.jpg",
+      "imageCaption": "解放奴隶宣言",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.66,
+      "year": 1863,
+      "place": "葛底斯堡",
+      "step": 4,
+      "keywords": [
+        "葛底斯堡演说"
+      ],
+      "caption": "1863年，葛底斯堡战场。他用272个字，留下人类史上最伟大的演说：'民有、民治、民享之国，永不消亡'。",
+      "image": "audio/narrations/images/lincoln/seg-05.jpg",
+      "imageCaption": "葛底斯堡演说",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.28,
+      "year": 1865,
+      "place": "华盛顿",
+      "step": 5,
+      "keywords": [
+        "遇刺"
+      ],
+      "caption": "1865年4月14日，南方投降刚过五天。林肯在福特剧院遇刺，次日清晨身亡，年仅56岁。",
+      "image": "audio/narrations/images/lincoln/seg-06.png",
+      "imageCaption": "遇刺",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.39,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：决定一个人高度的，不是出身，而是他在最艰难时刻，依然能坚守的良知。",
+      "image": "audio/narrations/images/lincoln/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:43:59.750Z"
+}

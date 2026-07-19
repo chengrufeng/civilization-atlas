@@ -1,0 +1,122 @@
+{
+  "personId": "churchill",
+  "atlasId": "modern_world",
+  "title": "丘吉尔 · 永不投降",
+  "subtitle": "约 2 分钟看完二战英国首相的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 67.66,
+  "audio": "audio/narrations/churchill.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "丘吉尔",
+        "二战领袖"
+      ],
+      "caption": "在最黑暗的时刻，他用语言点燃了一个国家的勇气。温斯顿·丘吉尔。",
+      "image": "audio/narrations/images/churchill/seg-00.jpg",
+      "imageCaption": "丘吉尔",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.4,
+      "year": 1874,
+      "place": "牛津",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1874年，英国牛津郡的贵族庄园。马尔伯勒家族的长子降生，含着银汤匙，却要用一生去证明自己。",
+      "image": "audio/narrations/images/churchill/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 15.48,
+      "year": 1899,
+      "place": "南非",
+      "step": 1,
+      "keywords": [
+        "布尔战争"
+      ],
+      "caption": "1899年，布尔战争。他当战地记者被俘，却上演惊险越狱，一夜之间成了英国的民族英雄。",
+      "image": "audio/narrations/images/churchill/seg-02.jpg",
+      "imageCaption": "布尔战争",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.13,
+      "year": 1915,
+      "place": "加里波利",
+      "step": 3,
+      "keywords": [
+        "达达尼尔失败"
+      ],
+      "caption": "1915年，他主导的达达尼尔战役惨败，无数士兵葬身加里波利海滩，他引咎辞职，亲赴战壕赎罪。",
+      "image": "audio/narrations/images/churchill/seg-03.jpg",
+      "imageCaption": "达达尼尔失败",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.14,
+      "year": 1940,
+      "place": "伦敦",
+      "step": 4,
+      "keywords": [
+        "首相",
+        "血汗泪"
+      ],
+      "caption": "1940年5月，德国铁蹄踏遍欧洲。65岁的丘吉尔临危受命出任首相，留下那句名言：'我所能奉献的，只有血、汗与泪。'",
+      "image": "audio/narrations/images/churchill/seg-04.jpg",
+      "imageCaption": "首相",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 44.41,
+      "year": 1940,
+      "place": "伦敦",
+      "step": 5,
+      "keywords": [
+        "不列颠空战"
+      ],
+      "caption": "不列颠空战，伦敦被炸成废墟。他说：'在人类战场上，从未有如此多的人，对如此少的人，欠下如此深的恩情。'",
+      "image": "audio/narrations/images/churchill/seg-05.jpg",
+      "imageCaption": "不列颠空战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.43,
+      "year": 1946,
+      "place": "伦敦",
+      "step": 6,
+      "keywords": [
+        "铁幕演说"
+      ],
+      "caption": "战后，他在富尔顿发出警告：'一道铁幕已经降临欧洲。'冷战，自此开启。",
+      "image": "audio/narrations/images/churchill/seg-06.jpg",
+      "imageCaption": "铁幕演说",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 61.04,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：勇气，不是没有恐惧，而是在恐惧面前，依然选择绝不投降。",
+      "image": "audio/narrations/images/churchill/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:44:24.198Z"
+}
