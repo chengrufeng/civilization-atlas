@@ -1,0 +1,158 @@
+{
+  "personId": "caesar",
+  "atlasId": "rome",
+  "title": "凯撒 · 我来，我见，我征服",
+  "subtitle": "约 2 分 30 秒浓缩凯撒大帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 97.25,
+  "audio": "audio/narrations/caesar.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "凯撒",
+        "尤利乌斯凯撒"
+      ],
+      "caption": "「我来，我见，我征服」——他是罗马共和国的终结者，罗马帝国的奠基人。Julius Caesar，凯撒。",
+      "image": "audio/narrations/images/caesar/seg-00.jpg",
+      "imageCaption": "凯撒",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.2,
+      "year": -100,
+      "place": "罗马",
+      "step": null,
+      "keywords": [
+        "凯撒出生",
+        "罗马"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 100 年，罗马。古老的尤利乌斯家族降生了一个男孩——名盖乌斯，姓尤利乌斯，后世称他凯撒。",
+      "image": "audio/narrations/images/caesar/seg-01.jpg",
+      "imageCaption": "凯撒出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.42,
+      "year": -60,
+      "place": "罗马",
+      "step": 0,
+      "keywords": [
+        "前三头同盟",
+        "凯撒庞培克拉苏"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 60 年。他与庞培、克拉苏秘密结盟，史称「前三头同盟」——三人瓜分了罗马的权力。",
+      "image": "audio/narrations/images/caesar/seg-02.jpg",
+      "imageCaption": "前三头同盟",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 25.76,
+      "year": -58,
+      "place": "高卢",
+      "step": 1,
+      "keywords": [
+        "高卢战记",
+        "凯撒"
+      ],
+      "effect": "fire",
+      "caption": "公元前 58 年。出任高卢总督，八年征战，把整个高卢（今法国）并入罗马版图——他还亲自写下了《高卢战记》。",
+      "image": "audio/narrations/images/caesar/seg-03.jpg",
+      "imageCaption": "高卢战记",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.62,
+      "year": -52,
+      "place": "阿莱西亚",
+      "step": 2,
+      "keywords": [
+        "阿莱西亚之围",
+        "维钦托利"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 52 年。阿莱西亚之围——他包围了高卢最后的抵抗领袖维钦托利。高卢之战就此终结。",
+      "image": "audio/narrations/images/caesar/seg-04.jpg",
+      "imageCaption": "阿莱西亚之围",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 44.41,
+      "year": -49,
+      "place": "罗马",
+      "step": 3,
+      "keywords": [
+        "跨越卢比孔河",
+        "凯撒"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 49 年。元老院要他交出兵权。他率军渡过卢比孔小河——「骰子已经掷下」。这是向罗马宣战。",
+      "image": "audio/narrations/images/caesar/seg-05.jpg",
+      "imageCaption": "跨越卢比孔河",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.19,
+      "year": -48,
+      "place": "法萨卢斯",
+      "step": 4,
+      "keywords": [
+        "法萨卢斯战役",
+        "庞培"
+      ],
+      "effect": "fire",
+      "caption": "公元前 48 年。法萨卢斯决战——以少胜多击溃庞培主力。庞培逃到埃及被杀，凯撒追到埃及，却与克娄巴特拉七世坠入爱河。",
+      "image": "http://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20191025/1/wemedia/52b2d473ed738ec694ccc2786cc4696197aa1997_size79_w564_h392.jpg",
+      "imageCaption": "法萨卢斯战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 66.2,
+      "year": -46,
+      "place": "罗马",
+      "step": 5,
+      "keywords": [
+        "凯撒凯旋",
+        "终身独裁官"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 46 年。凯旋罗马，被推为终身独裁官——他改革历法（儒略历），颁行新法，权倾一时。但他拒绝称王。",
+      "image": "https://pic3.zhimg.com/v2-10f6a2685f8a73a59105e0342046f672_r.jpg",
+      "imageCaption": "凯撒凯旋",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 76.63,
+      "year": -44,
+      "place": "罗马",
+      "step": 7,
+      "keywords": [
+        "凯撒遇刺",
+        "三月十五日"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 44 年 3 月 15 日，元老院。被布鲁图斯等人围刺，身中二十三刀。临终他用希腊语对养子喊：「吾儿，汝亦有乎？」",
+      "image": "audio/narrations/images/caesar/seg-08.jpg",
+      "imageCaption": "凯撒遇刺",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 87.47,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，「我来，我见，我征服」。死后养子屋大维建立了罗马帝国——他的名字 Caesar，从此成了皇帝的代名词。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:20:33.126Z"
+}

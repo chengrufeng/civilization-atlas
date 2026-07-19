@@ -1,0 +1,110 @@
+{
+  "personId": "wuzetian",
+  "atlasId": "tangsong",
+  "title": "武则天 · 从才人到唯一女皇",
+  "subtitle": "约 2 分钟浓缩武曌的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 66.73,
+  "audio": "audio/narrations/wuzetian.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "武则天"
+      ],
+      "caption": "她是从才人做到皇帝的唯一女人——有人骂她心如蛇蝎，有人敬她治世有方。她叫武则天。",
+      "image": "audio/narrations/images/wuzetian/seg-00.png",
+      "imageCaption": "武则天",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.72,
+      "year": 624,
+      "place": "长安",
+      "step": null,
+      "keywords": [
+        "武则天",
+        "武曌"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 624 年，并州文水。武士彟之女降生，名曌。十四岁入宫，成为唐太宗的才人——这是她传奇一生的起点。",
+      "image": "audio/narrations/images/wuzetian/seg-01.png",
+      "imageCaption": "武则天",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.34,
+      "year": 655,
+      "place": "长安",
+      "step": 0,
+      "keywords": [
+        "武则天立后",
+        "唐高宗"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 655 年。她从感业寺回宫，一步步踩着对手上位——这一年，被高宗立为皇后，开始了「二圣临朝」。",
+      "image": "audio/narrations/images/wuzetian/seg-02.png",
+      "imageCaption": "武则天立后",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.59,
+      "year": 683,
+      "place": "洛阳",
+      "step": 1,
+      "keywords": [
+        "武则天临朝",
+        "唐高宗崩"
+      ],
+      "caption": "公元 683 年。高宗驾崩，她以皇太后身份临朝称制。中宗、睿宗相继被废——她离皇位只差一个名号。",
+      "image": "audio/narrations/images/wuzetian/seg-03.jpg",
+      "imageCaption": "武则天临朝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.61,
+      "year": 690,
+      "place": "洛阳",
+      "step": 2,
+      "keywords": [
+        "武则天称帝",
+        "武周"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 690 年。六十七岁的她正式称帝，国号周——中国历史上唯一正统的女皇帝就此诞生。",
+      "image": "audio/narrations/images/wuzetian/seg-04.jpg",
+      "imageCaption": "武则天称帝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.31,
+      "year": 705,
+      "place": "洛阳",
+      "step": 3,
+      "keywords": [
+        "神龙政变",
+        "武则天退位"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 705 年。宰相张柬之发动神龙政变，逼她退位。同年冬，八十二岁的武则天病逝——遗制：去帝号，归陵与高宗合葬，称「则天大圣皇后」。",
+      "image": "https://pic4.zhimg.com/v2-b3e7d9124f6888dc4b8f7cce3c1cfdf7_r.jpg",
+      "imageCaption": "神龙政变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.66,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "她的墓前，立着一座无字碑——功过是非，留给后人评说。这，就是武则天。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:19:08.208Z"
+}

@@ -1,0 +1,152 @@
+{
+  "personId": "wang_yangming",
+  "atlasId": "ming",
+  "title": "王阳明 · 中国历史上最后一个圣人",
+  "subtitle": "约 2 分钟浓缩阳明先生的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 99.74,
+  "audio": "audio/narrations/wang_yangming.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "王阳明",
+        "王守仁"
+      ],
+      "caption": "「中国历史上做到立德、立功、立言三不朽的圣人，只有两个半——孔子、王阳明，加半个曾国藩。」",
+      "image": "audio/narrations/images/wang_yangming/seg-00.png",
+      "imageCaption": "王阳明",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.44,
+      "year": 1472,
+      "place": "余姚",
+      "step": null,
+      "keywords": [
+        "王阳明出生",
+        "余姚"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1472 年，浙江余姚。王家降生了一个男孩，名守仁，字伯安——后世称他阳明先生。",
+      "image": "audio/narrations/images/wang_yangming/seg-01.jpg",
+      "imageCaption": "余姚",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.63,
+      "year": 1499,
+      "place": "顺天",
+      "step": 0,
+      "keywords": [
+        "王阳明中进士"
+      ],
+      "caption": "公元 1499 年。二十八岁中进士。少年时他曾问老师：「何为第一等事？」老师说：「读书登第。」他说：「恐未必然，应是读书做圣贤。」",
+      "image": "audio/narrations/images/wang_yangming/seg-02.png",
+      "imageCaption": "王阳明中进士",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.6,
+      "year": 1506,
+      "place": "顺天",
+      "step": 1,
+      "keywords": [
+        "王阳明被贬",
+        "刘瑾"
+      ],
+      "effect": "fire",
+      "caption": "公元 1506 年。宦官刘瑾专权，他上疏直谏——被廷杖四十，几乎打死，贬到贵州龙场当一个不入流的驿丞。",
+      "image": "audio/narrations/images/wang_yangming/seg-03.jpg",
+      "imageCaption": "王阳明被贬",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 38.23,
+      "year": 1508,
+      "place": "贵阳",
+      "step": 2,
+      "keywords": [
+        "龙场悟道",
+        "心即理"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1508 年。在毒蛇瘴气的龙场，他日夜端居澄默——某个深夜忽然顿悟：「圣人之道，吾性自足，向之求理于事物者误也。」这就是著名的「龙场悟道」。",
+      "image": "audio/narrations/images/wang_yangming/seg-04.jpg",
+      "imageCaption": "龙场悟道",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.77,
+      "year": 1517,
+      "place": "赣州",
+      "step": 3,
+      "keywords": [
+        "王阳明巡抚南赣"
+      ],
+      "caption": "公元 1517 年。巡抚南赣，三年平定几十年未平的山中盗贼——他用兵如神，更以「十家牌法」治本。",
+      "image": "audio/narrations/images/wang_yangming/seg-05.jpg",
+      "imageCaption": "王阳明巡抚南赣",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.86,
+      "year": 1519,
+      "place": "南昌",
+      "step": 4,
+      "keywords": [
+        "宁王之乱",
+        "王阳明平叛"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1519 年。宁王朱宸濠在南昌谋反，十万大军。王阳明临时募兵——仅三十五天，活捉宁王。这是军事史上著名的速胜之战。",
+      "image": "audio/narrations/images/wang_yangming/seg-06.jpg",
+      "imageCaption": "宁王之乱",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.16,
+      "year": 1527,
+      "place": "广西",
+      "step": 5,
+      "keywords": [
+        "王阳明两广总督"
+      ],
+      "caption": "公元 1527 年。被起复总督两广，平定田州叛乱。他主张「攻心为上」，思田诸蛮不战而下。",
+      "image": "audio/narrations/images/wang_yangming/seg-07.jpg",
+      "imageCaption": "王阳明两广总督",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 81.1,
+      "year": 1529,
+      "place": "南安",
+      "step": 6,
+      "keywords": [
+        "王阳明病逝",
+        "此心光明"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1529 年，江西南安。病逝于归途舟中，年五十八。临终遗言：「此心光明，亦复何言。」",
+      "image": "audio/narrations/images/wang_yangming/seg-08.png",
+      "imageCaption": "王阳明病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 90.04,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，是「知行合一」四个字的最好注脚——文能讲学传道，武能带兵平叛。中国历史上最后一个圣人，王阳明。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:20:12.133Z"
+}

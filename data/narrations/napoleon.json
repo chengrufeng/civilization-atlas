@@ -1,0 +1,218 @@
+{
+  "personId": "napoleon",
+  "atlasId": "enlightenment",
+  "title": "拿破仑 · 从科西嘉岛民到法兰西皇帝",
+  "subtitle": "约 2 分 30 秒浓缩拿破仑的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 128.71,
+  "audio": "audio/narrations/napoleon.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "拿破仑"
+      ],
+      "caption": "「不可能这个词，只存在于愚人的字典里。」二十六岁当将军，三十五岁当皇帝——拿破仑·波拿巴。",
+      "image": "audio/narrations/images/napoleon/seg-00.jpg",
+      "imageCaption": "拿破仑",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.1,
+      "year": 1769,
+      "place": "阿雅克肖",
+      "step": null,
+      "keywords": [
+        "拿破仑出生",
+        "科西嘉"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1769 年，科西嘉岛阿雅克肖。一个没落小贵族家庭降生了男孩拿破仑——这一年，科西嘉刚被热那亚卖给法国。",
+      "image": "audio/narrations/images/napoleon/seg-01.jpg",
+      "imageCaption": "拿破仑出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.62,
+      "year": 1785,
+      "place": "巴黎",
+      "step": 0,
+      "keywords": [
+        "拿破仑炮兵",
+        "军官学校"
+      ],
+      "caption": "公元 1785 年。十六岁的他以少尉军衔从巴黎军官学校毕业——这是他人生的第一个军衔，炮兵少尉。",
+      "image": "audio/narrations/images/napoleon/seg-02.jpg",
+      "imageCaption": "拿破仑炮兵",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.71,
+      "year": 1793,
+      "place": "土伦",
+      "step": 1,
+      "keywords": [
+        "土伦战役",
+        "拿破仑"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1793 年。土伦战役——二十四岁的他指挥炮兵击退英国舰队，一战成名。破格晋升为准将。",
+      "image": "audio/narrations/images/napoleon/seg-03.jpg",
+      "imageCaption": "土伦战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.44,
+      "year": 1796,
+      "place": "意大利",
+      "step": 2,
+      "keywords": [
+        "拿破仑意大利",
+        "洛迪战役"
+      ],
+      "effect": "fire",
+      "caption": "公元 1796 年。二十七岁的他任意大利方面军司令——一年之内连败奥军，逼迫奥地利签订《坎波福米奥和约》。",
+      "image": "audio/narrations/images/napoleon/seg-04.png",
+      "imageCaption": "拿破仑意大利",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 47.2,
+      "year": 1798,
+      "place": "埃及",
+      "step": 3,
+      "keywords": [
+        "拿破仑埃及远征",
+        "金字塔战役"
+      ],
+      "effect": "fire",
+      "caption": "公元 1798 年。远征埃及，金字塔战役大胜——他说：「士兵们，四千年的历史在金字塔顶俯视着你们！」",
+      "image": "audio/narrations/images/napoleon/seg-05.jpg",
+      "imageCaption": "拿破仑埃及远征",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 56.69,
+      "year": 1799,
+      "place": "巴黎",
+      "step": 4,
+      "keywords": [
+        "雾月政变",
+        "拿破仑"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1799 年雾月十八日。他秘密回国，发动政变——三十岁成为法国「第一执政」，掌握最高权力。",
+      "image": "audio/narrations/images/napoleon/seg-06.jpg",
+      "imageCaption": "雾月政变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 65.53,
+      "year": 1804,
+      "place": "巴黎",
+      "step": 5,
+      "keywords": [
+        "拿破仑加冕",
+        "巴黎圣母院"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1804 年。巴黎圣母院加冕大典——他从教皇手中夺过皇冠，亲自戴在自己头上。「我不想从教皇手里接受皇冠。」",
+      "image": "audio/narrations/images/napoleon/seg-07.jpg",
+      "imageCaption": "拿破仑加冕",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.89,
+      "year": 1805,
+      "place": "奥斯特里茨",
+      "step": 6,
+      "keywords": [
+        "奥斯特里茨战役",
+        "三皇会战"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1805 年。奥斯特里茨「三皇会战」——他击败俄奥联军，粉碎第三次反法同盟。这是他军事生涯的巅峰。",
+      "image": "audio/narrations/images/napoleon/seg-08.jpg",
+      "imageCaption": "奥斯特里茨战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 85.74,
+      "year": 1812,
+      "place": "莫斯科",
+      "step": 7,
+      "keywords": [
+        "拿破仑远征俄罗斯",
+        "莫斯科大火"
+      ],
+      "effect": "fire",
+      "caption": "公元 1812 年。率六十万大军远征俄罗斯——库图佐夫的焦土政策、莫斯科的大火、严冬，让他只剩两万人逃回。",
+      "image": "audio/narrations/images/napoleon/seg-09.jpg",
+      "imageCaption": "拿破仑远征俄罗斯",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 95.9,
+      "year": 1814,
+      "place": "厄尔巴",
+      "step": 8,
+      "keywords": [
+        "拿破仑退位",
+        "厄尔巴岛"
+      ],
+      "caption": "公元 1814 年。被迫退位，流放厄尔巴岛——但他保留了「皇帝」称号。",
+      "image": "audio/narrations/images/napoleon/seg-10.jpg",
+      "imageCaption": "拿破仑退位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 102.3,
+      "year": 1815,
+      "place": "滑铁卢",
+      "step": 9,
+      "keywords": [
+        "百日王朝",
+        "滑铁卢战役"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1815 年。逃离厄尔巴，复辟「百日王朝」——却在滑铁卢被威灵顿公爵彻底击败。",
+      "image": "audio/narrations/images/napoleon/seg-11.jpg",
+      "imageCaption": "百日王朝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 110.16,
+      "year": 1821,
+      "place": "圣赫勒拿",
+      "step": 10,
+      "keywords": [
+        "拿破仑之死",
+        "圣赫勒拿"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1821 年，圣赫勒拿岛。五十二岁的拿破仑在流放中病逝——临终遗言：「法国，军队，约瑟芬……」",
+      "image": "audio/narrations/images/napoleon/seg-12.jpg",
+      "imageCaption": "拿破仑之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 119.51,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "从科西嘉岛民到法兰西皇帝——拿破仑这一生，是「不可能」三个字最大的反驳。他改变了欧洲，也改变了世界。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:21:01.096Z"
+}

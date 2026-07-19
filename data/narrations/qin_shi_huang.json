@@ -1,0 +1,169 @@
+{
+  "personId": "qin_shi_huang",
+  "atlasId": "qinhan",
+  "title": "秦始皇 · 千古一帝的暴君与开创者",
+  "subtitle": "约 2 分 30 秒浓缩嬴政的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 100.31,
+  "audio": "audio/narrations/qin_shi_huang.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "秦始皇",
+        "嬴政"
+      ],
+      "caption": "他是中国第一位皇帝——修长城、焚书坑儒、统一六国、寻求长生不老。功过两千年仍说不清。他就是秦始皇，嬴政。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-00.png",
+      "imageCaption": "秦始皇",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 10.76,
+      "year": -259,
+      "place": "邯郸",
+      "step": null,
+      "keywords": [
+        "秦始皇出生",
+        "赵国"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 259 年，赵国邯郸。秦王孙异人之子降生——这个在敌国出生的孩子，就是日后的始皇帝。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-01.jpg",
+      "imageCaption": "秦始皇出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.63,
+      "year": -247,
+      "place": "咸阳",
+      "step": 0,
+      "keywords": [
+        "嬴政即位",
+        "秦王政"
+      ],
+      "caption": "公元前 247 年。十三岁的嬴政即位秦王——少年登基，朝政由相邦吕不韦把持。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-02.png",
+      "imageCaption": "嬴政即位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.49,
+      "year": -238,
+      "place": "咸阳",
+      "step": 1,
+      "keywords": [
+        "嫪毒之乱",
+        "嬴政亲政"
+      ],
+      "effect": "fire",
+      "caption": "公元前 238 年。二十二岁的嬴政平定嫪毐之乱，罢黜吕不韦——从此亲政，开始他横扫六合的征途。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-03.jpg",
+      "imageCaption": "嫪毒之乱",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.84,
+      "year": -230,
+      "place": "咸阳",
+      "step": 2,
+      "keywords": [
+        "秦灭六国",
+        "秦始皇"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 230 年起。十年灭六国——韩、赵、魏、楚、燕、齐，逐一踏平。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-04.jpg",
+      "imageCaption": "秦灭六国",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 44.58,
+      "year": -221,
+      "place": "咸阳",
+      "step": 3,
+      "keywords": [
+        "秦统一六国",
+        "始皇帝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 221 年。三十九岁的嬴政一统天下，自称「始皇帝」——中国两千年帝制从此开端。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-05.jpg",
+      "imageCaption": "秦统一六国",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.16,
+      "year": -220,
+      "place": "咸阳",
+      "step": 4,
+      "keywords": [
+        "书同文车同轨",
+        "秦始皇"
+      ],
+      "caption": "他下令：车同轨、书同文、统一度量衡、统一货币。废分封、行郡县——把一个分裂的中国，捏成了一个真正的国家。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-06.jpg",
+      "imageCaption": "书同文车同轨",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 63.52,
+      "year": -214,
+      "place": "阴山",
+      "step": 5,
+      "keywords": [
+        "修筑长城",
+        "蒙恬"
+      ],
+      "caption": "公元前 214 年。派蒙恬北击匈奴，把秦、赵、燕三国旧长城连成一片——万里长城，从此成型。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-07.jpg",
+      "imageCaption": "修筑长城",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 73.13,
+      "year": -213,
+      "place": "咸阳",
+      "step": 6,
+      "keywords": [
+        "焚书坑儒",
+        "秦始皇"
+      ],
+      "effect": "fire",
+      "caption": "公元前 213 年。李斯建议焚书，次年坑杀方士儒生——「焚书坑儒」，是他一生最大的污点。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-08.jpg",
+      "imageCaption": "焚书坑儒",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 81.44,
+      "year": -210,
+      "place": "沙丘",
+      "step": 7,
+      "keywords": [
+        "沙丘之变",
+        "秦始皇死"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 210 年，沙丘。出巡途中病逝，享年五十。赵高与李斯矫诏立胡亥——秦二世而亡，他建立的帝国只活了十五年。",
+      "image": "audio/narrations/images/qin_shi_huang/seg-09.jpg",
+      "imageCaption": "沙丘之变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 92.86,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "功过两千年——暴君还是开创者？秦始皇用一个「始」字，刻进了每个中国人的历史记忆。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:19:30.357Z"
+}

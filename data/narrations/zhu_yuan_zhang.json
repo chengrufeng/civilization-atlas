@@ -1,0 +1,158 @@
+{
+  "personId": "zhu_yuan_zhang",
+  "atlasId": "ming",
+  "title": "朱元璋 · 从乞丐到开国皇帝的最励志逆袭",
+  "subtitle": "约 2 分 30 秒浓缩洪武大帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 105.34,
+  "audio": "audio/narrations/zhu_yuan_zhang.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "朱元璋",
+        "明太祖"
+      ],
+      "caption": "放牛娃、要过饭、当过和尚、做过乞丐——这个出身最低的中国皇帝，建立了近三百年的大明王朝。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-00.jpg",
+      "imageCaption": "朱元璋",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.56,
+      "year": 1328,
+      "place": "凤阳",
+      "step": null,
+      "keywords": [
+        "朱元璋出生",
+        "凤阳"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1328 年，濠州钟离。一户贫农家庭降生了重八——这是他出生时的名字，朱元璋是后来的事。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-01.jpg",
+      "imageCaption": "朱元璋出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.59,
+      "year": 1344,
+      "place": "凤阳",
+      "step": 0,
+      "keywords": [
+        "朱元璋出家",
+        "皇觉寺"
+      ],
+      "caption": "公元 1344 年。瘟疫连着饥荒，父母兄长相继死去。十六岁的他无依无靠——入皇觉寺当和尚，又被迫出门化缘乞讨。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-02.jpg",
+      "imageCaption": "朱元璋出家",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.55,
+      "year": 1352,
+      "place": "濠州",
+      "step": 1,
+      "keywords": [
+        "朱元璋投军",
+        "红巾军",
+        "郭子兴"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1352 年。发小汤和一封信，让他投奔了郭子兴的红巾军——这一年，他改名元璋，字国瑞。命运的齿轮开始转动。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-03.jpg",
+      "imageCaption": "朱元璋投军",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.22,
+      "year": 1360,
+      "place": "应天",
+      "step": 2,
+      "keywords": [
+        "朱元璋刘伯温",
+        "应天"
+      ],
+      "caption": "公元 1360 年。他请出刘伯温，以应天（今南京）为根基，开始系统布局天下。「高筑墙、广积粮、缓称王」——九字方针奠定了帝业。",
+      "image": "https://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20200601/16/wemedia/f3db64e1e78e4e4b5c1b3aeb543159bb3b357db4_size304_w1620_h1080.JPG",
+      "imageCaption": "朱元璋刘伯温",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.37,
+      "year": 1363,
+      "place": "鄱阳湖",
+      "step": 3,
+      "keywords": [
+        "鄱阳湖之战",
+        "朱元璋陈友谅"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1363 年。鄱阳湖大战——火攻陈友谅六十万大军，三日一夜决出胜负。这是中国历史上规模最大的水战之一，也是他逐鹿天下的关键一战。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-05.jpg",
+      "imageCaption": "鄱阳湖之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.18,
+      "year": 1368,
+      "place": "应天",
+      "step": 4,
+      "keywords": [
+        "明朝建立",
+        "朱元璋称帝"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1368 年。在应天称帝，国号大明，年号洪武。同年徐达北伐攻克大都——元朝退回漠北，蒙古在中原的统治终结。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-06.jpg",
+      "imageCaption": "明朝建立",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.61,
+      "year": 1380,
+      "place": "应天",
+      "step": 5,
+      "keywords": [
+        "胡惟庸案",
+        "废丞相"
+      ],
+      "effect": "fire",
+      "caption": "公元 1380 年。胡惟庸案爆发——他借机废除丞相制，六部直接对皇帝负责。从此中国皇权达到了前所未有的高度。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-07.jpg",
+      "imageCaption": "胡惟庸案",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 86.4,
+      "year": 1398,
+      "place": "应天",
+      "step": 6,
+      "keywords": [
+        "朱元璋驾崩",
+        "洪武帝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1398 年，应天。七十岁的朱元璋驾崩——出身最苦的皇帝，在位三十一年，给子孙留下了一个稳定的大明帝国。",
+      "image": "audio/narrations/images/zhu_yuan_zhang/seg-08.jpg",
+      "imageCaption": "朱元璋驾崩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 96.54,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "从要饭和尚到开国皇帝——朱元璋这一生，是中国历史最大的逆袭，也是「王侯将相宁有种乎」最响亮的回响。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:19:50.789Z"
+}

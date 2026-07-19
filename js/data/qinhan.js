@@ -30,7 +30,7 @@ const PLACES = [
 ];
 
 const PERSONS = [
-  { id: 'qin_shi_huang', name: '秦始皇', courtesy: '', alias: ['嬴政'], faction: 'qin', birth: -259, death: -210, birthPlace: '邯郸', title: '始皇帝', roles: ['统一六国之君'], avatar: '政', bio: '统一六国、车同轨书同文、废分封立郡县。', events: [ { year: -221, place: '咸阳', desc: '统一六国，称始皇帝' }, { year: -214, place: '阴山', desc: '修筑长城' }, { year: -210, place: '咸阳', desc: '出巡途中病逝' } ] },
+  { id: 'qin_shi_huang', name: '秦始皇', courtesy: '', alias: ['嬴政'], faction: 'qin', birth: -259, death: -210, birthPlace: '邯郸', title: '始皇帝', roles: ['统一六国之君'], avatar: '政', bio: '统一六国、车同轨书同文、废分封立郡县。', events: [ { year: -247, place: '咸阳', desc: '十三岁即位秦王' }, { year: -238, place: '咸阳', desc: '平定嫪毐之乱，亲政' }, { year: -230, place: '咸阳', desc: '开启灭六国之战，先灭韩' }, { year: -221, place: '咸阳', desc: '统一六国，称始皇帝' }, { year: -220, place: '咸阳', desc: '车同轨、书同文、统一度量衡' }, { year: -214, place: '阴山', desc: '修筑长城，北击匈奴' }, { year: -213, place: '咸阳', desc: '焚书坑儒' }, { year: -210, place: '沙丘', desc: '出巡途中病逝，沙丘之变' } ] },
   { id: 'li_si', name: '李斯', courtesy: '', alias: [], faction: 'qin', birth: -280, death: -208, birthPlace: '楚国', title: '秦丞相', roles: ['政治家'], avatar: '李', bio: '佐秦王统一，建议焚书坑儒，后被赵高所害。', events: [ { year: -221, place: '咸阳', desc: '任丞相，推行郡县制' } ] },
   { id: 'meng_tian', name: '蒙恬', courtesy: '', alias: [], faction: 'qin', birth: -250, death: -210, birthPlace: '齐国', title: '秦将', roles: ['名将'], avatar: '蒙', bio: '北击匈奴、修筑长城，后被胡亥赐死。', events: [ { year: -215, place: '阴山', desc: '北击匈奴' } ] },
   { id: 'zhao_gao', name: '赵高', courtesy: '', alias: [], faction: 'qin', birth: -258, death: -207, birthPlace: '咸阳', title: '中丞相', roles: ['权宦'], avatar: '赵', bio: '沙丘之谋、指鹿为马，亡秦者高也。', events: [ { year: -207, place: '咸阳', desc: '指鹿为马' } ] },
