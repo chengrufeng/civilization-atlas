@@ -1,0 +1,166 @@
+{
+  "personId": "simayi",
+  "atlasId": "sanguo",
+  "title": "司马懿 · 隐忍半生的最大赢家",
+  "subtitle": "约 2 分 30 秒浓缩仲达的隐忍人生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 100.57,
+  "audio": "audio/narrations/simayi.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "司马懿"
+      ],
+      "caption": "隐忍五十年，熬死曹操、曹丕、曹叡三代——他是三国最后的赢家，司马懿。",
+      "image": "audio/narrations/images/simayi/seg-00.jpg",
+      "imageCaption": "司马懿",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.85,
+      "year": 179,
+      "place": "洛阳",
+      "step": null,
+      "keywords": [
+        "司马懿"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 179 年，河内温县。司马家降生了二公子司马懿，字仲达——史书说他「狼顾之相」，能头转 90 度向后望。",
+      "image": "audio/narrations/images/simayi/seg-01.jpg",
+      "imageCaption": "司马懿",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.23,
+      "year": 208,
+      "place": "许昌",
+      "step": 0,
+      "keywords": [
+        "曹操司马炎",
+        "司马懿"
+      ],
+      "caption": "公元 208 年。曹操强征他为官，他装病推辞——但曹操警告：再不来，就抓。他这才出仕。",
+      "image": "audio/narrations/images/simayi/seg-02.jpg",
+      "imageCaption": "曹操司马炎",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.39,
+      "year": 215,
+      "place": "汉中",
+      "step": 1,
+      "keywords": [
+        "汉中之战",
+        "曹操司马懿"
+      ],
+      "caption": "公元 215 年。随曹操攻下汉中，他献策乘胜入蜀灭刘备——曹操摇头说：「人苦无足，既得陇，复望蜀耶？」",
+      "image": "audio/narrations/images/simayi/seg-03.jpg",
+      "imageCaption": "汉中之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.58,
+      "year": 219,
+      "place": "洛阳",
+      "step": 2,
+      "keywords": [
+        "襄樊之战",
+        "关羽",
+        "司马懿"
+      ],
+      "effect": "fire",
+      "caption": "公元 219 年。关羽水淹七军，威震华夏。司马懿建议联合孙权夹击——这一招，间接葬送了关羽，也保住了曹魏。",
+      "image": "audio/narrations/images/simayi/seg-04.jpg",
+      "imageCaption": "襄樊之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 47.6,
+      "year": 226,
+      "place": "洛阳",
+      "step": 3,
+      "keywords": [
+        "曹叡",
+        "司马懿辅政"
+      ],
+      "caption": "公元 226 年。曹丕临终，他和曹爽同受遗诏辅政。新一轮隐忍，开始了。",
+      "image": "audio/narrations/images/simayi/seg-05.jpg",
+      "imageCaption": "曹叡",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 55.56,
+      "year": 228,
+      "place": "祁山",
+      "step": 4,
+      "keywords": [
+        "诸葛亮北伐",
+        "司马懿"
+      ],
+      "caption": "公元 228 年起。诸葛亮六出祁山，司马懿奉命拒敌。他看穿对手粮草不济——坚持「坚壁拒守」，不打。",
+      "image": "audio/narrations/images/simayi/seg-06.png",
+      "imageCaption": "诸葛亮北伐",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 65.32,
+      "year": 234,
+      "place": "五丈原",
+      "step": 5,
+      "keywords": [
+        "五丈原",
+        "诸葛亮死"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 234 年。五丈原对峙百余日，他甚至穿上诸葛亮送的女装——硬是耗死了这位宿敌。",
+      "image": "audio/narrations/images/simayi/seg-07.jpg",
+      "imageCaption": "五丈原",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 73.49,
+      "year": 238,
+      "place": "辽东",
+      "step": 6,
+      "keywords": [
+        "平公孙渊",
+        "司马懿"
+      ],
+      "effect": "fire",
+      "caption": "公元 238 年。年近花甲的司马懿率军远征辽东，擒斩公孙渊——彻底平定东北边患。",
+      "image": "audio/narrations/images/simayi/seg-08.png",
+      "imageCaption": "平公孙渊",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 81.8,
+      "year": 249,
+      "place": "洛阳",
+      "step": 7,
+      "keywords": [
+        "高平陵之变"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 249 年。七十岁的他装病蛰伏多年后，发动高平陵之变——一举诛杀曹爽三族，独揽魏国大权。",
+      "image": "audio/narrations/images/simayi/seg-09.jpg",
+      "imageCaption": "高平陵之变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 91.56,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「善藏者，最难测。」司马懿这一生，把这两个字做到了极致——他的孙子司马炎，最终统一三国，建立晋朝。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T01:58:08.996Z"
+}

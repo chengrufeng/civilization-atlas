@@ -1,0 +1,151 @@
+{
+  "personId": "caocao",
+  "atlasId": "sanguo",
+  "title": "曹操 · 乱世之奸雄，治世之能臣",
+  "subtitle": "约 2 分 30 秒浓缩魏武帝的雄才大略",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 93.62,
+  "audio": "audio/narrations/caocao.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "曹操"
+      ],
+      "caption": "宁教我负天下人，休教天下人负我——他是三国最大的争议，也是三国最大的赢家。",
+      "image": "audio/narrations/images/caocao/seg-00.jpg",
+      "imageCaption": "曹操",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.92,
+      "year": 155,
+      "place": "许昌",
+      "step": null,
+      "keywords": [
+        "曹操"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 155 年，沛国谯县。宦官之孙曹家降生了一个男孩，名叫曹操——日后的魏武帝。",
+      "image": "audio/narrations/images/caocao/seg-01.jpg",
+      "imageCaption": "曹操",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 15.12,
+      "year": 189,
+      "place": "陈留",
+      "step": 0,
+      "keywords": [
+        "曹操起兵",
+        "讨董卓"
+      ],
+      "caption": "公元 189 年。董卓乱政，曹操散尽家财，在陈留起兵——这是他枭雄之路的第一步。",
+      "image": "audio/narrations/images/caocao/seg-02.jpg",
+      "imageCaption": "曹操起兵",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 23.2,
+      "year": 196,
+      "place": "许昌",
+      "step": 1,
+      "keywords": [
+        "曹操",
+        "许昌",
+        "汉献帝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 196 年。他做了一个比打仗更狠的决定——迎汉献帝到许都。从此「挟天子以令诸侯」，政治上永远占据制高点。",
+      "image": "audio/narrations/images/caocao/seg-03.jpg",
+      "imageCaption": "曹操",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.82,
+      "year": 200,
+      "place": "官渡",
+      "step": 2,
+      "keywords": [
+        "官渡之战"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 200 年。官渡之战，曹操以两万兵马，硬扛袁绍十万大军——火烧乌巢，扭转战局，统一北方。",
+      "image": "audio/narrations/images/caocao/seg-04.jpg",
+      "imageCaption": "官渡之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 43.14,
+      "year": 207,
+      "place": "邺城",
+      "step": 3,
+      "keywords": [
+        "北征乌桓",
+        "郭嘉"
+      ],
+      "caption": "公元 207 年。北征乌桓，彻底肃清袁氏残余。凯旋路上，最信任的谋士郭嘉病逝——他痛哭：「哀哉奉孝！」",
+      "image": "audio/narrations/images/caocao/seg-05.jpg",
+      "imageCaption": "北征乌桓",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.4,
+      "year": 208,
+      "place": "赤壁",
+      "step": 4,
+      "keywords": [
+        "赤壁之战"
+      ],
+      "effect": "fire",
+      "caption": "公元 208 年。挥师南下，欲一统天下——却被周瑜一把火烧在赤壁。这是曹操一生最大的失败，也是三国鼎立的开端。",
+      "image": "audio/narrations/images/caocao/seg-06.jpg",
+      "imageCaption": "赤壁之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.02,
+      "year": 213,
+      "place": "邺城",
+      "step": 5,
+      "keywords": [
+        "曹操",
+        "魏公"
+      ],
+      "caption": "公元 213 年。封魏公，加九锡。三年后进魏王，离皇位只差一步——但他终身没有迈出那一步。",
+      "image": "audio/narrations/images/caocao/seg-07.jpg",
+      "imageCaption": "曹操",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 73.54,
+      "year": 220,
+      "place": "洛阳",
+      "step": 8,
+      "keywords": [
+        "曹操",
+        "洛阳"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 220 年，洛阳。六十六岁的曹操病重离世。临终遗令：分香卖履，挽歌送葬——千古奸雄也有痴情的一面。",
+      "image": "audio/narrations/images/caocao/seg-08.jpg",
+      "imageCaption": "曹操",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.3,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「治世之能臣，乱世之奸雄」——这句话他当了一辈子。统一北方、兴复文学，他是乱世里最有能力的那个人。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T01:54:50.221Z"
+}

@@ -1,0 +1,151 @@
+{
+  "personId": "zhouyu",
+  "atlasId": "sanguo",
+  "title": "周瑜 · 赤壁功臣，谈笑间的翩翩公子",
+  "subtitle": "约 2 分钟浓缩公瑾的灿烂一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 93.67,
+  "audio": "audio/narrations/zhouyu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "周瑜"
+      ],
+      "caption": "「曲有误，周郎顾」——他是三国最完美的翩翩公子，赤壁之战的总指挥，周瑜。",
+      "image": "audio/narrations/images/zhouyu/seg-00.jpg",
+      "imageCaption": "周瑜",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.78,
+      "year": 175,
+      "place": "寿春",
+      "step": null,
+      "keywords": [
+        "周瑜",
+        "孙策"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 175 年，庐江舒县。一个将门世家降生了男孩周瑜，字公瑾——容貌俊美，通晓音律。",
+      "image": "audio/narrations/images/zhouyu/seg-01.jpg",
+      "imageCaption": "周瑜",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 15.46,
+      "year": 195,
+      "place": "寿春",
+      "step": 0,
+      "keywords": [
+        "周瑜孙策"
+      ],
+      "effect": "blossom",
+      "caption": "公元 195 年。孙策起兵渡江，周瑜率兵相助——两个少年一见如故，从此「升堂拜母」，情同骨肉。",
+      "image": "https://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20200928/11/wemedia/9c44febb43eef1149e651c77ce79aef13d84a3db_size41_w406_h271.jpeg",
+      "imageCaption": "周瑜孙策",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.73,
+      "year": 198,
+      "place": "皖城",
+      "step": 1,
+      "keywords": [
+        "小乔",
+        "周瑜"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 198 年。攻破皖城，他娶了乔公的小女儿——大乔归孙策，小乔归周瑜，江东双璧一时无两。",
+      "image": "audio/narrations/images/zhouyu/seg-03.jpg",
+      "imageCaption": "小乔",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.84,
+      "year": 200,
+      "place": "吴郡",
+      "step": 2,
+      "keywords": [
+        "孙策遇刺",
+        "孙权"
+      ],
+      "caption": "公元 200 年。孙策遇刺身亡，临终将江东托付给弟弟孙权。周瑜以中护军身份，扛起了辅佐少主的重担。",
+      "image": "audio/narrations/images/zhouyu/seg-04.jpg",
+      "imageCaption": "孙策遇刺",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 43.55,
+      "year": 208,
+      "place": "柴桑",
+      "step": 3,
+      "keywords": [
+        "赤壁之战前",
+        "周瑜"
+      ],
+      "caption": "公元 208 年。曹操八十万大军南下，朝堂一片投降声。周瑜拍案而起：将军有我，破曹必矣！",
+      "image": "audio/narrations/images/zhouyu/seg-05.jpg",
+      "imageCaption": "赤壁之战前",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 52.87,
+      "year": 208,
+      "place": "赤壁",
+      "step": 4,
+      "keywords": [
+        "赤壁之战"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "同年冬。三十四岁的周瑜任大都督，统兵五万迎战——一把大火烧在赤壁，曹操北退，三国鼎立就此成形。",
+      "image": "audio/narrations/images/zhouyu/seg-06.jpg",
+      "imageCaption": "赤壁之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.44,
+      "year": 209,
+      "place": "江陵",
+      "step": 5,
+      "keywords": [
+        "南郡之战",
+        "周瑜"
+      ],
+      "caption": "公元 209 年。乘胜攻南郡，与曹仁苦战年余——他身中流矢，仍奋力督战，终于拿下江陵。",
+      "image": "audio/narrations/images/zhouyu/seg-07.jpg",
+      "imageCaption": "南郡之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 71.06,
+      "year": 210,
+      "place": "巴丘",
+      "step": 6,
+      "keywords": [
+        "周瑜",
+        "巴丘病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 210 年。他谋划取益州、并张鲁、联马超——却在西征路上病逝巴丘，年仅三十六。孙权素服举哀，痛哭：「公瑾不在，我还能依靠谁？」",
+      "image": "audio/narrations/images/zhouyu/seg-08.jpg",
+      "imageCaption": "周瑜",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 83.89,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "三十六岁，他走了。赤壁的火烧出了一个时代，他却是这个时代最短的那颗流星——但所有人都记住了他谈笑间的从容。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T01:56:57.912Z"
+}

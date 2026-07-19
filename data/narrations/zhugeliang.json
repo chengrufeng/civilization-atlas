@@ -1,0 +1,153 @@
+{
+  "personId": "zhugeliang",
+  "atlasId": "sanguo",
+  "title": "诸葛亮 · 鞠躬尽瘁的千古智圣",
+  "subtitle": "约 2 分钟浓缩卧龙先生的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 87.86,
+  "audio": "audio/narrations/zhugeliang.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "诸葛亮"
+      ],
+      "caption": "二十七岁定三分天下，五十四岁星落秋风五丈原——他叫诸葛亮，中国历史上最完美的丞相。",
+      "image": "audio/narrations/images/zhugeliang/seg-00.jpg",
+      "imageCaption": "诸葛亮",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.98,
+      "year": 181,
+      "place": "隆中",
+      "step": null,
+      "keywords": [
+        "诸葛亮"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 181 年，琅琊阳都。一个官宦世家的男孩降生，谁也没想到，他会成为后世臣子的最高典范。",
+      "image": "audio/narrations/images/zhugeliang/seg-01.jpg",
+      "imageCaption": "诸葛亮",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.02,
+      "year": 207,
+      "place": "隆中",
+      "step": 0,
+      "keywords": [
+        "三顾茅庐",
+        "隆中对"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 207 年冬。刘备三次踏雪隆中，请出二十七岁的诸葛亮。一席隆中对，画出了三分天下的棋局。",
+      "image": "audio/narrations/images/zhugeliang/seg-02.jpg",
+      "imageCaption": "三顾茅庐",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.51,
+      "year": 208,
+      "place": "柴桑",
+      "step": 1,
+      "keywords": [
+        "赤壁之战",
+        "诸葛亮"
+      ],
+      "caption": "公元 208 年。曹操南下，诸葛亮孤身入吴，舌战群儒，促成了决定天下命运的孙刘联盟。",
+      "image": "audio/narrations/images/zhugeliang/seg-03.jpg",
+      "imageCaption": "赤壁之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.16,
+      "year": 208,
+      "place": "赤壁",
+      "step": 1,
+      "keywords": [
+        "赤壁之战"
+      ],
+      "effect": "fire",
+      "caption": "同年冬。借东风、纵大火——赤壁一战，曹操北退，三足鼎立就此形成。",
+      "image": "audio/narrations/images/zhugeliang/seg-04.jpg",
+      "imageCaption": "赤壁之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 42.25,
+      "year": 214,
+      "place": "成都",
+      "step": 2,
+      "keywords": [
+        "成都",
+        "蜀汉"
+      ],
+      "caption": "公元 214 年。刘备踏进成都，诸葛亮坐镇后方，调度粮草兵员——隆中对的第二步棋，落子成局。",
+      "image": "audio/narrations/images/zhugeliang/seg-05.jpg",
+      "imageCaption": "成都",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.48,
+      "year": 225,
+      "place": "南中",
+      "step": 3,
+      "keywords": [
+        "七擒孟获",
+        "诸葛亮南征"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 225 年。南中叛乱，诸葛亮亲率大军平定。七擒七纵孟获，攻心为上，从此南方归心。",
+      "image": "audio/narrations/images/zhugeliang/seg-06.jpg",
+      "imageCaption": "七擒孟获",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 60.97,
+      "year": 228,
+      "place": "祁山",
+      "step": 4,
+      "keywords": [
+        "失街亭",
+        "诸葛亮北伐",
+        "马谡"
+      ],
+      "effect": "fire",
+      "caption": "公元 228 年。他写下《出师表》，开始北伐。第一次出祁山，却因马谡失街亭功亏一篑——挥泪斩之。",
+      "image": "audio/narrations/images/zhugeliang/seg-07.jpg",
+      "imageCaption": "失街亭",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.63,
+      "year": 234,
+      "place": "五丈原",
+      "step": 5,
+      "keywords": [
+        "五丈原",
+        "秋风落叶"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 234 年。五丈原秋风萧瑟，他第六次北伐，与司马懿对峙百余日。八月，病逝军中，年五十四。",
+      "image": "audio/narrations/images/zhugeliang/seg-08.jpg",
+      "imageCaption": "五丈原",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 80.56,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "从隆中到五丈原，他这一生，把「鞠躬尽瘁，死而后已」八个字，活成了千古臣子的标杆。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T01:53:40.293Z"
+}

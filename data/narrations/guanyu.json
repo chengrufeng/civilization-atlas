@@ -1,0 +1,152 @@
+{
+  "personId": "guanyu",
+  "atlasId": "sanguo",
+  "title": "关羽 · 忠义千秋的武圣",
+  "subtitle": "约 2 分钟浓缩汉寿亭侯的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 92.64,
+  "audio": "audio/narrations/guanyu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "关羽"
+      ],
+      "caption": "温酒斩华雄、过五关斩六将、单刀赴会、水淹七军——他是中国人心里的「武圣」，关羽。",
+      "image": "audio/narrations/images/guanyu/seg-00.jpg",
+      "imageCaption": "关羽",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.62,
+      "year": 160,
+      "place": "涿郡",
+      "step": null,
+      "keywords": [
+        "关羽"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 160 年，河东解良。一个红脸长髯的壮士因抱打不平，避祸涿郡——他叫关羽，字云长。",
+      "image": "audio/narrations/images/guanyu/seg-01.jpg",
+      "imageCaption": "关羽",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.42,
+      "year": 184,
+      "place": "涿郡",
+      "step": 0,
+      "keywords": [
+        "桃园三结义",
+        "刘关张"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 184 年。涿郡集市上，他遇见了刘备、张飞。桃园三结义——这一拜，就是一辈子。",
+      "image": "audio/narrations/images/guanyu/seg-02.jpg",
+      "imageCaption": "桃园三结义",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 25.16,
+      "year": 200,
+      "place": "许昌",
+      "step": 1,
+      "keywords": [
+        "关羽降曹",
+        "斩颜良",
+        "千里走单骑"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 200 年。刘备兵败，关羽被迫降曹。曹操对他三日一小宴、五日一大宴，他却立下军令状：斩颜良报恩，便走。",
+      "image": "audio/narrations/images/guanyu/seg-03.png",
+      "imageCaption": "关羽降曹",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.1,
+      "year": 200,
+      "place": "许昌",
+      "step": 1,
+      "keywords": [
+        "过五关斩六将"
+      ],
+      "caption": "万军之中，一刀斩颜良，解了白马之围。挂印封金，护送嫂嫂——千里走单骑，过五关斩六将，回到刘备身边。",
+      "image": "audio/narrations/images/guanyu/seg-04.jpg",
+      "imageCaption": "过五关斩六将",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.97,
+      "year": 208,
+      "place": "华容",
+      "step": 2,
+      "keywords": [
+        "华容道",
+        "义释曹操"
+      ],
+      "caption": "公元 208 年。赤壁大败，曹操败走华容。关羽奉命截击——念及当年之恩，他放走了曹操，宁可自己受罚。",
+      "image": "audio/narrations/images/guanyu/seg-05.jpg",
+      "imageCaption": "华容道",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 56.11,
+      "year": 214,
+      "place": "荆州",
+      "step": 3,
+      "keywords": [
+        "荆州",
+        "单刀赴会"
+      ],
+      "caption": "公元 214 年。刘备入蜀，关羽镇守荆州。单刀赴会，与鲁肃据理力争——他是刘备最信任的封疆大吏。",
+      "image": "audio/narrations/images/guanyu/seg-06.jpg",
+      "imageCaption": "荆州",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 65.94,
+      "year": 219,
+      "place": "襄阳",
+      "step": 4,
+      "keywords": [
+        "水淹七军",
+        "威震华夏"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 219 年。襄樊之战，水淹七军，擒于禁、斩庞德——威震华夏，曹操一度想迁都避其锋。",
+      "image": "audio/narrations/images/guanyu/seg-07.jpg",
+      "imageCaption": "水淹七军",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.41,
+      "year": 220,
+      "place": "麦城",
+      "step": 5,
+      "keywords": [
+        "败走麦城"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 220 年。孙权背盟偷袭荆州，关羽腹背受敌，败走麦城——在临沮被擒遇害，年六十。",
+      "image": "audio/narrations/images/guanyu/seg-08.jpg",
+      "imageCaption": "败走麦城",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.35,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "从涿郡到麦城，六十年。忠义二字，关羽用一生写就——后世封他为「武圣」，与孔子并肩。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T01:55:56.277Z"
+}
