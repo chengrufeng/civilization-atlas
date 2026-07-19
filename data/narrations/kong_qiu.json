@@ -1,0 +1,169 @@
+{
+  "personId": "kong_qiu",
+  "atlasId": "chunqiu",
+  "title": "孔子 · 万世师表的一生",
+  "subtitle": "约 2 分 30 秒浓缩至圣先师的求索之路",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 117.8,
+  "audio": "audio/narrations/kong_qiu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "孔子",
+        "孔丘"
+      ],
+      "caption": "「天不生仲尼，万古如长夜。」他是中国最伟大的老师——弟子三千，贤者七十二。孔子。",
+      "image": "audio/narrations/images/kong_qiu/seg-00.jpg",
+      "imageCaption": "孔子",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.79,
+      "year": -551,
+      "place": "曲阜",
+      "step": null,
+      "keywords": [
+        "孔子出生",
+        "尼山"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 551 年，鲁国陬邑。叔梁纥与颜徵在之子降生于尼山——这个男孩取名丘，字仲尼。",
+      "image": "audio/narrations/images/kong_qiu/seg-01.jpg",
+      "imageCaption": "孔子出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.54,
+      "year": -522,
+      "place": "曲阜",
+      "step": 0,
+      "keywords": [
+        "孔子办学",
+        "三十而立"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 522 年。「三十而立」——他开始创办私学，打破学在官府的传统。无论贵贱贫富，只要交一束脩（十条干肉），皆可入门。",
+      "image": "audio/narrations/images/kong_qiu/seg-02.jpg",
+      "imageCaption": "孔子办学",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.16,
+      "year": -517,
+      "place": "齐国",
+      "step": 1,
+      "keywords": [
+        "孔子齐景公",
+        "问政"
+      ],
+      "caption": "公元前 517 年。鲁国发生内乱，三十五岁的孔子奔齐。齐景公问政于他——「君君，臣臣，父父，子子」八个字流传千古。",
+      "image": "audio/narrations/images/kong_qiu/seg-03.jpg",
+      "imageCaption": "孔子齐景公",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.82,
+      "year": -501,
+      "place": "曲阜",
+      "step": 2,
+      "keywords": [
+        "孔子中都宰"
+      ],
+      "caption": "公元前 501 年。五十一岁的孔子终于出仕，任中都宰——治理中都一年，四方诸侯都来学习。「一年，四方则之」。",
+      "image": "audio/narrations/images/kong_qiu/seg-04.jpg",
+      "imageCaption": "孔子中都宰",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.46,
+      "year": -500,
+      "place": "曲阜",
+      "step": 3,
+      "keywords": [
+        "孔子大司寇",
+        "夹谷之会"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 500 年。升任大司寇，摄相事。齐鲁夹谷之会，他凭礼仪智斗齐景公，逼齐国归还鲁国三处侵地——这是他政治生涯的巅峰。",
+      "image": "audio/narrations/images/kong_qiu/seg-05.jpg",
+      "imageCaption": "孔子大司寇",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.3,
+      "year": -497,
+      "place": "卫国",
+      "step": 4,
+      "keywords": [
+        "孔子周游列国"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 497 年。齐国送来美女良马，鲁君沉迷，孔子辞官出走——「道不行，乘桴浮于海」开始了他十四年的周游列国。",
+      "image": "audio/narrations/images/kong_qiu/seg-06.jpg",
+      "imageCaption": "孔子周游列国",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.78,
+      "year": -489,
+      "place": "楚国",
+      "step": 5,
+      "keywords": [
+        "陈蔡之厄",
+        "孔子"
+      ],
+      "effect": "fire",
+      "caption": "公元前 489 年。陈蔡之间，被两国大夫围困，绝粮七日——弟子们饿得起不来。他依然弦歌不辍：「君子固穷，小人穷斯滥矣。」",
+      "image": "audio/narrations/images/kong_qiu/seg-07.png",
+      "imageCaption": "陈蔡之厄",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.43,
+      "year": -484,
+      "place": "曲阜",
+      "step": 6,
+      "keywords": [
+        "孔子删诗书",
+        "春秋"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 484 年。六十八岁的孔子终于回到鲁国。他不再求仕，而是删《诗》《书》、定《礼》《乐》、修《春秋》、赞《周易》——奠定了两千年的中华经典。",
+      "image": "audio/narrations/images/kong_qiu/seg-08.jpg",
+      "imageCaption": "孔子删诗书",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 96.9,
+      "year": -479,
+      "place": "曲阜",
+      "step": 7,
+      "keywords": [
+        "孔子病逝",
+        "泰山其颓"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 479 年，曲阜。七十三岁的孔子病逝。临终歌曰：「泰山其颓乎？梁木其坏乎？哲人其萎乎？」",
+      "image": "audio/narrations/images/kong_qiu/seg-09.jpg",
+      "imageCaption": "孔子病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 107.64,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「学而时习之，不亦说乎？」——他用一生告诉我们：知识可以改变命运，教育可以点亮文明。这就是孔子，万世师表。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:48:50.807Z"
+}
