@@ -1,0 +1,164 @@
+{
+  "personId": "marie_curie",
+  "atlasId": "modern_world",
+  "title": "居里夫人 · 两次诺奖的放射性先驱",
+  "subtitle": "约 2 分钟浓缩居里夫人的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 98.68,
+  "audio": "audio/narrations/marie_curie.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "居里夫人"
+      ],
+      "caption": "她是史上第一位拿两次诺贝尔奖的科学家——也是一个被放射线杀死的女人。居里夫人。",
+      "image": "audio/narrations/images/marie_curie/seg-00.jpg",
+      "imageCaption": "居里夫人",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.5,
+      "year": 1867,
+      "place": "华沙",
+      "step": 0,
+      "keywords": [
+        "居里夫人出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1867 年，俄占波兰华沙。一个教师家庭降生了女孩玛丽亚·斯克沃多夫斯卡——那时的波兰女人，不能上大学。",
+      "image": "http://k.sinaimg.cn/n/sinacn/20171107/74b9-fynmzuk4041367.jpg/w700d1q75cms.jpg",
+      "imageCaption": "居里夫人出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.14,
+      "year": 1891,
+      "place": "巴黎",
+      "step": 1,
+      "keywords": [
+        "居里夫人巴黎"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1891 年。二十四岁的她只身赴巴黎索邦大学求学——住在没有暖气的阁楼，常常靠面包和水度日。",
+      "image": "audio/narrations/images/marie_curie/seg-02.png",
+      "imageCaption": "居里夫人巴黎",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.61,
+      "year": 1895,
+      "place": "巴黎",
+      "step": 2,
+      "keywords": [
+        "居里夫妇"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1895 年。与皮埃尔·居里结婚——一对科学史上的传奇夫妻，开始合作研究放射线。",
+      "image": "audio/narrations/images/marie_curie/seg-03.jpg",
+      "imageCaption": "居里夫妇",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.83,
+      "year": 1898,
+      "place": "巴黎",
+      "step": 3,
+      "keywords": [
+        "居里夫人镭",
+        "钋"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1898 年。她在简陋棚屋里处理了数吨沥青铀矿——发现了两种新元素：钋（以祖国波兰命名）和镭。",
+      "image": "audio/narrations/images/marie_curie/seg-04.jpg",
+      "imageCaption": "居里夫人镭",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.37,
+      "year": 1903,
+      "place": "斯德哥尔摩",
+      "step": 4,
+      "keywords": [
+        "居里夫人诺奖"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1903 年。与丈夫、贝克勒尔共获诺贝尔物理学奖——历史上第一位女性诺贝尔奖得主。",
+      "image": "audio/narrations/images/marie_curie/seg-05.jpg",
+      "imageCaption": "居里夫人诺奖",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.95,
+      "year": 1906,
+      "place": "巴黎",
+      "step": 5,
+      "keywords": [
+        "居里夫人教授"
+      ],
+      "caption": "公元 1906 年。丈夫皮埃尔被马车撞死。她强忍悲痛，接任索邦大学第一位女教授——讲义是皮埃尔未完成的笔记。",
+      "image": "audio/narrations/images/marie_curie/seg-06.jpg",
+      "imageCaption": "居里夫人教授",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.57,
+      "year": 1911,
+      "place": "斯德哥尔摩",
+      "step": 6,
+      "keywords": [
+        "居里夫人化学奖"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1911 年。独获诺贝尔化学奖——史上第一人拿两次诺奖。同一年，她因与保罗·朗之万的感情被法国媒体口诛笔伐。",
+      "image": "audio/narrations/images/marie_curie/seg-07.jpg",
+      "imageCaption": "居里夫人化学奖",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.79,
+      "year": 1914,
+      "place": "巴黎",
+      "step": 7,
+      "keywords": [
+        "居里夫人X光车"
+      ],
+      "caption": "一战爆发，她带着女儿开X光车上前线——为伤员定位弹片，挽救了上百万条生命。",
+      "image": "audio/narrations/images/marie_curie/seg-08.jpg",
+      "imageCaption": "居里夫人X光车",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 83.1,
+      "year": 1934,
+      "place": "巴黎",
+      "step": 8,
+      "keywords": [
+        "居里夫人病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1934 年，巴黎。六十七岁的居里夫人病逝——再生障碍性贫血。她死于自己发现的放射线。",
+      "image": "audio/narrations/images/marie_curie/seg-09.jpg",
+      "imageCaption": "居里夫人病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 92.26,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "她的笔记本至今仍有放射性——但她的名字，永远闪耀在人类科学的星空。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:04:09.163Z"
+}

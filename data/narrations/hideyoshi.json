@@ -1,0 +1,141 @@
+{
+  "personId": "hideyoshi",
+  "atlasId": "japan",
+  "title": "丰臣秀吉 · 日本史上最励志的农民",
+  "subtitle": "约 2 分钟浓缩太阁丰臣秀吉的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 81.71,
+  "audio": "audio/narrations/hideyoshi.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "丰臣秀吉"
+      ],
+      "caption": "从提鞋仆役到统一日本——他是日本史上出身最低的天下人。丰臣秀吉。",
+      "image": "audio/narrations/images/hideyoshi/seg-00.jpg",
+      "imageCaption": "丰臣秀吉",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.07,
+      "year": 1537,
+      "place": "名古屋",
+      "step": 0,
+      "keywords": [
+        "丰臣秀吉出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1537 年，尾张贫农家庭。一个叫「日吉丸」的男孩降生——这就是后来的丰臣秀吉。",
+      "image": "audio/narrations/images/hideyoshi/seg-01.jpg",
+      "imageCaption": "丰臣秀吉出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 14.78,
+      "year": 1568,
+      "place": "京都",
+      "step": 1,
+      "keywords": [
+        "丰臣秀吉信长"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "他投奔织田信长——从提鞋仆役做起，凭借机智勤勉，一步步成为信长最倚重的大将之一。",
+      "image": "http://i1.cdn.yzz.cn/pub/imgx2021/10/27/503_091716_99e3b_lit.jpg",
+      "imageCaption": "丰臣秀吉信长",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 22.43,
+      "year": 1582,
+      "place": "京都",
+      "step": 2,
+      "keywords": [
+        "本能寺之变",
+        "秀吉"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1582 年。本能寺之变——主公信长自焚。秀吉正与毛利作战，迅速议和，五天急行军两百公里回师京都，山崎之战击杀明智光秀。",
+      "image": "audio/narrations/images/hideyoshi/seg-03.jpg",
+      "imageCaption": "本能寺之变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.28,
+      "year": 1583,
+      "place": "大阪",
+      "step": 3,
+      "keywords": [
+        "贱岳之战",
+        "秀吉"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1583 年。贱岳之战——他击败织田家首席家臣柴田胜家，开始筑大阪城。统一日本指日可待。",
+      "image": "audio/narrations/images/hideyoshi/seg-04.jpg",
+      "imageCaption": "贱岳之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 44.96,
+      "year": 1590,
+      "place": "小田原",
+      "step": 4,
+      "keywords": [
+        "小田原之战",
+        "秀吉"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1590 年。围攻小田原城，灭北条氏——历经百年战乱的日本，终于在他的手中完成统一。",
+      "image": "audio/narrations/images/hideyoshi/seg-05.jpg",
+      "imageCaption": "小田原之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.59,
+      "year": 1592,
+      "place": "汉城",
+      "step": 5,
+      "keywords": [
+        "文禄之役",
+        "秀吉"
+      ],
+      "effect": "fire",
+      "caption": "公元 1592 年。野心膨胀的他发动「文禄之役」侵朝——却被明朝援军与朝鲜水军（李舜臣）联手遏制。",
+      "image": "audio/narrations/images/hideyoshi/seg-06.jpg",
+      "imageCaption": "文禄之役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.65,
+      "year": 1598,
+      "place": "大阪",
+      "step": 6,
+      "keywords": [
+        "丰臣秀吉病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1598 年，伏见城。六十二岁的秀吉病逝——遗令从朝鲜撤兵。他给儿子秀赖留下的，是一个风雨飘摇的天下。",
+      "image": "audio/narrations/images/hideyoshi/seg-07.jpg",
+      "imageCaption": "丰臣秀吉病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.96,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他从农民做到关白、太阁——日本史上最励志的逆袭。但野心太大，最终成也秀吉，败也秀吉。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:01:29.807Z"
+}

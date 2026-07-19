@@ -1,0 +1,154 @@
+{
+  "personId": "fdr",
+  "atlasId": "modern_world",
+  "title": "罗斯福 · 坐在轮椅上救了美国的总统",
+  "subtitle": "约 2 分钟浓缩富兰克林·罗斯福的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 93.58,
+  "audio": "audio/narrations/fdr.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "罗斯福",
+        "FDR"
+      ],
+      "caption": "他坐着轮椅救了美国——大萧条的新政、二战的胜利、唯一连任四届的总统。富兰克林·罗斯福。",
+      "image": "audio/narrations/images/fdr/seg-00.jpg",
+      "imageCaption": "罗斯福",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.56,
+      "year": 1882,
+      "place": "海德公园",
+      "step": 0,
+      "keywords": [
+        "罗斯福出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1882 年，纽约海德公园。罗斯福家族——远房堂兄就是西奥多·罗斯福总统。富兰克林从小立志从政。",
+      "image": "audio/narrations/images/fdr/seg-01.jpg",
+      "imageCaption": "罗斯福出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.94,
+      "year": 1921,
+      "place": "纽约",
+      "step": 1,
+      "keywords": [
+        "罗斯福小儿麻痹"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1921 年。三十九岁的他在加拿大度假时感染脊髓灰质炎——双腿永久瘫痪。所有人都认为他的政治生涯结束了。",
+      "image": "audio/narrations/images/fdr/seg-02.jpg",
+      "imageCaption": "罗斯福小儿麻痹",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.94,
+      "year": 1928,
+      "place": "纽约",
+      "step": 2,
+      "keywords": [
+        "罗斯福州长"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1928 年。他通过残酷的康复训练，学会了用拐杖和别人的搀扶「站立」竞选——当选纽约州州长。媒体从不在镜头前展示他的轮椅。",
+      "image": "audio/narrations/images/fdr/seg-03.jpg",
+      "imageCaption": "罗斯福州长",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 42.07,
+      "year": 1933,
+      "place": "华盛顿",
+      "step": 3,
+      "keywords": [
+        "罗斯福新政"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1933 年。就任第 32 任总统——大萧条正使美国濒临崩溃。前 100 天推行「罗斯福新政」：救济、复兴、改革。",
+      "image": "audio/narrations/images/fdr/seg-04.jpg",
+      "imageCaption": "罗斯福新政",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.36,
+      "year": 1933,
+      "place": "华盛顿",
+      "step": 4,
+      "keywords": [
+        "炉边谈话",
+        "罗斯福"
+      ],
+      "effect": "fire",
+      "caption": "他开创「炉边谈话」——用广播直接对国民讲话，像家人一样坐在壁炉边。他给绝望的美国人灌入信心。",
+      "image": "audio/narrations/images/fdr/seg-05.jpg",
+      "imageCaption": "炉边谈话",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.11,
+      "year": 1941,
+      "place": "华盛顿",
+      "step": 5,
+      "keywords": [
+        "罗斯福宣战"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1941 年 12 月 7 日，珍珠港事件。第二天他对日德宣战——「一个永远活在耻辱中的日子」。",
+      "image": "audio/narrations/images/fdr/seg-06.jpg",
+      "imageCaption": "罗斯福宣战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.38,
+      "year": 1945,
+      "place": "雅尔塔",
+      "step": 6,
+      "keywords": [
+        "雅尔塔会议",
+        "罗斯福"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1945 年 2 月，雅尔塔。他与丘吉尔、斯大林商讨战后秩序——但他的身体已经油尽灯枯。",
+      "image": "audio/narrations/images/fdr/seg-07.jpg",
+      "imageCaption": "雅尔塔会议",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 79.15,
+      "year": 1945,
+      "place": "温泉镇",
+      "step": 7,
+      "keywords": [
+        "罗斯福病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1945 年 4 月 12 日，温泉镇。脑溢血突发去世，享年 63 岁。他没看到二战胜利的那一天。",
+      "image": "audio/narrations/images/fdr/seg-08.jpg",
+      "imageCaption": "罗斯福病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 88.28,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「我们唯一需要恐惧的，是恐惧本身。」——他用一生证明了这句话。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:05:05.345Z"
+}

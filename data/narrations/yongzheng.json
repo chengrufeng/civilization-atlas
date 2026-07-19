@@ -1,0 +1,139 @@
+{
+  "personId": "yongzheng",
+  "atlasId": "qing",
+  "title": "雍正 · 被误解最深的大清勤政之君",
+  "subtitle": "约 2 分钟浓缩雍正改革的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 82.96,
+  "audio": "audio/narrations/yongzheng.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "雍正"
+      ],
+      "caption": "他统治大清十三年，每天只睡四小时——他被骂「暴君」、「篡位」，却是康乾盛世真正的承上启下者。",
+      "image": "audio/narrations/images/yongzheng/seg-00.jpg",
+      "imageCaption": "雍正",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.15,
+      "year": 1678,
+      "place": "北京",
+      "step": null,
+      "keywords": [
+        "雍正出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1678 年，北京紫禁城。康熙帝第四子胤禛降生——四十五年隐忍，只为等待那一刻的到来。",
+      "image": "audio/narrations/images/yongzheng/seg-01.png",
+      "imageCaption": "雍正出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.82,
+      "year": 1722,
+      "place": "北京",
+      "step": 0,
+      "keywords": [
+        "雍正即位",
+        "九子夺嫡"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1722 年冬。康熙驾崩，四十五岁的胤禛胜出「九子夺嫡」即位，年号雍正——这就是后世争议不休的「传位之谜」。",
+      "image": "https://img.dpm.org.cn/Uploads/Picture/dc/16493[1024].jpg",
+      "imageCaption": "雍正即位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.82,
+      "year": 1723,
+      "place": "北京",
+      "step": 1,
+      "keywords": [
+        "雍正清查亏空"
+      ],
+      "caption": "公元 1723 年。第一件事：清查亏空——他自己的兄弟、亲王，欠国库的银子也得还。十二位高官被革职抄家。",
+      "image": "audio/narrations/images/yongzheng/seg-03.png",
+      "imageCaption": "雍正清查亏空",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.25,
+      "year": 1723,
+      "place": "北京",
+      "step": 2,
+      "keywords": [
+        "摊丁入亩",
+        "雍正"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "推行「摊丁入亩」——把人头税并入土地税。中国两千年的「人头税」从此终结，人口随之爆炸式增长。",
+      "image": "audio/narrations/images/yongzheng/seg-04.jpg",
+      "imageCaption": "摊丁入亩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46,
+      "year": 1729,
+      "place": "北京",
+      "step": 3,
+      "keywords": [
+        "军机处",
+        "雍正"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1729 年。设军机处——几名大臣日夜轮值，皇帝亲决大小政务。从此清廷皇权达到了中国历史的顶峰。",
+      "image": "audio/narrations/images/yongzheng/seg-05.jpg",
+      "imageCaption": "军机处",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 56.4,
+      "year": 1729,
+      "place": "青海",
+      "step": 4,
+      "keywords": [
+        "年羹尧",
+        "罗卜藏丹津"
+      ],
+      "effect": "fire",
+      "caption": "同年，派年羹尧平定青海罗卜藏丹津叛乱——青海正式纳入清朝版图。但年羹尧恃功骄横，最终被赐死。",
+      "image": "audio/narrations/images/yongzheng/seg-06.jpg",
+      "imageCaption": "年羹尧",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 66.23,
+      "year": 1735,
+      "place": "北京",
+      "step": 5,
+      "keywords": [
+        "雍正暴卒"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1735 年，圆明园。雍正突然崩逝——死因成谜（暴病？丹药中毒？）。传位弘历，是为乾隆。",
+      "image": "audio/narrations/images/yongzheng/seg-07.jpg",
+      "imageCaption": "雍正暴卒",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.79,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他勤政到累死，承前启后——「康乾盛世」真正的执行者，是这位被骂了三百年的雍正。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:02:12.467Z"
+}

@@ -1,0 +1,154 @@
+{
+  "personId": "gandhi",
+  "atlasId": "modern_world",
+  "title": "甘地 · 不带武器的革命者",
+  "subtitle": "约 2 分钟浓缩圣雄甘地的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 105.19,
+  "audio": "audio/narrations/gandhi.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "甘地"
+      ],
+      "caption": "他用一块白布、一根手杖、一台纺车——打败了人类历史上最庞大的帝国。他是圣雄甘地。",
+      "image": "audio/narrations/images/gandhi/seg-00.jpg",
+      "imageCaption": "甘地",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.84,
+      "year": 1869,
+      "place": "波尔班达",
+      "step": 0,
+      "keywords": [
+        "甘地出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1869 年，印度西部波尔班达。一个土邦官员家庭降生了男孩莫汉达斯——他是吠舍种姓，家境普通。",
+      "image": "audio/narrations/images/gandhi/seg-01.jpg",
+      "imageCaption": "甘地出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.38,
+      "year": 1893,
+      "place": "南非",
+      "step": 1,
+      "keywords": [
+        "甘地南非"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1893 年。二十四岁的律师甘地赴南非工作——某次坐头等车厢，因肤色被白人乘客推下车。这一推，推出了一个未来的革命者。",
+      "image": "audio/narrations/images/gandhi/seg-02.jpg",
+      "imageCaption": "甘地南非",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.41,
+      "year": 1915,
+      "place": "印度",
+      "step": 2,
+      "keywords": [
+        "甘地回印度"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1915 年。他在南非试验「非暴力抗争」二十年后回到印度——加入国大党，开始领导民族独立运动。",
+      "image": "audio/narrations/images/gandhi/seg-03.jpg",
+      "imageCaption": "甘地回印度",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 38.42,
+      "year": 1920,
+      "place": "印度",
+      "step": 3,
+      "keywords": [
+        "非暴力不合作",
+        "甘地"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1920 年。发起「非暴力不合作运动」——号召印度人抵制英国货、不上英国学校、不当英国官。他穿起土布、拿起纺车。",
+      "image": "audio/narrations/images/gandhi/seg-04.jpg",
+      "imageCaption": "非暴力不合作",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 49.67,
+      "year": 1930,
+      "place": "丹迪",
+      "step": 4,
+      "keywords": [
+        "甘地盐税长征"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1930 年。「盐税长征」——六十一岁的他步行 380 公里到海边，煮海为盐，抗议英国盐税垄断。全球轰动。",
+      "image": "audio/narrations/images/gandhi/seg-05.jpg",
+      "imageCaption": "甘地盐税长征",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 60.5,
+      "year": 1942,
+      "place": "印度",
+      "step": 5,
+      "keywords": [
+        "退出印度运动",
+        "甘地"
+      ],
+      "effect": "fire",
+      "caption": "公元 1942 年。他发动「退出印度」运动——「要么行动，要么死亡」（Do or Die）。六万多人被英印当局逮捕，他被囚禁两年。",
+      "image": "audio/narrations/images/gandhi/seg-06.jpg",
+      "imageCaption": "退出印度运动",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.98,
+      "year": 1947,
+      "place": "印度",
+      "step": 6,
+      "keywords": [
+        "印度独立",
+        "甘地"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1947 年 8 月 15 日。印度独立——但他为印巴分治带来的宗教仇杀绝食抗议。「宁可让我的尸体被火烧掉，也不愿看到印度教徒与穆斯林自相残杀。」",
+      "image": "audio/narrations/images/gandhi/seg-07.jpg",
+      "imageCaption": "印度独立",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.26,
+      "year": 1948,
+      "place": "德里",
+      "step": 7,
+      "keywords": [
+        "甘地遇刺"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1948 年 1 月 30 日，德里。七十八岁的甘地走向晚祷会——被一名印度教极端分子开枪刺杀。临终遗言：「Hē Ram」（啊，罗摩）。",
+      "image": "audio/narrations/images/gandhi/seg-08.jpg",
+      "imageCaption": "甘地遇刺",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 96.08,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他没有军队、没有官职、没有财产——却让大英帝国低头。「成为你想在这个世界上看到的改变。」这就是甘地。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:05:42.180Z"
+}

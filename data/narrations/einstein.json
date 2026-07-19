@@ -1,0 +1,151 @@
+{
+  "personId": "einstein",
+  "atlasId": "modern_world",
+  "title": "爱因斯坦 · 20 世纪最聪明的大脑",
+  "subtitle": "约 2 分 30 秒浓缩爱因斯坦的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 97.13,
+  "audio": "audio/narrations/einstein.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "爱因斯坦"
+      ],
+      "caption": "他是 20 世纪最聪明的大脑——E=mc²、相对论、原子弹。Albert Einstein，爱因斯坦。",
+      "image": "audio/narrations/images/einstein/seg-00.jpg",
+      "imageCaption": "爱因斯坦",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.39,
+      "year": 1879,
+      "place": "乌尔姆",
+      "step": 0,
+      "keywords": [
+        "爱因斯坦出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1879 年，德国乌尔姆。一个犹太商人之子降生——母亲看他方方的后脑勺，担心他是畸形儿。",
+      "image": "audio/narrations/images/einstein/seg-01.jpg",
+      "imageCaption": "爱因斯坦出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.18,
+      "year": 1905,
+      "place": "伯尔尼",
+      "step": 1,
+      "keywords": [
+        "爱因斯坦奇迹年"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1905 年。他在瑞士伯尔尼专利局当三等技术员——这一年他发表了四篇论文：狭义相对论、光电效应、布朗运动、质能方程。史称「奇迹年」。",
+      "image": "audio/narrations/images/einstein/seg-02.jpg",
+      "imageCaption": "爱因斯坦奇迹年",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 30.44,
+      "year": 1915,
+      "place": "柏林",
+      "step": 2,
+      "keywords": [
+        "广义相对论"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1915 年。发表广义相对论——预言光线会被引力弯曲。当时全世界只有三个人能看懂。",
+      "image": "audio/narrations/images/einstein/seg-03.jpg",
+      "imageCaption": "广义相对论",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.14,
+      "year": 1919,
+      "place": "伦敦",
+      "step": 3,
+      "keywords": [
+        "爱丁顿日全食"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1919 年。英国天文学家爱丁顿在日全食时观测星光偏折——和爱因斯坦预言完全一致。一夜之间，他从科学家变成全球偶像。",
+      "image": "audio/narrations/images/einstein/seg-04.jpg",
+      "imageCaption": "爱丁顿日全食",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.52,
+      "year": 1921,
+      "place": "斯德哥尔摩",
+      "step": 4,
+      "keywords": [
+        "爱因斯坦诺奖"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1921 年。获诺贝尔物理学奖——但奇怪的是，颁奖理由是「光电效应」，而非相对论。委员会仍忌惮相对论的争议性。",
+      "image": "audio/narrations/images/einstein/seg-05.jpg",
+      "imageCaption": "爱因斯坦诺奖",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.62,
+      "year": 1933,
+      "place": "普林斯顿",
+      "step": 5,
+      "keywords": [
+        "爱因斯坦美国"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1933 年。希特勒上台，他逃离德国，定居美国普林斯顿——「只要我还能选择，我就只在一个自由国家生活。」",
+      "image": "audio/narrations/images/einstein/seg-06.jpg",
+      "imageCaption": "爱因斯坦美国",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.32,
+      "year": 1939,
+      "place": "华盛顿",
+      "step": 6,
+      "keywords": [
+        "爱因斯坦信",
+        "曼哈顿计划"
+      ],
+      "effect": "fire",
+      "caption": "公元 1939 年。他致信罗斯福总统，警告纳粹可能研制原子弹——直接促成「曼哈顿计划」。",
+      "image": "audio/narrations/images/einstein/seg-07.jpg",
+      "imageCaption": "爱因斯坦信",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 80.66,
+      "year": 1955,
+      "place": "普林斯顿",
+      "step": 7,
+      "keywords": [
+        "爱因斯坦逝世"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1955 年，普林斯顿。七十六岁的爱因斯坦因主动脉瘤破裂病逝——「我想离开的时候，就这样离开。」",
+      "image": "https://www.1mpi.com/pic/acc1dceb17421d9bcea4f895/1-810-jpg_6-1080-0-0-1080.jpg",
+      "imageCaption": "爱因斯坦逝世",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 89.7,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「想象力比知识更重要。」——他用一生证明：一个普通人，可以凭思考到达宇宙的本质。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:03:00.907Z"
+}
