@@ -1,0 +1,142 @@
+{
+  "personId": "kangxi",
+  "atlasId": "qing",
+  "title": "康熙 · 在位最久的少年天子",
+  "subtitle": "约 2 分钟浓缩康熙大帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 79.67,
+  "audio": "audio/narrations/kangxi.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "康熙",
+        "清圣祖"
+      ],
+      "caption": "八岁登基、十四亲政、在位六十一载——擒鳌拜、平三藩、收台湾、抗沙俄。他就是康熙大帝。",
+      "image": "audio/narrations/images/kangxi/seg-00.jpg",
+      "imageCaption": "康熙",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.77,
+      "year": 1654,
+      "place": "北京",
+      "step": null,
+      "keywords": [
+        "康熙出生",
+        "顺治帝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1654 年，北京紫禁城。顺治帝第三子降生，八岁登基——这是个孩子扛起的帝国。",
+      "image": "audio/narrations/images/kangxi/seg-01.jpg",
+      "imageCaption": "康熙出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.82,
+      "year": 1669,
+      "place": "北京",
+      "step": 0,
+      "keywords": [
+        "康熙擒鳌拜"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1669 年。十五岁的康熙用一帮少年布库，智擒权臣鳌拜——亲政的第一战，惊艳天下。",
+      "image": "audio/narrations/images/kangxi/seg-02.jpg",
+      "imageCaption": "康熙擒鳌拜",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 25.36,
+      "year": 1681,
+      "place": "广州",
+      "step": 1,
+      "keywords": [
+        "平定三藩",
+        "康熙"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1681 年。八年苦战，平定三藩之乱——吴三桂兵败病死，华南归心。这是清初最大的一场内战。",
+      "image": "audio/narrations/images/kangxi/seg-03.png",
+      "imageCaption": "平定三藩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.04,
+      "year": 1683,
+      "place": "台南",
+      "step": 2,
+      "keywords": [
+        "施琅",
+        "康熙收台湾"
+      ],
+      "effect": "fire",
+      "caption": "公元 1683 年。施琅率水师攻台，郑克塽降。台湾正式纳入清朝版图——这是中国历史上第一次真正统一台湾。",
+      "image": "audio/narrations/images/kangxi/seg-04.jpg",
+      "imageCaption": "施琅",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.61,
+      "year": 1685,
+      "place": "雅克萨",
+      "step": 3,
+      "keywords": [
+        "雅克萨之战",
+        "康熙"
+      ],
+      "effect": "fire",
+      "caption": "公元 1685 年。沙俄入侵黑龙江——康熙下令反击。两次雅克萨之战，打得沙俄坐下来谈判。",
+      "image": "audio/narrations/images/kangxi/seg-05.jpg",
+      "imageCaption": "雅克萨之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.5,
+      "year": 1689,
+      "place": "尼布楚",
+      "step": 4,
+      "keywords": [
+        "尼布楚条约",
+        "中俄"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1689 年。《尼布楚条约》签订——这是中国历史上第一份与西方国家签订的平等条约，划定了中俄东段边界。",
+      "image": "audio/narrations/images/kangxi/seg-06.jpg",
+      "imageCaption": "尼布楚条约",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.24,
+      "year": 1722,
+      "place": "北京",
+      "step": 5,
+      "keywords": [
+        "康熙驾崩",
+        "畅春园"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1722 年，畅春园。六十九岁的康熙驾崩，在位六十一年——中国历史上最长。",
+      "image": "audio/narrations/images/kangxi/seg-07.jpg",
+      "imageCaption": "康熙驾崩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 71.9,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，开疆拓土、定国安邦——奠定了「康乾盛世」的百年基业，也奠定了近代中国的版图。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:12:59.137Z"
+}

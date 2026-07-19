@@ -1,0 +1,141 @@
+{
+  "personId": "sushi",
+  "atlasId": "tangsong",
+  "title": "苏轼 · 把苦难煮成东坡肉的乐天派",
+  "subtitle": "约 2 分钟浓缩东坡居士的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 93.18,
+  "audio": "audio/narrations/sushi.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "苏轼",
+        "苏东坡"
+      ],
+      "caption": "一生被贬三次，越贬越南——他却把每次苦难，都煮成了诗、炖成了肉。他就是苏东坡。",
+      "image": "audio/narrations/images/sushi/seg-00.jpg",
+      "imageCaption": "苏轼",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.84,
+      "year": 1037,
+      "place": "眉山",
+      "step": null,
+      "keywords": [
+        "苏轼",
+        "眉山三苏"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1037 年，四川眉山。苏家三父子——苏洵、苏轼、苏辙，日后并称「三苏」，同列唐宋八大家。",
+      "image": "audio/narrations/images/sushi/seg-01.jpg",
+      "imageCaption": "苏轼",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.52,
+      "year": 1057,
+      "place": "开封",
+      "step": 0,
+      "keywords": [
+        "苏轼中进士",
+        "欧阳修"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1057 年。二十一岁的苏轼进京应试，欧阳修读罢大惊：「老夫当避此人，放出一头地！」一考成名。",
+      "image": "audio/narrations/images/sushi/seg-02.jpg",
+      "imageCaption": "苏轼中进士",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.04,
+      "year": 1079,
+      "place": "开封",
+      "step": 1,
+      "keywords": [
+        "乌台诗案",
+        "苏轼入狱"
+      ],
+      "effect": "fire",
+      "caption": "公元 1079 年。一场「乌台诗案」，他从一方大员沦为阶下囚。一百三十天牢狱之灾，差点丢了性命。",
+      "image": "audio/narrations/images/sushi/seg-03.jpg",
+      "imageCaption": "乌台诗案",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.36,
+      "year": 1080,
+      "place": "黄州",
+      "step": 2,
+      "keywords": [
+        "苏轼黄州",
+        "赤壁赋"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1080 年。贬黄州团练副使——这是他人生的最低谷，也是文学的最高峰。前、后《赤壁赋》、《念奴娇·赤壁怀古》皆出于此。他还在东坡开荒种地——「东坡居士」由此而来。",
+      "image": "audio/narrations/images/sushi/seg-04.png",
+      "imageCaption": "苏轼黄州",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 52.16,
+      "year": 1094,
+      "place": "惠州",
+      "step": 3,
+      "keywords": [
+        "苏轼惠州",
+        "日啖荔枝"
+      ],
+      "caption": "公元 1094 年。再贬惠州——他却写下「日啖荔枝三百颗，不辞长作岭南人」。苦难在他笔下，永远有滋味。",
+      "image": "audio/narrations/images/sushi/seg-05.jpg",
+      "imageCaption": "苏轼惠州",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.02,
+      "year": 1097,
+      "place": "儋州",
+      "step": 4,
+      "keywords": [
+        "苏轼儋州",
+        "海南"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1097 年。六十二岁的他被一竿子打到海南儋州——天涯海角。他办学堂、教书育人，把蛮荒之地变成了文化之乡。",
+      "image": "audio/narrations/images/sushi/seg-06.png",
+      "imageCaption": "苏轼儋州",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 73.07,
+      "year": 1101,
+      "place": "常州",
+      "step": 5,
+      "keywords": [
+        "苏轼病逝",
+        "常州"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1101 年，常州。北归途中，六十六岁的苏轼病逝。临终写下的最后一句话：「着力即差」——不用力，自然就好。",
+      "image": "audio/narrations/images/sushi/seg-07.jpg",
+      "imageCaption": "苏轼病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 83.59,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，是诗、是文、是书、是画、是肉、是酒——是每个中国人心里的那位最豁达的朋友，苏东坡。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:12:27.686Z"
+}

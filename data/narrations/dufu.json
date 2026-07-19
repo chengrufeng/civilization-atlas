@@ -1,0 +1,126 @@
+{
+  "personId": "dufu",
+  "atlasId": "tangsong",
+  "title": "杜甫 · 颠沛流离中的千古诗圣",
+  "subtitle": "约 2 分钟浓缩诗史的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 79.66,
+  "audio": "audio/narrations/dufu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "杜甫",
+        "诗圣"
+      ],
+      "caption": "他的诗，被后世称为「诗史」。他的一生，是大唐由盛转衰的倒影。诗圣杜甫。",
+      "image": "audio/narrations/images/dufu/seg-00.jpg",
+      "imageCaption": "杜甫",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.43,
+      "year": 712,
+      "place": "巩县",
+      "step": null,
+      "keywords": [
+        "杜甫",
+        "巩县"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 712 年，巩县。诗人杜审言之孙降生。少年杜甫「读书破万卷，下笔如有神」也曾自信满满。",
+      "image": "audio/narrations/images/dufu/seg-01.jpg",
+      "imageCaption": "杜甫",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.87,
+      "year": 744,
+      "place": "洛阳",
+      "step": 0,
+      "keywords": [
+        "李白杜甫",
+        "齐赵"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 744 年。三十三岁的他在洛阳遇见了李白。两位诗人携手同游齐赵，喝醉酒盖一床被——「醉眠秋共被，携手日同行」。",
+      "image": "audio/narrations/images/dufu/seg-02.jpg",
+      "imageCaption": "李白杜甫",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.31,
+      "year": 755,
+      "place": "长安",
+      "step": 1,
+      "keywords": [
+        "安史之乱",
+        "杜甫"
+      ],
+      "effect": "fire",
+      "caption": "公元 755 年。安史之乱爆发——「国破山河在，城春草木深」。杜甫从此颠沛流离，与苦难同行。",
+      "image": "audio/narrations/images/dufu/seg-03.jpg",
+      "imageCaption": "安史之乱",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.82,
+      "year": 757,
+      "place": "长安",
+      "step": 2,
+      "keywords": [
+        "杜甫左拾遗",
+        "凤翔"
+      ],
+      "caption": "公元 757 年。他冒死逃出长安，到凤翔投奔肃宗，被任命为左拾遗。然而直言进谏，很快被贬。",
+      "image": "audio/narrations/images/dufu/seg-04.jpg",
+      "imageCaption": "杜甫左拾遗",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 47.46,
+      "year": 759,
+      "place": "成都",
+      "step": 3,
+      "keywords": [
+        "杜甫草堂",
+        "成都"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 759 年。他携家入蜀，依严武，在成都浣花溪畔建起草堂。这是他一生最安定的时光，写下「窗含西岭千秋雪，门泊东吴万里船」。",
+      "image": "http://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20191112/18/wemedia/52620bea6179d1570c4ba04b152af077cf561ccb_size170_w1280_h921.jpg",
+      "imageCaption": "杜甫草堂",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.88,
+      "year": 770,
+      "place": "耒阳",
+      "step": 4,
+      "keywords": [
+        "杜甫病逝",
+        "湘江"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 770 年，湘江舟中。五十九岁的杜甫病逝。临终前还在写诗：「战血流依旧，军声动至今」。",
+      "image": "audio/narrations/images/dufu/seg-06.jpg",
+      "imageCaption": "杜甫病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 69.2,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生穷困潦倒，却把苍生的苦难写进了诗里——「安得广厦千万间，大庇天下寒士俱欢颜」——这是杜甫，永远的诗人良心。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:11:57.907Z"
+}

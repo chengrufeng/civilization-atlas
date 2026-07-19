@@ -1,0 +1,171 @@
+{
+  "personId": "lishimin",
+  "atlasId": "tangsong",
+  "title": "李世民 · 玄武门之变到贞观之治",
+  "subtitle": "约 2 分钟浓缩天可汗的明君一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 108.78,
+  "audio": "audio/narrations/lishimin.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "李世民",
+        "唐太宗"
+      ],
+      "caption": "杀兄囚父、开创盛世、被尊为「天可汗」——他是中国历史上最矛盾的明君，唐太宗李世民。",
+      "image": "audio/narrations/images/lishimin/seg-00.png",
+      "imageCaption": "李世民",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.93,
+      "year": 598,
+      "place": "长安",
+      "step": null,
+      "keywords": [
+        "李世民",
+        "唐高祖"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 598 年，李渊次子降生。少年李世民弓马娴熟，十六岁便随父从军——那个乱世，给了他舞台。",
+      "image": "audio/narrations/images/lishimin/seg-01.png",
+      "imageCaption": "李世民",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.47,
+      "year": 618,
+      "place": "长安",
+      "step": 0,
+      "keywords": [
+        "唐朝建立",
+        "李渊"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 618 年。父亲李渊在长安称帝，建立唐朝。二十岁的李世民封秦王，从此开始了平定天下的征途。",
+      "image": "audio/narrations/images/lishimin/seg-02.jpg",
+      "imageCaption": "唐朝建立",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.54,
+      "year": 621,
+      "place": "洛阳",
+      "step": 1,
+      "keywords": [
+        "虎牢关之战",
+        "李世民"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 621 年。虎牢关一战，他生擒窦建德、逼降王世充——一战定中原，是大唐统一的奠基之战。",
+      "image": "audio/narrations/images/lishimin/seg-03.jpg",
+      "imageCaption": "虎牢关之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.7,
+      "year": 626,
+      "place": "长安",
+      "step": 2,
+      "keywords": [
+        "玄武门之变"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 626 年。玄武门之变——他亲手射杀兄长建成、弟弟元吉。两个月后登基，年号贞观。这是他一生最大的污点，也是命运的转折。",
+      "image": "audio/narrations/images/lishimin/seg-04.jpg",
+      "imageCaption": "玄武门之变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 49.19,
+      "year": 627,
+      "place": "长安",
+      "step": 3,
+      "keywords": [
+        "贞观之治"
+      ],
+      "caption": "公元 627 年。改元贞观。他纳谏如流，重用魏征——「以铜为镜，可正衣冠；以人为镜，可明得失」开创了千古称颂的贞观之治。",
+      "image": "audio/narrations/images/lishimin/seg-05.jpg",
+      "imageCaption": "贞观之治",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 61.03,
+      "year": 630,
+      "place": "阴山",
+      "step": 4,
+      "keywords": [
+        "李靖",
+        "突厥",
+        "天可汗"
+      ],
+      "effect": "fire",
+      "caption": "公元 630 年。李靖夜袭阴山，一举灭东突厥。四夷君长齐呼他为「天可汗」——大唐威名从此远播。",
+      "image": "audio/narrations/images/lishimin/seg-06.png",
+      "imageCaption": "李靖",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.5,
+      "year": 641,
+      "place": "青海",
+      "step": 5,
+      "keywords": [
+        "文成公主",
+        "松赞干布"
+      ],
+      "caption": "公元 641 年。文成公主入藏，远嫁松赞干布——这一次和亲，换来了唐蕃数十年的和平。",
+      "image": "audio/narrations/images/lishimin/seg-07.jpg",
+      "imageCaption": "文成公主",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 79.25,
+      "year": 645,
+      "place": "辽东",
+      "step": 6,
+      "keywords": [
+        "亲征高句丽",
+        "唐太宗"
+      ],
+      "effect": "fire",
+      "caption": "公元 645 年。亲征高句丽——这是他少有的失手。战事不利退兵，他叹息：「若魏征在，不使我有是行也。」",
+      "image": "audio/narrations/images/lishimin/seg-08.jpg",
+      "imageCaption": "亲征高句丽",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 89.34,
+      "year": 649,
+      "place": "长安",
+      "step": 7,
+      "keywords": [
+        "唐太宗",
+        "翠微宫"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 649 年，长安翠微宫。五十二岁的李世民病逝。临终前把帝位和高昌、突厥的边患，一同留给了太子李治。",
+      "image": "audio/narrations/images/lishimin/seg-09.jpg",
+      "imageCaption": "唐太宗",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 100.06,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，是杀伐决断，也是从谏如流。贞观之治，是后世所有皇帝的标杆——这，就是唐太宗。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:10:58.224Z"
+}

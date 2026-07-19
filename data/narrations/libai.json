@@ -1,0 +1,125 @@
+{
+  "personId": "libai",
+  "atlasId": "tangsong",
+  "title": "李白 · 绣口一吐就是半个盛唐",
+  "subtitle": "约 2 分钟浓缩诗仙的浪漫一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 78.7,
+  "audio": "audio/narrations/libai.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "李白",
+        "诗仙"
+      ],
+      "caption": "酒入豪肠，七分酿成月光，余下的三分啸成剑气——绣口一吐，就是半个盛唐。他就是李白。",
+      "image": "audio/narrations/images/libai/seg-00.jpg",
+      "imageCaption": "李白",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.29,
+      "year": 701,
+      "place": "碎叶",
+      "step": null,
+      "keywords": [
+        "李白",
+        "碎叶城"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 701 年，碎叶城——今天的中亚吉尔吉斯斯坦。一个商人家庭的男孩降生，五岁随父迁蜀，从此一生漂泊。",
+      "image": "audio/narrations/images/libai/seg-01.jpg",
+      "imageCaption": "李白",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.41,
+      "year": 725,
+      "place": "江陵",
+      "step": 0,
+      "keywords": [
+        "李白仗剑去国"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 725 年。二十五岁的李白仗剑去国，辞亲远游——「仰天大笑出门去，我辈岂是蓬蒿人」一路出蜀，开启了他的诗剑人生。",
+      "image": "audio/narrations/images/libai/seg-02.jpg",
+      "imageCaption": "李白仗剑去国",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.27,
+      "year": 742,
+      "place": "长安",
+      "step": 1,
+      "keywords": [
+        "李白翰林供奉",
+        "贺知章"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 742 年。四十二岁的他奉诏入京，任翰林供奉。贺知章一见惊呼「谪仙人」——连唐玄宗都亲自调羹。",
+      "image": "audio/narrations/images/libai/seg-03.png",
+      "imageCaption": "李白翰林供奉",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.17,
+      "year": 744,
+      "place": "洛阳",
+      "step": 2,
+      "keywords": [
+        "李白杜甫",
+        "赐金放还"
+      ],
+      "effect": "blossom",
+      "caption": "公元 744 年。醉酒叫高力士脱靴、杨贵妃捧砚——终究被「赐金放还」。这一年，他在洛阳遇见了杜甫，二人同游齐赵，结下千古友情。",
+      "image": "audio/narrations/images/libai/seg-04.jpg",
+      "imageCaption": "李白杜甫",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.66,
+      "year": 756,
+      "place": "江陵",
+      "step": 3,
+      "keywords": [
+        "李白永王",
+        "夜郎"
+      ],
+      "caption": "公元 756 年。安史之乱中，他入永王李璘幕府——谁知永王谋反兵败，李白被流放夜郎。",
+      "image": "audio/narrations/images/libai/seg-05.jpg",
+      "imageCaption": "李白永王",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 60.12,
+      "year": 762,
+      "place": "当涂",
+      "step": 4,
+      "keywords": [
+        "李白当涂",
+        "月下"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 762 年，当涂。六十二岁的李白病逝。传说他是醉酒入水捉月而亡——这浪漫的死法，配得上他这一生。",
+      "image": "audio/narrations/images/libai/seg-06.jpg",
+      "imageCaption": "李白当涂",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.33,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，是诗，是酒，是剑——是盛唐最浪漫的一道月光，千年之后依然照在每个中国人的心上。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T02:11:33.929Z"
+}
