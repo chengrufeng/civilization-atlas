@@ -1,0 +1,122 @@
+{
+  "personId": "plato",
+  "atlasId": "greece",
+  "title": "柏拉图 · 西方哲学的影子",
+  "subtitle": "约 2 分钟浓缩柏拉图的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 74.02,
+  "audio": "audio/narrations/plato.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "柏拉图"
+      ],
+      "caption": "怀特海说：「整个西方哲学史，不过是柏拉图的脚注。」他就是柏拉图。",
+      "image": "audio/narrations/images/plato/seg-00.jpg",
+      "imageCaption": "柏拉图",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 5.89,
+      "year": -428,
+      "place": "雅典",
+      "step": 0,
+      "keywords": [
+        "柏拉图出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 428 年，雅典贵族家庭降生了一个男孩——原名叫阿里斯托克勒斯，「柏拉图」是健身教练给他取的绰号，意为「宽广」（他的胸膛宽厚）。",
+      "image": "audio/narrations/images/plato/seg-01.jpg",
+      "imageCaption": "柏拉图出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.83,
+      "year": -399,
+      "place": "雅典",
+      "step": 1,
+      "keywords": [
+        "苏格拉底之死",
+        "柏拉图"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 399 年。老师苏格拉底被雅典民主派判处死刑——这一幕改变了柏拉图一生。他对民主彻底失望。",
+      "image": "audio/narrations/images/plato/seg-02.jpg",
+      "imageCaption": "苏格拉底之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28,
+      "year": -388,
+      "place": "叙拉古",
+      "step": 2,
+      "keywords": [
+        "柏拉图叙拉古"
+      ],
+      "effect": "fire",
+      "caption": "公元前 388 年。他三赴叙拉古，想劝说僭主狄奥尼修斯实施「哲人王」理想——结果被卖为奴隶，幸亏朋友赎回。",
+      "image": "audio/narrations/images/plato/seg-03.png",
+      "imageCaption": "柏拉图叙拉古",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 38.28,
+      "year": -387,
+      "place": "雅典",
+      "step": 3,
+      "keywords": [
+        "柏拉图学园"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 387 年。他在雅典城外建立「学园」（Academy）——这是西方第一所高等学府，存续了九百年。",
+      "image": "audio/narrations/images/plato/seg-04.png",
+      "imageCaption": "柏拉图学园",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 47.03,
+      "year": -367,
+      "place": "叙拉古",
+      "step": 4,
+      "keywords": [
+        "柏拉图叙拉古二次"
+      ],
+      "effect": "fire",
+      "caption": "公元前 367 年。老狄奥尼修斯死，他二赴叙拉古教导新主——又险些丧命，被遣返。",
+      "image": "audio/narrations/images/plato/seg-05.png",
+      "imageCaption": "柏拉图叙拉古二次",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 55.13,
+      "year": -348,
+      "place": "雅典",
+      "step": 4,
+      "keywords": [
+        "柏拉图之死"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 348 年。八十岁的柏拉图在一次婚礼宴席上安详离世——他写的《理想国》，至今仍是哲学必读书。",
+      "image": "audio/narrations/images/plato/seg-06.jpg",
+      "imageCaption": "柏拉图之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.81,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「哲学就是练习死亡。」——他写了二十部对话录，每一部都在追问：什么是正义？什么是美？什么是真理？"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:21:08.674Z"
+}

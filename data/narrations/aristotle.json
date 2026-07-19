@@ -1,0 +1,122 @@
+{
+  "personId": "aristotle",
+  "atlasId": "greece",
+  "title": "亚里士多德 · 古代百科全书",
+  "subtitle": "约 2 分钟浓缩亚里士多德的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 77.38,
+  "audio": "audio/narrations/aristotle.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "亚里士多德"
+      ],
+      "caption": "他是亚历山大大帝的老师，古希腊学术的集大成者——亚里士多德，影响了西方两千年。",
+      "image": "audio/narrations/images/aristotle/seg-00.jpg",
+      "imageCaption": "亚里士多德",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.38,
+      "year": -384,
+      "place": "斯塔吉拉",
+      "step": 0,
+      "keywords": [
+        "亚里士多德出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 384 年，色雷斯的斯塔吉拉。马其顿宫廷御医之子降生——医学世家让他从小具备科学素养。",
+      "image": "audio/narrations/images/aristotle/seg-01.jpg",
+      "imageCaption": "亚里士多德出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.82,
+      "year": -367,
+      "place": "雅典",
+      "step": 1,
+      "keywords": [
+        "亚里士多德柏拉图"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 367 年。十七岁的他来到雅典柏拉图学园——一学就是二十年，被称为「学园之心」。",
+      "image": "audio/narrations/images/aristotle/seg-02.jpg",
+      "imageCaption": "亚里士多德柏拉图",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 25.14,
+      "year": -343,
+      "place": "佩拉",
+      "step": 2,
+      "keywords": [
+        "亚里士多德亚历山大"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 343 年。马其顿国王腓力二世聘请他担任十三岁王子亚历山大的老师——他给未来的征服者讲《荷马史诗》和哲学。",
+      "image": "audio/narrations/images/aristotle/seg-03.jpg",
+      "imageCaption": "亚里士多德亚历山大",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.93,
+      "year": -335,
+      "place": "雅典",
+      "step": 3,
+      "keywords": [
+        "亚里士多德吕克昂"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 335 年。他在雅典东郊吕克昂建立自己的学园——他和学生边散步边讨论，被称作「逍遥学派」（Peripatetic）。",
+      "image": "audio/narrations/images/aristotle/seg-04.jpg",
+      "imageCaption": "亚里士多德吕克昂",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.07,
+      "year": -323,
+      "place": "雅典",
+      "step": 4,
+      "keywords": [
+        "亚里士多德出逃"
+      ],
+      "effect": "fire",
+      "caption": "公元前 323 年。亚历山大突然病逝，雅典反马其顿情绪爆发——他被控「不敬神」，他说：「不让雅典第二次对哲学犯罪。」出逃。",
+      "image": "audio/narrations/images/aristotle/seg-05.jpg",
+      "imageCaption": "亚里士多德出逃",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.17,
+      "year": -322,
+      "place": "优卑亚",
+      "step": 4,
+      "keywords": [
+        "亚里士多德逝世"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 322 年。亚里士多德在优卑亚岛病逝——享年六十二。他留下了逻辑学、伦理学、政治学、物理学、生物学、诗学……是古代最博学的学者。",
+      "image": "audio/narrations/images/aristotle/seg-06.jpg",
+      "imageCaption": "亚里士多德逝世",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.55,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「吾爱吾师，吾更爱真理。」——他用一生证明，知识可以系统化，世界可以被理解。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:21:46.197Z"
+}

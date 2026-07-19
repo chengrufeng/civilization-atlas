@@ -1,0 +1,152 @@
+{
+  "personId": "hannibal",
+  "atlasId": "rome",
+  "title": "汉尼拔 · 让罗马做了五十年噩梦的男人",
+  "subtitle": "约 2 分钟浓缩战略之父的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 94.92,
+  "audio": "audio/narrations/hannibal.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "汉尼拔"
+      ],
+      "caption": "他带着三万七千人、三十七头战象，翻越阿尔卑斯——在罗马本土打了十六年。他叫汉尼拔。",
+      "image": "audio/narrations/images/hannibal/seg-00.jpg",
+      "imageCaption": "汉尼拔",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.27,
+      "year": -247,
+      "place": "迦太基",
+      "step": 0,
+      "keywords": [
+        "汉尼拔出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 247 年，北非迦太基。将军哈米尔卡·巴卡之子降生——他从小被父亲带到神庙立誓：「我永远做罗马的敌人。」",
+      "image": "audio/narrations/images/hannibal/seg-01.jpg",
+      "imageCaption": "汉尼拔出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.1,
+      "year": -221,
+      "place": "迦太基",
+      "step": 0,
+      "keywords": [
+        "汉尼拔统帅"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 221 年。二十六岁的他继承父职——任迦太基在西班牙的统帅。",
+      "image": "audio/narrations/images/hannibal/seg-02.jpg",
+      "imageCaption": "汉尼拔统帅",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.32,
+      "year": -218,
+      "place": "萨贡托",
+      "step": 1,
+      "keywords": [
+        "萨贡托",
+        "汉尼拔"
+      ],
+      "effect": "fire",
+      "caption": "公元前 218 年。他攻陷了罗马盟友萨贡托——第二次布匿战争爆发。",
+      "image": "audio/narrations/images/hannibal/seg-03.jpg",
+      "imageCaption": "萨贡托",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33,
+      "year": -218,
+      "place": "阿尔卑斯",
+      "step": 2,
+      "keywords": [
+        "汉尼拔翻越阿尔卑斯"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 218 年秋。他做了一个所有人都认为疯狂的决定——率军翻越阿尔卑斯。三万七千人，三十七头战象，从天而降。",
+      "image": "audio/narrations/images/hannibal/seg-04.jpg",
+      "imageCaption": "汉尼拔翻越阿尔卑斯",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 43.88,
+      "year": -216,
+      "place": "坎尼",
+      "step": 3,
+      "keywords": [
+        "坎尼会战",
+        "汉尼拔"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 216 年。坎尼会战——五万罗马军团被全歼，罗马一日之内损失了五分之一成年男性公民。这是西方军事史上最经典的歼灭战。",
+      "image": "audio/narrations/images/hannibal/seg-05.png",
+      "imageCaption": "坎尼会战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 56.4,
+      "year": -203,
+      "place": "迦太基",
+      "step": 4,
+      "keywords": [
+        "汉尼拔回师"
+      ],
+      "caption": "公元前 203 年。罗马将军西庇阿反攻北非——他被迫回师救援本土。十六年征伐，功亏一篑。",
+      "image": "audio/narrations/images/hannibal/seg-06.jpg",
+      "imageCaption": "汉尼拔回师",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 65.56,
+      "year": -202,
+      "place": "扎马",
+      "step": 5,
+      "keywords": [
+        "扎马之战",
+        "汉尼拔"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 202 年。扎马之战——他败给了二十年前从坎尼逃出的少年西庇阿。这一次，他输了。",
+      "image": "audio/narrations/images/hannibal/seg-07.jpg",
+      "imageCaption": "扎马之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 74.5,
+      "year": -183,
+      "place": "比提尼亚",
+      "step": 6,
+      "keywords": [
+        "汉尼拔之死"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 183 年。流亡比提尼亚的他被罗马追兵包围——服毒自尽，享年六十四。临终说：「让我把罗马人从他们对老汉尼拔的恐惧中解放出来吧。」",
+      "image": "audio/narrations/images/hannibal/seg-08.jpg",
+      "imageCaption": "汉尼拔之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 87.16,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "罗马人怕了他一辈子——他死后，罗马母亲们吓孩子都说：「汉尼拔在门口。」这就是战略之父。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:19:48.742Z"
+}

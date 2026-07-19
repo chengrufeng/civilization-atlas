@@ -1,0 +1,152 @@
+{
+  "personId": "zhang_qian",
+  "atlasId": "qinhan",
+  "title": "张骞 · 凿空西域的第一人",
+  "subtitle": "约 2 分钟浓缩张骞的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 94.85,
+  "audio": "audio/narrations/zhang_qian.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "张骞",
+        "丝绸之路"
+      ],
+      "caption": "他十三年出使归来，带回的不只是西域地图——还有一条改变了东西方文明的丝绸之路。他叫张骞。",
+      "image": "audio/narrations/images/zhang_qian/seg-00.jpg",
+      "imageCaption": "张骞",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.53,
+      "year": -164,
+      "place": "汉中",
+      "step": null,
+      "keywords": [
+        "张骞出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 164 年，汉中成固。一个普通的郎官降生——他即将完成中国历史上最伟大的探险。",
+      "image": "http://epaper.ahyouth.com/userfiles/image/0 0 0 0 1/0 01705/7_1.jpg",
+      "imageCaption": "张骞出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.87,
+      "year": -138,
+      "place": "长安",
+      "step": 0,
+      "keywords": [
+        "张骞出使",
+        "汉武帝"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 138 年。汉武帝下诏招募勇士出使大月氏，夹击匈奴。二十六岁的张骞应募出发——率一百多人，堂邑父为向导。",
+      "image": "audio/narrations/images/zhang_qian/seg-02.jpg",
+      "imageCaption": "张骞出使",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 28.38,
+      "year": -129,
+      "place": "敦煌",
+      "step": 1,
+      "keywords": [
+        "张骞被俘"
+      ],
+      "effect": "fire",
+      "caption": "出陇西就被匈奴俘虏——他被扣留十年，娶匈奴妻生子，但汉使节杖始终握在手中。",
+      "image": "audio/narrations/images/zhang_qian/seg-03.jpg",
+      "imageCaption": "张骞被俘",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.1,
+      "year": -129,
+      "place": "敦煌",
+      "step": 1,
+      "keywords": [
+        "张骞西逃"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 129 年。他寻机西逃——穿越大漠、翻越葱岭，终于抵达大月氏。但大月氏已安居乐业，不愿东归。",
+      "image": "audio/narrations/images/zhang_qian/seg-04.jpg",
+      "imageCaption": "张骞西逃",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.31,
+      "year": -126,
+      "place": "长安",
+      "step": 2,
+      "keywords": [
+        "张骞归汉"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 126 年。出发时一百多人，回到长安只剩他和堂邑父两人——十三年。汉武帝拜他为太中大夫，史称「凿空」。",
+      "image": "audio/narrations/images/zhang_qian/seg-05.jpg",
+      "imageCaption": "张骞归汉",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.29,
+      "year": -119,
+      "place": "乌孙",
+      "step": 3,
+      "keywords": [
+        "张骞二次出使"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 119 年。他再次出使西域，远达乌孙、大宛、康居、大夏——三千人队伍，牛羊数万，外交大获成功。",
+      "image": "audio/narrations/images/zhang_qian/seg-06.jpg",
+      "imageCaption": "张骞二次出使",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 67.74,
+      "year": -115,
+      "place": "长安",
+      "step": 4,
+      "keywords": [
+        "丝绸之路开辟"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 115 年。西域各国使节随他入汉——丝绸之路正式开辟。东西方文明第一次大规模握手。",
+      "image": "audio/narrations/images/zhang_qian/seg-07.jpg",
+      "imageCaption": "丝绸之路开辟",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 77.16,
+      "year": -113,
+      "place": "长安",
+      "step": 5,
+      "keywords": [
+        "张骞病逝"
+      ],
+      "caption": "公元前 113 年。张骞病逝于长安，封博望侯——「博望」二字，是中国人对一个看得最远的探险家最好的纪念。",
+      "image": "audio/narrations/images/zhang_qian/seg-08.jpg",
+      "imageCaption": "张骞病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 86.8,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他走通了没人走过的路——从中国到中亚，从中亚到罗马。从此，东方和西方，再也分不开。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:23:00.851Z"
+}

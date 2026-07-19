@@ -1,0 +1,129 @@
+{
+  "personId": "han_xin",
+  "atlasId": "qinhan",
+  "title": "韩信 · 国士无双，成败皆萧何",
+  "subtitle": "约 2 分钟浓缩兵仙韩信的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 83.59,
+  "audio": "audio/narrations/han_xin.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "韩信",
+        "兵仙"
+      ],
+      "caption": "胯下之辱、漂母一饭、明修栈道、十面埋伏——他是中国军事史上最传奇的将军，韩信。",
+      "image": "audio/narrations/images/han_xin/seg-00.jpg",
+      "imageCaption": "韩信",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.79,
+      "year": -231,
+      "place": "淮阴",
+      "step": null,
+      "keywords": [
+        "韩信出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 231 年，淮阴。一个贫民家庭出生了韩信——他穷得连母亲死后下葬的钱都没有，但佩剑始终带在身上。",
+      "image": "audio/narrations/images/han_xin/seg-01.jpg",
+      "imageCaption": "韩信出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.07,
+      "year": -208,
+      "place": "汉中",
+      "step": 0,
+      "keywords": [
+        "萧何月下追韩信"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 208 年。他先投项羽不被重用，再投刘邦也不被赏识——某夜他逃了。丞相萧何骑马连夜追回他，向刘邦力荐：「国士无双。」",
+      "image": "audio/narrations/images/han_xin/seg-02.jpg",
+      "imageCaption": "萧何月下追韩信",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 30.16,
+      "year": -205,
+      "place": "陈仓",
+      "step": 1,
+      "keywords": [
+        "暗度陈仓",
+        "韩信"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 205 年。他献「明修栈道，暗度陈仓」之计——出奇兵占领关中。刘邦从此有了争夺天下的根基。",
+      "image": "audio/narrations/images/han_xin/seg-03.png",
+      "imageCaption": "暗度陈仓",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.7,
+      "year": -204,
+      "place": "井陉",
+      "step": 2,
+      "keywords": [
+        "背水一战",
+        "韩信"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 204 年。井陉之战——他以三万新兵背水列阵，大破赵军二十万。「置之死地而后生」从此成为中国军事学的金科玉律。",
+      "image": "audio/narrations/images/han_xin/seg-04.jpg",
+      "imageCaption": "背水一战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.2,
+      "year": -203,
+      "place": "垓下",
+      "step": 3,
+      "keywords": [
+        "十面埋伏",
+        "韩信"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 203 年。垓下十面埋伏——他指挥四十万大军合围项羽。四面楚歌，霸王别姬，西楚霸王自刎乌江。",
+      "image": "audio/narrations/images/han_xin/seg-05.jpg",
+      "imageCaption": "十面埋伏",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 61.58,
+      "year": -196,
+      "place": "长安",
+      "step": 5,
+      "keywords": [
+        "韩信之死",
+        "吕后"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 196 年。刘邦出征在外，吕后与萧何设局——把他骗进长乐宫钟室斩杀，夷三族。「成也萧何，败也萧何」从此千古流传。",
+      "image": "audio/narrations/images/han_xin/seg-06.jpg",
+      "imageCaption": "韩信之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 73.5,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「狡兔死，良狗烹；飞鸟尽，良弓藏。」——他用绝顶的军事才华打下汉朝四百年，却终究没能逃过帝王家的猜忌。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T05:22:17.847Z"
+}
