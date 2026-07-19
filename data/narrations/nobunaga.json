@@ -1,0 +1,138 @@
+{
+  "personId": "nobunaga",
+  "atlasId": "japan",
+  "title": "织田信长 · 天下布武的战国革命儿",
+  "subtitle": "约 2 分钟浓缩第六天魔王的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 85.88,
+  "audio": "audio/narrations/nobunaga.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "织田信长",
+        "战国"
+      ],
+      "caption": "「天下布武」——他是日本战国最叛逆的革命儿，几乎完成统一，却死于一场背叛。织田信长。",
+      "image": "audio/narrations/images/nobunaga/seg-00.jpg",
+      "imageCaption": "织田信长",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.03,
+      "year": 1534,
+      "place": "名古屋",
+      "step": null,
+      "keywords": [
+        "织田信长出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1534 年，尾张国那古野城。织田家嫡子降生——少年时行为放浪，人称「尾张的大傻瓜」。",
+      "image": "audio/narrations/images/nobunaga/seg-01.jpg",
+      "imageCaption": "织田信长出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.78,
+      "year": 1559,
+      "place": "名古屋",
+      "step": 0,
+      "keywords": [
+        "织田信长统一尾张"
+      ],
+      "caption": "公元 1559 年。二十五岁的他统一尾张国——这个曾经被嘲笑的「傻瓜」，开始让天下侧目。",
+      "image": "audio/narrations/images/nobunaga/seg-02.jpg",
+      "imageCaption": "织田信长统一尾张",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.85,
+      "year": 1560,
+      "place": "桶狭间",
+      "step": 1,
+      "keywords": [
+        "桶狭间之战",
+        "信长"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1560 年。桶狭间奇袭——他率两千人冒雨突袭今川义元四万大军，亲手取义元首级。这是日本战国史上最传奇的逆袭。",
+      "image": "audio/narrations/images/nobunaga/seg-03.jpg",
+      "imageCaption": "桶狭间之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.5,
+      "year": 1568,
+      "place": "京都",
+      "step": 2,
+      "keywords": [
+        "织田信长上洛"
+      ],
+      "caption": "公元 1568 年。他奉足利义昭上洛（入京），扶持其为将军——自己则开始「天下布武」，用武力统一日本。",
+      "image": "audio/narrations/images/nobunaga/seg-04.jpg",
+      "imageCaption": "织田信长上洛",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.61,
+      "year": 1573,
+      "place": "京都",
+      "step": 3,
+      "keywords": [
+        "织田信长流放将军"
+      ],
+      "effect": "fire",
+      "caption": "公元 1573 年。流放足利义昭——室町幕府正式终结。日本进入「安土桃山时代」。",
+      "image": "audio/narrations/images/nobunaga/seg-05.jpg",
+      "imageCaption": "织田信长流放将军",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.33,
+      "year": 1575,
+      "place": "长篠",
+      "step": 4,
+      "keywords": [
+        "长篠之战",
+        "信长"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1575 年。长篠之战——他率一万八千联军，用三千铁炮（火绳枪）三段击大破武田胜赖的「战国最强骑兵」。这是世界军事史上热兵器对冷兵器的标志性战役。",
+      "image": "audio/narrations/images/nobunaga/seg-06.jpg",
+      "imageCaption": "长篠之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 67.72,
+      "year": 1582,
+      "place": "京都",
+      "step": 5,
+      "keywords": [
+        "本能寺之变",
+        "信长"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1582 年，京都本能寺。家臣明智光秀突然反叛——「敌在本能寺！」他被万军围困，于寺中自焚，享年四十九。",
+      "image": "audio/narrations/images/nobunaga/seg-07.jpg",
+      "imageCaption": "本能寺之变",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 77.88,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「人生五十年，如梦又似幻」——他唱着这首幸若舞，走入本能寺的火海。这就是织田信长。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:45:51.641Z"
+}

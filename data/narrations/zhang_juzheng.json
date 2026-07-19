@@ -1,0 +1,152 @@
+{
+  "personId": "zhang_juzheng",
+  "atlasId": "ming",
+  "title": "张居正 · 大明最后的救世主",
+  "subtitle": "约 2 分钟浓缩张居正改革的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 90.55,
+  "audio": "audio/narrations/zhang_juzheng.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "张居正",
+        "明朝改革"
+      ],
+      "caption": "他给大明续了七十年命，死后却被抄家——他是中国历史上最有魄力的改革家之一，张居正。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-00.jpg",
+      "imageCaption": "张居正",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.72,
+      "year": 1525,
+      "place": "顺天",
+      "step": null,
+      "keywords": [
+        "张居正出生",
+        "江陵"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1525 年，湖广江陵。一个军户家庭降生了男孩张居正——他两岁识字、五岁入学、十二岁中秀才，被称为「荆州神童」。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-01.jpg",
+      "imageCaption": "张居正出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.77,
+      "year": 1547,
+      "place": "顺天",
+      "step": 0,
+      "keywords": [
+        "张居正进士"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1547 年。二十三岁中进士，入翰林院——他在老师徐阶的指引下，开始观察这个暮气沉沉的帝国。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-02.jpg",
+      "imageCaption": "张居正进士",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.9,
+      "year": 1567,
+      "place": "顺天",
+      "step": 1,
+      "keywords": [
+        "张居正入阁"
+      ],
+      "caption": "公元 1567 年。穆宗即位，他入内阁——观察、学习、等待，已经二十年。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-03.jpg",
+      "imageCaption": "张居正入阁",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.18,
+      "year": 1572,
+      "place": "顺天",
+      "step": 2,
+      "keywords": [
+        "张居正首辅",
+        "万历帝"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1572 年。神宗万历帝十岁即位，他出任首辅，独掌国政——开始了为期十年的「万历新政」。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-04.jpg",
+      "imageCaption": "张居正首辅",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 43.72,
+      "year": 1573,
+      "place": "顺天",
+      "step": 3,
+      "keywords": [
+        "张居正考成法"
+      ],
+      "caption": "公元 1573 年。推行「考成法」——以考核整顿吏治。明代官员行政效率达到了前所未有的高度。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-05.jpg",
+      "imageCaption": "张居正考成法",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 52.42,
+      "year": 1578,
+      "place": "顺天",
+      "step": 4,
+      "keywords": [
+        "张居正清丈田亩"
+      ],
+      "caption": "公元 1578 年。下令清丈全国田亩——豪强大户隐瞒的土地被一一查出。这动了整个士绅阶层的奶酪。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-06.jpg",
+      "imageCaption": "张居正清丈田亩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 61.84,
+      "year": 1581,
+      "place": "顺天",
+      "step": 5,
+      "keywords": [
+        "一条鞭法",
+        "张居正"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1581 年。全国推行「一条鞭法」——把田赋、徭役、杂税合并按亩征银。这是中国税制史上最重要的一次改革。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-07.jpg",
+      "imageCaption": "一条鞭法",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.48,
+      "year": 1582,
+      "place": "顺天",
+      "step": 6,
+      "keywords": [
+        "张居正病逝",
+        "抄家"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1582 年，顺天。五十八岁的张居正积劳成疾病逝。万历帝亲政后，对他抄家——长子被逼自尽，全家饿死十余口。",
+      "image": "audio/narrations/images/zhang_juzheng/seg-08.jpg",
+      "imageCaption": "张居正病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 83.68,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他给大明续了七十年的命，却救不了自己。「宰相之杰」——这是后世对他的定评。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:42:37.190Z"
+}

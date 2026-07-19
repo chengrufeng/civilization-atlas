@@ -1,0 +1,140 @@
+{
+  "personId": "qi_ji_guang",
+  "atlasId": "ming",
+  "title": "戚继光 · 大明抗倭第一名将",
+  "subtitle": "约 2 分钟浓缩戚继光的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 81.18,
+  "audio": "audio/narrations/qi_ji_guang.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "戚继光",
+        "抗倭"
+      ],
+      "caption": "他组建戚家军，独创鸳鸯阵，十二年踏平东南倭患——他叫戚继光，大明抗倭第一名将。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-00.jpg",
+      "imageCaption": "戚继光",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.79,
+      "year": 1528,
+      "place": "蓬莱",
+      "step": null,
+      "keywords": [
+        "戚继光出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1528 年，山东蓬莱。一个将门世家降生了男孩戚继光——十七岁袭职登州卫指挥佥事。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-01.jpg",
+      "imageCaption": "戚继光出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.39,
+      "year": 1555,
+      "place": "浙江",
+      "step": 0,
+      "keywords": [
+        "戚继光浙江",
+        "抗倭"
+      ],
+      "caption": "公元 1555 年。调任浙江参将——面对凶悍的倭寇，他发现卫所兵不堪用，决心另练新军。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-02.jpg",
+      "imageCaption": "戚继光浙江",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 24.71,
+      "year": 1559,
+      "place": "义乌",
+      "step": 1,
+      "keywords": [
+        "戚家军",
+        "鸳鸯阵"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1559 年。他跑到义乌，招募了三千矿工和乡民——组建「戚家军」，独创「鸳鸯阵」。这支军队将创造一个神话。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-03.png",
+      "imageCaption": "戚家军",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 35.04,
+      "year": 1561,
+      "place": "台州",
+      "step": 2,
+      "keywords": [
+        "台州九战九捷",
+        "戚继光"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1561 年。台州九战九捷——歼倭数千，戚家军伤亡不到二十人。这是冷兵器时代最悬殊的伤亡比之一。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-04.jpg",
+      "imageCaption": "台州九战九捷",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.18,
+      "year": 1565,
+      "place": "福建",
+      "step": 3,
+      "keywords": [
+        "戚继光福建",
+        "平定倭患"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1565 年。与俞大猷联手，在福建广东彻底歼灭倭寇主力——祸害大明沿海两百年的倭患，就此平定。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-05.jpg",
+      "imageCaption": "戚继光福建",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.74,
+      "year": 1568,
+      "place": "蓟州",
+      "step": 4,
+      "keywords": [
+        "戚继光蓟州",
+        "长城"
+      ],
+      "caption": "公元 1568 年。北调镇守蓟州——修长城、练边兵，镇守北疆十六年，蒙古骑兵不敢南下。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-06.jpg",
+      "imageCaption": "戚继光蓟州",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 63.4,
+      "year": 1588,
+      "place": "蓬莱",
+      "step": 5,
+      "keywords": [
+        "戚继光病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1588 年。靠山张居正死后，他被弹劾罢官回乡，病逝故里——「三年三千里，报国心未已」。",
+      "image": "audio/narrations/images/qi_ji_guang/seg-07.png",
+      "imageCaption": "戚继光病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 72.24,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "南平倭寇、北镇蒙古——戚继光这一生，是大明最传奇的将军，也是「封侯非我意，但愿海波平」最好的注脚。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:43:21.305Z"
+}

@@ -1,0 +1,156 @@
+{
+  "personId": "ieyasu",
+  "atlasId": "japan",
+  "title": "德川家康 · 等了一辈子才赢的人",
+  "subtitle": "约 2 分 30 秒浓缩德川家康的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 98.76,
+  "audio": "audio/narrations/ieyasu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "德川家康",
+        "江户幕府"
+      ],
+      "caption": "「杜鹃不啼，就等到它啼为止。」他等了五十年——等死了信长、等死了秀吉，最终成为日本三百年太平的奠基人。",
+      "image": "audio/narrations/images/ieyasu/seg-00.jpg",
+      "imageCaption": "德川家康",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.06,
+      "year": 1543,
+      "place": "冈崎",
+      "step": null,
+      "keywords": [
+        "德川家康出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1543 年，三河冈崎城。松平广忠嫡子降生，名竹千代——他的人生从六岁开始就当人质，先后被织田、今川两家辗转挟持。",
+      "image": "audio/narrations/images/ieyasu/seg-01.png",
+      "imageCaption": "德川家康出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 21.17,
+      "year": 1560,
+      "place": "冈崎",
+      "step": 1,
+      "keywords": [
+        "德川家康独立",
+        "清洲同盟"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1560 年。桶狭间之战后今川家衰落，他独立回冈崎，与儿时玩伴织田信长结盟——这就是著名的「清洲同盟」，二十年不动摇。",
+      "image": "audio/narrations/images/ieyasu/seg-02.jpg",
+      "imageCaption": "德川家康独立",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 32.84,
+      "year": 1579,
+      "place": "滨松",
+      "step": 2,
+      "keywords": [
+        "德川家康滨松"
+      ],
+      "caption": "公元 1579 年。移居滨松城，开始经营远江——他做信长的盟友，但始终保留自己的实力，等待时机。",
+      "image": "audio/narrations/images/ieyasu/seg-03.jpg",
+      "imageCaption": "德川家康滨松",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 42,
+      "year": 1590,
+      "place": "江户",
+      "step": 3,
+      "keywords": [
+        "德川家康江户"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1590 年。丰臣秀吉统一天下后，把他转封到偏远的关东八州——他没反抗，默默经营江户。今日东京的雏形，就此埋下。",
+      "image": "https://www.oraclechn.com/uploads/allimg/200522/1-200522232310400.jpg",
+      "imageCaption": "德川家康江户",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 53.53,
+      "year": 1600,
+      "place": "关原",
+      "step": 4,
+      "keywords": [
+        "关原之战",
+        "德川家康"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1600 年。秀吉死后两年，他在关原决战——一天之内击败石田三成的西军，掌握天下实权。",
+      "image": "audio/narrations/images/ieyasu/seg-05.jpg",
+      "imageCaption": "关原之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.64,
+      "year": 1603,
+      "place": "江户",
+      "step": 5,
+      "keywords": [
+        "德川家康将军",
+        "江户幕府"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1603 年。天皇册封他为征夷大将军——江户幕府正式建立，开「二百六十五年太平」。",
+      "image": "audio/narrations/images/ieyasu/seg-06.jpg",
+      "imageCaption": "德川家康将军",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.81,
+      "year": 1614,
+      "place": "大阪",
+      "step": 6,
+      "keywords": [
+        "大阪冬夏阵",
+        "家康"
+      ],
+      "effect": "fire",
+      "caption": "公元 1614 年起。大阪冬阵、夏阵——他用一年多时间彻底消灭丰臣秀赖一族。日本战国，正式落幕。",
+      "image": "audio/narrations/images/ieyasu/seg-07.jpg",
+      "imageCaption": "大阪冬夏阵",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 80.62,
+      "year": 1616,
+      "place": "骏府",
+      "step": 7,
+      "keywords": [
+        "德川家康逝世",
+        "东照神君"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1616 年，骏府城。七十三岁的德川家康病逝——临终遗命：葬久能山，一年后移日光山，永镇关东八州。",
+      "image": "audio/narrations/images/ieyasu/seg-08.jpg",
+      "imageCaption": "德川家康逝世",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 90.9,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "杜鹃不啼，就等到它啼——他这一生，是「等」字的艺术。三百年太平，是给一个能等的人的礼物。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:46:42.958Z"
+}

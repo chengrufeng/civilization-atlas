@@ -1,0 +1,166 @@
+{
+  "personId": "darwin",
+  "atlasId": "enlightenment",
+  "title": "达尔文 · 一艘小船改变人类的世界观",
+  "subtitle": "约 2 分 30 秒浓缩达尔文的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 109.02,
+  "audio": "audio/narrations/darwin.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "达尔文",
+        "进化论"
+      ],
+      "caption": "他改变了人类对自身的认识——我们不再是上帝的造物，而是漫长演化的结果。Charles Darwin，达尔文。",
+      "image": "audio/narrations/images/darwin/seg-00.jpg",
+      "imageCaption": "达尔文",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.51,
+      "year": 1809,
+      "place": "什鲁斯伯里",
+      "step": null,
+      "keywords": [
+        "达尔文出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1809 年，英国什鲁斯伯里。一个富裕医生家庭降生了男孩查尔斯——父亲希望他继承家学当医生。",
+      "image": "audio/narrations/images/darwin/seg-01.jpg",
+      "imageCaption": "达尔文出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.86,
+      "year": 1825,
+      "place": "爱丁堡",
+      "step": 0,
+      "keywords": [
+        "达尔文爱丁堡"
+      ],
+      "caption": "公元 1825 年。十六岁的他进爱丁堡学医——但见血就晕。父亲又把他送去剑桥学神学，希望他当牧师。",
+      "image": "audio/narrations/images/darwin/seg-02.jpg",
+      "imageCaption": "达尔文爱丁堡",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.56,
+      "year": 1831,
+      "place": "剑桥",
+      "step": 1,
+      "keywords": [
+        "达尔文剑桥",
+        "贝格尔号"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1831 年。剑桥毕业，他收到一封改变命运的邀请——随贝格尔号军舰环球考察，担任博物学家。父亲反对，最后同意了。",
+      "image": "audio/narrations/images/darwin/seg-03.jpg",
+      "imageCaption": "达尔文剑桥",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39,
+      "year": 1831,
+      "place": "加拉帕戈斯",
+      "step": 2,
+      "keywords": [
+        "加拉帕戈斯",
+        "达尔文雀"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1835 年。在加拉帕戈斯群岛，他发现不同岛屿的雀鸟嘴形不同——这是进化论的第一个关键证据。但他还没敢说出那个词。",
+      "image": "audio/narrations/images/darwin/seg-04.jpg",
+      "imageCaption": "加拉帕戈斯",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.1,
+      "year": 1836,
+      "place": "伦敦",
+      "step": 3,
+      "keywords": [
+        "达尔文回伦敦"
+      ],
+      "caption": "公元 1836 年。五年环球航行归来——他带回了几万件标本。从此隐居伦敦郊外，开始了长达二十多年的反复推敲。",
+      "image": "audio/narrations/images/darwin/seg-05.jpg",
+      "imageCaption": "达尔文回伦敦",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 60.6,
+      "year": 1858,
+      "place": "伦敦",
+      "step": 4,
+      "keywords": [
+        "达尔文华莱士"
+      ],
+      "caption": "公元 1858 年。远在马来群岛的年轻学者华莱士寄来论文——和他二十年的想法完全一致。他决定不再拖延。",
+      "image": "audio/narrations/images/darwin/seg-06.jpg",
+      "imageCaption": "达尔文华莱士",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.16,
+      "year": 1859,
+      "place": "伦敦",
+      "step": 5,
+      "keywords": [
+        "物种起源",
+        "达尔文"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1859 年。《物种起源》出版——首印 1250 册当天售罄。「自然选择」从此成了科学史最重要的概念之一。",
+      "image": "audio/narrations/images/darwin/seg-07.png",
+      "imageCaption": "物种起源",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 80.3,
+      "year": 1871,
+      "place": "伦敦",
+      "step": 6,
+      "keywords": [
+        "人类的由来",
+        "达尔文"
+      ],
+      "caption": "公元 1871 年。出版《人类的由来》——公开宣称人类与猿猴有共同祖先。这次引爆的不只是科学界，而是整个基督教世界。",
+      "image": "audio/narrations/images/darwin/seg-08.jpg",
+      "imageCaption": "人类的由来",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 91.36,
+      "year": 1882,
+      "place": "伦敦",
+      "step": 7,
+      "keywords": [
+        "达尔文逝世",
+        "威斯敏斯特"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1882 年。达尔文病逝——葬于威斯敏斯特大教堂，紧邻牛顿。教会低头了，世界变了。",
+      "image": "audio/narrations/images/darwin/seg-09.png",
+      "imageCaption": "达尔文逝世",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 100.27,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「无数最美丽的、最奇异的生物，曾经并正在从如此简单的开端演化而来。」——这是他留给我们最壮丽的句子。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:44:54.214Z"
+}

@@ -19,6 +19,11 @@ const PLACES = [
   { id: 'tianjin', name: '天津', modern: '天津', coord: [117.20, 39.13], note: '北方通商口岸' },
   { id: 'weihai', name: '威海', modern: '山东威海', coord: [122.12, 37.51], note: '北洋水师基地' },
   { id: 'humen', name: '虎门', modern: '广东东莞', coord: [113.66, 22.82], note: '虎门销烟' },
+  { id: 'wuhan', name: '武汉', modern: '湖北武汉', coord: [114.31, 30.59], note: '湖广总督驻地' },
+  { id: 'hangzhou', name: '杭州', modern: '浙江杭州', coord: [120.16, 30.27], note: '林则徐初任杭嘉湖道' },
+  { id: 'yili', name: '伊犁', modern: '新疆伊犁', coord: [81.32, 43.91], note: '林则徐流放之地' },
+  { id: 'xian', name: '西安', modern: '陕西西安', coord: [108.95, 34.27], note: '林则徐起复之地' },
+  { id: 'chaozhou', name: '潮州', modern: '广东潮州', coord: [116.63, 23.68], note: '林则徐病逝之地' },
   { id: 'tianjing_city', name: '天京', modern: '江苏南京', coord: [118.79, 32.06], note: '太平天国都' },
   { id: 'changsha', name: '长沙', modern: '湖南长沙', coord: [112.94, 28.23], note: '湖南重镇' },
   { id: 'anqing', name: '安庆', modern: '安徽安庆', coord: [117.05, 30.53], note: '太平军重镇' },
@@ -33,7 +38,7 @@ const PLACES = [
 ];
 
 const PERSONS = [
-  { id: 'lin_ze_xu', name: '林则徐', courtesy: '元抚', alias: [], faction: 'qingmo', birth: 1785, death: 1850, birthPlace: '福州', title: '钦差大臣', roles: ['政治家','民族英雄'], avatar: '林', bio: '虎门销烟，开眼看世界第一人。', events: [ { year: 1839, place: '虎门', desc: '虎门销烟' }, { year: 1840, place: '广州', desc: '鸦片战争中遭贬' } ] },
+  { id: 'lin_ze_xu', name: '林则徐', courtesy: '元抚', alias: [], faction: 'qingmo', birth: 1785, death: 1850, birthPlace: '福州', title: '钦差大臣', roles: ['政治家','民族英雄'], avatar: '林', bio: '虎门销烟，开眼看世界第一人。', events: [ { year: 1811, place: '北京', desc: '二十六岁中进士入翰林' }, { year: 1820, place: '杭州', desc: '任杭嘉湖道，开始兴修水利' }, { year: 1838, place: '武汉', desc: '任湖广总督，禁烟卓有成效' }, { year: 1839, place: '虎门', desc: '钦差大臣赴粤，虎门销烟' }, { year: 1840, place: '广州', desc: '鸦片战争中遭投降派诬陷被贬' }, { year: 1841, place: '伊犁', desc: '流放伊犁，著《四洲志》' }, { year: 1845, place: '西安', desc: '起复陕甘总督' }, { year: 1850, place: '潮州', desc: '赴广西镇压太平军途中病逝' } ] },
   { id: 'hong_xiu_quan', name: '洪秀全', courtesy: '', alias: [], faction: 'taiping', birth: 1814, death: 1864, birthPlace: '花县', title: '天王', roles: ['太平天国领袖'], avatar: '洪', bio: '创立拜上帝会，发动太平天国运动。', events: [ { year: 1851, place: '金田', desc: '金田起义' }, { year: 1853, place: '天京', desc: '定都天京' }, { year: 1864, place: '天京', desc: '天京陷落前夕病逝' } ] },
   { id: 'zeng_guo_fan', name: '曾国藩', courtesy: '伯涵', alias: [], faction: 'qingmo', birth: 1811, death: 1872, birthPlace: '湘乡', title: '两江总督', roles: ['理学家','湘军统帅'], avatar: '曾', bio: '组建湘军镇压太平天国，洋务运动发起者之一。', events: [ { year: 1853, place: '长沙', desc: '组建湘军' }, { year: 1864, place: '天京', desc: '攻陷天京' } ] },
   { id: 'li_hong_zhang', name: '李鸿章', courtesy: '少荃', alias: [], faction: 'qingmo', birth: 1823, death: 1901, birthPlace: '合肥', title: '直隶总督', roles: ['洋务派首领'], avatar: '李', bio: '淮军创始人，主持洋务、北洋水师，签多项条约。', events: [ { year: 1872, place: '上海', desc: '轮船招商局成立' }, { year: 1895, place: '威海', desc: '马关议和' } ] },

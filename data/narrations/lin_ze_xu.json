@@ -1,0 +1,139 @@
+{
+  "personId": "lin_ze_xu",
+  "atlasId": "jinxiandai",
+  "title": "林则徐 · 开眼看世界的第一人",
+  "subtitle": "约 2 分钟浓缩林则徐的悲壮一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 95.51,
+  "audio": "audio/narrations/lin_ze_xu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "林则徐",
+        "虎门销烟"
+      ],
+      "caption": "「苟利国家生死以，岂因祸福避趋之。」他点燃了虎门销烟的大火，也点燃了近代中国的悲壮开端。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-00.jpg",
+      "imageCaption": "林则徐",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.03,
+      "year": 1785,
+      "place": "福州",
+      "step": null,
+      "keywords": [
+        "林则徐出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1785 年，福建福州。一个贫寒教书先生的家庭降生了男孩林则徐——传说他出生时，恰逢福建总督李国亮出巡。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-01.jpg",
+      "imageCaption": "林则徐出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.53,
+      "year": 1811,
+      "place": "北京",
+      "step": 0,
+      "keywords": [
+        "林则徐进士"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1811 年。二十六岁中进士，入翰林院——他是当时少有的「实干派」清流，治水、救灾、整顿盐政，样样拿得起。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-02.jpg",
+      "imageCaption": "林则徐进士",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.17,
+      "year": 1838,
+      "place": "武汉",
+      "step": 2,
+      "keywords": [
+        "林则徐湖广总督",
+        "禁烟"
+      ],
+      "caption": "公元 1838 年。任湖广总督，禁烟大见成效——「十户之邑，必有烟馆」。他向道光帝上书：鸦片再不禁，几十年后中国将无可用之兵、无可筹之饷。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-03.jpg",
+      "imageCaption": "林则徐湖广总督",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 42.65,
+      "year": 1839,
+      "place": "虎门",
+      "step": 3,
+      "keywords": [
+        "虎门销烟",
+        "林则徐"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1839 年。钦差大臣赴粤，强迫洋商交出鸦片二万二千箱。六月三日，虎门海滩当众销毁——大火整整烧了二十三天。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-04.jpg",
+      "imageCaption": "虎门销烟",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.3,
+      "year": 1840,
+      "place": "广州",
+      "step": 4,
+      "keywords": [
+        "林则徐被贬",
+        "鸦片战争"
+      ],
+      "effect": "fire",
+      "caption": "公元 1840 年。鸦片战争爆发，英舰北上。投降派诬陷他「启衅」——他被革职查办，发配伊犁赎罪。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-05.jpg",
+      "imageCaption": "林则徐被贬",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 63.65,
+      "year": 1841,
+      "place": "伊犁",
+      "step": 5,
+      "keywords": [
+        "林则徐流放",
+        "四洲志"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1841 年。流放伊犁途中，他写下「苟利国家生死以，岂因祸福避趋之」。在伊犁，他翻译西方报刊编成《四洲志》——中国人第一次系统地看世界。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-06.jpg",
+      "imageCaption": "林则徐流放",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 76.67,
+      "year": 1850,
+      "place": "潮州",
+      "step": 7,
+      "keywords": [
+        "林则徐病逝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1850 年，潮州。赴广西镇压太平军途中病逝，享年六十六。临终高呼「星斗南！」——「新豆栏」，广州洋行的街名。",
+      "image": "audio/narrations/images/lin_ze_xu/seg-07.jpg",
+      "imageCaption": "林则徐病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 87.86,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他是开眼看世界的第一人——虎门那把火，烧出了一个时代的开端。林则徐，民族英雄。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T04:44:15.021Z"
+}
