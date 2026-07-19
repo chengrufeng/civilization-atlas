@@ -1,0 +1,110 @@
+{
+  "personId": "lao_dan",
+  "atlasId": "chunqiu",
+  "title": "老子 · 五千言里的东方智慧",
+  "subtitle": "约 2 分钟浓缩道家始祖的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 68.36,
+  "audio": "audio/narrations/lao_dan.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "老子",
+        "道德经"
+      ],
+      "caption": "他比孔子大二十岁，骑一头青牛出关——留下的五千言，影响了中国人两千五百年。他叫老子。",
+      "image": "audio/narrations/images/lao_dan/seg-00.jpg",
+      "imageCaption": "老子",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.22,
+      "year": -571,
+      "place": "楚国",
+      "step": null,
+      "keywords": [
+        "老子出生",
+        "楚国"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 571 年，楚国苦县。一个男孩降生——姓李，名耳，字伯阳。后世称他老子，是尊称。",
+      "image": "audio/narrations/images/lao_dan/seg-01.jpg",
+      "imageCaption": "老子出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.69,
+      "year": -551,
+      "place": "洛邑",
+      "step": 0,
+      "keywords": [
+        "老子守藏室",
+        "周朝"
+      ],
+      "imageMode": "hero",
+      "caption": "他做了周朝的守藏室史——相当于今天的国家图书馆馆长。三十年的冷板凳，让他读遍了三皇五帝以来的所有典籍。",
+      "image": "audio/narrations/images/lao_dan/seg-02.jpg",
+      "imageCaption": "老子守藏室",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.04,
+      "year": -518,
+      "place": "洛邑",
+      "step": 1,
+      "keywords": [
+        "孔子问礼老子"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 518 年。年轻的孔子专程到洛邑向他问礼。回去后孔子对弟子说：「鸟会飞，鱼会游，兽会跑——唯龙，乘风云而上天。老子，其犹龙耶！」",
+      "image": "audio/narrations/images/lao_dan/seg-03.jpg",
+      "imageCaption": "孔子问礼老子",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 41.04,
+      "year": -516,
+      "place": "洛邑",
+      "step": 2,
+      "keywords": [
+        "老子出关"
+      ],
+      "caption": "公元前 516 年。周王室大乱，老子辞职，骑一头青牛西去——这是中国历史上最传奇的一次「离职」。",
+      "image": "audio/narrations/images/lao_dan/seg-04.jpg",
+      "imageCaption": "老子出关",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50,
+      "year": -516,
+      "place": "函谷关",
+      "step": 3,
+      "keywords": [
+        "道德经",
+        "函谷关"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "到了函谷关，关令尹喜拦住他：「您要隐居了，请为我留下一本书吧。」老子提笔——洋洋五千言，分上下两篇，名曰《道德经》。",
+      "image": "audio/narrations/images/lao_dan/seg-05.jpg",
+      "imageCaption": "道德经",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.9,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「道可道，非常道；名可名，非常名。」——他没留下生平，只留下了智慧。这，就是老子。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:13:23.560Z"
+}

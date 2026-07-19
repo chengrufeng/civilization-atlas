@@ -27,6 +27,11 @@ const PLACES = [
   { id: 'gaugamela', name: '高加米拉', modern: '伊拉克埃尔比勒', coord: [43.30, 36.35], note: '伊苏斯/高加米拉之战' },
   { id: 'pergamum', name: '帕加马', modern: '土耳其贝尔加马', coord: [27.18, 39.13], note: '希腊化王国' },
   { id: 'babylon_g', name: '巴比伦', modern: '伊拉克希拉', coord: [44.42, 32.54], note: '亚历山大逝处' },
+  { id: 'granicus', name: '格拉尼库斯', modern: '土耳其比加河', coord: [27.20, 40.40], note: '亚历山大东征首战' },
+  { id: 'issus', name: '伊苏斯', modern: '土耳其伊斯肯德伦', coord: [36.10, 36.84], note: '伊苏斯战役' },
+  { id: 'gaugamela', name: '高加米拉', modern: '伊拉克埃尔比勒', coord: [43.50, 36.30], note: '灭波斯之战' },
+  { id: 'hydaspes', name: '印度河', modern: '巴基斯坦杰赫勒姆', coord: [73.10, 32.80], note: '亚历山大远征印度' },
+  { id: 'susa', name: '苏萨', modern: '伊朗舒什', coord: [48.25, 32.20], note: '波斯古都，亚历山大东西方婚礼' },
 ];
 
 const PERSONS = [
@@ -42,7 +47,7 @@ const PERSONS = [
   { id: 'socrates', name: '苏格拉底', courtesy: '', alias: [], faction: 'athens', birth: -470, death: -399, birthPlace: '雅典', title: '哲学家', roles: ['西方哲学奠基者'], avatar: '苏', bio: '产婆术、精神助产士，被判处饮鸩。', events: [ { year: -399, place: '雅典', desc: '被判处饮鸩而死' } ] },
   { id: 'plato', name: '柏拉图', courtesy: '', alias: [], faction: 'athens', birth: -428, death: -348, birthPlace: '雅典', title: '哲学家', roles: ['学园创立者'], avatar: '柏', bio: '《理想国》，建立学园。', events: [ { year: -387, place: '雅典', desc: '建立雅典学园' } ] },
   { id: 'aristotle', name: '亚里士多德', courtesy: '', alias: [], faction: 'macedon', birth: -384, death: -322, birthPlace: '斯塔吉拉', title: '哲学家', roles: ['百科全书式学者'], avatar: '亚', bio: '亚历山大之师，集希腊学术之大成。', events: [ { year: -335, place: '雅典', desc: '建立吕克昂学园' } ] },
-  { id: 'alexander', name: '亚历山大大帝', courtesy: '', alias: [], faction: 'macedon', birth: -356, death: -323, birthPlace: '佩拉', title: '马其顿国王', roles: ['征服者'], avatar: '历', bio: '横扫欧亚非，建立亚历山大帝国。', events: [ { year: -334, place: '特洛伊', desc: '东征开始' }, { year: -331, place: '高加米拉', desc: '高加米拉之战灭波斯' }, { year: -323, place: '巴比伦', desc: '病逝于巴比伦' } ] },
+  { id: 'alexander', name: '亚历山大大帝', courtesy: '', alias: [], faction: 'macedon', birth: -356, death: -323, birthPlace: '佩拉', title: '马其顿国王', roles: ['征服者'], avatar: '历', bio: '横扫欧亚非，建立亚历山大帝国。', events: [ { year: -356, place: '佩拉', desc: '马其顿王子降生，亚里士多德为其师' }, { year: -336, place: '佩拉', desc: '父亲腓力二世遇刺，二十岁即位' }, { year: -334, place: '格拉尼库斯', desc: '格拉尼库斯河战役，开启东征' }, { year: -333, place: '伊苏斯', desc: '伊苏斯战役，大败波斯皇帝大流士三世' }, { year: -331, place: '高加米拉', desc: '高加米拉之战，灭波斯帝国' }, { year: -327, place: '印度河', desc: '远征印度，海达斯佩斯河战役' }, { year: -324, place: '苏萨', desc: '举行东西方联合婚礼，推行融合政策' }, { year: -323, place: '巴比伦', desc: '病逝于巴比伦，年三十三' } ] },
   { id: 'archimedes', name: '阿基米德', courtesy: '', alias: [], faction: 'sicily', birth: -287, death: -212, birthPlace: '叙拉古', title: '数学家·工程师', roles: ['古代科学家'], avatar: '阿', bio: '浮力定律、防御罗马围攻叙拉古。', events: [ { year: -212, place: '叙拉古', desc: '城破被罗马士兵所杀' } ] },
   { id: 'hippocrates', name: '希波克拉底', courtesy: '', alias: [], faction: 'ionia', birth: -460, death: -370, birthPlace: '科斯', title: '医生', roles: ['医学之父'], avatar: '希', bio: '希波克拉底誓言。', events: [ { year: -420, place: '科林斯', desc: '创立医学学派' } ] },
   { id: 'sappho', name: '萨福', courtesy: '', alias: ['Sappho'], faction: 'ionia', birth: -630, death: -570, birthPlace: '莱斯沃斯', title: '女诗人', roles: ['第十位缪斯'], avatar: '萨', bio: '古希腊最伟大的抒情诗人，柏拉图称她"第十位缪斯"。', events: [ { year: -600, place: '科林斯', desc: '在莱斯沃斯创办女子诗社' } ] },

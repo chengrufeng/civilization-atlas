@@ -1,0 +1,179 @@
+{
+  "personId": "newton",
+  "atlasId": "enlightenment",
+  "title": "牛顿 · 一个苹果砸出来的科学革命",
+  "subtitle": "约 2 分钟浓缩牛顿的传奇一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 128.11,
+  "audio": "audio/narrations/newton.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "牛顿"
+      ],
+      "caption": "「自然与自然的定律，隐藏在黑暗中——上帝说，让牛顿来！于是一切被照亮。」这是英国诗人蒲柏为他写的墓志铭。",
+      "image": "audio/narrations/images/newton/seg-00.jpg",
+      "imageCaption": "牛顿",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.88,
+      "year": 1643,
+      "place": "伍尔索普",
+      "step": null,
+      "keywords": [
+        "牛顿出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1643 年，英国林肯郡伍尔索普庄园。一个早产儿降生——瘦小到能放进马克杯。父亲早逝，母亲改嫁——他是被外婆带大的遗腹子。",
+      "image": "audio/narrations/images/newton/seg-01.jpg",
+      "imageCaption": "牛顿出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 22.01,
+      "year": 1661,
+      "place": "剑桥",
+      "step": 0,
+      "keywords": [
+        "牛顿剑桥",
+        "三一学院"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1661 年。十八岁的他进入剑桥三一学院——半工半读，做佣人抵学费。那时没人想到，这个农家少年将改变世界。",
+      "image": "audio/narrations/images/newton/seg-02.jpg",
+      "imageCaption": "牛顿剑桥",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.16,
+      "year": 1665,
+      "place": "伍尔索普",
+      "step": 1,
+      "keywords": [
+        "牛顿奇迹年",
+        "苹果"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1665 年。瘟疫爆发，他从剑桥返乡——这十八个月，被后世称为「奇迹年」。他在这段时间发明了微积分、发现了白光的组成、孕育了万有引力。",
+      "image": "audio/narrations/images/newton/seg-03.jpg",
+      "imageCaption": "牛顿奇迹年",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.22,
+      "year": 1666,
+      "place": "伍尔索普",
+      "step": 1,
+      "keywords": [
+        "牛顿苹果",
+        "万有引力"
+      ],
+      "imageMode": "hero",
+      "caption": "传说中——一个苹果从树上掉下来。他问：「为什么苹果总是垂直落地，而不是向上、向旁边？」——万有引力，就诞生在这个问题里。",
+      "image": "audio/narrations/images/newton/seg-04.jpg",
+      "imageCaption": "牛顿苹果",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.35,
+      "year": 1668,
+      "place": "剑桥",
+      "step": 2,
+      "keywords": [
+        "牛顿望远镜"
+      ],
+      "caption": "公元 1668 年。自制反射式望远镜——只有六英寸长，却能放大四十倍。这种望远镜至今仍被称作「牛顿式」。",
+      "image": "audio/narrations/images/newton/seg-05.jpg",
+      "imageCaption": "牛顿望远镜",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 67.27,
+      "year": 1687,
+      "place": "剑桥",
+      "step": 3,
+      "keywords": [
+        "自然哲学的数学原理",
+        "牛顿三大定律"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1687 年。在好友哈雷的资助下，他出版了《自然哲学的数学原理》——三大运动定律 + 万有引力，**奠定了经典力学**。这是科学史上最重要的著作之一。",
+      "image": "audio/narrations/images/newton/seg-06.jpg",
+      "imageCaption": "自然哲学的数学原理",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 81.88,
+      "year": 1696,
+      "place": "伦敦",
+      "step": 4,
+      "keywords": [
+        "牛顿铸币局"
+      ],
+      "caption": "公元 1696 年。他离开剑桥，出任皇家铸币局局长——亲自带队抓捕伪造货币的罪犯，把十个假币贩子送上了绞架。",
+      "image": "audio/narrations/images/newton/seg-07.jpg",
+      "imageCaption": "牛顿铸币局",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 92.23,
+      "year": 1703,
+      "place": "伦敦",
+      "step": 5,
+      "keywords": [
+        "牛顿皇家学会"
+      ],
+      "caption": "公元 1703 年。任英国皇家学会会长，连任二十四年——铁腕统治，让皇家学会成为欧洲最重要的科学机构。",
+      "image": "audio/narrations/images/newton/seg-08.jpg",
+      "imageCaption": "牛顿皇家学会",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 102.11,
+      "year": 1705,
+      "place": "伦敦",
+      "step": 6,
+      "keywords": [
+        "牛顿封爵"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1705 年。安妮女王册封他为爵士——这是英国历史上第一位因科学成就获封骑士的人。",
+      "image": "audio/narrations/images/newton/seg-09.jpg",
+      "imageCaption": "牛顿封爵",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 110.57,
+      "year": 1727,
+      "place": "伦敦",
+      "step": 7,
+      "keywords": [
+        "牛顿逝世",
+        "威斯敏斯特"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1727 年，伦敦。八十四岁的牛顿病逝——葬于威斯敏斯特大教堂，第一个获此殊荣的科学家。",
+      "image": "audio/narrations/images/newton/seg-10.jpg",
+      "imageCaption": "牛顿逝世",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 119.48,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "临终他说：「我只是一个在海滨玩耍的孩子，偶尔捡到一颗更光滑的卵石——真理的大海，我还一无所知。」"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:16:47.195Z"
+}

@@ -1,0 +1,124 @@
+{
+  "personId": "sun_wu",
+  "atlasId": "chunqiu",
+  "title": "孙武 · 兵圣与他的不战之书",
+  "subtitle": "约 2 分钟浓缩孙子的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 82.87,
+  "audio": "audio/narrations/sun_wu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "孙武",
+        "孙子兵法"
+      ],
+      "caption": "他写了一本书，两千五百年后还摆在各国军事学院的必读书单上。他是兵圣，孙武。",
+      "image": "audio/narrations/images/sun_wu/seg-00.png",
+      "imageCaption": "孙武",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.79,
+      "year": -545,
+      "place": "齐国",
+      "step": null,
+      "keywords": [
+        "孙武出生",
+        "齐国"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 545 年，齐国乐安。田氏家族的旁支孙氏，降生了一个男孩，名武。他是齐国田完后人，从小耳濡目染军国大事。",
+      "image": "audio/narrations/images/sun_wu/seg-01.png",
+      "imageCaption": "孙武出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.15,
+      "year": -532,
+      "place": "吴国",
+      "step": 0,
+      "keywords": [
+        "孙武奔吴"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 532 年。齐国发生内乱，他避祸奔吴——隐居三十年，边种地边研究战争。后人对他的认识，全部藏在这段隐居里。",
+      "image": "audio/narrations/images/sun_wu/seg-02.png",
+      "imageCaption": "孙武奔吴",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 30.42,
+      "year": -512,
+      "place": "吴国",
+      "step": 1,
+      "keywords": [
+        "孙武吴王",
+        "孙子兵法十三篇"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 512 年。经伍子胥七次推荐，他见到了吴王阖闾。献上兵法十三篇——开篇第一句：「兵者，国之大事，死生之地，存亡之道，不可不察也。」",
+      "image": "audio/narrations/images/sun_wu/seg-03.png",
+      "imageCaption": "孙武吴王",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 43.9,
+      "year": -512,
+      "place": "吴国",
+      "step": 1,
+      "keywords": [
+        "孙武练兵",
+        "斩美姬"
+      ],
+      "effect": "fire",
+      "caption": "吴王让他训练宫女。他三令五申，宫女仍笑——他下令斩两位吴王宠姬。从此吴军令行禁止。",
+      "image": "audio/narrations/images/sun_wu/seg-04.jpg",
+      "imageCaption": "孙武练兵",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 52.79,
+      "year": -506,
+      "place": "柏举",
+      "step": 2,
+      "keywords": [
+        "柏举之战",
+        "孙武破楚"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 506 年。柏举之战——孙武率三万吴军，深入楚国腹地，五战五胜，攻破楚都郢。这是中国军事史上的奇袭经典——以少胜多的教科书。",
+      "image": "audio/narrations/images/sun_wu/seg-05.png",
+      "imageCaption": "柏举之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 65.64,
+      "year": -482,
+      "place": "吴国",
+      "step": 3,
+      "keywords": [
+        "孙武隐退"
+      ],
+      "caption": "公元前 482 年前后，他从史书消失。吴王夫差骄奢，伍子胥被赐死——他选择隐退，不知所终。",
+      "image": "audio/narrations/images/sun_wu/seg-06.jpg",
+      "imageCaption": "孙武隐退",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 74.68,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "「不战而屈人之兵，善之善者也。」——他写的是战争，教的却是和平。这，就是兵圣孙武。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:13:52.461Z"
+}

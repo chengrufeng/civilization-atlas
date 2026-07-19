@@ -1,0 +1,184 @@
+{
+  "personId": "han_wu",
+  "atlasId": "qinhan",
+  "title": "汉武帝 · 中国版图的真正奠基者",
+  "subtitle": "约 2 分 30 秒浓缩汉武帝的雄才大略",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 120.55,
+  "audio": "audio/narrations/han_wu.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "汉武帝",
+        "刘彻"
+      ],
+      "caption": "罢黜百家、北伐匈奴、凿空西域——他在位五十四年，奠定了汉民族两千年的版图与精神底色。汉武帝刘彻。",
+      "image": "audio/narrations/images/han_wu/seg-00.jpg",
+      "imageCaption": "汉武帝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.56,
+      "year": -156,
+      "place": "长安",
+      "step": null,
+      "keywords": [
+        "汉武帝出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 156 年，长安。汉景帝之子降生——他是十皇子，本与皇位无缘，命运却把他推上了历史的舞台。",
+      "image": "audio/narrations/images/han_wu/seg-01.jpg",
+      "imageCaption": "汉武帝出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.2,
+      "year": -141,
+      "place": "长安",
+      "step": 0,
+      "keywords": [
+        "汉武帝即位"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 141 年。十六岁的刘彻即位，少年天子——他要面对的，是文景之治留下的富庶国库，和北边虎视眈眈的匈奴。",
+      "image": "audio/narrations/images/han_wu/seg-02.jpg",
+      "imageCaption": "汉武帝即位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.94,
+      "year": -134,
+      "place": "长安",
+      "step": 1,
+      "keywords": [
+        "罢黜百家独尊儒术",
+        "董仲舒"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 134 年。采纳董仲舒建议——「罢黜百家，独尊儒术」。从此儒学成了中华两千年的官方思想。",
+      "image": "audio/narrations/images/han_wu/seg-03.png",
+      "imageCaption": "罢黜百家独尊儒术",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.5,
+      "year": -127,
+      "place": "长安",
+      "step": 2,
+      "keywords": [
+        "推恩令",
+        "主父偃"
+      ],
+      "caption": "公元前 127 年。颁布「推恩令」——不费一兵一卒，让诸侯王的封地一代代越分越小。这是中国历史上最高明的削藩。",
+      "image": "audio/narrations/images/han_wu/seg-04.jpg",
+      "imageCaption": "推恩令",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.08,
+      "year": -126,
+      "place": "长安",
+      "step": 3,
+      "keywords": [
+        "张骞通西域",
+        "丝绸之路"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 126 年。张骞第一次出使西域归来——十三年九死一生，从此丝绸之路被打通，东西方文明第一次大规模握手。",
+      "image": "audio/narrations/images/han_wu/seg-05.jpg",
+      "imageCaption": "张骞通西域",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 60.72,
+      "year": -119,
+      "place": "漠北",
+      "step": 4,
+      "keywords": [
+        "漠北之战",
+        "卫青霍去病"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 119 年。漠北之战——卫青、霍去病各率五万骑兵深入大漠，封狼居胥。从此「匈奴远遁，而幕南无王庭」。",
+      "image": "audio/narrations/images/han_wu/seg-06.jpg",
+      "imageCaption": "漠北之战",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 71.68,
+      "year": -100,
+      "place": "北海",
+      "step": 5,
+      "keywords": [
+        "苏武牧羊",
+        "北海"
+      ],
+      "caption": "公元前 100 年。苏武出使匈奴被扣——他在北海（贝加尔湖）边牧羊十九年，持节不屈，成了汉民族气节的图腾。",
+      "image": "https://www.dpm.org.cn/Uploads/Picture/dc/51978[1024].jpg",
+      "imageCaption": "苏武牧羊",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 81.43,
+      "year": -91,
+      "place": "长安",
+      "step": 6,
+      "keywords": [
+        "巫蛊之祸",
+        "汉武帝"
+      ],
+      "effect": "fire",
+      "caption": "公元前 91 年。巫蛊之祸——他听信江充谗言，逼得太子刘据起兵自杀，皇后卫子夫自尽。这是他一生最大的悲剧。",
+      "image": "audio/narrations/images/han_wu/seg-08.jpg",
+      "imageCaption": "巫蛊之祸",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 92.03,
+      "year": -89,
+      "place": "长安",
+      "step": 7,
+      "keywords": [
+        "轮台罪己诏",
+        "汉武帝"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 89 年。下「轮台罪己诏」——「朕即位以来，所为狂悖，使天下愁苦，不可追悔。」这是中国历史上第一份皇帝罪己诏。",
+      "image": "audio/narrations/images/han_wu/seg-09.png",
+      "imageCaption": "轮台罪己诏",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 103.06,
+      "year": -87,
+      "place": "长安",
+      "step": 8,
+      "keywords": [
+        "汉武帝驾崩",
+        "霍光"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 87 年，长安。七十岁的汉武帝驾崩，托孤霍光。在位五十四年——他把汉朝推到了巅峰，也耗空了国库。",
+      "image": "audio/narrations/images/han_wu/seg-10.png",
+      "imageCaption": "汉武帝驾崩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 113.05,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "他这一生，雄才大略也好，穷兵黩武也罢——「汉」这个字，从他开始成了一个民族的名字。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:14:31.388Z"
+}

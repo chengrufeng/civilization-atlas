@@ -1,0 +1,153 @@
+{
+  "personId": "alexander",
+  "atlasId": "greece",
+  "title": "亚历山大 · 33 岁征服已知世界",
+  "subtitle": "约 2 分 30 秒浓缩亚历山大大帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 105.36,
+  "audio": "audio/narrations/alexander.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "亚历山大大帝"
+      ],
+      "caption": "二十岁继承王位，三十岁已经征服了从希腊到印度的已知世界。他叫亚历山大，西方历史最伟大的征服者。",
+      "image": "audio/narrations/images/alexander/seg-00.png",
+      "imageCaption": "亚历山大大帝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.32,
+      "year": -356,
+      "place": "佩拉",
+      "step": null,
+      "keywords": [
+        "亚历山大出生",
+        "亚里士多德"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 356 年，马其顿佩拉。国王腓力二世之子降生——他的老师，是亚里士多德。",
+      "image": "audio/narrations/images/alexander/seg-01.jpg",
+      "imageCaption": "亚历山大出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.3,
+      "year": -336,
+      "place": "佩拉",
+      "step": 0,
+      "keywords": [
+        "亚历山大即位"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 336 年。父亲腓力二世在女儿婚礼上遇刺身亡——二十岁的亚历山大被士兵举在盾牌上，宣布为王。",
+      "image": "audio/narrations/images/alexander/seg-02.jpg",
+      "imageCaption": "亚历山大即位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 27.18,
+      "year": -334,
+      "place": "格拉尼库斯",
+      "step": 1,
+      "keywords": [
+        "格拉尼库斯河战役"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 334 年。他率三万五千希腊联军东征波斯——格拉尼库斯河首战，亲自率骑兵冲锋，差点阵亡。",
+      "image": "audio/narrations/images/alexander/seg-03.png",
+      "imageCaption": "格拉尼库斯河战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.15,
+      "year": -333,
+      "place": "伊苏斯",
+      "step": 2,
+      "keywords": [
+        "伊苏斯战役",
+        "大流士三世"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 333 年。伊苏斯战役——他以四万兵力击败大流士三世亲自率领的十二万波斯大军，俘获波斯皇帝的妻女。",
+      "image": "audio/narrations/images/alexander/seg-04.jpg",
+      "imageCaption": "伊苏斯战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 47.68,
+      "year": -331,
+      "place": "高加米拉",
+      "step": 3,
+      "keywords": [
+        "高加米拉战役"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元前 331 年。高加米拉——又一次以少胜多，击败波斯主力。大流士三世东逃被部下刺杀——延续两百年的波斯帝国就此灭亡。",
+      "image": "audio/narrations/images/alexander/seg-05.jpg",
+      "imageCaption": "高加米拉战役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.52,
+      "year": -327,
+      "place": "印度河",
+      "step": 4,
+      "keywords": [
+        "亚历山大远征印度"
+      ],
+      "effect": "fire",
+      "caption": "公元前 327 年。他率军越过兴都库什山，进入印度——海达斯佩斯河战役击败印度国王波鲁斯。这是他军事生涯的最后一战。",
+      "image": "audio/narrations/images/alexander/seg-06.jpg",
+      "imageCaption": "亚历山大远征印度",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 70.98,
+      "year": -324,
+      "place": "苏萨",
+      "step": 5,
+      "keywords": [
+        "亚历山大东西方婚礼"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元前 324 年。他在苏萨举行「东西方联合婚礼」——自己和八十名将领同时迎娶波斯女子，强迫一万名士兵娶亚洲妻子。他梦想建立一个欧亚融合的帝国。",
+      "image": "audio/narrations/images/alexander/seg-07.jpg",
+      "imageCaption": "亚历山大东西方婚礼",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.74,
+      "year": -323,
+      "place": "巴比伦",
+      "step": 6,
+      "keywords": [
+        "亚历山大之死"
+      ],
+      "imageMode": "hero",
+      "caption": "公元前 323 年，巴比伦。三十三岁的亚历山大突然病倒，十天后离世。临终部下问：「帝国留给谁？」他答：「留给最强者。」",
+      "image": "audio/narrations/images/alexander/seg-08.jpg",
+      "imageCaption": "亚历山大之死",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 96.28,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "三十三年，征服了一个时代——他的帝国分裂了，但他把希腊文明播撒到了整个近东。这，就是亚历山大。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:16:04.636Z"
+}

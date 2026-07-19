@@ -1,0 +1,155 @@
+{
+  "personId": "zhu_di",
+  "atlasId": "ming",
+  "title": "朱棣 · 大明最强雄主的天子守国门",
+  "subtitle": "约 2 分 30 秒浓缩永乐大帝的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 103.03,
+  "audio": "audio/narrations/zhu_di.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "朱棣",
+        "明成祖",
+        "永乐"
+      ],
+      "caption": "天子守国门，君王死社稷——他从侄子手里抢来皇位，却把大明推到了最强盛的时代。永乐大帝，朱棣。",
+      "image": "https://img.dpm.org.cn/Uploads/Picture/dc/1468[1024].jpg",
+      "imageCaption": "朱棣",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 9.32,
+      "year": 1360,
+      "place": "应天",
+      "step": null,
+      "keywords": [
+        "朱棣出生"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1360 年，应天。朱元璋第四子降生——那时朱元璋还在打仗，连给儿子起名的时间都没有。",
+      "image": "https://img.dpm.org.cn/Uploads/Picture/dc/1468[1024].jpg",
+      "imageCaption": "朱棣出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 18.05,
+      "year": 1370,
+      "place": "应天",
+      "step": null,
+      "keywords": [
+        "朱棣燕王"
+      ],
+      "caption": "公元 1370 年。十岁的朱棣被封为燕王，封地北平——也就是今天的北京。从此他守着大明最苦寒的北疆，与蒙古人交手二十年。",
+      "image": "audio/narrations/images/zhu_di/seg-02.jpg",
+      "imageCaption": "朱棣燕王",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.82,
+      "year": 1402,
+      "place": "应天",
+      "step": 0,
+      "keywords": [
+        "靖难之役",
+        "朱棣"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1402 年。建文帝削藩，他装疯装病三年后起兵「靖难」——四年血战，攻入南京，从侄子手中夺得皇位，年号永乐。",
+      "image": "audio/narrations/images/zhu_di/seg-03.jpg",
+      "imageCaption": "靖难之役",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 40.8,
+      "year": 1405,
+      "place": "刘家港",
+      "step": 1,
+      "keywords": [
+        "郑和下西洋",
+        "朱棣"
+      ],
+      "imageMode": "hero",
+      "effect": "blossom",
+      "caption": "公元 1405 年。他做了一个震惊世界的决定——派郑和下西洋。二百艘宝船、两万七千人，七下西洋，最远抵达东非。",
+      "image": "audio/narrations/images/zhu_di/seg-04.jpg",
+      "imageCaption": "郑和下西洋",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 51.47,
+      "year": 1407,
+      "place": "应天",
+      "step": 2,
+      "keywords": [
+        "永乐大典"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1407 年。《永乐大典》编成——两万两千卷，三亿七千万字，是中国古代最大的百科全书。他说：「天下古今事物，散载诸书，朕欲成一统。」",
+      "image": "audio/narrations/images/zhu_di/seg-05.webp",
+      "imageCaption": "永乐大典",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 64.49,
+      "year": 1410,
+      "place": "漠北",
+      "step": 3,
+      "keywords": [
+        "朱棣亲征漠北"
+      ],
+      "effect": "fire",
+      "caption": "公元 1410 年起。他五次亲征漠北——皇帝亲自跨马冲锋，中国历史上仅此一例。漠南无王庭，蒙古各部闻之胆寒。",
+      "image": "audio/narrations/images/zhu_di/seg-06.jpg",
+      "imageCaption": "朱棣亲征漠北",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 75.25,
+      "year": 1421,
+      "place": "顺天",
+      "step": 4,
+      "keywords": [
+        "朱棣迁都北京",
+        "紫禁城"
+      ],
+      "imageMode": "hero",
+      "effect": "fire",
+      "caption": "公元 1421 年。迁都北京，紫禁城建成——「天子守国门」，从此北京成为中国的政治中心，至今六百年。",
+      "image": "audio/narrations/images/zhu_di/seg-07.jpg",
+      "imageCaption": "朱棣迁都北京",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 84.77,
+      "year": 1424,
+      "place": "榆木川",
+      "step": 5,
+      "keywords": [
+        "朱棣驾崩",
+        "榆木川"
+      ],
+      "imageMode": "hero",
+      "caption": "公元 1424 年，第五次北征归途——他病逝于榆木川，年六十五。临终留下遗诏：丧礼从简，不许后宫殉葬（除少数妃嫔）。",
+      "image": "audio/narrations/images/zhu_di/seg-08.jpg",
+      "imageCaption": "朱棣驾崩",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 95.72,
+      "year": null,
+      "place": null,
+      "step": null,
+      "caption": "雄猜之主，开创盛世——朱棣这一生，是中国历史上最有争议也最伟大的皇帝之一。"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T03:15:21.875Z"
+}

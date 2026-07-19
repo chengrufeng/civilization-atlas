@@ -27,6 +27,7 @@ const PLACES = [
   { id: 'getty', name: '葛底斯堡', modern: '美国葛底斯堡', coord: [-77.23, 39.83], note: '南北战争转折' },
   { id: 'princeton', name: '普林斯顿', modern: '美国普林斯顿', coord: [-74.66, 40.35], note: '高等研究院' },
   { id: 'cambridge', name: '剑桥', modern: '英国剑桥', coord: [0.12, 52.21], note: '牛顿执教' },
+  { id: 'woolsthorpe', name: '伍尔索普', modern: '英国林肯郡', coord: [-0.64, 52.80], note: '牛顿故乡，"奇迹年"所在地' },
   { id: 'glasgow', name: '格拉斯哥', modern: '英国格拉斯哥', coord: [-4.25, 55.86], note: '瓦特工作处' },
   { id: 'menlopark', name: '门洛帕克', modern: '美国门洛帕克', coord: [-122.18, 37.45], note: '爱迪生实验室' },
   { id: 'geneva_e', name: '日内瓦', modern: '瑞士日内瓦', coord: [6.14, 46.20], note: '伏尔泰/孟德斯鸠居地' },
@@ -36,7 +37,7 @@ const PLACES = [
 const PERSONS = [
   { id: 'bacon', name: '培根', courtesy: '', alias: ['弗朗西斯·培根'], faction: 'science', birth: 1561, death: 1626, birthPlace: '伦敦', title: '哲学家', roles: ['经验主义'], avatar: '培', bio: '知识就是力量，归纳法奠基。', events: [ { year: 1620, place: '伦敦', desc: '出版新工具论' } ] },
   { id: 'descartes', name: '笛卡尔', courtesy: '', alias: [], faction: 'science', birth: 1596, death: 1650, birthPlace: '拉海', title: '哲学家·数学家', roles: ['理性主义之父'], avatar: '笛', bio: '我思故我在、解析几何。', events: [ { year: 1637, place: '巴黎', desc: '出版方法谈' } ] },
-  { id: 'newton', name: '牛顿', courtesy: '', alias: [], faction: 'britain', birth: 1643, death: 1727, birthPlace: '伍尔索普', title: '物理学家', roles: ['经典力学奠基'], avatar: '牛', bio: '万有引力、三大定律、微积分。', events: [ { year: 1687, place: '剑桥', desc: '出版自然哲学的数学原理' } ] },
+  { id: 'newton', name: '牛顿', courtesy: '', alias: [], faction: 'britain', birth: 1643, death: 1727, birthPlace: '伍尔索普', title: '物理学家', roles: ['经典力学奠基'], avatar: '牛', bio: '万有引力、三大定律、微积分。', events: [ { year: 1661, place: '剑桥', desc: '进入剑桥三一学院' }, { year: 1665, place: '伍尔索普', desc: '瘟疫返乡，"奇迹年"：发现微积分、白光分解、万有引力雏形' }, { year: 1668, place: '剑桥', desc: '自制反射式望远镜' }, { year: 1687, place: '剑桥', desc: '出版《自然哲学的数学原理》，奠定经典力学' }, { year: 1696, place: '伦敦', desc: '出任皇家铸币局局长，整顿英镑' }, { year: 1703, place: '伦敦', desc: '任英国皇家学会会长，次年出版《光学》' }, { year: 1705, place: '伦敦', desc: '被安妮女王封爵，首位获封科学家' }, { year: 1727, place: '伦敦', desc: '病逝，葬于威斯敏斯特大教堂' } ] },
   { id: 'locke', name: '洛克', courtesy: '', alias: [], faction: 'britain', birth: 1632, death: 1704, birthPlace: '灵顿', title: '哲学家', roles: ['经验主义','自由主义'], avatar: '洛', bio: '《政府论》社会契约、天赋人权。', events: [ { year: 1689, place: '伦敦', desc: '出版政府论' } ] },
   { id: 'voltaire', name: '伏尔泰', courtesy: '', alias: ['弗朗索瓦-马里·阿鲁埃'], faction: 'france', birth: 1694, death: 1778, birthPlace: '巴黎', title: '思想家', roles: ['启蒙运动领袖'], avatar: '伏', bio: '理性、宽容、反对教会专制。', events: [ { year: 1759, place: '日内瓦', desc: '出版老实人' } ] },
   { id: 'rousseau', name: '卢梭', courtesy: '', alias: [], faction: 'france', birth: 1712, death: 1778, birthPlace: '日内瓦', title: '哲学家', roles: ['社会契约论'], avatar: '卢', bio: '《社会契约论》《爱弥儿》。', events: [ { year: 1762, place: '巴黎', desc: '出版社会契约论' } ] },

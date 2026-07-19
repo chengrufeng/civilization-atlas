@@ -11,6 +11,9 @@ const FACTIONS = [
 
 const PLACES = [
   { id: 'yingtian', name: '应天', modern: '江苏南京', coord: [118.79, 32.06], note: '明初都城' },
+  { id: 'liujiagang', name: '刘家港', modern: '江苏太仓', coord: [121.10, 31.45], note: '郑和下西洋起锚地' },
+  { id: 'mobei_ming', name: '漠北', modern: '蒙古高原', coord: [105.0, 47.0], note: '永乐帝五征漠北' },
+  { id: 'yumuchuan', name: '榆木川', modern: '内蒙古多伦', coord: [116.40, 42.20], note: '永乐帝病逝之地' },
   { id: 'shuntian', name: '顺天', modern: '北京', coord: [116.40, 39.90], note: '明都（1421迁）' },
   { id: 'fengyang', name: '凤阳', modern: '安徽凤阳', coord: [117.56, 32.86], note: '朱元璋故里' },
   { id: 'jingjiang', name: '北平', modern: '北京', coord: [116.40, 39.90], note: '朱龙兴之地' },
@@ -37,7 +40,7 @@ const PLACES = [
 
 const PERSONS = [
   { id: 'zhu_yuan_zhang', name: '朱元璋', courtesy: '国瑞', alias: ['明太祖'], faction: 'ming', birth: 1328, death: 1398, birthPlace: '凤阳', title: '明太祖', roles: ['明朝建立者'], avatar: '朱', bio: '放牛娃、和尚出身，驱逐元廷开创大明。', events: [ { year: 1344, place: '凤阳', desc: '父母双亡，入皇觉寺为僧' }, { year: 1352, place: '濠州', desc: '投奔郭子兴，加入红巾军' }, { year: 1360, place: '应天', desc: '采纳刘伯温，以应天为基' }, { year: 1363, place: '鄱阳湖', desc: '鄱阳湖之战，灭陈友谅' }, { year: 1368, place: '应天', desc: '称帝建明，徐达北伐' }, { year: 1380, place: '应天', desc: '废丞相，集权一身' }, { year: 1398, place: '应天', desc: '病逝，享年七十' } ] },
-  { id: 'zhu_di', name: '朱棣', courtesy: '', alias: ['明成祖','永乐帝'], faction: 'ming', birth: 1360, death: 1424, birthPlace: '应天', title: '明成祖', roles: ['雄主'], avatar: '棣', bio: '靖难夺位，迁都北京、五征漠北、修《永乐大典》。', events: [ { year: 1402, place: '应天', desc: '靖难之役入京即位' }, { year: 1421, place: '顺天', desc: '迁都北京' } ] },
+  { id: 'zhu_di', name: '朱棣', courtesy: '', alias: ['明成祖','永乐帝'], faction: 'ming', birth: 1360, death: 1424, birthPlace: '应天', title: '明成祖', roles: ['雄主'], avatar: '棣', bio: '靖难夺位，迁都北京、五征漠北、修《永乐大典》。', events: [ { year: 1402, place: '应天', desc: '靖难之役入京即位，年号永乐' }, { year: 1405, place: '刘家港', desc: '郑和首次下西洋' }, { year: 1407, place: '应天', desc: '《永乐大典》编成' }, { year: 1410, place: '漠北', desc: '一征漠北，亲率大军破鞑靼' }, { year: 1421, place: '顺天', desc: '迁都北京，建紫禁城' }, { year: 1424, place: '榆木川', desc: '五征漠北归途病逝' } ] },
   { id: 'liu_bowen', name: '刘伯温', courtesy: '伯温', alias: ['刘基'], faction: 'ming', birth: 1311, death: 1375, birthPlace: '青田', title: '诚意伯', roles: ['谋臣','文学家'], avatar: '刘', bio: '佐朱元璋定天下，谋略可比诸葛。', events: [ { year: 1360, place: '应天', desc: '应召入朱元璋幕' } ] },
   { id: 'xu_da', name: '徐达', courtesy: '天德', alias: [], faction: 'ming', birth: 1332, death: 1385, birthPlace: '凤阳', title: '魏国公', roles: ['开国第一将'], avatar: '徐', bio: '北伐灭元，平定天下。', events: [ { year: 1368, place: '顺天', desc: '攻克大都，元亡' } ] },
   { id: 'zheng_he', name: '郑和', courtesy: '三保', alias: ['马三保'], faction: 'ming', birth: 1371, death: 1433, birthPlace: '云南', title: '太监·航海家', roles: ['航海家','外交家'], avatar: '郑', bio: '七下西洋，远涉非洲，宣示国威。', events: [ { year: 1405, place: '漳州', desc: '首次下西洋' }, { year: 1433, place: '漳州', desc: '第七次下西洋归途中逝' } ] },
