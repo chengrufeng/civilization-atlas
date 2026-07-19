@@ -1,0 +1,121 @@
+{
+  "personId": "shakespeare",
+  "atlasId": "renaissance",
+  "title": "莎士比亚 · 人类的镜子",
+  "subtitle": "约 2 分钟看完戏剧之王的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 65.14,
+  "audio": "audio/narrations/shakespeare.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "莎士比亚",
+        "剧作家"
+      ],
+      "caption": "他写下三千多个角色，每一个都是我们自己。威廉·莎士比亚。",
+      "image": "audio/narrations/images/shakespeare/seg-00.jpg",
+      "imageCaption": "莎士比亚",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 5.89,
+      "year": 1564,
+      "place": "斯特拉福德",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1564年，英国小镇斯特拉福德。手套商的儿子莎士比亚出生，小学没毕业，却注定要重塑英语。",
+      "image": "audio/narrations/images/shakespeare/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 15.02,
+      "year": 1582,
+      "place": "斯特拉福德",
+      "step": 1,
+      "keywords": [
+        "早婚"
+      ],
+      "caption": "18岁，他与大他八岁的安妮·哈瑟维匆匆结婚。三个孩子之后，他消失在历史里整整七年。",
+      "image": "audio/narrations/images/shakespeare/seg-02.jpg",
+      "imageCaption": "早婚",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 23.77,
+      "year": 1590,
+      "place": "伦敦",
+      "step": 2,
+      "keywords": [
+        "赴伦敦"
+      ],
+      "caption": "约1590年，他只身闯荡伦敦。从给观众看马、跑龙套开始，一步步写成驻团编剧。",
+      "image": "audio/narrations/images/shakespeare/seg-03.jpg",
+      "imageCaption": "赴伦敦",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 31.51,
+      "year": 1595,
+      "place": "伦敦",
+      "step": 3,
+      "keywords": [
+        "罗密欧与朱丽叶"
+      ],
+      "caption": "1595年，《罗密欧与朱丽叶》《仲夏夜之梦》问世。爱情与诗意，让整个伦敦为之疯狂。",
+      "image": "audio/narrations/images/shakespeare/seg-04.png",
+      "imageCaption": "罗密欧与朱丽叶",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.37,
+      "year": 1599,
+      "place": "伦敦",
+      "step": 4,
+      "keywords": [
+        "环球剧场"
+      ],
+      "caption": "1599年，环球剧场建成。他是股东，也是主剧作家。《哈姆雷特》《奥赛罗》《李尔王》《麦克白》——四大悲剧接连诞生。",
+      "image": "audio/narrations/images/shakespeare/seg-05.jpg",
+      "imageCaption": "环球剧场",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 49.78,
+      "year": 1616,
+      "place": "斯特拉福德",
+      "step": 6,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "晚年他回到故乡，1616年病逝。墓碑上刻着他留下的诅咒：'移我骨者，必遭天谴。'",
+      "image": "audio/narrations/images/shakespeare/seg-06.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.68,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：人类的所有故事，都已经被一个人写完了。剩下的，只是怎样把它演好。",
+      "image": "audio/narrations/images/shakespeare/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:06:27.190Z"
+}

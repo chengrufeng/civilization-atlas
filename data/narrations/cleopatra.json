@@ -1,0 +1,122 @@
+{
+  "personId": "cleopatra",
+  "atlasId": "egypt",
+  "title": "克利奥帕特拉 · 末代法老的赌局",
+  "subtitle": "约 2 分钟看完埃及艳后的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 79.32,
+  "audio": "audio/narrations/cleopatra.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "克利奥帕特拉",
+        "埃及艳后"
+      ],
+      "caption": "她用美貌、智慧和权谋，把一个垂死的王朝，多续了二十年。埃及最后的法老——克利奥帕特拉七世。",
+      "image": "audio/narrations/images/cleopatra/seg-00.jpg",
+      "imageCaption": "克利奥帕特拉",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 8.65,
+      "year": -69,
+      "place": "亚历山大",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "公元前69年，亚历山大城。希腊裔的托勒密王朝公主出生。她是埃及的王，却精通九种语言，是史上第一位真正会说埃及语的法老。",
+      "image": "audio/narrations/images/cleopatra/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 20.47,
+      "year": -51,
+      "place": "亚历山大",
+      "step": 1,
+      "keywords": [
+        "继位"
+      ],
+      "caption": "公元前51年，18岁的她和弟弟共治埃及。宫廷阴谋很快将她驱逐，她在沙漠中寻找翻盘的机会。",
+      "image": "audio/narrations/images/cleopatra/seg-02.png",
+      "imageCaption": "继位",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 29.87,
+      "year": -48,
+      "place": "亚历山大",
+      "step": 2,
+      "keywords": [
+        "献给凯撒"
+      ],
+      "caption": "公元前48年，凯撒追击政敌来到埃及。她裹在地毯里被抬进凯撒的寝宫——这一夜，改变了她的命运。",
+      "image": "audio/narrations/images/cleopatra/seg-03.jpg",
+      "imageCaption": "献给凯撒",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 39.29,
+      "year": -41,
+      "place": "塔尔苏斯",
+      "step": 4,
+      "keywords": [
+        "安东尼"
+      ],
+      "caption": "凯撒遇刺后，她乘着金船驶向塔尔苏斯，征服了罗马东方统帅马克·安东尼。一场盛大的恋爱，也是一场政治豪赌。",
+      "image": "audio/narrations/images/cleopatra/seg-04.jpg",
+      "imageCaption": "安东尼",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 49.69,
+      "year": -31,
+      "place": "阿克提乌姆",
+      "step": 5,
+      "keywords": [
+        "亚克兴海战"
+      ],
+      "caption": "公元前31年，亚克兴海战。屋大维的舰队击败安东尼，她下令埃及舰队撤退。一切，已经无法挽回。",
+      "image": "audio/narrations/images/cleopatra/seg-05.jpg",
+      "imageCaption": "亚克兴海战",
+      "effect": "fire",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 59.5,
+      "year": -30,
+      "place": "亚历山大",
+      "step": 6,
+      "keywords": [
+        "自杀"
+      ],
+      "caption": "公元前30年，屋大维兵临亚历山大。安东尼伏剑自尽，克利奥帕特拉让毒蛇噬胸，与王朝一同落幕。埃及，从此成为罗马的一个行省。",
+      "image": "audio/narrations/images/cleopatra/seg-06.png",
+      "imageCaption": "自杀",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 71.77,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "她告诉我们：在男人的世界里，女人最大的武器，从来不是美貌，而是她能读懂对方的渴望。",
+      "image": "audio/narrations/images/cleopatra/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:07:11.879Z"
+}

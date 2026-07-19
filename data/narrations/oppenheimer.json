@@ -1,0 +1,122 @@
+{
+  "personId": "oppenheimer",
+  "atlasId": "modern_world",
+  "title": "奥本海默 · 我成了死神",
+  "subtitle": "约 2 分钟看完原子弹之父的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 65.59,
+  "audio": "audio/narrations/oppenheimer.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "奥本海默",
+        "原子弹之父"
+      ],
+      "caption": "他打开了潘多拉的魔盒，又用一生去忏悔。原子弹之父——罗伯特·奥本海默。",
+      "image": "audio/narrations/images/oppenheimer/seg-00.jpg",
+      "imageCaption": "奥本海默",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 6.97,
+      "year": 1904,
+      "place": "纽约",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1904年，纽约。一个富裕的德裔犹太家庭，少年奥本海默在显微镜与诗歌间长大，被誉为全才。",
+      "image": "audio/narrations/images/oppenheimer/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.1,
+      "year": 1929,
+      "place": "伯克利",
+      "step": 1,
+      "keywords": [
+        "伯克利教授"
+      ],
+      "caption": "1929年，25岁的他成了加州伯克利教授，一手把美国量子力学带到世界前沿。",
+      "image": "audio/narrations/images/oppenheimer/seg-02.png",
+      "imageCaption": "伯克利教授",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 23.82,
+      "year": 1942,
+      "place": "伯克利",
+      "step": 2,
+      "keywords": [
+        "曼哈顿计划"
+      ],
+      "caption": "1942年，二战正酣。他被任命为曼哈顿计划科学主管，要在纳粹之前造出原子弹。",
+      "image": "audio/narrations/images/oppenheimer/seg-03.png",
+      "imageCaption": "曼哈顿计划",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 31.85,
+      "year": 1943,
+      "place": "洛斯阿拉莫斯",
+      "step": 3,
+      "keywords": [
+        "洛斯阿拉莫斯"
+      ],
+      "caption": "在新墨西哥的荒漠，他建起绝密实验室洛斯阿拉莫斯，汇集了当时最聪明的头脑。",
+      "image": "audio/narrations/images/oppenheimer/seg-04.jpg",
+      "imageCaption": "洛斯阿拉莫斯",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 38.99,
+      "year": 1945,
+      "place": "三位一体核试场",
+      "step": 4,
+      "keywords": [
+        "三位一体核试"
+      ],
+      "caption": "1945年7月16日清晨，人类第一颗原子弹爆炸。他望着蘑菇云，默念《薄伽梵歌》：'我成了死神，世界的毁灭者。'",
+      "image": "audio/narrations/images/oppenheimer/seg-05.jpg",
+      "imageCaption": "三位一体核试",
+      "effect": "fire",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 49.06,
+      "year": 1954,
+      "place": "华盛顿",
+      "step": 5,
+      "keywords": [
+        "安全许可"
+      ],
+      "caption": "战后他呼吁控制核武器，却在麦卡锡风潮中被吊销安全许可。忠诚，敌不过时代的恐惧。",
+      "image": "audio/narrations/images/oppenheimer/seg-06.jpg",
+      "imageCaption": "安全许可",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.28,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：科学没有善恶，但人有。每一次推开世界的大门，都要问自己——我，能不能承受。",
+      "image": "audio/narrations/images/oppenheimer/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:05:18.532Z"
+}

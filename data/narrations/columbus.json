@@ -1,0 +1,121 @@
+{
+  "personId": "columbus",
+  "atlasId": "renaissance",
+  "title": "哥伦布 · 改变世界的误航",
+  "subtitle": "约 2 分钟看完发现新大陆的航海家",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 66.67,
+  "audio": "audio/narrations/columbus.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "哥伦布",
+        "发现新大陆"
+      ],
+      "caption": "他至死都以为自己到了印度，却意外把两个世界连在了一起。克里斯托弗·哥伦布。",
+      "image": "audio/narrations/images/columbus/seg-00.jpg",
+      "imageCaption": "哥伦布",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.62,
+      "year": 1451,
+      "place": "热那亚",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1451年，意大利热那亚。纺织工的儿子哥伦布自小闻着海风长大，梦想驶向东方的香料之地。",
+      "image": "audio/narrations/images/columbus/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 16.18,
+      "year": 1485,
+      "place": "里斯本",
+      "step": 1,
+      "keywords": [
+        "求赞助失败"
+      ],
+      "caption": "他相信地球是圆的，向西走也能到印度。葡萄牙国王拒绝了他，他转投西班牙。",
+      "image": "audio/narrations/images/columbus/seg-02.jpg",
+      "imageCaption": "求赞助失败",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 23.56,
+      "year": 1492,
+      "place": "帕洛斯港",
+      "step": 2,
+      "keywords": [
+        "起航"
+      ],
+      "caption": "1492年8月3日，伊莎贝拉女王点头。三艘小船——圣玛利亚号、平塔号、尼尼亚号，从帕洛斯港扬帆起航。",
+      "image": "audio/narrations/images/columbus/seg-00.jpg",
+      "imageCaption": "起航",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 33.55,
+      "year": 1492,
+      "place": "圣萨尔瓦多岛",
+      "step": 3,
+      "keywords": [
+        "发现新大陆"
+      ],
+      "caption": "10月12日凌晨，'陆地！'的喊声划破黑暗。他踏上巴哈马的圣萨尔瓦多岛，把这片土地叫做'西印度'。",
+      "image": "audio/narrations/images/columbus/seg-04.jpg",
+      "imageCaption": "发现新大陆",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 42.54,
+      "year": 1493,
+      "place": "伊斯帕尼奥拉",
+      "step": 4,
+      "keywords": [
+        "殖民"
+      ],
+      "caption": "他三次回航，建立殖民地、寻找黄金。两个文明的相遇，也是美洲原住民苦难的开始。",
+      "image": "audio/narrations/images/columbus/seg-00.jpg",
+      "imageCaption": "殖民",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 50.33,
+      "year": 1506,
+      "place": "巴利亚多利德",
+      "step": 5,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "1506年，哥伦布病逝于西班牙。他临终仍坚信，自己到达的是亚洲的边缘。",
+      "image": "audio/narrations/images/columbus/seg-06.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 57.54,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：改变世界的，常常不是准确的判断，而是敢闯的勇气。哪怕方向错了，也会撞见新的天地。",
+      "image": "audio/narrations/images/columbus/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:05:42.657Z"
+}

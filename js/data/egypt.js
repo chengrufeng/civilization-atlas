@@ -25,6 +25,8 @@ const PLACES = [
   { id: 'abydos', name: '阿布辛贝', modern: '埃及阿布辛贝', coord: [31.63, 22.34], note: '拉美西斯二世神庙' },
   { id: 'nile', name: '尼罗河', modern: '尼罗河三角洲', coord: [31.50, 30.50], note: '抵御海上民族' },
   { id: 'actium', name: '阿克提乌姆', modern: '希腊亚克兴', coord: [20.74, 39.00], note: '亚克兴海战' },
+  { id: 'tarsus', name: '塔尔苏斯', modern: '土耳其塔尔苏斯', coord: [34.90, 36.92], note: '克利奥帕特拉与安东尼初遇' },
+  { id: 'rome_egypt', name: '罗马', modern: '意大利罗马', coord: [12.50, 41.90], note: '凯撒驻地' },
 ];
 
 const PERSONS = [
@@ -41,7 +43,7 @@ const PERSONS = [
   { id: 'ramses_iii', name: '拉美西斯三世', courtesy: '', alias: [], faction: 'new', birth: -1217, death: -1155, birthPlace: '底比斯', title: '法老', roles: ['海上民族抵御者'], avatar: '拉', bio: '抵御海上民族入侵，新王国最后的辉煌。', events: [ { year: -1175, place: '尼罗河', desc: '抵御海上民族入侵' } ] },
   { id: 'piye', name: '皮耶', courtesy: '', alias: [], faction: 'late', birth: -800, death: -752, birthPlace: '努比亚', title: '努比亚法老', roles: ['第二十五王朝建立者'], avatar: '皮', bio: '由努比亚北上征服埃及，建立第二十五王朝。', events: [ { year: -727, place: '底比斯', desc: '征服上下埃及' } ] },
   { id: 'ashurbanipal_egypt', name: '普萨美提克一世', courtesy: '', alias: [], faction: 'late', birth: -700, death: -610, birthPlace: '塞易斯', title: '法老', roles: ['舍易斯复兴'], avatar: '普', bio: '驱逐亚述驻军，建立舍易斯王朝复兴。', events: [ { year: -664, place: '塞易斯', desc: '建立第二十六王朝' } ] },
-  { id: 'cleopatra', name: '克利奥帕特拉七世', courtesy: '', alias: ['埃及艳后'], faction: 'late', birth: -69, death: -30, birthPlace: '亚历山大', title: '托勒密女王', roles: ['末代法老'], avatar: '克', bio: '与凯撒安东尼结盟，最后亡于屋大维。', events: [ { year: -48, place: '亚历山大', desc: '与凯撒结盟' }, { year: -31, place: '阿克提乌姆', desc: '亚克兴海战败北' }, { year: -30, place: '亚历山大', desc: '自杀，埃及并入罗马' } ] },
+  { id: 'cleopatra', name: '克利奥帕特拉七世', courtesy: '', alias: ['埃及艳后'], faction: 'late', birth: -69, death: -30, birthPlace: '亚历山大', title: '托勒密女王', roles: ['末代法老'], avatar: '克', bio: '与凯撒安东尼结盟，最后亡于屋大维。', events: [ { year: -69, place: '亚历山大', desc: '托勒密王朝公主出生，精通九国语言' }, { year: -51, place: '亚历山大', desc: '18岁继位，与弟弟托勒密十三共治' }, { year: -48, place: '亚历山大', desc: '裹在地毯里献给凯撒，结成同盟' }, { year: -47, place: '罗马', desc: '赴罗马与凯撒同居，生子小凯撒' }, { year: -41, place: '塔尔苏斯', desc: '与马克安东尼相遇，乘金船赴约' }, { year: -31, place: '阿克提乌姆', desc: '亚克兴海战大败，逃回亚历山大' }, { year: -30, place: '亚历山大', desc: '屋大维兵临城下，毒蛇噬胸自杀，埃及并入罗马' } ] },
 ];
 
 const RELATIONS = [

@@ -1,0 +1,121 @@
+{
+  "personId": "luther",
+  "atlasId": "renaissance",
+  "title": "马丁·路德 · 这是我的立场",
+  "subtitle": "约 2 分钟看完宗教改革者的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 69.7,
+  "audio": "audio/narrations/luther.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "马丁·路德",
+        "宗教改革"
+      ],
+      "caption": "他一个人，对抗整个罗马教廷。一句话，让西方基督教永远分裂。马丁·路德。",
+      "image": "audio/narrations/images/luther/seg-00.jpg",
+      "imageCaption": "马丁·路德",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7.81,
+      "year": 1483,
+      "place": "艾斯莱本",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1483年，德国艾斯莱本。矿工家庭的孩子出生，父亲希望他学法律，他却在一道闪电下逃进了修道院。",
+      "image": "audio/narrations/images/luther/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 17.66,
+      "year": 1517,
+      "place": "维滕贝格",
+      "step": 2,
+      "keywords": [
+        "九十五条论纲"
+      ],
+      "caption": "1517年10月31日。维滕贝格教堂的门上，他钉下《九十五条论纲》，公开抗议赎罪券的买卖。",
+      "image": "audio/narrations/images/luther/seg-02.jpg",
+      "imageCaption": "九十五条论纲",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.15,
+      "year": 1521,
+      "place": "沃尔姆斯",
+      "step": 3,
+      "keywords": [
+        "沃尔姆斯议会"
+      ],
+      "caption": "1521年，帝国议会要他收回主张。他独自面对皇帝与教皇代表，说出那句千古名言：'这是我的立场，我别无选择。愿上帝助我。'",
+      "image": "audio/narrations/images/luther/seg-03.jpg",
+      "imageCaption": "沃尔姆斯议会",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 37.85,
+      "year": 1521,
+      "place": "瓦尔特堡",
+      "step": 4,
+      "keywords": [
+        "译经"
+      ],
+      "caption": "在朋友的'绑架'下，他藏身瓦尔特堡，化名'骑士约尔格'。十个月里，把《圣经》译成德语，奠定了现代德语。",
+      "image": "audio/narrations/images/luther/seg-04.jpg",
+      "imageCaption": "译经",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 46.79,
+      "year": 1525,
+      "place": "维滕贝格",
+      "step": 5,
+      "keywords": [
+        "结婚"
+      ],
+      "caption": "1525年，他娶了逃出修道院的修女凯瑟琳。他们的婚姻，打破了千年的神职禁婚传统。",
+      "image": "audio/narrations/images/luther/seg-00.jpg",
+      "imageCaption": "结婚",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.65,
+      "year": 1546,
+      "place": "艾斯莱本",
+      "step": 6,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "1546年，他回故乡调解贵族纠纷，心脏病发死在出生的城市。一个轮回，画上了句号。",
+      "image": "audio/narrations/images/luther/seg-00.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 63.06,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：一个人，可以对抗整个时代——前提是，他真的相信自己所坚持的。",
+      "image": "audio/narrations/images/luther/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:06:48.927Z"
+}

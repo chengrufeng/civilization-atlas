@@ -1,0 +1,121 @@
+{
+  "personId": "michelangelo",
+  "atlasId": "renaissance",
+  "title": "米开朗基罗 · 用石头雕刻神性",
+  "subtitle": "约 2 分钟看完文艺复兴艺术巅峰的一生",
+  "lang": "zh",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "totalDurationSec": 69.58,
+  "audio": "audio/narrations/michelangelo.m4a",
+  "segments": [
+    {
+      "t": 0,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "米开朗基罗",
+        "文艺复兴"
+      ],
+      "caption": "上帝把雕塑的天赋给了一个人，让他把神性，从石头里解放出来。米开朗基罗。",
+      "image": "audio/narrations/images/michelangelo/seg-00.jpg",
+      "imageCaption": "米开朗基罗",
+      "imageMode": "hero",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 7,
+      "year": 1475,
+      "place": "卡普雷塞",
+      "step": 0,
+      "keywords": [
+        "出生"
+      ],
+      "caption": "1475年，托斯卡纳的山村卡普雷塞。米开朗基罗出生，奶娘是石匠的妻子，他说：'雕刀和锤子，和我的奶水一起，注入了我的血脉。'",
+      "image": "audio/narrations/images/michelangelo/seg-01.jpg",
+      "imageCaption": "出生",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 19.1,
+      "year": 1488,
+      "place": "佛罗伦萨",
+      "step": 1,
+      "keywords": [
+        "学徒"
+      ],
+      "caption": "13岁他进入画家工坊，又走进美第奇家族的雕塑花园，亲历了佛罗伦萨艺术的黄金时代。",
+      "image": "audio/narrations/images/michelangelo/seg-02.jpg",
+      "imageCaption": "学徒",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 26.92,
+      "year": 1504,
+      "place": "佛罗伦萨",
+      "step": 2,
+      "keywords": [
+        "大卫像"
+      ],
+      "caption": "1504年，29岁的他完成《大卫》。五米高的少年，眉间带着凝视巨人的勇气，从此成了佛罗伦萨的灵魂。",
+      "image": "audio/narrations/images/michelangelo/seg-03.jpg",
+      "imageCaption": "大卫像",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 36.43,
+      "year": 1508,
+      "place": "罗马",
+      "step": 3,
+      "keywords": [
+        "西斯廷天顶画"
+      ],
+      "caption": "教皇强令他登上西斯廷礼拜堂的脚手架。仰头画了四年，他几乎瞎了。500平米的天顶，留下了《创世纪》。",
+      "image": "audio/narrations/images/michelangelo/seg-04.jpg",
+      "imageCaption": "西斯廷天顶画",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 45.8,
+      "year": 1536,
+      "place": "罗马",
+      "step": 5,
+      "keywords": [
+        "最后的审判"
+      ],
+      "caption": "60岁，他再次回到西斯廷，祭坛墙上画下《最后的审判》。圣巴托罗缪脸上那张人皮，正是他自己。",
+      "image": "audio/narrations/images/michelangelo/seg-05.jpg",
+      "imageCaption": "最后的审判",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 54.7,
+      "year": 1564,
+      "place": "罗马",
+      "step": 6,
+      "keywords": [
+        "病逝"
+      ],
+      "caption": "1564年，89岁的米开朗基罗在罗马病逝。遗骸被偷偷运回佛罗伦萨——他终于回家了。",
+      "image": "audio/narrations/images/michelangelo/seg-06.jpg",
+      "imageCaption": "病逝",
+      "imageSource": "© Bing 图片搜索结果"
+    },
+    {
+      "t": 62.92,
+      "year": null,
+      "place": null,
+      "step": null,
+      "keywords": [
+        "启示"
+      ],
+      "caption": "他告诉我们：天才不是天生的神迹，是用一辈子的孤独和苦役，凿出来的形状。",
+      "image": "audio/narrations/images/michelangelo/seg-07.jpg",
+      "imageCaption": "启示",
+      "imageSource": "© Bing 图片搜索结果"
+    }
+  ],
+  "ttsBackend": "edge",
+  "rate": "+15%",
+  "builtAt": "2026-07-19T06:06:03.743Z"
+}
