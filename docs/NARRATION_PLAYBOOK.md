@@ -98,6 +98,22 @@ node tools/localize-narration-images.mjs data/narrations/<personId>.json
 ```
 **必做**：把所有外链图下载到 `audio/narrations/images/<personId>/`，避免 hotlink 防护 / 域名失效。
 
+### 4. `tools/render-narration-video.mjs` — 无头渲染成视频（免录屏）
+```bash
+node tools/render-narration-video.mjs data/narrations/<personId>.json  # 单人
+node tools/render-narration-video.mjs --all                            # 批量（跳过已存在）
+node tools/render-narration-video.mjs --all --force                    # 全部重渲
+#   --width 1920 --height 1080   分辨率（默认 1080p）
+```
+**产物**：`video/narrations/<personId>.mp4`（H.264 + AAC，B站直传）。
+
+**原理**：内置静态服务器 → 无头 Chrome（复用系统 Chrome）打开页面 → 自动 `startNarration` → CDP Screencast 逐帧捕获（带真实时间戳）→ ffmpeg 按时间戳合成 CFR 25fps + 原 m4a 音轨。
+
+**两个关键坑**（调试半天换来的）：
+1. **不能用 Playwright 的 `recordVideo`**：它/CDP screencast 之外的组合问题已排除，但 `recordVideo` 会与音轨产生快进（12s 播完 169s），必须自己用 CDP `Page.startScreencast` 收帧。
+2. **`waitForFunction` 里不要 `import()` 业务模块**：Playwright 注入上下文会重新实例化 ES 模块，`session` 为 null → 第一轮 poll 就误判"解说结束"。用 DOM 信号（如 `narration-focus` class 移除）判断结束。
+3. **`waitForFunction(fn, arg, options)` 三参数签名**：options 必须是第三个参数，传成第二个会被当成 arg → 默认 30s 超时。
+
 ---
 
 ## 四、标准制作流程（7 步）

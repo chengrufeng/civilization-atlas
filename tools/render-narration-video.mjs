@@ -12,7 +12,8 @@
  */
 
 import { createServer } from 'node:http';
-import { readFile, stat, mkdir, access } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { readFile, stat, mkdir, access, writeFile, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -74,6 +75,11 @@ function startServer(port) {
 }
 
 function findFfmpeg() {
+  // 优先：项目内 ffmpeg-static（npm 安装，自带 libx264/aac）
+  try {
+    const p = createRequire(import.meta.url)('ffmpeg-static');
+    if (p && existsSync(p)) return p;
+  } catch { /* 未安装则继续找系统版本 */ }
   for (const c of ['/opt/homebrew/bin/ffmpeg', '/usr/local/bin/ffmpeg']) {
     if (existsSync(c)) return c;
   }
@@ -108,60 +114,102 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
   const context = await browser.newContext({
     viewport: { width: WIDTH, height: HEIGHT },
     deviceScaleFactor: 1,
-    recordVideo: { dir: path.join(ROOT, 'video', '.tmp'), size: { width: WIDTH, height: HEIGHT } },
   });
   const page = await context.newPage();
   page.on('pageerror', (e) => console.log(`  ⚠ 页面错误：${String(e).split('\n')[0]}`));
 
   const t0 = Date.now();
+  // CDP Screencast 逐帧捕获（不用 playwright recordVideo——它会启用虚拟时钟把音频快进）
+  // 每帧带真实时间戳 metadata.timestamp，合成时按时间戳精确对齐音画
+  const frameDir = path.join(ROOT, 'video', '.tmp', personId);
+  await mkdir(frameDir, { recursive: true });
+  const cdp = await context.newCDPSession(page);
+  const frames = []; // { file, ts }
+  let frameSeq = 0;
+  cdp.on('Page.screencastFrame', async ({ data, metadata, sessionId }) => {
+    const file = path.join(frameDir, `f${String(frameSeq++).padStart(5, '0')}.png`);
+    try {
+      await writeFile(file, Buffer.from(data, 'base64'));
+      frames.push({ file, ts: metadata.timestamp });
+    } catch { /* 磁盘错误则丢帧 */ }
+    await cdp.send('Page.screencastFrameAck', { sessionId }).catch(() => {});
+  });
+
   try {
+    await cdp.send('Page.startScreencast', {
+      format: 'png', maxWidth: WIDTH, maxHeight: HEIGHT, everyNthFrame: 1,
+    });
     await page.goto(`http://127.0.0.1:${port}/index.html?atlas=${atlasId}`, {
       waitUntil: 'networkidle', timeout: 60000,
     });
     // 等地图瓦片就绪
     await page.waitForTimeout(2500);
+    frames.length = 0; frameSeq = 0; // 起点前的帧不进正片
 
-    // 启动解说并等待播完（音频推进即页面推进）
+    // 启动解说并等待播完（音频实时推进即页面推进）
+    // 注意：不要在 waitForFunction 里 import() 业务模块 —— Playwright 注入上下文会
+    // 重新实例化 ES 模块（session 变量为 null），第一轮 poll 就误判结束。
+    // 改用 DOM 信号：narration-focus 在 startNarration 添加、stopNarration 移除。
     await page.evaluate(async (pid) => {
       const m = await import('./js/core/narration.js');
       await m.startNarration(pid);
     }, personId);
 
-    await page.waitForFunction(async () => {
-      const m = await import('./js/core/narration.js');
-      return !m.isNarrationActive();
-    }, { timeout: 300000, polling: 1000 });
+    await page.waitForFunction(
+      () => !document.body.classList.contains('narration-focus'),
+      null, // arg
+      { timeout: 600000, polling: 1000 },
+    );
 
     await page.waitForTimeout(TAIL_MS); // 收尾动画
-    const video = page.video();
-    await context.close();
-    var webmPath = await video.path();
-    await browser.close();
+    await cdp.send('Page.stopScreencast').catch(() => {});
+    await page.waitForTimeout(300); // 收净在途帧
   } catch (e) {
     await browser.close().catch(() => {});
     return { personId, error: `页面渲染失败：${String(e).split('\n')[0]}` };
   }
+  await browser.close().catch(() => {});
 
-  // context.close() 后才能拿到完整 webm；video() 要在 close 前拿路径 —— 上面顺序已保证拿到 path
-  if (!webmPath || !existsSync(webmPath)) {
-    return { personId, error: '未能获取录屏文件' };
+  if (frames.length < 2) {
+    return { personId, error: `捕获帧不足（${frames.length} 帧）` };
   }
 
-  // 合成：录屏画面 + 原始 m4a 音轨（音画天然同步——页面就是被这条音轨驱动的）
+  // 生成 ffmpeg concat 清单：每帧带精确 duration（时间戳差值）
+  const listFile = path.join(frameDir, 'list.txt');
+  const durations = [];
+  for (let i = 1; i < frames.length; i++) durations.push(frames[i].ts - frames[i - 1].ts);
+  // 清理异常间隔（掉帧/卡顿保护：单帧最长 1s）
+  const clamp = (d) => Math.min(Math.max(d, 1 / 60), 1.0);
+  const lines = [];
+  for (let i = 0; i < frames.length; i++) {
+    const d = i < frames.length - 1 ? clamp(durations[i]) : clamp(durations[durations.length - 1]);
+    lines.push(`file '${frames[i].file.replace(/'/g, "'\\''")}'`);
+    lines.push(`duration ${d.toFixed(4)}`);
+  }
+  // concat demuxer 需要重复最后一帧
+  lines.push(`file '${frames[frames.length - 1].file.replace(/'/g, "'\\''")}'`);
+  await writeFile(listFile, lines.join('\n'));
+
+  // 合成：帧序列(按时间戳) + 原始 m4a 音轨 → CFR 25fps H.264
   const r = spawnSync(ffmpeg, [
-    '-y', '-i', webmPath, '-i', path.join(ROOT, audio),
+    '-y',
+    '-f', 'concat', '-safe', '0', '-i', listFile,
+    '-i', path.join(ROOT, audio),
     '-map', '0:v:0', '-map', '1:a:0',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
+    '-vf', 'fps=25,format=yuv420p',
+    '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
     '-c:a', 'aac', '-b:a', '160k',
     '-movflags', '+faststart',
     '-shortest',
     outFile,
   ], { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8' });
+  // 清理帧目录
+  spawnSync('rm', ['-rf', frameDir]);
   if (r.status !== 0) {
     return { personId, error: `ffmpeg 失败：${(r.stderr || '').split('\n').slice(-3).join(' ')}` };
   }
   const st = await stat(outFile);
-  console.log(`✅ ${personId}.mp4（${(st.size / 1e6).toFixed(1)}MB，耗时 ${((Date.now() - t0) / 1000).toFixed(0)}s）`);
+  console.log(`✅ ${personId}.mp4（${(st.size / 1e6).toFixed(1)}MB，${frames.length} 帧，耗时 ${((Date.now() - t0) / 1000).toFixed(0)}s）`);
   return { personId, ok: true };
 }
 
@@ -185,7 +233,7 @@ async function main() {
 
   const ffmpeg = findFfmpeg();
   if (!ffmpeg) {
-    console.error('✗ 未找到 ffmpeg，请先：brew install ffmpeg');
+    console.error('✗ 未找到 ffmpeg，请先：npm i -D ffmpeg-static（或 brew install ffmpeg）');
     process.exit(1);
   }
 
