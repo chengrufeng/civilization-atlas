@@ -15,3 +15,6 @@ dist/
 
 # Comate 工具产物（如临时）
 .comate/
+
+# 渲染视频产物
+video/
