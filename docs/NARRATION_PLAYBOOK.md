@@ -98,21 +98,30 @@ node tools/localize-narration-images.mjs data/narrations/<personId>.json
 ```
 **必做**：把所有外链图下载到 `audio/narrations/images/<personId>/`，避免 hotlink 防护 / 域名失效。
 
-### 4. `tools/render-narration-video.mjs` — 无头渲染成视频（免录屏）
+### 4. `tools/render-narration-video.mjs` — 逐帧渲染成视频（免录屏）
 ```bash
 node tools/render-narration-video.mjs data/narrations/<personId>.json  # 单人
 node tools/render-narration-video.mjs --all                            # 批量（跳过已存在）
 node tools/render-narration-video.mjs --all --force                    # 全部重渲
 #   --width 1920 --height 1080   分辨率（默认 1080p）
+#   --fps 12                     采样帧率（相机滑动平滑度，默认 12）
 ```
 **产物**：`video/narrations/<personId>.mp4`（H.264 + AAC，B站直传）。
 
-**原理**：内置静态服务器 → 无头 Chrome（复用系统 Chrome）打开页面 → 自动 `startNarration` → CDP Screencast 逐帧捕获（带真实时间戳）→ ffmpeg 按时间戳合成 CFR 25fps + 原 m4a 音轨。
+**原理（确定性逐帧渲染）**：
+1. 内置静态服务器 + 无头 Chrome（复用系统 Chrome），URL 带 `?person=` 走真实用户路径
+2. 开拍前：等全部瓦片加载完 + 沿轨迹逐点预热瓦片（进缓存）
+3. 音频**暂停**，只作时间轴：逐帧 `audio.currentTime = t`（`seeked` 事件已接 `onTimeUpdate → applySegment`，字幕/轨迹/图片/特效同步切换）
+4. 相机不交给 `flyTo`（壁钟动画），按视频时间插值 `jumpTo`（easeInOutQuad，0.8s）
+5. 每帧等瓦片/图片加载完再截图 → 均匀 FPS 序列 → ffmpeg 合成（`apad` 补静音保住收尾帧）
+6. 音画同步由构造保证：第 i 帧就是音频 t=i/fps 的画面
 
-**两个关键坑**（调试半天换来的）：
-1. **不能用 Playwright 的 `recordVideo`**：它/CDP screencast 之外的组合问题已排除，但 `recordVideo` 会与音轨产生快进（12s 播完 169s），必须自己用 CDP `Page.startScreencast` 收帧。
-2. **`waitForFunction` 里不要 `import()` 业务模块**：Playwright 注入上下文会重新实例化 ES 模块，`session` 为 null → 第一轮 poll 就误判"解说结束"。用 DOM 信号（如 `narration-focus` class 移除）判断结束。
-3. **`waitForFunction(fn, arg, options)` 三参数签名**：options 必须是第三个参数，传成第二个会被当成 arg → 默认 30s 超时。
+**关键坑**（两轮调试换来的，别再踩）：
+1. **Playwright `recordVideo` / CDP screencast 实时出帧都不可用**：1080p 下出帧率低且不均匀（~10fps 抖动），画面卡顿；给帧间隔封顶截断又会导致音图不符。必须逐帧确定性截图。
+2. **`waitForFunction` 里不要 `import()` 业务模块**：注入上下文会重新实例化 ES 模块，`session` 为 null → 误判解说结束。用 DOM 信号（`narration-focus` class）。
+3. **`waitForFunction(fn, arg, options)` 三参数签名**：options 传成第二个参数会被当成 arg → 默认 30s 超时。
+4. **数据集是具名导出**（`sanguoAtlas` 驼峰），不是 default export。
+5. **无头 Chrome 音频自动播放**需 `--autoplay-policy=no-user-gesture-required`；`new Audio()` 不入 DOM，挂钩 `window.Audio` 构造器捕获实例。
 
 ---
 

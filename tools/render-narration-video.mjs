@@ -31,6 +31,7 @@ const opt = (name, dflt) => {
 };
 const WIDTH = parseInt(opt('--width', '1920'), 10);
 const HEIGHT = parseInt(opt('--height', '1080'), 10);
+const FPS = parseInt(opt('--fps', '12'), 10); // 逐帧渲染采样率（地图移动平滑度）
 const TAIL_MS = parseInt(opt('--tail', '2500'), 10); // 结束后再录的尾巴，让收尾动画播完
 const FORCE = flag('--force');
 
@@ -119,56 +120,43 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
   page.on('pageerror', (e) => console.log(`  ⚠ 页面错误：${String(e).split('\n')[0]}`));
 
   const t0 = Date.now();
-  // CDP Screencast 逐帧捕获（不用 playwright recordVideo——它会启用虚拟时钟把音频快进）
-  // 每帧带真实时间戳 metadata.timestamp，合成时按时间戳精确对齐音画
+  // ── 确定性逐帧渲染（不依赖 screencast 实时出帧——它出帧率低且不均匀，是卡顿根源）──
+  // 思路：音频暂停，仅作时间轴；逐帧设置 audio.currentTime（'seeked' 事件在
+  // narration.js 里已接 onTimeUpdate → applySegment 同步切字幕/轨迹/图片/特效）；
+  // 相机不交给 flyTo（壁钟动画），由我们按视频时间插值 jumpTo；每帧等瓦片/图片
+  // 加载完再截图 → 均匀 FPS 序列，音画逐帧对齐。
   const frameDir = path.join(ROOT, 'video', '.tmp', personId);
   await mkdir(frameDir, { recursive: true });
-  const cdp = await context.newCDPSession(page);
-  const frames = []; // { file, ts }
   let frameSeq = 0;
-  cdp.on('Page.screencastFrame', async ({ data, metadata, sessionId }) => {
-    const file = path.join(frameDir, `f${String(frameSeq++).padStart(5, '0')}.png`);
-    try {
-      await writeFile(file, Buffer.from(data, 'base64'));
-      frames.push({ file, ts: metadata.timestamp });
-    } catch { /* 磁盘错误则丢帧 */ }
-    await cdp.send('Page.screencastFrameAck', { sessionId }).catch(() => {});
-  });
 
   try {
-    await cdp.send('Page.startScreencast', {
-      format: 'png', maxWidth: WIDTH, maxHeight: HEIGHT, everyNthFrame: 1,
-    });
     // 带 person 参数：走真实用户路径（打开人物详情面板，地图 flyTo 到人物位置）
     await page.goto(
       `http://127.0.0.1:${port}/index.html?atlas=${atlasId}&person=${personId}`,
       { waitUntil: 'networkidle', timeout: 60000 },
     );
 
-    // 1) 等地图瓦片全部加载完（灰块 = 未加载瓦片，进正片前必须干净）
-    // 2) 沿解说轨迹逐点预热瓦片（提前进缓存，正片中 flyTo 秒出图）
-    // 3) 回到首个地点视野，再开始解说
-    await page.evaluate(async ({ atlas, pid }) => {
+    // 1) 等地图瓦片全部加载完 2) 沿轨迹预热瓦片 3) 进入渲染模式
+    const setup = await page.evaluate(async ({ atlas, pid }) => {
       const waitTiles = async (timeoutMs = 30000) => {
-        const t0 = performance.now();
-        while (performance.now() - t0 < timeoutMs) {
+        const s = performance.now();
+        while (performance.now() - s < timeoutMs) {
           const imgs = [...document.querySelectorAll('#map-chart img.leaflet-tile')];
           if (imgs.length && imgs.every(i => i.complete && i.naturalWidth > 0)) return true;
           await new Promise(r => setTimeout(r, 250));
         }
         return false;
       };
-      // 等开放详情的 flyTo + 初始瓦片
       await new Promise(r => setTimeout(r, 1200));
       await waitTiles();
 
-      // 轨迹地点预热
       const script = await (await fetch(`../data/narrations/${pid}.json`)).json();
       const { state } = await import('./js/core/state.js');
-      // 数据集导出形如 sanguoAtlas（具名导出，按文件名转驼峰）
       const camel = atlas.replace(/_([a-z])/g, (_, c) => c.toUpperCase()) + 'Atlas';
       const dsMod = await import(`./js/data/${atlas}.js`);
       const ds = dsMod[camel] || dsMod.default || Object.values(dsMod)[0];
+
+      // 轨迹地点预热（沿途瓦片全部进缓存）
       const seen = new Set();
       const coords = [];
       for (const s of script.segments) {
@@ -178,70 +166,134 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
       }
       if (coords.length) {
         for (const c of coords) {
-          // setView 立即定位（不产生 flyTo 动画帧），等瓦片后继续
           state.map.setView([c[1], c[0]], 6, { animate: false });
           await waitTiles(8000);
         }
-        // 回到首个地点
         state.map.setView([coords[0][1], coords[0][0]], 6, { animate: false });
         await waitTiles(8000);
       }
-    }, { atlas: atlasId, pid: personId });
 
-    frames.length = 0; frameSeq = 0; // 起点前的帧不进正片
+      // ── 渲染模式接管 ──
+      // 1. 捕获 startNarration 内部创建的 Audio 实例
+      window.__audioEl = null;
+      const OrigAudio = window.Audio;
+      window.Audio = class extends OrigAudio {
+        constructor(...a) { super(...a); window.__audioEl = this; }
+      };
+      // 2. 屏蔽 flyTo（壁钟动画），相机由外部逐帧驱动
+      state.map.flyTo = () => {};
 
-    // 启动解说并等待播完（音频实时推进即页面推进）
-    // 注意：不要在 waitForFunction 里 import() 业务模块 —— Playwright 注入上下文会
-    // 重新实例化 ES 模块（session 变量为 null），第一轮 poll 就误判结束。
-    // 改用 DOM 信号：narration-focus 在 startNarration 添加、stopNarration 移除。
-    await page.evaluate(async (pid) => {
       const m = await import('./js/core/narration.js');
       await m.startNarration(pid);
-    }, personId);
+      const a = window.__audioEl;
+      if (!a) throw new Error('未捕获到解说音频实例');
+      a.pause(); a.muted = true; a.currentTime = 0;
 
-    await page.waitForFunction(
-      () => !document.body.classList.contains('narration-focus'),
-      null, // arg
-      { timeout: 600000, polling: 1000 },
-    );
+      // 3. 隐藏暂停态控制条（视频里不应出现"已暂停"的样子）
+      const bar = document.querySelector('.narration-bar');
+      if (bar) bar.style.display = 'none';
 
-    await page.waitForTimeout(TAIL_MS); // 收尾动画
-    await cdp.send('Page.stopScreencast').catch(() => {});
-    await page.waitForTimeout(300); // 收净在途帧
+      // 4. 相机轨道
+      window.__cam = {
+        segs: script.segments.map(s => {
+          const p = s.place ? ds.places.find(x => x.name === s.place) : null;
+          return { t: s.t, lat: p ? p.coord[1] : null, lng: p ? p.coord[0] : null };
+        }),
+        lastIdx: -1, from: null, to: null, glideT0: 0,
+      };
+      return { duration: isFinite(a.duration) && a.duration > 0 ? a.duration : (script.totalDurationSec || 0) };
+    }, { atlas: atlasId, pid: personId });
+
+    const duration = setup.duration;
+    if (!duration || duration < 5) throw new Error(`音频时长异常：${duration}`);
+
+    // ── 逐帧循环：seek → 相机插值 → 等资源 → 截图 ──
+    const frameStep = async (t) => {
+      await page.evaluate(async (tt) => {
+        const a = window.__audioEl;
+        // seek 触发 applySegment（字幕/轨迹/图片/特效同步切换）
+        const seeked = new Promise(r => {
+          a.addEventListener('seeked', r, { once: true });
+          setTimeout(r, 150);
+        });
+        a.currentTime = Math.min(tt, (a.duration || tt) - 0.05);
+        await seeked;
+
+        // 相机：与字幕同基准（currentTime + 0.2s 提前量）
+        const cam = window.__cam;
+        const vt = a.currentTime + 0.2;
+        let idx = -1;
+        for (let i = 0; i < cam.segs.length; i++) if (vt >= cam.segs[i].t) idx = i;
+        if (idx >= 0 && cam.segs[idx].lat != null) {
+          const seg = cam.segs[idx];
+          if (idx !== cam.lastIdx) {
+            const prev = cam.lastIdx >= 0 ? cam.segs[cam.lastIdx] : null;
+            cam.from = prev && prev.lat != null ? [prev.lat, prev.lng] : [seg.lat, seg.lng];
+            cam.to = [seg.lat, seg.lng];
+            cam.glideT0 = seg.t;
+            cam.lastIdx = idx;
+          }
+          const GLIDE = 0.8;
+          let p = Math.min(Math.max((vt - cam.glideT0) / GLIDE, 0), 1);
+          p = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // easeInOutQuad
+          const { state } = await import('./js/core/state.js');
+          state.map.jumpTo({
+            center: [cam.from[0] + (cam.to[0] - cam.from[0]) * p,
+                      cam.from[1] + (cam.to[1] - cam.from[1]) * p],
+            zoom: 6,
+          }, { animate: false });
+        }
+
+        // 等本帧资源：瓦片 + 解说图片（每帧都齐，绝不带灰块/空图进正片）
+        const s0 = performance.now();
+        while (performance.now() - s0 < 3000) {
+          const imgs = [...document.querySelectorAll(
+            '#map-chart img.leaflet-tile, .narration-image-card img, .narration-hero-card img'
+          )];
+          if (imgs.length && imgs.every(i => i.complete && i.naturalWidth > 0)) break;
+          await new Promise(r => setTimeout(r, 50));
+        }
+      }, t);
+      const file = path.join(frameDir, `f${String(frameSeq++).padStart(5, '0')}.jpg`);
+      await page.screenshot({ path: file, type: 'jpeg', quality: 90 });
+    };
+
+    const N = Math.ceil(duration * FPS);
+    for (let i = 0; i < N; i++) {
+      await frameStep(i / FPS);
+      if (i % 100 === 0) console.log(`  帧 ${i}/${N}（t=${(i / FPS).toFixed(1)}s）`);
+    }
+
+    // ── 收尾：触发 ended → 恢复 UI（详情面板弹回），补 tail 帧 ──
+    await page.evaluate(async () => {
+      const m = await import('./js/core/narration.js');
+      m.stopNarration();
+      await new Promise(r => setTimeout(r, 400));
+    });
+    for (let k = 0; k < Math.round((TAIL_MS / 1000) * FPS); k++) {
+      const file = path.join(frameDir, `f${String(frameSeq++).padStart(5, '0')}.jpg`);
+      await page.screenshot({ path: file, type: 'jpeg', quality: 90 });
+    }
   } catch (e) {
     await browser.close().catch(() => {});
     return { personId, error: `页面渲染失败：${String(e).split('\n')[0]}` };
   }
   await browser.close().catch(() => {});
 
-  if (frames.length < 2) {
-    return { personId, error: `捕获帧不足（${frames.length} 帧）` };
+  if (frameSeq < 2) {
+    return { personId, error: `捕获帧不足（${frameSeq} 帧）` };
   }
 
-  // 生成 ffmpeg concat 清单：每帧带精确 duration（时间戳差值）
-  const listFile = path.join(frameDir, 'list.txt');
-  const durations = [];
-  for (let i = 1; i < frames.length; i++) durations.push(frames[i].ts - frames[i - 1].ts);
-  // 清理异常间隔（掉帧/卡顿保护：单帧最长 1s）
-  const clamp = (d) => Math.min(Math.max(d, 1 / 60), 1.0);
-  const lines = [];
-  for (let i = 0; i < frames.length; i++) {
-    const d = i < frames.length - 1 ? clamp(durations[i]) : clamp(durations[durations.length - 1]);
-    lines.push(`file '${frames[i].file.replace(/'/g, "'\\''")}'`);
-    lines.push(`duration ${d.toFixed(4)}`);
-  }
-  // concat demuxer 需要重复最后一帧
-  lines.push(`file '${frames[frames.length - 1].file.replace(/'/g, "'\\''")}'`);
-  await writeFile(listFile, lines.join('\n'));
-
-  // 合成：帧序列(按时间戳) + 原始 m4a 音轨 → CFR 25fps H.264
+  // 合成：均匀 FPS 帧序列 + 原始 m4a 音轨（音画由逐帧 seek 对齐，天然同步）
+  // apad：把音频尾部补静音到视频长度（保留收尾帧），-shortest 以视频为准截断
   const r = spawnSync(ffmpeg, [
     '-y',
-    '-f', 'concat', '-safe', '0', '-i', listFile,
+    '-framerate', String(FPS), '-i', path.join(frameDir, 'f%05d.jpg'),
     '-i', path.join(ROOT, audio),
     '-map', '0:v:0', '-map', '1:a:0',
     '-vf', 'fps=25,format=yuv420p',
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
+    '-af', 'apad',
     '-c:a', 'aac', '-b:a', '160k',
     '-movflags', '+faststart',
     '-shortest',
@@ -253,7 +305,7 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
     return { personId, error: `ffmpeg 失败：${(r.stderr || '').split('\n').slice(-3).join(' ')}` };
   }
   const st = await stat(outFile);
-  console.log(`✅ ${personId}.mp4（${(st.size / 1e6).toFixed(1)}MB，${frames.length} 帧，耗时 ${((Date.now() - t0) / 1000).toFixed(0)}s）`);
+  console.log(`✅ ${personId}.mp4（${(st.size / 1e6).toFixed(1)}MB，${frameSeq} 帧 @${FPS}fps，耗时 ${((Date.now() - t0) / 1000).toFixed(0)}s）`);
   return { personId, ok: true };
 }
 
