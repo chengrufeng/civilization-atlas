@@ -139,11 +139,55 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
     await cdp.send('Page.startScreencast', {
       format: 'png', maxWidth: WIDTH, maxHeight: HEIGHT, everyNthFrame: 1,
     });
-    await page.goto(`http://127.0.0.1:${port}/index.html?atlas=${atlasId}`, {
-      waitUntil: 'networkidle', timeout: 60000,
-    });
-    // 等地图瓦片就绪
-    await page.waitForTimeout(2500);
+    // 带 person 参数：走真实用户路径（打开人物详情面板，地图 flyTo 到人物位置）
+    await page.goto(
+      `http://127.0.0.1:${port}/index.html?atlas=${atlasId}&person=${personId}`,
+      { waitUntil: 'networkidle', timeout: 60000 },
+    );
+
+    // 1) 等地图瓦片全部加载完（灰块 = 未加载瓦片，进正片前必须干净）
+    // 2) 沿解说轨迹逐点预热瓦片（提前进缓存，正片中 flyTo 秒出图）
+    // 3) 回到首个地点视野，再开始解说
+    await page.evaluate(async ({ atlas, pid }) => {
+      const waitTiles = async (timeoutMs = 30000) => {
+        const t0 = performance.now();
+        while (performance.now() - t0 < timeoutMs) {
+          const imgs = [...document.querySelectorAll('#map-chart img.leaflet-tile')];
+          if (imgs.length && imgs.every(i => i.complete && i.naturalWidth > 0)) return true;
+          await new Promise(r => setTimeout(r, 250));
+        }
+        return false;
+      };
+      // 等开放详情的 flyTo + 初始瓦片
+      await new Promise(r => setTimeout(r, 1200));
+      await waitTiles();
+
+      // 轨迹地点预热
+      const script = await (await fetch(`../data/narrations/${pid}.json`)).json();
+      const { state } = await import('./js/core/state.js');
+      // 数据集导出形如 sanguoAtlas（具名导出，按文件名转驼峰）
+      const camel = atlas.replace(/_([a-z])/g, (_, c) => c.toUpperCase()) + 'Atlas';
+      const dsMod = await import(`./js/data/${atlas}.js`);
+      const ds = dsMod[camel] || dsMod.default || Object.values(dsMod)[0];
+      const seen = new Set();
+      const coords = [];
+      for (const s of script.segments) {
+        if (!s.place) continue;
+        const p = ds.places.find(x => x.name === s.place);
+        if (p && !seen.has(p.name)) { seen.add(p.name); coords.push(p.coord); }
+      }
+      if (coords.length) {
+        for (const c of coords) {
+          // setView 立即定位（不产生 flyTo 动画帧），等瓦片后继续
+          state.map.setView([c[1], c[0]], 6, { animate: false });
+          await waitTiles(8000);
+        }
+        // 回到首个地点
+        state.map.setView([coords[0][1], coords[0][0]], 6, { animate: false });
+        await waitTiles(8000);
+      }
+    }, { atlas: atlasId, pid: personId });
+
     frames.length = 0; frameSeq = 0; // 起点前的帧不进正片
 
     // 启动解说并等待播完（音频实时推进即页面推进）
