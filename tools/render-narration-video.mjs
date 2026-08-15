@@ -31,7 +31,7 @@ const opt = (name, dflt) => {
 };
 const WIDTH = parseInt(opt('--width', '1920'), 10);
 const HEIGHT = parseInt(opt('--height', '1080'), 10);
-const FPS = parseInt(opt('--fps', '12'), 10); // 逐帧渲染采样率（地图移动平滑度）
+const FPS = parseInt(opt('--fps', '24'), 10); // 逐帧渲染采样率（地图移动平滑度）
 const TAIL_MS = parseInt(opt('--tail', '2500'), 10); // 结束后再录的尾巴，让收尾动画播完
 const FORCE = flag('--force');
 
@@ -53,7 +53,7 @@ const MIME = {
   '.woff2': 'font/woff2',
 };
 
-/* ---------- 极简静态服务器（根目录 = 项目根） ---------- */
+/* ---------- 极简静态服务器（根目录 = 项目根，支持 Range：音频 seek 必需） ---------- */
 function startServer(port) {
   const server = createServer(async (req, res) => {
     try {
@@ -65,11 +65,34 @@ function startServer(port) {
       }
       const st = await stat(file);
       if (!st.isFile()) { res.writeHead(404); res.end('404'); return; }
+      const type = MIME[path.extname(file).toLowerCase()] || 'application/octet-stream';
+      const buf = await readFile(file);
+
+      // Range 支持：暂停的 <audio> 向前 seek 时 Chrome 会发 Range 请求，
+      // 服务器不回 206 的话 seek 被静默丢弃 → currentTime 拨不动 → 画面定格
+      const range = req.headers.range;
+      const m = range && range.match(/bytes=(\d*)-(\d*)/);
+      if (m && (m[1] || m[2])) {
+        const start = m[1] ? parseInt(m[1], 10) : 0;
+        const end = m[2] ? parseInt(m[2], 10) : st.size - 1;
+        const chunk = buf.subarray(start, Math.min(end, st.size - 1) + 1);
+        res.writeHead(206, {
+          'content-type': type,
+          'content-range': `bytes ${start}-${Math.min(end, st.size - 1)}/${st.size}`,
+          'accept-ranges': 'bytes',
+          'content-length': chunk.length,
+          'cache-control': 'no-store',
+        });
+        res.end(chunk);
+        return;
+      }
       res.writeHead(200, {
-        'content-type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream',
+        'content-type': type,
+        'content-length': st.size,
+        'accept-ranges': 'bytes',
         'cache-control': 'no-store',
       });
-      res.end(await readFile(file));
+      res.end(buf);
     } catch { res.writeHead(500); res.end('500'); }
   });
   return new Promise((resolve) => server.listen(port, '127.0.0.1', () => resolve(server)));
@@ -237,11 +260,11 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
           let p = Math.min(Math.max((vt - cam.glideT0) / GLIDE, 0), 1);
           p = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // easeInOutQuad
           const { state } = await import('./js/core/state.js');
-          state.map.jumpTo({
-            center: [cam.from[0] + (cam.to[0] - cam.from[0]) * p,
-                      cam.from[1] + (cam.to[1] - cam.from[1]) * p],
-            zoom: 6,
-          }, { animate: false });
+          // Leaflet 无 jumpTo，用 setView({animate:false}) 瞬时定位
+          state.map.setView([
+            cam.from[0] + (cam.to[0] - cam.from[0]) * p,
+            cam.from[1] + (cam.to[1] - cam.from[1]) * p,
+          ], 6, { animate: false });
         }
 
         // 等本帧资源：瓦片 + 解说图片（每帧都齐，绝不带灰块/空图进正片）
