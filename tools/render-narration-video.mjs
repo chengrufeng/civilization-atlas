@@ -208,9 +208,11 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
       //    否则相机中心和站点真实回放出现地理偏差
       window.__cam = { pending: null, from: null, to: null, glideT0: 0, glideDur: 0.8 };
       state.map.flyTo = (latlng, zoom, opts) => {
-        // 非法目标（坐标缺失 → NaN）直接忽略，避免污染相机轨道
-        if (!latlng || !isFinite(latlng.lat) || !isFinite(latlng.lng)) return;
-        window.__cam.pending = { lat: latlng.lat, lng: latlng.lng, dur: opts?.duration ?? 0.8 };
+        // ll() 返回 [lat, lng] 数组（Leaflet 原生 flyTo 能吃数组，但这里要自己取值）
+        const lat = Array.isArray(latlng) ? latlng[0] : latlng?.lat;
+        const lng = Array.isArray(latlng) ? latlng[1] : latlng?.lng;
+        if (!isFinite(lat) || !isFinite(lng)) return; // 非法目标忽略
+        window.__cam.pending = { lat, lng, dur: opts?.duration ?? 0.8 };
       };
 
       const m = await import('./js/core/narration.js');
