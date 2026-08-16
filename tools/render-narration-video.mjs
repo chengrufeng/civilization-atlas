@@ -13,7 +13,7 @@
 
 import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
-import { readFile, stat, mkdir, access, writeFile, rm } from 'node:fs/promises';
+import { readFile, stat, mkdir, access, writeFile, rm, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -203,8 +203,15 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
       window.Audio = class extends OrigAudio {
         constructor(...a) { super(...a); window.__audioEl = this; }
       };
-      // 2. 屏蔽 flyTo（壁钟动画），相机由外部逐帧驱动
-      state.map.flyTo = () => {};
+      // 2. 屏蔽 flyTo 的壁钟动画，但截获它的目标坐标——applySegment 飞向的是
+      //    step.coord（事件轨迹坐标），不是 seg.place 反查的坐标，必须用同源数据，
+      //    否则相机中心和站点真实回放出现地理偏差
+      window.__cam = { pending: null, from: null, to: null, glideT0: 0, glideDur: 0.8 };
+      state.map.flyTo = (latlng, zoom, opts) => {
+        // 非法目标（坐标缺失 → NaN）直接忽略，避免污染相机轨道
+        if (!latlng || !isFinite(latlng.lat) || !isFinite(latlng.lng)) return;
+        window.__cam.pending = { lat: latlng.lat, lng: latlng.lng, dur: opts?.duration ?? 0.8 };
+      };
 
       const m = await import('./js/core/narration.js');
       await m.startNarration(pid);
@@ -215,15 +222,6 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
       // 3. 隐藏暂停态控制条（视频里不应出现"已暂停"的样子）
       const bar = document.querySelector('.narration-bar');
       if (bar) bar.style.display = 'none';
-
-      // 4. 相机轨道
-      window.__cam = {
-        segs: script.segments.map(s => {
-          const p = s.place ? ds.places.find(x => x.name === s.place) : null;
-          return { t: s.t, lat: p ? p.coord[1] : null, lng: p ? p.coord[0] : null };
-        }),
-        lastIdx: -1, from: null, to: null, glideT0: 0,
-      };
       return { duration: isFinite(a.duration) && a.duration > 0 ? a.duration : (script.totalDurationSec || 0) };
     }, { atlas: atlasId, pid: personId });
 
@@ -241,25 +239,23 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
         });
         a.currentTime = Math.min(tt, (a.duration || tt) - 0.05);
         await seeked;
+        await new Promise(r => setTimeout(r, 20)); // 收尾本 tick 的同步 DOM 更新
 
-        // 相机：与字幕同基准（currentTime + 0.2s 提前量）
+        // 相机：applySegment 刚才若调了 flyTo，这里会留下 pending 目标
+        // （与站点真实回放同源：step.coord），以本次视频时间为起点开始滑翔
         const cam = window.__cam;
-        const vt = a.currentTime + 0.2;
-        let idx = -1;
-        for (let i = 0; i < cam.segs.length; i++) if (vt >= cam.segs[i].t) idx = i;
-        if (idx >= 0 && cam.segs[idx].lat != null) {
-          const seg = cam.segs[idx];
-          if (idx !== cam.lastIdx) {
-            const prev = cam.lastIdx >= 0 ? cam.segs[cam.lastIdx] : null;
-            cam.from = prev && prev.lat != null ? [prev.lat, prev.lng] : [seg.lat, seg.lng];
-            cam.to = [seg.lat, seg.lng];
-            cam.glideT0 = seg.t;
-            cam.lastIdx = idx;
-          }
-          const GLIDE = 0.8;
-          let p = Math.min(Math.max((vt - cam.glideT0) / GLIDE, 0), 1);
+        const { state } = await import('./js/core/state.js');
+        if (cam.pending) {
+          const c = state.map.getCenter();
+          cam.from = [c.lat, c.lng];
+          cam.to = [cam.pending.lat, cam.pending.lng];
+          cam.glideT0 = a.currentTime;
+          cam.glideDur = cam.pending.dur;
+          cam.pending = null;
+        }
+        if (cam.to) {
+          let p = Math.min(Math.max((a.currentTime - cam.glideT0) / cam.glideDur, 0), 1);
           p = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // easeInOutQuad
-          const { state } = await import('./js/core/state.js');
           // Leaflet 无 jumpTo，用 setView({animate:false}) 瞬时定位
           state.map.setView([
             cam.from[0] + (cam.to[0] - cam.from[0]) * p,
@@ -277,14 +273,28 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
           await new Promise(r => setTimeout(r, 50));
         }
       }, t);
-      const file = path.join(frameDir, `f${String(frameSeq++).padStart(5, '0')}.jpg`);
-      await page.screenshot({ path: file, type: 'jpeg', quality: 90 });
+      // 截图由调用方做（带超时与单帧容错）
     };
 
     const N = Math.ceil(duration * FPS);
+    let lastGoodFile = null;
     for (let i = 0; i < N; i++) {
-      await frameStep(i / FPS);
-      if (i % 100 === 0) console.log(`  帧 ${i}/${N}（t=${(i / FPS).toFixed(1)}s）`);
+      const file = path.join(frameDir, `f${String(i).padStart(5, '0')}.jpg`);
+      try {
+        await frameStep(i / FPS);
+        await page.screenshot({ path: file, type: 'jpeg', quality: 90, timeout: 60000 });
+        lastGoodFile = file;
+      } catch (e) {
+        // 单帧失败（瓦片/图片卡住等）不致命：复用上一帧，继续推进
+        // —— 宁可定格一帧也不要整个视频报废，批量渲染尤其需要这种韧性
+        if (lastGoodFile) {
+          try { await copyFile(lastGoodFile, file); } catch {}
+        } else {
+          i--; continue; // 还没有可用帧，原地重试一次
+        }
+      }
+      if (i % 200 === 0) console.log(`  帧 ${i}/${N}（t=${(i / FPS).toFixed(1)}s）`);
+      frameSeq = i + 1;
     }
 
     // ── 收尾：触发 ended → 恢复 UI（详情面板弹回），补 tail 帧 ──
