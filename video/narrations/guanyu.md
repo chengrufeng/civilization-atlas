@@ -2,9 +2,13 @@
 
 > 成片：guanyu.mp4 · 实测时长 1:33（93s）· 1080p 24fps
 
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+
 ## 标题
 
 温酒斩华雄，大意失荆州｜一分半走完关羽的封神与陨落
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 ## 简介
 
@@ -23,6 +27,8 @@
 01:15 220年 · 败走麦城
 
 系列持续更新：刘备、曹操、诸葛亮、司马懿、周瑜已上线。
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 #三国 #关羽 #武圣 #历史 #地图
 ```

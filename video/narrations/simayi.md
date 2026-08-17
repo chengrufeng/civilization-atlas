@@ -2,9 +2,13 @@
 
 > 成片：simayi.mp4 · 实测时长 1:41（101s）· 1080p 24fps
 
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+
 ## 标题
 
 装病躲曹操、熬走三代帝王、70岁夺权｜100秒看完司马懿的一生
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 ## 简介
 
@@ -23,6 +27,8 @@
 01:21 249年 · 高平陵之变
 
 系列持续更新：刘备、关羽、曹操、诸葛亮、周瑜已上线。
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 #三国 #司马懿 #历史 #权谋 #地图
 ```

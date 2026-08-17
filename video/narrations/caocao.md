@@ -2,9 +2,13 @@
 
 > 成片：caocao.mp4 · 实测时长 1:34（94s）· 1080p 24fps
 
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+
 ## 标题
 
 挟天子以令诸侯，曹操是奸雄还是英雄？｜一分半看完曹操一生
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 ## 简介
 
@@ -23,6 +27,8 @@
 01:13 220年 · 洛阳病逝
 
 系列持续更新：刘备、关羽、诸葛亮、司马懿、周瑜已上线。
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 #三国 #曹操 #历史 #人物志 #地图
 ```

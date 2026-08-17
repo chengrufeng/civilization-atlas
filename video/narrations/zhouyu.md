@@ -2,9 +2,13 @@
 
 > 成片：zhouyu.mp4 · 实测时长 1:34（94s）· 1080p 24fps
 
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+
 ## 标题
 
 他不是被气死的！34岁统兵五万烧出三分天下｜还原真实的周瑜
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 ## 简介
 
@@ -24,6 +28,8 @@
 01:11 210年 · 病逝巴丘
 
 系列持续更新：刘备、关羽、曹操、诸葛亮、司马懿已上线。
+
+GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 
 #三国 #周瑜 #赤壁之战 #历史 #地图
 ```
