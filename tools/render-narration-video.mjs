@@ -341,6 +341,9 @@ async function renderOne({ chromium }, jsonPath, ffmpeg, port) {
   }
   const st = await stat(outFile);
   console.log(`✅ ${personId}.mp4（${(st.size / 1e6).toFixed(1)}MB，${frameSeq} 帧 @${FPS}fps，耗时 ${((Date.now() - t0) / 1000).toFixed(0)}s）`);
+  if (!existsSync(outFile.replace(/\.mp4$/, '.md'))) {
+    console.log(`   ↪ 投稿文案待生成：用 bilibili-narration-copy skill 产出 ${personId}.md`);
+  }
   return { personId, ok: true };
 }
 

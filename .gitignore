@@ -13,8 +13,12 @@ dist/
 *.swp
 *~
 
-# Comate 工具产物（如临时）
-.comate/
+# Comate 工具产物（如临时）；skills 除外（随库共享）
+.comate/*
+!.comate/skills/
 
-# 渲染视频产物
-video/
+# 渲染视频产物（mp4 不入库）；投稿文案随库
+video/*
+!video/narrations/
+video/narrations/*
+!video/narrations/*.md
