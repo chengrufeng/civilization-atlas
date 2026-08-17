@@ -3,12 +3,14 @@
 > 成片：zhugeliang.mp4 · 实测时长 1:28（88s）· 1080p 24fps
 
 GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+在线体验：https://chengrufeng.github.io/civilization-atlas/
 
 ## 标题
 
 27岁出山，54岁星落五丈原｜90秒看完诸葛亮的一生
 
 GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+在线体验：https://chengrufeng.github.io/civilization-atlas/
 
 ## 简介
 
@@ -29,6 +31,7 @@ GitHub 开源：https://github.com/chengrufeng/civilization-atlas
 系列持续更新：刘备、关羽、曹操、司马懿、周瑜已上线。
 
 GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+在线体验：https://chengrufeng.github.io/civilization-atlas/
 
 #三国 #诸葛亮 #历史 #地图 #人物志
 ```

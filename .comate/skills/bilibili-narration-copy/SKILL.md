@@ -86,6 +86,7 @@ MM:SS XXX年 · 事件
 系列持续更新：<同系列其他人物>已上线。
 
 GitHub 开源：https://github.com/chengrufeng/civilization-atlas
+在线体验：https://chengrufeng.github.io/civilization-atlas/
 
 #标签 #标签 #标签 #标签 #标签
 ```
