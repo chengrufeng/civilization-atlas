@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>霓虹湾 NEON BAY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #05060f; color: #fff;
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; user-select: none; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  .hidden { display: none !important; }
+  .stroke { text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 3px 6px rgba(0,0,0,.6); }
+
+  #vignette { position: fixed; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.45) 100%); }
+  #hurt { position: fixed; inset: 0; pointer-events: none; opacity: 0; transition: opacity .25s;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(255,0,40,.55) 100%); }
+  #fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s; }
+
+  /* ---------- HUD ---------- */
+  #hud { position: fixed; inset: 0; pointer-events: none; }
+  #topright { position: absolute; top: 18px; right: 22px; text-align: right;
+    font-family: Impact, "Arial Black", "PingFang SC", sans-serif; letter-spacing: 1px; }
+  #clock { font-size: 26px; color: #e9e9e9; }
+  #money { font-size: 34px; color: #7CFC6A; margin-top: -2px; }
+  #stars { font-size: 30px; margin-top: 2px; letter-spacing: 2px; }
+  #stars span { color: rgba(0,0,0,.45); text-shadow: 0 0 2px rgba(255,255,255,.25); }
+  #stars span.on { color: #ffd23f; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; }
+  #stars.flash span.on { animation: blink .5s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .15; } }
+  .bar { width: 190px; height: 12px; margin: 6px 0 0 auto; background: rgba(0,0,0,.6); border: 2px solid #000; }
+  #health { height: 100%; width: 100%; background: linear-gradient(#ff6b81, #d81e3f); transition: width .15s; }
+
+  #minimapWrap { position: absolute; left: 22px; bottom: 22px; width: 208px; height: 208px; border-radius: 50%;
+    border: 4px solid rgba(0,0,0,.85); box-shadow: 0 0 0 2px rgba(255,255,255,.25), 0 6px 18px rgba(0,0,0,.6); overflow: hidden; }
+  #minimap { width: 200px; height: 200px; display: block; }
+  #zone { position: absolute; right: 26px; bottom: 64px; font-size: 30px; font-style: italic; font-weight: 800;
+    color: #ffe9f3; opacity: 0; transition: opacity .8s; }
+  #carname { position: absolute; right: 26px; bottom: 104px; font-size: 22px; font-style: italic; font-weight: 700;
+    color: #9ff3ff; opacity: 0; transition: opacity .8s; }
+  #speedo { position: absolute; right: 26px; bottom: 22px; font-family: Impact, "Arial Black", sans-serif; font-size: 30px; color: #fff; }
+  #speedo small { font-size: 15px; color: #ccc; margin-left: 4px; }
+  #radio { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); font-size: 15px; color: #ffd0e6;
+    opacity: 0; transition: opacity .6s; }
+  #timer { position: absolute; left: 50%; top: 44px; transform: translateX(-50%);
+    font-family: Impact, "Arial Black", sans-serif; font-size: 38px; color: #ffe14d; }
+  #objective { position: absolute; left: 50%; bottom: 46px; transform: translateX(-50%); max-width: 70vw;
+    padding: 8px 18px; font-size: 20px; text-align: center; background: rgba(0,0,0,.55); border-radius: 6px; }
+  #objective:empty { display: none; }
+  #objective b { color: #ffe14d; }
+  #hint { position: absolute; left: 50%; bottom: 104px; transform: translateX(-50%); padding: 6px 14px;
+    font-size: 16px; background: rgba(0,0,0,.5); border-radius: 4px; opacity: 0; transition: opacity .3s; white-space: nowrap; }
+  #hint b { color: #9ff3ff; }
+  #crosshair { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+    background: #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.6); opacity: .85; }
+  #lockhint { position: absolute; left: 50%; top: 96px; transform: translateX(-50%); font-size: 14px; color: #ddd;
+    background: rgba(0,0,0,.5); padding: 4px 12px; border-radius: 4px; }
+
+  /* ---------- big text ---------- */
+  #big { position: fixed; left: 0; right: 0; top: 34%; text-align: center; pointer-events: none; opacity: 0; transition: opacity .5s; }
+  #big .main { font-family: Impact, "Arial Black", "PingFang SC", sans-serif; font-size: 92px; font-style: italic; letter-spacing: 4px; }
+  #big .sub { font-size: 26px; margin-top: 4px; font-weight: 700; }
+  #big.mission .main { color: #ffe14d; font-size: 64px; }
+  #big.passed .main { color: #ffe14d; }
+  #big.failed .main, #big.wasted .main { color: #e5183c; }
+  #big.busted .main { color: #4aa3ff; }
+
+  /* ---------- start / pause ---------- */
+  .panel { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, rgba(10,5,30,.35), rgba(10,5,30,.75)); text-align: center; }
+  .logo { line-height: .95; transform: rotate(-4deg); margin-bottom: 26px; }
+  .logo .l1 { display: block; font-size: 40px; font-weight: 900; letter-spacing: 14px; color: #fff; text-shadow: 0 0 18px #ff4fa8; }
+  .logo .l2 { display: block; font-family: Impact, "Arial Black", sans-serif; font-size: 128px; font-style: italic;
+    background: linear-gradient(180deg, #fff3b0 0%, #ff9a5a 38%, #ff3f9f 68%, #7a3cff 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,.55)) drop-shadow(0 0 28px rgba(255,79,168,.6)); }
+  .tag { font-size: 17px; color: #ffd0e6; margin-bottom: 26px; letter-spacing: 2px; }
+  .keys { display: grid; grid-template-columns: auto auto; gap: 7px 22px; text-align: left; font-size: 15px;
+    background: rgba(0,0,0,.45); padding: 16px 26px; border-radius: 10px; border: 1px solid rgba(255,255,255,.15); }
+  .keys kbd { display: inline-block; min-width: 26px; padding: 2px 7px; margin-right: 3px; text-align: center; font-family: inherit;
+    font-size: 13px; color: #111; background: #ffe14d; border-radius: 4px; font-weight: 700; }
+  .btn { margin-top: 28px; padding: 14px 54px; font-size: 24px; font-weight: 900; letter-spacing: 6px; color: #fff; cursor: pointer;
+    border: none; border-radius: 40px; background: linear-gradient(90deg, #ff3f9f, #ff9a5a);
+    box-shadow: 0 8px 30px rgba(255,63,159,.55); animation: pulse 1.4s ease-in-out infinite; pointer-events: auto; }
+  @keyframes pulse { 50% { transform: scale(1.06); } }
+  #pause h2 { font-size: 56px; font-style: italic; margin: 0 0 20px; font-family: Impact, "Arial Black", "PingFang SC", sans-serif; letter-spacing: 6px; }
+  #err { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; font-size: 20px; padding: 40px; text-align: center; background: #111; }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="vignette"></div>
+<div id="hurt"></div>
+
+<div id="hud" class="hidden">
+  <div id="topright" class="stroke">
+    <div id="clock">17:40</div>
+    <div id="money">$00000000</div>
+    <div class="bar"><div id="health"></div></div>
+    <div id="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  </div>
+  <div id="radio" class="stroke"></div>
+  <div id="timer" class="stroke"></div>
+  <div id="lockhint">点击画面锁定鼠标以控制视角</div>
+  <div id="crosshair"></div>
+  <div id="zone" class="stroke"></div>
+  <div id="carname" class="stroke"></div>
+  <div id="speedo" class="stroke"></div>
+  <div id="hint"></div>
+  <div id="objective"></div>
+  <div id="minimapWrap"><canvas id="minimap" width="200" height="200"></canvas></div>
+</div>
+
+<div id="big" class="stroke"><div class="main"></div><div class="sub"></div></div>
+<div id="fade"></div>
+
+<div id="start" class="panel">
+  <div class="logo"><span class="l1">霓虹湾</span><span class="l2">NEON BAY</span></div>
+  <div class="tag">向 GTA 致敬的开放世界网页小游戏 · 纯前端 · 无需安装</div>
+  <div class="keys">
+    <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动 / 驾驶</div><div><kbd>鼠标</kbd> 视角</div>
+    <div><kbd>F</kbd> 上车 / 下车（有人的车也能抢）</div><div><kbd>左键</kbd> 开枪（步行时）</div>
+    <div><kbd>Shift</kbd> 奔跑</div><div><kbd>空格</kbd> 跳跃 / 手刹漂移</div>
+    <div><kbd>R</kbd> 车载电台</div><div><kbd>P</kbd> 暂停</div>
+  </div>
+  <button id="startBtn" class="btn">开始游戏</button>
+</div>
+
+<div id="pause" class="panel hidden">
+  <h2>暂停</h2>
+  <div class="keys">
+    <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动 / 驾驶</div><div><kbd>鼠标</kbd> 视角</div>
+    <div><kbd>F</kbd> 上车 / 下车</div><div><kbd>左键</kbd> 开枪（步行时）</div>
+    <div><kbd>Shift</kbd> 奔跑</div><div><kbd>空格</kbd> 跳跃 / 手刹漂移</div>
+    <div><kbd>R</kbd> 车载电台</div><div><kbd>P</kbd> 继续</div>
+  </div>
+</div>
+
+<div id="err"></div>
+
+<script src="three.min.js"></script>
+<script>
+  if (!window.THREE) {
+    const e = document.getElementById('err');
+    e.style.display = 'flex';
+    e.textContent = '加载 three.min.js 失败：请确认它和 index.html 在同一目录。';
+  }
+</script>
+<script src="js/world.js"></script>
+<script src="js/entities.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>九连环</title>
+<style>
+  :root {
+    --bg: #12161c;
+    --panel: #1b212a;
+    --panel-2: #232b36;
+    --line: #313b49;
+    --text: #e9e4d8;
+    --muted: #98a1ad;
+    --gold: #e2b955;
+    --jade: #4cc79a;
+    --danger: #e8806f;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(1200px 600px at 50% -10%, #222b38 0%, var(--bg) 60%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px 16px 48px; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 264px; gap: 16px; align-items: start; }
+  .side { display: flex; flex-direction: column; gap: 12px; }
+
+  header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  h1 {
+    margin: 0;
+    font-family: "Songti SC", "Noto Serif SC", "STSong", serif;
+    font-size: 36px;
+    letter-spacing: 6px;
+    color: var(--gold);
+  }
+  header p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; }
+  .stat .k { font-size: 12px; color: var(--muted); }
+  .stat .v { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat .v small { font-size: 13px; font-weight: 400; color: var(--muted); }
+
+  .board {
+    background: linear-gradient(180deg, #1e2530 0%, #171c24 100%);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 4px;
+  }
+  .board canvas {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    touch-action: manipulation;
+    user-select: none; -webkit-user-select: none;
+  }
+
+  .ringbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px; }
+  .ringbtn {
+    width: 44px; height: 44px; padding: 0;
+    border-radius: 50%;
+    border: 2px dashed #4a5564;
+    background: transparent;
+    color: var(--muted);
+    font-weight: 600; font-size: 16px;
+  }
+  .ringbtn.on { border-style: solid; border-color: var(--jade); background: rgba(76, 199, 154, .16); color: var(--text); }
+  .show-movable .ringbtn.movable { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold); color: var(--gold); }
+  .ringbtn.hint { border-style: solid; border-color: var(--gold); background: rgba(226, 185, 85, .25); color: var(--gold); }
+
+  .message { min-height: 24px; margin: 10px 2px 0; font-size: 14px; color: var(--muted); text-align: center; }
+  .message.warn { color: var(--danger); }
+  .message.good { color: var(--jade); }
+
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .options {
+    display: flex; flex-direction: column; gap: 12px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px;
+  }
+  button, select {
+    font: inherit;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled), select:hover { border-color: #4d5b6e; background: #2a3441; }
+  .ringbtn:hover:not(:disabled) { background: rgba(255, 255, 255, .07); }
+  .ringbtn.on:hover:not(:disabled) { background: rgba(76, 199, 154, .28); border-color: var(--jade); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button.primary { background: var(--gold); border-color: var(--gold); color: #20180a; font-weight: 600; }
+  button.primary:hover:not(:disabled) { background: #edc96c; border-color: #edc96c; }
+  button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 2px;
+  }
+  .field { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; color: var(--muted); }
+  .field.check { justify-content: flex-start; }
+  .field input[type="range"] { width: 130px; accent-color: var(--gold); }
+  .field select { padding: 6px 10px; }
+  .field input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--gold); }
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { flex: 1; border: 0; border-radius: 0; padding: 7px 14px; background: transparent; color: var(--muted); }
+  .seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--gold); }
+
+  details {
+    margin-top: 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  summary { cursor: pointer; font-weight: 600; }
+  details ul { margin: 10px 0 2px; padding-left: 20px; color: #c9c5bb; }
+  details li { margin: 4px 0; }
+  kbd {
+    font: inherit; font-size: 12px;
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px;
+  }
+
+  .overlay {
+    position: fixed; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(8, 10, 14, .72);
+    padding: 16px;
+  }
+  .overlay.open { display: flex; }
+  .dialog {
+    width: min(420px, 100%);
+    background: var(--panel);
+    border: 1px solid var(--gold);
+    border-radius: 14px;
+    padding: 26px 26px 22px;
+    text-align: center;
+    animation: pop 260ms cubic-bezier(.34, 1.4, .55, 1);
+  }
+  @keyframes pop { from { transform: scale(.85); opacity: 0; } }
+  .dialog h2 {
+    margin: 0 0 10px;
+    font-family: "Songti SC", "Noto Serif SC", "STSong", serif;
+    font-size: 30px; letter-spacing: 4px; color: var(--gold);
+  }
+  .dialog p { margin: 6px 0; color: #c9c5bb; }
+  .dialog .actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .controls { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .controls { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 30px; }
+    .ringbar { gap: 5px; }
+    .ringbtn { width: 34px; height: 34px; font-size: 15px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dialog { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>九连环</h1>
+    <p>点圆环（或它的杆、下面的编号）把它套上或取下。九个环最少要走 341 步。</p>
+  </header>
+
+  <div class="layout">
+    <div class="play show-movable" id="play">
+      <div class="board">
+        <canvas id="cv" role="img" aria-label="九连环实物视图：环挂在柄上，每个环的杆穿过后一个环连到底板"></canvas>
+      </div>
+      <div class="ringbar" id="ringbar" role="group" aria-label="选择要动的环"></div>
+      <div class="message" id="message" role="status" aria-live="polite"></div>
+    </div>
+
+    <aside class="side">
+      <section class="stats" aria-label="本局数据">
+        <div class="stat"><div class="k">步数</div><div class="v" id="moves">0</div></div>
+        <div class="stat"><div class="k">用时</div><div class="v" id="time">00:00</div></div>
+        <div class="stat"><div class="k">最少还需</div><div class="v" id="remain">0</div></div>
+        <div class="stat"><div class="k">最佳纪录</div><div class="v" id="best">—</div></div>
+      </section>
+
+      <div class="controls">
+        <button id="btn-reset" class="primary">重新开始</button>
+        <button id="btn-undo">撤销</button>
+        <button id="btn-hint">提示</button>
+        <button id="btn-auto">自动演示</button>
+      </div>
+
+      <div class="options">
+        <label class="field">演示速度
+          <input type="range" id="speed" min="1" max="5" value="3">
+        </label>
+        <label class="field">环数
+          <select id="count"></select>
+        </label>
+        <div class="seg" role="group" aria-label="玩法">
+          <button id="mode-off" aria-pressed="true">解环</button>
+          <button id="mode-on" aria-pressed="false">套环</button>
+        </div>
+        <label class="field check">
+          <input type="checkbox" id="show-movable" checked> 高亮可动的环
+        </label>
+      </div>
+    </aside>
+  </div>
+
+  <details>
+    <summary>结构、规则与快捷键</summary>
+    <ul>
+      <li>结构：每个环顶上连着一根杆，杆向下穿过后一个环，再穿过底板。环套在柄上时，它的杆是从柄中间的缝里穿上来的。</li>
+      <li>取环：把环翻过柄头，再顺着缝放下去；套环正好反过来。柄可以前后抽动，画面里会自动抽到合适的位置。</li>
+      <li>第 1 环（最靠柄头）随时可以动。</li>
+      <li>其余的环：前面的环都取下，柄头才退得到它跟前；紧邻的前一个环还要套在柄上，它才能绕着那根杆从缝里穿过去。</li>
+      <li>所以任何时刻最多只有两个环能动：第 1 环，以及“柄上最靠前的环”后面那一个。</li>
+      <li>这里每动一个环算一步，n 个环的最少步数约为 2<sup>n+1</sup>/3，九环是 341 步。（传统玩法里 1、2 环可以一起动，按那种算法是 256 步。）</li>
+      <li>快捷键：<kbd>1</kbd>–<kbd>9</kbd> 动对应的环，<kbd>Z</kbd> 撤销，<kbd>H</kbd> 提示，<kbd>R</kbd> 重新开始。</li>
+    </ul>
+  </details>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="win-title">
+    <h2 id="win-title">解开了</h2>
+    <p id="win-summary"></p>
+    <p id="win-note"></p>
+    <div class="actions">
+      <button id="win-again" class="primary">再来一局</button>
+      <button id="win-close">看看九连环</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- 实物尺寸（世界坐标：x 沿柄指向握把，y 向上，z 朝向观察者） ---------- */
+
+  const DEG = Math.PI / 180;
+  const G = 60;              // 相邻两根杆的间距
+  const R = 66;              // 环的半径
+  const LEAN = 36 * DEG;     // 环挂着时向柄头方向倾斜的角度
+  const TILT = 6 * DEG;      // 环侧身过缝时的微小倾角
+  const TOP = 8;             // 套在柄上时，环顶高出柄的距离
+  const DROP = 64;           // 取下后环顶低于柄的距离
+  const PLATE = 195;         // 底板在柄下方的距离
+  const ROD = 233;           // 杆长
+  const BAR = 14;            // 柄的两根梁到中线的距离
+  const TIP = 104;           // 动某个环时，柄头在它前方的距离
+  const TAIL = 50, GRIP = 120;
+  const EDGE_X = -20;        // 环侧身过缝时圆心相对本环位置的偏移
+
+  const CY = Math.cos(25 * DEG), SY = Math.sin(25 * DEG);   // 视角：水平转角
+  const CP = Math.cos(28 * DEG), SP = Math.sin(28 * DEG);   // 视角：俯角
+  const LW = 1000, PAD = 24, RING_SEGS = 64;
+
+  const MOVE_MS = 640;
+  const SPEEDS = [1100, 750, 450, 220, 80];
+  const STORE_KEY = 'nine-rings-best-v1';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const ST = {
+    ring: [
+      { m: '#41c596', h: '#cbf8e7', o: '#07110e' },
+      { m: '#2fb1a9', h: '#c2f2ee', o: '#07110e' },
+    ],
+    ringDim: [
+      { m: '#3d7566', h: '#86a99d', o: '#07110e' },
+      { m: '#37707a', h: '#86a8ae', o: '#07110e' },
+    ],
+    ringHover: { m: '#8ff0cd', h: '#ffffff', o: '#07110e' },
+    ringHint: { m: '#e8bf58', h: '#fff3c9', o: '#1a1204' },
+    ringBad: { m: '#e8806f', h: '#ffd6cf', o: '#1c0a07' },
+    rod: { m: '#a7b0ba', h: '#eef2f5', o: '#0b0f13' },
+    rodHot: { m: '#f1f4f7', h: '#ffffff', o: '#0b0f13' },
+    bar: { m: '#d2a23a', h: '#f8e19a', o: '#1a1204' },
+    wood: { m: '#7b4f33', h: '#a97852', o: '#140c07' },
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const ui = {
+    play: $('play'), cv: $('cv'), ringbar: $('ringbar'), message: $('message'),
+    moves: $('moves'), time: $('time'), remain: $('remain'), best: $('best'),
+    reset: $('btn-reset'), undo: $('btn-undo'), hint: $('btn-hint'), auto: $('btn-auto'),
+    speed: $('speed'), count: $('count'), modeOff: $('mode-off'), modeOn: $('mode-on'),
+    showMovable: $('show-movable'),
+    overlay: $('overlay'), winTitle: $('win-title'), winSummary: $('win-summary'),
+    winNote: $('win-note'), winAgain: $('win-again'), winClose: $('win-close'),
+  };
+  const ctx = ui.cv.getContext('2d');
+
+  const game = {
+    n: 9,
+    mode: 'off',      // 'off' 解环：目标全部取下；'on' 套环：目标全部套上
+    state: 0,         // 第 i 环在柄上 <=> 第 i-1 位为 1
+    moves: 0,
+    history: [],
+    startedAt: 0,
+    elapsed: 0,
+    ticker: null,
+    autoTimer: null,
+    winTimer: null,
+    assisted: false,
+    won: false,
+    hintRing: 0,
+  };
+
+  const view = { k: 1, ox: 0, oy: 0, LH: 600 };
+  const vis = { handleX: -TIP, anim: null, hover: 0, screen: [], raf: 0 };
+  let buttons = [];
+
+  /* ---------- 规则 ---------- */
+
+  const allOn = () => (1 << game.n) - 1;
+  const target = () => (game.mode === 'off' ? 0 : allOn());
+  const isOn = (i) => (game.state >> (i - 1) & 1) === 1;
+
+  // 第 1 环随时可动；第 i 环要求第 i-1 环在柄上且 1..i-2 环全部取下
+  function canMove(i) {
+    if (i === 1) return true;
+    return (game.state & ((1 << (i - 1)) - 1)) === (1 << (i - 2));
+  }
+
+  function blockersOf(i) {
+    const list = [];
+    for (let k = 1; k <= i - 2; k++) if (isOn(k)) list.push(k);
+    return list;
+  }
+
+  function blockReason(i) {
+    const blockers = blockersOf(i);
+    const parts = [];
+    if (blockers.length) parts.push(`第 ${blockers.join('、')} 环还套在柄上，柄头退不过来`);
+    if (!isOn(i - 1)) parts.push(`第 ${i - 1} 环要先套在柄上`);
+    return `第 ${i} 环现在动不了：${parts.join('；')}。`;
+  }
+
+  // 九连环的状态序列就是格雷码：把状态按格雷码解码，得到它在序列中的位置
+  function grayDecode(g) {
+    let v = g;
+    for (let s = g >> 1; s; s >>= 1) v ^= s;
+    return v;
+  }
+  const remaining = () => Math.abs(grayDecode(game.state) - grayDecode(target()));
+  const optimalTotal = () => grayDecode(allOn());
+
+  function nextRing() {
+    const v = grayDecode(game.state), t = grayDecode(target());
+    if (v === t) return 0;
+    const nv = v > t ? v - 1 : v + 1;
+    const diff = game.state ^ (nv ^ (nv >> 1));
+    return Math.log2(diff) + 1;
+  }
+
+  /* ---------- 几何 ---------- */
+
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const norm = (a) => mul(a, 1 / Math.hypot(a[0], a[1], a[2]));
+  const lerp = (a, b, f) => a + (b - a) * f;
+  const lerp3 = (a, b, f) => [lerp(a[0], b[0], f), lerp(a[1], b[1], f), lerp(a[2], b[2], f)];
+  const clamp01 = (t) => Math.max(0, Math.min(1, t));
+  const ease = (t) => t * t * (3 - 2 * t);
+
+  const ringX = (i) => (i - 1) * G;
+  const tipFor = (i) => ringX(i) - TIP;
+  const slotLen = () => TIP + (game.n - 1) * G + TAIL;
+
+  // 环所在平面的两个方向：u 指向环顶（杆的挂点），w 与之垂直
+  // th：绕挂点向柄头翻起的角度；tau：绕自身竖轴转身；eps：前后微倾
+  function frameOf(th, tau, eps) {
+    const st = Math.sin(th), ct = Math.cos(th), sa = Math.sin(tau), ca = Math.cos(tau);
+    const se = Math.sin(eps), ce = Math.cos(eps);
+    const rx = (v) => [v[0], v[1] * ce - v[2] * se, v[1] * se + v[2] * ce];
+    return { u: rx([st, ct, 0]), w: rx([sa * ct, -sa * st, ca]) };
+  }
+
+  // 由法线方向给出平面（落到柄下以后转回悬挂姿势时用，保证前一根杆始终穿在环里）
+  function frameFromNormal(beta, gamma) {
+    const n = [Math.sin(beta) * Math.cos(gamma), -Math.sin(gamma), -Math.cos(beta) * Math.cos(gamma)];
+    const u = norm([-n[1] * n[0], 1 - n[1] * n[1], -n[1] * n[2]]);
+    return { u, w: cross(n, u) };
+  }
+
+  // 取环的轨迹：s=0 套在柄上，s=1 取下挂好。坐标相对本环的杆位。
+  const KEYS = [
+    { s: 0, T: [0, TOP, 0], th: LEAN, tau: 0, eps: 0 },                           // 挂在柄上
+    { s: 0.25, T: [-10, 13, 0], th: 95 * DEG, tau: 0, eps: 0 },                   // 向前翻过柄头
+    { s: 0.38, T: [-17, 14, 0], th: 160 * DEG, tau: 0, eps: 0 },                  // 立起来
+    { s: 0.47, T: [EDGE_X, 14, 0], th: 180 * DEG, tau: 90 * DEG, eps: -TILT },    // 侧过身对准缝
+  ];
+  const S_UP = 0.47, S_DOWN = 0.78;
+  const FR_EDGE = frameOf(180 * DEG, 90 * DEG, -TILT);
+  const C_HI = sub(KEYS[3].T, mul(FR_EDGE.u, R));
+  const C_LO = [EDGE_X, -80, 0];
+  const T_LO = sub(C_LO, mul(FR_EDGE.u, R));
+
+  function trackPose(i, s) {
+    let C, T, fr;
+    if (s <= S_UP) {
+      let j = 1;
+      while (j < KEYS.length - 1 && KEYS[j].s < s) j++;
+      const a = KEYS[j - 1], b = KEYS[j], f = clamp01((s - a.s) / (b.s - a.s));
+      fr = frameOf(lerp(a.th, b.th, f), lerp(a.tau, b.tau, f), lerp(a.eps, b.eps, f));
+      T = lerp3(a.T, b.T, f);
+      C = sub(T, mul(fr.u, R));
+    } else if (s <= S_DOWN) {
+      // 侧身顺着缝落下去；杆的挂点留在缝口，沿着环滑到另一头
+      const f = (s - S_UP) / (S_DOWN - S_UP), al = -Math.PI * f;
+      fr = FR_EDGE;
+      C = lerp3(C_HI, C_LO, f);
+      T = add(C, add(mul(fr.u, R * Math.cos(al)), mul(fr.w, R * Math.sin(al))));
+    } else {
+      const f = (s - S_DOWN) / (1 - S_DOWN);
+      fr = frameFromNormal(90 * DEG * f, lerp(TILT, LEAN, Math.sqrt(f)));
+      T = lerp3(T_LO, [0, -DROP, 0], f);
+      C = sub(T, mul(fr.u, R));
+    }
+    const x0 = ringX(i);
+    return { C: [C[0] + x0, C[1], C[2]], T: [T[0] + x0, T[1], T[2]], u: fr.u, w: fr.w };
+  }
+
+  // 杆从挂点穿过底板上的孔，可以在孔里滑动
+  function rodEnd(T, i) {
+    const hole = [ringX(i), -PLATE, 0];
+    return { hole, E: add(T, mul(norm(sub(hole, T)), ROD)) };
+  }
+
+  function ringPoints(pose, count) {
+    const pts = [];
+    for (let j = 0; j < count; j++) {
+      const a = (j + 0.5) / count * 2 * Math.PI;
+      pts.push(add(pose.C, add(mul(pose.u, R * Math.cos(a)), mul(pose.w, R * Math.sin(a)))));
+    }
+    return pts;
+  }
+
+  function subdivide(a, b, step) {
+    const d = sub(b, a), count = Math.max(1, Math.ceil(Math.hypot(d[0], d[1], d[2]) / step));
+    const pts = [];
+    for (let j = 0; j <= count; j++) pts.push(lerp3(a, b, j / count));
+    return pts;
+  }
+
+  /* ---------- 投影与取景 ---------- */
+
+  const rawX = (p) => p[0] * CY + p[2] * SY;
+  const rawZ = (p) => -p[0] * SY + p[2] * CY;
+  const rawUp = (p) => p[1] * CP - rawZ(p) * SP;
+
+  function project(p) {
+    return [view.ox + rawX(p) * view.k, view.oy - rawUp(p) * view.k, rawZ(p) * CP + p[1] * SP];
+  }
+
+  function computeView() {
+    const n = game.n, xe = -TIP + slotLen();
+    const pts = [
+      [-TIP, 0, -BAR], [-TIP, 0, BAR], [xe + GRIP + 12, 14, 0], [xe + GRIP + 12, -14, 0],
+      [-36, -PLATE - 10, 0], [ringX(n) + 36, -PLATE - 10, 0],
+    ];
+    for (const i of [1, n]) {
+      for (const s of [0, 0.25, 0.38, 0.47, 0.62, 0.78, 1]) pts.push(...ringPoints(trackPose(i, s), 12));
+      pts.push([ringX(i), -DROP - ROD - 36, 0]);
+    }
+    let x0 = Infinity, x1 = -Infinity, u0 = Infinity, u1 = -Infinity;
+    for (const p of pts) {
+      x0 = Math.min(x0, rawX(p)); x1 = Math.max(x1, rawX(p));
+      u0 = Math.min(u0, rawUp(p)); u1 = Math.max(u1, rawUp(p));
+    }
+    view.k = Math.min(1.3, (LW - 2 * PAD) / (x1 - x0));
+    view.ox = (LW - (x0 + x1) * view.k) / 2;
+    view.oy = PAD + u1 * view.k;
+    view.LH = Math.ceil((u1 - u0) * view.k + 2 * PAD);
+    ui.cv.style.aspectRatio = `${LW} / ${view.LH}`;
+  }
+
+  function resizeCanvas() {
+    // 限制画面高度，保证编号按钮和提示不被挤出屏幕
+    const wide = window.matchMedia('(min-width: 901px)').matches;
+    const maxH = wide
+      ? Math.max(340, Math.min(640, window.innerHeight - 225))
+      : Math.max(300, Math.min(600, window.innerHeight * 0.6));
+    ui.cv.style.maxWidth = `${Math.round(maxH * LW / view.LH)}px`;
+    const w = ui.cv.clientWidth;
+    if (!w) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    const cw = Math.round(w * dpr), ch = Math.round(w * view.LH / LW * dpr);
+    if (ui.cv.width !== cw || ui.cv.height !== ch) { ui.cv.width = cw; ui.cv.height = ch; }
+    invalidate();
+  }
+
+  /* ---------- 绘制：把所有金属丝切成小段，按远近排序后逐段画，前面的自然压住后面的 ---------- */
+
+  function tube(list, pts, w, st, closed) {
+    const pr = pts.map(project), count = pr.length;
+    for (let j = 0; j < (closed ? count : count - 1); j++) {
+      const a = pr[j], b = pr[(j + 1) % count];
+      list.push({ d: (a[2] + b[2]) / 2, a, b, w: w * view.k, st });
+    }
+    return pr;
+  }
+
+  function knob(list, p, r, st, hollow, bias) {
+    const q = project(p);
+    list.push({ d: q[2] + (bias || 0), x: q[0], y: q[1], r: r * view.k, st, hollow });
+    return q;
+  }
+
+  function addHandle(list, hx) {
+    const xs = hx + BAR, xe = hx + slotLen();
+    const far = [], near = [], arc = [];
+    for (let x = xs; x < xe; x += 6) { far.push([x, 0, -BAR]); near.push([x, 0, BAR]); }
+    far.push([xe, 0, -BAR]); near.push([xe, 0, BAR]);
+    for (let a = -90; a <= 90; a += 15) arc.push([xs - BAR * Math.cos(a * DEG), 0, BAR * Math.sin(a * DEG)]);
+    tube(list, far, 6.5, ST.bar);
+    tube(list, near, 6.5, ST.bar);
+    tube(list, arc, 6.5, ST.bar);
+    tube(list, [[xe, 0, -BAR], [xe + 6, 0, -BAR * 0.6], [xe + 10, 0, 0], [xe + 6, 0, BAR * 0.6], [xe, 0, BAR]], 6.5, ST.bar);
+    tube(list, subdivide([xe + 8, 0, 0], [xe + 22, 0, 0], 7), 19, ST.bar);
+    tube(list, subdivide([xe + 20, 0, 0], [xe + GRIP, 0, 0], 10), 23, ST.wood);
+    knob(list, [xe + GRIP, 0, 0], 11.5, ST.wood, false, -1);
+  }
+
+  function addPlate(list) {
+    const a = [-34, -PLATE, 0], b = [ringX(game.n) + 34, -PLATE, 0];
+    tube(list, subdivide(a, b, 8), 15, ST.wood);
+    knob(list, a, 7.5, ST.wood, false, 1);
+    knob(list, b, 7.5, ST.wood, false, -1);
+  }
+
+  const bump = (t) => (t < 0.35 ? 1 - (1 - t / 0.35) ** 2 : 1 - ease((t - 0.35) / 0.65));
+
+  function draw(now) {
+    const n = game.n, a = vis.anim;
+    let hx = vis.handleX, moving = 0, movePose = null, shake = 0, bad = null;
+
+    if (a) {
+      const t = a.dur > 0 ? clamp01((now - a.start) / a.dur) : 1;
+      if (a.kind === 'move') {
+        const slide = a.hFrom !== a.hTo;
+        hx = lerp(a.hFrom, a.hTo, ease(clamp01(t / 0.3)));
+        const s = ease(slide ? clamp01((t - 0.1) / 0.9) : t);
+        moving = a.ring;
+        movePose = trackPose(a.ring, a.toOff ? s : 1 - s);
+      } else {
+        hx = lerp(a.hFrom, a.hBlock, bump(t));
+        shake = 5 * Math.sin(t * Math.PI * 6) * (1 - t);
+        moving = a.ring;
+        bad = a.bad;
+      }
+      if (t >= 1) vis.anim = null;
+    }
+
+    const sx = ui.cv.width / LW, k = view.k;
+    ctx.setTransform(sx, 0, 0, sx, 0, 0);
+    ctx.clearRect(0, 0, LW, view.LH);
+    ctx.lineJoin = 'round';
+
+    const list = [];
+    addHandle(list, hx);
+    addPlate(list);
+
+    const showMovable = ui.showMovable.checked;
+    const pulse = 0.5 + 0.5 * Math.sin(now / 150);
+    const screen = [null];
+
+    for (let i = 1; i <= n; i++) {
+      let pose = movePose && moving === i ? movePose : trackPose(i, isOn(i) ? 0 : 1);
+      if (shake && moving === i) {
+        pose = { C: add(pose.C, [shake, 0, 0]), T: add(pose.T, [shake, 0, 0]), u: pose.u, w: pose.w };
+      }
+      const movable = !game.won && canMove(i);
+      const hint = game.hintRing === i, hover = vis.hover === i;
+
+      let st, width = 6;
+      if (bad && bad.includes(i)) st = ST.ringBad;
+      else if (hint) { st = ST.ringHint; width = 6 + 2.5 * pulse; }
+      else if (hover) st = ST.ringHover;
+      else if (showMovable && !movable && !game.won && moving !== i) st = ST.ringDim[i % 2];
+      else st = ST.ring[i % 2];
+      const rodSt = hint || hover ? ST.rodHot : ST.rod;
+
+      const loop = tube(list, ringPoints(pose, RING_SEGS), width, st, true);
+      const { hole, E } = rodEnd(pose.T, i);
+      tube(list, subdivide(pose.T, hole, 12).concat(subdivide(hole, E, 12).slice(1)), 3.2, rodSt);
+      const pT = knob(list, pose.T, 4.6, rodSt, true, 2);
+      const pE = knob(list, E, 5.5, rodSt, false, 0);
+      screen.push({ loop, T: pT, E: pE, movable, hint });
+    }
+
+    list.sort((p, q) => p.d - q.d);
+    for (const it of list) {
+      const st = it.st;
+      if (it.r) {
+        ctx.beginPath();
+        ctx.arc(it.x, it.y, it.r, 0, 2 * Math.PI);
+        if (it.hollow) {
+          ctx.lineWidth = 4.4 * k; ctx.strokeStyle = st.o; ctx.stroke();
+          ctx.lineWidth = 2 * k; ctx.strokeStyle = st.m; ctx.stroke();
+        } else {
+          ctx.fillStyle = st.m; ctx.fill();
+          ctx.lineWidth = 1.3 * k; ctx.strokeStyle = st.o; ctx.stroke();
+        }
+        continue;
+      }
+      const { a: p, b: q, w } = it, o = w * 0.2;
+      ctx.lineCap = 'butt';
+      ctx.lineWidth = w + 2.8 * k; ctx.strokeStyle = st.o;
+      ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
+      ctx.lineCap = 'round';
+      ctx.lineWidth = w; ctx.strokeStyle = st.m;
+      ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
+      ctx.lineWidth = w * 0.28; ctx.strokeStyle = st.h;
+      ctx.beginPath(); ctx.moveTo(p[0] - o, p[1] - o); ctx.lineTo(q[0] - o, q[1] - o); ctx.stroke();
+    }
+
+    // 编号写在每根杆底下的珠子旁
+    const fs = Math.max(16, 12 * LW / (ui.cv.clientWidth || LW));
+    ctx.font = `700 ${fs}px -apple-system, "PingFang SC", "Segoe UI", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.lineWidth = fs * 0.28;
+    ctx.strokeStyle = '#12161c';
+    for (let i = 1; i <= n; i++) {
+      const s = screen[i];
+      s.label = [s.E[0], s.E[1] + 8 * k + fs * 0.75];
+      ctx.strokeText(i, s.label[0], s.label[1]);
+      ctx.fillStyle = s.hint || vis.hover === i || (showMovable && s.movable) ? '#e2b955' : '#98a1ad';
+      ctx.fillText(i, s.label[0], s.label[1]);
+    }
+    vis.screen = screen;
+  }
+
+  function invalidate() {
+    if (vis.raf) return;
+    vis.raf = requestAnimationFrame((now) => {
+      vis.raf = 0;
+      draw(now);
+      if (vis.anim || game.hintRing) invalidate();
+    });
+  }
+
+  /* ---------- 动画 ---------- */
+
+  function animateMove(i, toOff, dur) {
+    const hFrom = vis.handleX, hTo = tipFor(i);
+    vis.handleX = hTo;
+    vis.anim = reducedMotion || dur <= 0
+      ? null
+      : { kind: 'move', ring: i, toOff, start: performance.now(), dur, hFrom, hTo };
+    invalidate();
+  }
+
+  // 动不了的时候演示原因：柄往后抽，被还套着的环的杆卡住
+  function animateBlocked(i) {
+    const blockers = blockersOf(i);
+    const hFrom = vis.handleX;
+    const hBlock = blockers.length ? Math.max(hFrom, ringX(blockers[0]) - 8) : hFrom;
+    vis.anim = reducedMotion
+      ? null
+      : { kind: 'bump', ring: i, start: performance.now(), dur: 560, hFrom, hBlock, bad: blockers.length ? blockers : [i - 1] };
+    invalidate();
+  }
+
+  /* ---------- 点选 ---------- */
+
+  function distSeg(px, py, a, b) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], len = dx * dx + dy * dy;
+    const t = len ? clamp01(((px - a[0]) * dx + (py - a[1]) * dy) / len) : 0;
+    return Math.hypot(px - a[0] - t * dx, py - a[1] - t * dy);
+  }
+
+  function hitTest(e) {
+    const rect = ui.cv.getBoundingClientRect();
+    if (!rect.width) return 0;
+    const f = LW / rect.width;
+    const px = (e.clientX - rect.left) * f, py = (e.clientY - rect.top) * f;
+    let best = 0, bestD = Math.max(10, 14 * f);
+    for (let i = 1; i < vis.screen.length; i++) {
+      const s = vis.screen[i];
+      let d = Math.min(distSeg(px, py, s.T, s.E), Math.hypot(px - s.label[0], py - s.label[1]) - 8 * f);
+      for (let j = 0; j < s.loop.length; j++) {
+        d = Math.min(d, distSeg(px, py, s.loop[j], s.loop[(j + 1) % s.loop.length]));
+      }
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return best;
+  }
+
+  function setHover(i) {
+    if (vis.hover === i) return;
+    vis.hover = i;
+    ui.cv.style.cursor = i ? 'pointer' : 'default';
+    invalidate();
+  }
+
+  /* ---------- 界面 ---------- */
+
+  function buildButtons() {
+    ui.ringbar.textContent = '';
+    buttons = [null];
+    for (let i = 1; i <= game.n; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'ringbtn';
+      btn.textContent = i;
+      btn.addEventListener('click', () => move(i));
+      btn.addEventListener('mouseenter', () => setHover(i));
+      btn.addEventListener('mouseleave', () => setHover(0));
+      btn.addEventListener('focus', () => setHover(i));
+      btn.addEventListener('blur', () => setHover(0));
+      ui.ringbar.appendChild(btn);
+      buttons.push(btn);
+    }
+  }
+
+  function render() {
+    for (let i = 1; i <= game.n; i++) {
+      const on = isOn(i), movable = !game.won && canMove(i), btn = buttons[i];
+      btn.classList.toggle('on', on);
+      btn.classList.toggle('movable', movable);
+      btn.classList.toggle('hint', game.hintRing === i);
+      btn.setAttribute('aria-label', `第 ${i} 环，${on ? '套在柄上' : '已取下'}${movable ? '，可以动' : ''}`);
+    }
+    ui.moves.textContent = game.moves;
+    ui.remain.innerHTML = `${remaining()} <small>步</small>`;
+    ui.undo.disabled = game.history.length === 0 || game.won;
+    ui.hint.disabled = game.won;
+    ui.auto.disabled = game.won;
+    ui.auto.textContent = game.autoTimer ? '停止演示' : '自动演示';
+    invalidate();
+  }
+
+  function say(text, kind) {
+    ui.message.textContent = text;
+    ui.message.className = 'message' + (kind ? ' ' + kind : '');
+  }
+
+  /* ---------- 计时与纪录 ---------- */
+
+  const fmt = (ms) => {
+    const s = Math.floor(ms / 1000);
+    return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  };
+
+  function startTimer() {
+    if (game.ticker) return;
+    game.startedAt = Date.now() - game.elapsed;
+    game.ticker = setInterval(() => {
+      game.elapsed = Date.now() - game.startedAt;
+      ui.time.textContent = fmt(game.elapsed);
+    }, 250);
+  }
+
+  function stopTimer() {
+    if (!game.ticker) return;
+    clearInterval(game.ticker);
+    game.ticker = null;
+    game.elapsed = Date.now() - game.startedAt;
+    ui.time.textContent = fmt(game.elapsed);
+  }
+
+  function loadBest() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { return {}; }
+  }
+
+  function saveBest() {
+    const all = loadBest();
+    const key = `${game.n}-${game.mode}`;
+    const old = all[key];
+    const better = !old || game.moves < old.moves || (game.moves === old.moves && game.elapsed < old.time);
+    if (!better) return false;
+    all[key] = { moves: game.moves, time: game.elapsed };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(all)); } catch { /* 无痕模式下存不了，忽略 */ }
+    return true;
+  }
+
+  function showBest() {
+    const rec = loadBest()[`${game.n}-${game.mode}`];
+    ui.best.innerHTML = rec ? `${rec.moves} <small>步 · ${fmt(rec.time)}</small>` : '—';
+  }
+
+  /* ---------- 操作 ---------- */
+
+  const autoInterval = () => SPEEDS[ui.speed.value - 1];
+
+  function move(i, fromAuto) {
+    if (i < 1 || i > game.n) return;
+    if (!fromAuto) stopAuto();
+    if (game.won) { say('这一局已经完成了，点“重新开始”再来一局。'); return; }
+    if (!canMove(i)) { animateBlocked(i); say(blockReason(i), 'warn'); return; }
+
+    const wasOn = isOn(i);
+    game.state ^= 1 << (i - 1);
+    game.moves++;
+    game.history.push(i);
+    game.hintRing = 0;
+    startTimer();
+    animateMove(i, wasOn, fromAuto ? Math.min(760, autoInterval() * 0.92) : MOVE_MS);
+
+    if (game.state === target()) { win(); return; }
+    say(wasOn ? `第 ${i} 环翻过柄头，从缝里放下来了。` : `第 ${i} 环从缝里提上来，套上了柄。`);
+    render();
+  }
+
+  function undo() {
+    stopAuto();
+    if (game.won || !game.history.length) return;
+    const i = game.history.pop();
+    const wasOn = isOn(i);
+    game.state ^= 1 << (i - 1);
+    game.moves--;
+    game.hintRing = 0;
+    animateMove(i, wasOn, MOVE_MS);
+    say(`已撤销第 ${i} 环的操作。`);
+    render();
+  }
+
+  function hint() {
+    stopAuto();
+    if (game.won) return;
+    const i = nextRing();
+    game.hintRing = i;
+    say(`提示：${isOn(i) ? '取下' : '套上'}第 ${i} 环。`, 'good');
+    render();
+  }
+
+  function autoStep() {
+    const i = nextRing();
+    if (!i) { stopAuto(); return; }
+    move(i, true);
+    if (game.won) return;
+    game.autoTimer = setTimeout(autoStep, autoInterval());
+  }
+
+  function toggleAuto() {
+    if (game.autoTimer) { stopAuto(); say('演示已停止，可以接着自己走。'); return; }
+    if (game.won) return;
+    game.assisted = true;
+    game.autoTimer = setTimeout(autoStep, 0);
+    render();
+  }
+
+  function stopAuto() {
+    if (!game.autoTimer) return;
+    clearTimeout(game.autoTimer);
+    game.autoTimer = null;
+    render();
+  }
+
+  function win() {
+    game.won = true;
+    if (game.autoTimer) { clearTimeout(game.autoTimer); game.autoTimer = null; }
+    stopTimer();
+    render();
+
+    const best = optimalTotal();
+    ui.winTitle.textContent = game.mode === 'off' ? '解开了' : '套好了';
+    ui.winSummary.textContent = `${game.n} 个环，用了 ${game.moves} 步，${fmt(game.elapsed)}。最少步数是 ${best} 步。`;
+    if (game.assisted) {
+      ui.winNote.textContent = '这一局用过自动演示，不计入最佳纪录。';
+    } else {
+      const isRecord = saveBest();
+      showBest();
+      ui.winNote.textContent = game.moves === best
+        ? '一步都没多走，完美。'
+        : (isRecord ? '刷新了最佳纪录。' : `比最少步数多走了 ${game.moves - best} 步。`);
+    }
+    say(game.mode === 'off' ? '全部取下，完成。' : '全部套上，完成。', 'good');
+    // 等最后一个环落定再弹出结算
+    game.winTimer = setTimeout(() => {
+      game.winTimer = null;
+      ui.overlay.classList.add('open');
+      ui.winAgain.focus();
+    }, vis.anim ? vis.anim.dur + 220 : 0);
+  }
+
+  function closeOverlay() {
+    ui.overlay.classList.remove('open');
+  }
+
+  function reset() {
+    stopAuto();
+    stopTimer();
+    clearTimeout(game.winTimer);
+    game.winTimer = null;
+    closeOverlay();
+    game.state = game.mode === 'off' ? allOn() : 0;
+    game.moves = 0;
+    game.history = [];
+    game.elapsed = 0;
+    game.assisted = false;
+    game.won = false;
+    game.hintRing = 0;
+    vis.handleX = tipFor(1);
+    vis.anim = null;
+    ui.time.textContent = '00:00';
+    showBest();
+    say(game.mode === 'off'
+      ? `把 ${game.n} 个环全部从柄上取下。最少 ${optimalTotal()} 步。`
+      : `把 ${game.n} 个环全部套到柄上。最少 ${optimalTotal()} 步。`);
+    render();
+  }
+
+  function setMode(mode) {
+    game.mode = mode;
+    ui.modeOff.setAttribute('aria-pressed', String(mode === 'off'));
+    ui.modeOn.setAttribute('aria-pressed', String(mode === 'on'));
+    reset();
+  }
+
+  function setCount(n) {
+    game.n = n;
+    buildButtons();
+    computeView();
+    resizeCanvas();
+    reset();
+  }
+
+  /* ---------- 事件 ---------- */
+
+  for (let n = 3; n <= 9; n++) {
+    const opt = document.createElement('option');
+    opt.value = n;
+    opt.textContent = `${n} 环`;
+    ui.count.appendChild(opt);
+  }
+  ui.count.value = game.n;
+
+  ui.reset.addEventListener('click', reset);
+  ui.undo.addEventListener('click', undo);
+  ui.hint.addEventListener('click', hint);
+  ui.auto.addEventListener('click', toggleAuto);
+  ui.modeOff.addEventListener('click', () => setMode('off'));
+  ui.modeOn.addEventListener('click', () => setMode('on'));
+  ui.winAgain.addEventListener('click', reset);
+  ui.winClose.addEventListener('click', closeOverlay);
+  ui.overlay.addEventListener('click', (e) => { if (e.target === ui.overlay) closeOverlay(); });
+  ui.count.addEventListener('change', () => setCount(Number(ui.count.value)));
+  ui.showMovable.addEventListener('change', () => {
+    ui.play.classList.toggle('show-movable', ui.showMovable.checked);
+    invalidate();
+  });
+
+  ui.cv.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') setHover(hitTest(e)); });
+  ui.cv.addEventListener('pointerleave', () => setHover(0));
+  ui.cv.addEventListener('click', (e) => {
+    const i = hitTest(e);
+    if (i) move(i);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'Escape') { closeOverlay(); return; }
+    if (e.target instanceof Element && e.target.closest('input, select')) return;
+    if (ui.overlay.classList.contains('open')) return;
+    const key = e.key.toLowerCase();
+    if (key >= '1' && key <= '9') move(Number(key));
+    else if (key === 'z') undo();
+    else if (key === 'h') hint();
+    else if (key === 'r') reset();
+  });
+
+  if (window.ResizeObserver) new ResizeObserver(resizeCanvas).observe(ui.cv);
+  window.addEventListener('resize', resizeCanvas);
+
+  setCount(game.n);
+})();
+</script>
+</body>
+</html>
